@@ -22,6 +22,7 @@ redirect_from:
 周吉喆，四川大学计算机学院副教授，主要擅长内容安全和自监督学习方向，长期招收AI+CV方向solid background and self-motivated的研究生与本科生（限川大），组内各研究方向详见Supervised Students部分，欢迎联系邮件 jzzhou@scu.edu.cn 。    
 
 # 🔥 News   
+- *2025.04* ``Publication``: [ForensicsHub](https://arxiv.org/abs/2505.11003)[![Stars](https://github.com/scu-zjz/ForensicHub), a unified benchmark \& Codebase for All-Domain (IML, Deepfake detect, Document Tamper detect, AIGC detect) Fake Image Detection and Localization is now established by us and under longterm construction \& maintain. ``ForensicsHub is the first-ever effort constructing a unified (all-for-one) model for detecting all-kinds fake images in real life. `` 
 - *2025.04* ``A&S Service``: Appointed as the *Program Committee Member* for *NeurIPS 2025*.   
 - *2025.03* ``A&S Service``: Appointed as the *Area Chair* for *MM 2025*.   
 - *2025.03* ``Publication``:  &nbsp;[*CVPR 2025*]🎉🎉 [Style Quantization for Data-Efficient GAN Training](https://arxiv.org/abs/2503.24282), our new quantization method for general GAN training is accepted by CVPR 2025!   
