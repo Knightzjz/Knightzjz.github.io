@@ -24,8 +24,8 @@ redirect_from:
 1 quota for 26 fall Ph.D. student major in Artificial Intelligence and Science.   
 
 # 🔥 News   
-- *2025.04* ``A&S Service``: Appointed as the *Program Committee Membe* for *ICLR 2025*.    
-- *2025.04* ``A&S Service``: Appointed as the *Program Committee Membe* for *AAAI 2025*.   
+- *2025.09* ``A&S Service``: Appointed as the *Program Committee Membe* for *ICLR 2025*.    
+- *2025.07* ``A&S Service``: Appointed as the *Program Committee Membe* for *AAAI 2025*.   
 - *2025.05* ``Publication``: &nbsp;[*NuerIPS 2025*]🎉🎉[ForensicsHub](https://arxiv.org/abs/2505.11003)[![Stars](https://img.shields.io/github/stars/scu-zjz/ForensicHub?style=social)](https://github.com/scu-zjz/ForensicHub), we propose a new task termed "FIDL", Fake Image Detection and Localization, unifying the 4 major subdomains of image forensics (IML, AIGC detection, DeepFake Detection, DocumentTamper Detection) into this single FIDL task.    
 - *2025.04* ``A&S Service``: Appointed as the *Program Committee Member* for *NeurIPS 2025*.   
 - *2025.03* ``A&S Service``: Appointed as the *Area Chair* for *MM 2025*.   
