@@ -19,14 +19,14 @@ redirect_from:
 
 ⛹️‍♂️Ji-Zhe Zhou (周吉喆)🏊‍♂️, Associate Professor at the School of Computer Science, Sichuan University. I obtained my Ph.D. (early graduation) from the University of Macau in 2021. My primary research areas are the self-supervised learning theories and multimedia content security. I am the first or corresponding author for many top conferences and IEEE transactions, including ICCV, NIPS, ACM MM, ACL, IJCAI, AAAI, etc. My publication recieved a total <a href='https://scholar.google.com/citations?user=-cNWmJMAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a> citations.   
 
-周吉喆，四川大学计算机学院副教授，主要擅长大模型安全和自监督学习方向，长期招收AI+CV方向solid background and self-motivated的研究生与本科生（限川大），组内各研究方向详见Supervised Students部分，欢迎联系邮件 jzzhou@scu.edu.cn 。    
+周吉喆，四川大学计算机学院副教授，主要擅长内容生成与反生成方向，长期招收AI+CV方向solid background and self-motivated的研究生与本科生（限川大），组内各研究方向详见Supervised Students部分，欢迎联系邮件 jzzhou@scu.edu.cn 。    
 招收26秋的智能科学与技术专业博士生一名，欢迎联系。   
 1 quota for 26 fall Ph.D. student major in Artificial Intelligence and Science.   
 
 # 🔥 News   
 - *2025.09* ``A&S Service``: Appointed as the *Program Committee Membe* for *ICLR 2025*.    
 - *2025.07* ``A&S Service``: Appointed as the *Program Committee Membe* for *AAAI 2025*.   
-- *2025.05* ``Publication``: &nbsp;[*NuerIPS 2025*]🎉🎉[ForensicsHub](https://arxiv.org/abs/2505.11003)[![Stars](https://img.shields.io/github/stars/scu-zjz/ForensicHub?style=social)](https://github.com/scu-zjz/ForensicHub), we propose a new task termed "FIDL", Fake Image Detection and Localization, unifying the 4 major subdomains of image forensics (IML, AIGC detection, DeepFake Detection, DocumentTamper Detection) into this single FIDL task.    
+- *2025.05* ``Publication``: &nbsp;[*NeurIPS 2025*]🎉🎉[ForensicsHub](https://arxiv.org/abs/2505.11003)[![Stars](https://img.shields.io/github/stars/scu-zjz/ForensicHub?style=social)](https://github.com/scu-zjz/ForensicHub), we propose a new task termed "FIDL", Fake Image Detection and Localization, unifying the 4 major subdomains of image forensics (IML, AIGC detection, DeepFake Detection, DocumentTamper Detection) into this single FIDL task.    
 - *2025.04* ``A&S Service``: Appointed as the *Program Committee Member* for *NeurIPS 2025*.   
 - *2025.03* ``A&S Service``: Appointed as the *Area Chair* for *MM 2025*.   
 - *2025.03* ``Publication``: &nbsp;[*CVPR 2025*]🎉🎉 [Style Quantization for Data-Efficient GAN Training](https://arxiv.org/abs/2503.24282), our new quantization method for general GAN training is accepted by CVPR 2025!   
@@ -43,8 +43,8 @@ redirect_from:
 - *2024.09* ``Publication``: &nbsp;[*NeurIPS 2024*, *Spotlight!(0.9%)*]🎉🎉 Our comprehensive benchmark and modular codebase on IML (addressing the model evaluation), [IMDL-BenCo](https://github.com/scu-zjz/IMDLBenCo)[![](https://img.shields.io/github/stars/scu-zjz/IMDLBenCo?style=social&label=Code+Stars)](https://github.com/scu-zjz/IMDLBenCo), is now fully released and under long-term maintenance and construction!  
 - *2024.09* ``A&S Service``: Appointed as the *Program Committee Member* for *ICLR25*. 
 - *2024.09* ``Competition``: &nbsp;🎉🎉 We won the *1st Price* in  Tecent AI Arena Competition (腾讯开悟比赛多智能体博弈赛道), meaning  *1/2000+* . Both of our teams are advanced to the grand finals, check [Award List](https://pre-prod.kaiwu.pvp.qq.com/aiarena/zh/match/open-competition-2024?tab=score) for details.
-- *2024.07* ``Publication``: &nbsp;[*MM 2024*, *Oral(3%)*]🎉🎉 We raise the generative contrstive approach to address the person identification through chest bones, details are in [Neural Boneprint](https://dl.acm.org/doi/abs/10.1145/3664647.3681174).
-- *2024.07* ``Publication``: &nbsp;[*MM 2024*, *Oral(3%)*]🎉🎉 We propose to revise the inexacts while restoring images through Diffusion models, details are in [DPPS](https://dpps.pages.dev/)[![](https://img.shields.io/github/stars/74587887/DPPS_code?style=social&label=Code+Stars)](https://github.com/74587887/DPPS_code).   
+- *2024.07* ``Publication``: &nbsp;[*MM 2024*, *Oral(3%)*]🎉🎉 We raise the generative contrastive approach to address the person identification through chest bones, details are in [Neural Boneprint](https://dl.acm.org/doi/abs/10.1145/3664647.3681174).
+- *2024.07* ``Publication``: &nbsp;[*MM 2024*, *Oral(3%)*]🎉🎉 We propose to revise the inaccuracies while restoring images through Diffusion models, details are in [DPPS](https://dpps.pages.dev/)[![](https://img.shields.io/github/stars/74587887/DPPS_code?style=social&label=Code+Stars)](https://github.com/74587887/DPPS_code).   
 - *2024.06* ``A&S Service``: Appointed as the *Program Committee Member* for *AAAI25*.  
 - *2024.06* ``Publication``: &nbsp;🎉🎉 Our latest framework and benchmark model on private object detection, [PrivacyGuard](https://arxiv.org/pdf/2406.12736), is now online; the code and training dataset will soon be available!
 - *2024.04* ``A&S Service``: Appointed as the *Program Committee Member* for *NIPS24*.
