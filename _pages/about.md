@@ -25,8 +25,8 @@ redirect_from:
 
 # 🔥 News   
 - *2026.01* ``A&S Service``: 🎉🎉Promoted as the *Area Chair* for *ICML 2026*. 
-- *2025.12* ``Publication``: &nbsp;[*AAAI 2025*]🎉🎉 [FGM-HD](https://arxiv.org/abs/2511.08945), we introduce the classic Hausdorff Dimension into Fractal Generation Model, and the code will be soon available!
-- *2025.11* ``Publication``: &nbsp;[*IEEE-T-DSC*]🎉🎉Two of our works on privacy & adversarial learning are accepted to TDSC.
+- *2025.12* ``Publication``: &nbsp;[*AAAI 2026*]🎉🎉 [FGM-HD](https://arxiv.org/abs/2511.08945), we introduce the classic Hausdorff Dimension into Fractal Generation Model, and the code will be soon available!
+- *2025.11* ``Publication``: &nbsp;[*T-DSC*]🎉🎉Two of our works on privacy & adversarial learning are accepted to TDSC.
 - *2025.09* ``A&S Service``: Appointed as the *Program Committee Member* for *ICLR 2026*.    
 - *2025.07* ``A&S Service``: Appointed as the *Program Committee Member* for *AAAI 2026*.   
 - *2025.05* ``Publication``: &nbsp;[*NeurIPS 2025*]🎉🎉[ForensicsHub](https://arxiv.org/abs/2505.11003)[![Stars](https://img.shields.io/github/stars/scu-zjz/ForensicHub?style=social)](https://github.com/scu-zjz/ForensicHub), we propose a new task termed "FIDL", Fake Image Detection and Localization, unifying the 4 major subdomains of image forensics (IML, AIGC detection, DeepFake Detection, DocumentTamper Detection) into this single FIDL task.    
