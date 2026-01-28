@@ -20,15 +20,15 @@ redirect_from:
 ⛹️‍♂️Ji-Zhe Zhou (周吉喆)🏊‍♂️, Associate Professor at the School of Computer Science, Sichuan University. I obtained my Ph.D. (early graduation) from the University of Macau in 2021. My primary research areas are the self-supervised learning theories and multimedia content security. I am the first or corresponding author for many top conferences and IEEE transactions, including ICCV, NIPS, ACM MM, ACL, IJCAI, AAAI, etc. My publication recieved a total <a href='https://scholar.google.com/citations?user=-cNWmJMAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a> citations.   
 
 周吉喆，四川大学计算机学院副教授，主要擅长内容生成与反生成方向，长期招收AI+CV方向solid background and self-motivated的研究生与本科生（限川大），组内各研究方向详见Supervised Students部分，欢迎联系邮件 jzzhou@scu.edu.cn 。    
-招收26秋的智能科学与技术专业博士生一名，欢迎联系。   
-1 quota for 26 fall Ph.D. student major in Artificial Intelligence and Science.   
+招收26秋的软件工程专业留学生硕士一名，欢迎联系。   
+1 quota for 26 fall international Ms.c student major in Software Engineering.   
 
 # 🔥 News   
-- *2026.01* ``A&S Service``: Appointed as the *Senior Program Committee Membe* for *ICML 2026*. 
-- *2025.12* ``Publication``: &nbsp;[**AAAI 2025*]🎉🎉 [FGM-HD](https://arxiv.org/abs/2511.08945), we introduce the classic Hausdorff Dimension into Fractal Generation Model, and the code will be soon available!
+- *2026.01* ``A&S Service``: Appointed as the *Senior Program Committee* for *ICML 2026*. 
+- *2025.12* ``Publication``: &nbsp;[*AAAI 2025*]🎉🎉 [FGM-HD](https://arxiv.org/abs/2511.08945), we introduce the classic Hausdorff Dimension into Fractal Generation Model, and the code will be soon available!
 - *2025.11* ``Publication``: &nbsp;[*IEEE-T-DSC*]🎉🎉Two of our works on privacy \& adversarial learning are accepted to TDSC.
-- *2025.09* ``A&S Service``: Appointed as the *Program Committee Membe* for *ICLR 2026*.    
-- *2025.07* ``A&S Service``: Appointed as the *Program Committee Membe* for *AAAI 2026*.   
+- *2025.09* ``A&S Service``: Appointed as the *Program Committee Member* for *ICLR 2026*.    
+- *2025.07* ``A&S Service``: Appointed as the *Program Committee Member* for *AAAI 2026*.   
 - *2025.05* ``Publication``: &nbsp;[*NeurIPS 2025*]🎉🎉[ForensicsHub](https://arxiv.org/abs/2505.11003)[![Stars](https://img.shields.io/github/stars/scu-zjz/ForensicHub?style=social)](https://github.com/scu-zjz/ForensicHub), we propose a new task termed "FIDL", Fake Image Detection and Localization, unifying the 4 major subdomains of image forensics (IML, AIGC detection, DeepFake Detection, DocumentTamper Detection) into this single FIDL task.    
 - *2025.04* ``A&S Service``: Appointed as the *Program Committee Member* for *NeurIPS 2025*.   
 - *2025.03* ``A&S Service``: Appointed as the *Area Chair* for *MM 2025*.   
