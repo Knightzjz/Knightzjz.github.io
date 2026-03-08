@@ -3,9 +3,12 @@ title: "周吉喆 Ji-Zhe Zhou | 四川大学副教授"
 description: "周吉喆(Ji-Zhe Zhou)，四川大学计算机学院副教授、博士生导师。研究方向：图像篡改检测、生成式AI、多模态大模型。"
 url: "https://knightzjz.github.io"
 
-# 禁用远程主题，使用本地布局
+# 强制禁用所有主题
 theme: null
 remote_theme: null
+
+# 使用本地布局
+layouts_dir: _layouts
 
 # 插件
 plugins:
@@ -24,3 +27,4 @@ exclude:
   - README.md
   - commit_with_version.py
   - _pages/about.md.backup
+  - _pages/about-content.html
