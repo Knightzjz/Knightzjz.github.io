@@ -1,7 +1,7 @@
 ---
 permalink: /
-title: "周吉喆 Ji-Zhe Zhou | 四川大学博导硕导 | 图像篡改检测与生成 | 多模态大模型"
-excerpt: "周吉喆(Ji-Zhe Zhou)，四川大学计算机学院博士生导师、硕士生导师，四川省千人、天府峨眉计划入选者。周吉喆 四川大学、周吉喆 川大计算机学院。研究方向：图像篡改检测、生成式AI、多模态大模型。主持自然基金面上、自然基金青年项目。招收硕博研究生。"
+title: "周吉喆 Ji-Zhe Zhou | 四川大学副教授 | 图像篡改检测与生成 | 多模态大模型"
+excerpt: "周吉喆(Ji-Zhe Zhou)，四川大学计算机学院副教授、博士生导师。周吉喆 川大副教授、周吉喆 四川大学计算机学院副教授。研究方向：图像篡改检测、生成式AI、多模态大模型。招收硕博研究生。"
 author_profile: false
 classes: wide
 redirect_from: 
@@ -10,7 +10,7 @@ redirect_from:
 ---
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<meta name="description" content="周吉喆(Ji-Zhe Zhou)，四川大学计算机学院博士生导师、硕士生导师，四川省千人、天府峨眉计划入选者。周吉喆 川大、周吉喆 四川大学计算机学院教授。研究方向：图像篡改检测、生成式AI、多模态大模型。主持自然基金面上/青年项目。招收硕博研究生。">
+<meta name="description" content="周吉喆(Ji-Zhe Zhou)，四川大学计算机学院副教授、博士生导师。周吉喆 川大副教授、周吉喆 四川大学计算机学院副教授。研究方向：图像篡改检测、生成式AI、多模态大模型。招收硕博研究生。">
 <meta name="keywords" content="周吉喆, Ji-Zhe Zhou, 周吉喆 四川大学, 周吉喆 川大, 周吉喆 计算机学院, 周吉喆 川大计算机学院, 四川大学 周吉喆, 川大 周吉喆, 四川大学 计算机学院 周吉喆, 周吉喆 博导, 周吉喆 硕导, 周吉喆 博士生导师, 周吉喆 硕士生导师, 周吉喆 副教授, 周吉喆 图像篡改, 周吉喆 图像篡改检测, 周吉喆 多模态, 周吉喆 大模型, 川大计算机 博导, 川大计算机 硕导, 四川大学 博导, 四川大学 硕导, 四川大学, Sichuan University, 川大, SCU, 计算机学院, School of Computer Science, 四川大学计算机学院, 博导, PhD Supervisor, 硕导, MSc Supervisor, 副教授, Associate Professor, 图像篡改检测, Image Manipulation Detection, IML, 生成, Generation, AIGI, AIGC, 多模态大模型, Multimodal LLM, MLLM, 自然基金面上, NSFC General Program, 自然基金青年, NSFC Youth Program, 四川省千人, Sichuan Thousand Talents, 天府峨眉计划, Tianfu Emei Program, 信息取证, Information Forensics, 伪造图像检测, Fake Image Detection, 自监督学习, Self-supervised Learning, 多媒体内容生成, Multimedia Content Generation, 深度学习, Deep Learning, 人工智能, AI, IEEE TETCI">
 <meta name="author" content="Ji-Zhe Zhou">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -23,8 +23,8 @@ redirect_from:
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://knightzjz.github.io/">
-<meta property="og:title" content="周吉喆 Ji-Zhe Zhou | 四川大学博导硕导 | 图像篡改检测与生成">
-<meta property="og:description" content="周吉喆(Ji-Zhe Zhou)，四川大学计算机学院博导硕导，四川省千人、天府峨眉计划入选者。川大计算机学院图像篡改检测、生成式AI、多模态大模型研究。主持自然基金面上/青年项目。招收硕博研究生。">
+<meta property="og:title" content="周吉喆 Ji-Zhe Zhou | 四川大学副教授 | 图像篡改检测与生成">
+<meta property="og:description" content="周吉喆(Ji-Zhe Zhou)，四川大学计算机学院副教授、博导。川大计算机学院图像篡改检测、生成式AI、多模态大模型研究。招收硕博研究生。">
 <meta property="og:image" content="https://knightzjz.github.io/images/myavatar.jpg">
 <meta property="og:image:width" content="400">
 <meta property="og:image:height" content="400">
@@ -35,17 +35,17 @@ redirect_from:
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://knightzjz.github.io/">
-<meta name="twitter:title" content="周吉喆 Ji-Zhe Zhou | 四川大学博导硕导">
-<meta name="twitter:description" content="周吉喆(Ji-Zhe Zhou)，四川大学计算机学院博导，省千人、天府峨眉计划入选者。川大计算机学院图像篡改检测、生成式AI、多模态大模型研究。">
+<meta name="twitter:title" content="周吉喆 Ji-Zhe Zhou | 四川大学副教授">
+<meta name="twitter:description" content="周吉喆(Ji-Zhe Zhou)，四川大学计算机学院副教授、博导。川大计算机学院图像篡改检测、生成式AI、多模态大模型研究。">
 <meta name="twitter:image" content="https://knightzjz.github.io/images/myavatar.jpg">
 
 <!-- 微信分享优化 WeChat Share Optimization -->
-<meta property="og:image:alt" content="周吉喆 Ji-Zhe Zhou - 四川大学计算机学院博导">
+<meta property="og:image:alt" content="周吉喆 Ji-Zhe Zhou - 四川大学计算机学院副教授">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:locale:alternate" content="en_US">
 <!-- 微信专用 - 确保图片大于 300x300 -->
-<meta itemprop="name" content="周吉喆 Ji-Zhe Zhou | 四川大学博导硕导">
-<meta itemprop="description" content="四川大学计算机学院博士生导师、硕导。图像篡改检测、生成式AI、多模态大模型研究。省千人、天府峨眉计划入选者。">
+<meta itemprop="name" content="周吉喆 Ji-Zhe Zhou | 四川大学副教授">
+<meta itemprop="description" content="四川大学计算机学院副教授、博导。图像篡改检测、生成式AI、多模态大模型研究。">
 <meta itemprop="image" content="https://knightzjz.github.io/images/myavatar.jpg">
 
 <!-- 微信浏览器 viewport 优化 -->
@@ -61,7 +61,7 @@ redirect_from:
   "@type": "Person",
   "name": "Ji-Zhe Zhou",
   "alternateName": "周吉喆",
-  "jobTitle": "PhD & MSc Supervisor / Associate Professor",
+  "jobTitle": "Associate Professor / PhD & MSc Supervisor",
   "worksFor": {
     "@type": "Organization",
     "name": "四川大学 Sichuan University",
@@ -105,7 +105,7 @@ redirect_from:
   "@type": "WebSite",
   "name": "Ji-Zhe Zhou (周吉喆)",
   "url": "https://knightzjz.github.io",
-  "description": "周吉喆(Ji-Zhe Zhou)个人学术主页，四川大学计算机学院博导，周吉喆 川大、周吉喆 四川大学计算机学院。省千人、天府峨眉计划入选者。研究：图像篡改检测、生成式AI、多模态大模型。Personal academic homepage of Ji-Zhe Zhou, PhD Supervisor at Sichuan University.",
+  "description": "周吉喆(Ji-Zhe Zhou)个人学术主页，四川大学计算机学院副教授、博导，周吉喆 川大副教授、周吉喆 四川大学计算机学院副教授。研究：图像篡改检测、生成式AI、多模态大模型。Personal academic homepage of Ji-Zhe Zhou, Associate Professor at Sichuan University.",
   "author": {
     "@type": "Person",
     "name": "Ji-Zhe Zhou"
