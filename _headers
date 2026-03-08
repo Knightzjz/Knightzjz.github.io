@@ -1,0 +1,35 @@
+# Cloudflare Pages / Netlify Headers
+# 优化后：允许社交媒体和搜索引擎正常抓取，同时保持基本安全
+
+/*
+  # X-Frame-Options 从 DENY 改为 SAMEORIGIN
+  # DENY 会阻止所有嵌入，可能影响某些社交媒体预览
+  # SAMEORIGIN 允许同域嵌入，不影响社交媒体抓取（它们不通过iframe）
+  X-Frame-Options: SAMEORIGIN
+  
+  # 防止 MIME 类型嗅探
+  X-Content-Type-Options: nosniff
+  
+  # Referrer 策略：允许搜索引擎和社交媒体获取来源信息
+  Referrer-Policy: strict-origin-when-cross-origin
+  
+  # 权限策略：限制敏感API
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()
+  
+  # XSS 保护
+  X-XSS-Protection: 1; mode=block
+  
+  # 缓存控制：1小时
+  Cache-Control: public, max-age=3600
+
+# 图片缓存：30天（提高性能）
+/images/*
+  Cache-Control: public, max-age=2592000
+
+# Service Worker 不缓存
+/sw.js
+  Cache-Control: public, max-age=0
+
+# 开放图谱图片特殊缓存（社交媒体频繁抓取）
+/images/myavatar.jpg
+  Cache-Control: public, max-age=2592000
