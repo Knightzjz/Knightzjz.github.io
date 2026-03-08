@@ -1,0 +1,40 @@
+name: Update Version SHA
+
+on:
+  push:
+    branches: [ master, main ]
+    paths:
+      - '_pages/about.md'
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Get commit SHA and update file
+      run: |
+        # 获取最新提交的短 SHA
+        COMMIT_SHA=$(git rev-parse --short HEAD)
+        echo "Current commit: $COMMIT_SHA"
+        
+        # 更新 about.md 中的 Version SHA
+        sed -i "s/Version SHA:<\/span>\s*<span class=\"number\"[^>]*>[^<]*/Version SHA:<\/span>\n      <span class=\"number\" style=\"color: #fbbf24; font-family: 'SF Mono', Monaco, monospace;\">$COMMIT_SHA/" _pages/about.md
+        
+        # 检查是否有变更
+        if git diff --quiet; then
+          echo "No changes needed"
+          exit 0
+        fi
+        
+        # 提交更新
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add _pages/about.md
+        git commit -m "Auto-update Version SHA to $COMMIT_SHA"
+        git push

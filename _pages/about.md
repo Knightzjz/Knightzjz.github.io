@@ -176,7 +176,7 @@ redirect_from:
 
 body { font-size: var(--font-base); line-height: 1.75; -webkit-text-size-adjust: 100%; }
 
-/* Header - 优化布局 */
+/* Header - 优化布局 - 添加金色边框 */
 .profile-header {
   background: linear-gradient(135deg, var(--color-primary) 0%, #2c5282 100%);
   color: white;
@@ -184,6 +184,8 @@ body { font-size: var(--font-base); line-height: 1.75; -webkit-text-size-adjust:
   border-radius: 16px;
   margin-bottom: 6rem;
   position: relative;
+  border: 3px solid var(--color-secondary);
+  box-shadow: 0 0 0 1px rgba(214, 158, 46, 0.3), 0 4px 20px rgba(0,0,0,0.15);
 }
 
 .profile-content { 
@@ -1242,6 +1244,11 @@ html {
       <span class="icon">👤</span>
       <span>pushes:</span>
       <span class="number" id="uv-count">Loading...</span>
+    </div>
+    <div class="pv-counter">
+      <span class="icon">📋</span>
+      <span>Version SHA:</span>
+      <span class="number" style="color: #fbbf24; font-family: 'SF Mono', Monaco, monospace;">697dfeb</span>
     </div>
   </div>
   
