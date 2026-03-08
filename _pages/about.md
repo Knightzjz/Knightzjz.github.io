@@ -17,7 +17,7 @@ redirect_from:
 <meta name="googlebot" content="index, follow">
 <meta name="bingbot" content="index, follow">
 
-<!-- Canonical URL -->
+<!-- Deployment timestamp: 2025-03-08 17:30 CST - Force cache refresh -->
 <link rel="canonical" href="https://knightzjz.github.io/">
 
 <!-- Open Graph / Facebook -->
