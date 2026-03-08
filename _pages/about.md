@@ -37,6 +37,9 @@ body { font-size: var(--font-base); line-height: 1.75; -webkit-text-size-adjust:
   position: relative;
   border: 3px solid var(--color-secondary);
   box-shadow: 0 0 0 1px rgba(214, 158, 46, 0.3), 0 4px 20px rgba(0,0,0,0.15);
+  position: relative;
+  border: 3px solid var(--color-secondary);
+  box-shadow: 0 0 0 1px rgba(214, 158, 46, 0.3), 0 4px 20px rgba(0,0,0,0.15);
 }
 
 .profile-content { 
