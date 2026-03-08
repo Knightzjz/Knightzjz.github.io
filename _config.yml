@@ -1,0 +1,26 @@
+# GitHub Pages 配置
+title: "周吉喆 Ji-Zhe Zhou | 四川大学副教授"
+description: "周吉喆(Ji-Zhe Zhou)，四川大学计算机学院副教授、博士生导师。研究方向：图像篡改检测、生成式AI、多模态大模型。"
+url: "https://knightzjz.github.io"
+
+# 禁用远程主题，使用本地布局
+theme: null
+remote_theme: null
+
+# 插件
+plugins:
+  - jekyll-redirect-from
+
+# 默认布局
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
+# 排除文件
+exclude:
+  - README.md
+  - commit_with_version.py
+  - _pages/about.md.backup
