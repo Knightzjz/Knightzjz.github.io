@@ -1,30 +1,129 @@
-# GitHub Pages 配置
-title: "周吉喆 Ji-Zhe Zhou | 四川大学副教授"
+# Site Settings
+title: "周吉喆 Ji-Zhe Zhou | 四川大学计算机学院"
 description: "周吉喆(Ji-Zhe Zhou)，四川大学计算机学院副教授、博士生导师。研究方向：图像篡改检测、生成式AI、多模态大模型。"
-url: "https://knightzjz.github.io"
+repository: "Knightzjz/Knightzjz.github.io"
+google_scholar_stats_use_cdn: true
 
-# 强制禁用所有主题
-theme: null
-remote_theme: null
+# google analytics
+google_analytics_id:
 
-# 使用本地布局
-layouts_dir: _layouts
+# SEO Related
+google_site_verification:
+bing_site_verification:
+baidu_site_verification:
 
-# 插件
-plugins:
-  - jekyll-redirect-from
+# Site Author
+author:
+  name: "Ji-Zhe Zhou"
+  avatar: "images/myavatar.jpg"
+  bio: "Associate Professor at Sichuan University"
+  location: "Chengdu, China"
+  employer: "Sichuan University"
+  pubmed:
+  googlescholar: "https://scholar.google.com/citations?user=-cNWmJMAAAAJ"
+  email: "jzzhou@scu.edu.cn"
+  researchgate:
+  uri:
+  github: "Knightzjz"
+  linkedin:
+  orcid:
+  dblp:
 
-# 默认布局
+# Reading Files
+include:
+  - .htaccess
+  - _pages
+  - files
+exclude:
+  - docs
+  - google_scholar_crawler
+  - "*.sublime-project"
+  - "*.sublime-workspace"
+  - .asset-cache
+  - .bundle
+  - .jekyll-assets-cache
+  - .sass-cache
+  - .github
+  - CHANGELOG
+  - Capfile
+  - Gemfile
+  - Gruntfile.js
+  - LICENSE
+  - README
+  - Rakefile
+  - assets/js/_main.js
+  - assets/js/plugins
+  - assets/js/vendor
+  - config
+  - gulpfile.js
+  - log
+  - node_modules
+  - package.json
+  - tmp
+  - vendor
+keep_files:
+  - .git
+  - .svn
+encoding: "utf-8"
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+
+# Conversion
+markdown: kramdown
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
+
+# Markdown Processing
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+
+# Defaults
 defaults:
   - scope:
       path: ""
-      type: "pages"
+      type: pages
     values:
-      layout: "default"
+      layout: default
+      author_profile: true
 
-# 排除文件
-exclude:
-  - README.md
-  - commit_with_version.py
-  - _pages/about.md.backup
-  - _pages/about-content.html
+# Sass/SCSS
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Outputting
+permalink: /:categories/:title/
+timezone: Asia/Shanghai
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jekyll-redirect-from
+
+# mimic GitHub Pages with --safe
+whitelist:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
+
+# HTML Compression
+compress_html:
+  clippings: all
+  ignore:
+    envs: development
+
+theme: null
+remote_theme: null
