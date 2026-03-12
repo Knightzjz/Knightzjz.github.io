@@ -1,3 +1,10 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your entire site, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# `jekyll serve`. If you change this file, please restart the server process.
+
 # Site Settings
 title: "周吉喆 Ji-Zhe Zhou | 四川大学计算机学院"
 description: "周吉喆(Ji-Zhe Zhou)，四川大学计算机学院副教授、博士生导师。研究方向：图像篡改检测、生成式AI、多模态大模型。"
@@ -87,6 +94,7 @@ kramdown:
 
 # Defaults
 defaults:
+  # _pages
   - scope:
       path: ""
       type: pages
@@ -97,11 +105,11 @@ defaults:
 # Sass/SCSS
 sass:
   sass_dir: _sass
-  style: compressed
+  style: compressed # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
 
 # Outputting
 permalink: /:categories/:title/
-timezone: Asia/Shanghai
+timezone: Asia/Shanghai # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 # Plugins
 plugins:
@@ -120,10 +128,8 @@ whitelist:
   - jemoji
 
 # HTML Compression
+# - http://jch.penibelst.de/
 compress_html:
   clippings: all
   ignore:
     envs: development
-
-theme: null
-remote_theme: null

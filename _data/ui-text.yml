@@ -1,0 +1,15 @@
+# User interface text and labels
+
+# English (default)
+en:
+  follow_label                 : "Follow:"
+  powered_by                   : "Powered by"
+
+# Chinese
+zh:
+  follow_label                 : "关注："
+  powered_by                   : "基于"
+
+zh-CN:
+  follow_label                 : "关注："
+  powered_by                   : "基于"
