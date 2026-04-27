@@ -1,0 +1,32 @@
+---
+layout: default
+---
+
+<article class="post">
+  <header class="post-header">
+    <h1>{{ page.title }}</h1>
+    <p class="post-meta">{{ page.date | date: "%B %d, %Y" }}</p>
+  </header>
+  
+  <div class="post-content">
+    {{ content }}
+  </div>
+  
+  <footer class="post-footer">
+    <a href="{{ '/blog/' | relative_url }}">← Back to Blog</a>
+  </footer>
+</article>
+
+<style>
+.post { max-width: 720px; margin: 0 auto; }
+.post-header { text-align: center; margin-bottom: 3rem; }
+.post-header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+.post-meta { color: var(--text-light); }
+.post-content { font-size: 1.1rem; line-height: 1.8; }
+.post-content h2 { margin: 2rem 0 1rem; }
+.post-content p { margin-bottom: 1.5rem; }
+.post-content code { background: var(--bg-alt); padding: 0.2rem 0.4rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+.post-content pre { background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: var(--radius); overflow-x: auto; margin: 1.5rem 0; }
+.post-footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+.post-footer a { color: var(--primary); text-decoration: none; }
+</style>
