@@ -28,3 +28,8 @@ exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
+  - .github
+
+# Include files
+include:
+  - _data
