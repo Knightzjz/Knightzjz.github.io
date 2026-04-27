@@ -75,11 +75,13 @@ body {
 
 .links { display: flex; gap: 1rem; margin-top: 1.5rem; }
 .btn {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.75rem 1.5rem; border-radius: var(--radius);
-  background: var(--primary); color: white; text-decoration: none; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.5rem 1rem; border-radius: 6px;
+  background: var(--primary); color: white; text-decoration: none; font-weight: 500; font-size: 0.85rem;
 }
 .btn.secondary { background: var(--bg-alt); color: var(--text); border: 1px solid var(--border); }
+.btn.scholar { background: #4285f4; }
+.btn.scholar:hover { background: #357ae8; }
 
 /* Stats */
 .stats {
