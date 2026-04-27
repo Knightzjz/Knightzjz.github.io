@@ -1,0 +1,45 @@
+name: Update Citations
+
+on:
+  schedule:
+    - cron: '0 */8 * * *'  # Every 8 hours
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  update-citations:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch citation count
+        run: |
+          # Fetch Google Scholar profile page
+          curl -s "https://scholar.google.com/citations?user=-cNWmJMAAAAJ" \
+            -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" \
+            -o scholar_page.html
+          
+          # Extract total citations using grep and sed
+          CITATIONS=$(grep -oP '(?<=Total citations</td><td class="g-rgh">)[\d,]+(?=</td>)' scholar_page.html 2>/dev/null || \
+                     grep -oP 'Cited by \K[\d,]+' scholar_page.html 2>/dev/null || \
+                     echo "N/A")
+          
+          # Clean up commas
+          CITATIONS=$(echo $CITATIONS | tr -d ',')
+
+      - name: Create data directory
+        run: mkdir -p _data
+
+      - name: Update citations.json
+        run: |
+          # Create JSON file with current timestamp and citation count
+          echo '{"citations": "'$CITATIONS'", "updated": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"}' > _data/citations.json
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add _data/citations.json
+          git diff --staged --quiet || git commit -m "Update citation count [skip ci]"
+          git push
