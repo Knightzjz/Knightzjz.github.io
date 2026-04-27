@@ -1,0 +1,30 @@
+# Site settings
+title: "Ji-Zhe (Knight) Zhou"
+description: "Associate Professor at Sichuan University | Neural Networks & Generative AI Security"
+author: "Ji-Zhe Zhou"
+url: "https://knightzjz.github.io"
+avatar: "https://avatars.githubusercontent.com/u/10630688?v=4"
+github_username: "Knightzjz"
+location: "Chengdu, China"
+email: ""
+
+# Academic info
+position: "Associate Professor"
+affiliation: "Sichuan University, College of Computer Science"
+research_interests:
+  - "Neural Network Methods"
+  - "Generative AI Security"
+  - "Image Manipulation Detection"
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-seo-tag
+  - jekyll-feed
+
+# Exclude from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
