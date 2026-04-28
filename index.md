@@ -6,11 +6,14 @@ title: "Ji-Zhe (Knight) Zhou"
 <div class="home-container">
   <!-- Hero Section -->
   <header class="hero">
-    <img src="{{ site.avatar }}" alt="{{ site.author }}" class="avatar">
+    <div class="avatar-wrapper">
+      <img src="{{ site.avatar }}" alt="{{ site.author }}" class="avatar">
+    </div>
     <div class="hero-text">
-      <h1>Ji-Zhe (周继喆)</h1>
-      <p class="position">Associate Professor</p>
-      <p class="bio">Sichuan University, College of Computer Science</p>
+      <h1>Ji-Zhe Zhou （周吉喆）</h1>
+      <p class="position-cn">四川大学计算机学院副教授</p>
+      <div class="position-divider"></div>
+      <p class="position-en">Associate Professor at Sichuan University</p>
       
       <div class="links">
         <a href="https://github.com/{{ site.github_username }}" target="_blank" class="btn">
@@ -21,8 +24,9 @@ title: "Ji-Zhe (Knight) Zhou"
           <svg height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
           Scholar <span id="citation-count"></span>
         </a>
-        <a href="{{ '/blog/' | relative_url }}" class="btn secondary">
-          📝 Blog
+        <a href="{{ '/blog/' | relative_url }}" class="btn blog">
+          <svg height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+          Blog
         </a>
       </div>
     </div>
@@ -36,6 +40,14 @@ title: "Ji-Zhe (Knight) Zhou"
       })
       .catch(error => console.log('Citation data not available'));
   </script>
+
+  <!-- Bio Section -->
+  <section class="bio-section">
+    <p class="bio-text">
+      <!-- 请在此处填入您的个人简介 -->
+      [您的个人简介内容将在这里展示，请告诉我具体文字，我来替换这里的占位符。]
+    </p>
+  </section>
 
   <!-- Publications -->
   <section class="section">
