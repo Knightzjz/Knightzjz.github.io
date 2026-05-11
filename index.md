@@ -43,10 +43,31 @@ title: "Ji-Zhe (Knight) Zhou"
 
   <!-- Bio Section -->
   <section class="bio-section">
-    <p class="bio-text">
-      <!-- 请在此处填入您的个人简介 -->
-      [您的个人简介内容将在这里展示，请告诉我具体文字，我来替换这里的占位符。]
-    </p>
+    <div class="bio-cn">
+      <p>
+        周吉喆，四川大学计算机学院副教授，
+        <span class="highlight-tag">省千人计划</span>
+        入选者，IEEE <a class="highlight-tag" href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank">TETCI 副主编</a>，
+        J. Imaging <a class="highlight-tag" href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank">客座主编</a>。
+        主要研究方向为<strong>伪造图像检测</strong>（Fake Image Detection）及<strong>生成与取证统一</strong>（Forensic-Embedded Generation）。
+        主导开发了 IML-ViT、Sparse-ViT、IMDL-BenCo、ForensicHub、SICA（OpenMMSec）、Defake 等多个开源项目。
+        更多详情请见 GitHub 与 Google Scholar 主页。
+      </p>
+    </div>
+    <hr class="bio-divider">
+    <div class="bio-en">
+      <p>
+        Ji-Zhe Zhou is an Associate Professor at the College of Computer Science, Sichuan University,
+        and a recipient of the Sichuan Provincial Thousand Talents Program.
+        He serves as Associate Editor of <a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank" class="project-link" style="font-style:normal"><em>IEEE TETCI</em></a>
+        and Guest Editor of <a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank" class="project-link" style="font-style:normal"><em>J. Imaging</em></a>.
+        His research focuses on <strong style="font-style:normal">Fake Image Detection</strong>
+        and <strong style="font-style:normal">Forensic-Embedded Generation</strong>.
+        He has led the development of several open-source projects, including
+        IML-ViT, Sparse-ViT, IMDL-BenCo, ForensicHub, SICA (OpenMMSec), and Defake.
+        For more details, please visit his GitHub and Google Scholar profiles.
+      </p>
+    </div>
   </section>
 
   <!-- Publications -->
