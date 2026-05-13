@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ji-Zhe Zhou | 四川大学</title>
+  <meta name="description" content="Associate Professor at Sichuan University | Neural Networks & Generative AI Security">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+  <style>
+/* ============================================================
+   Global Styles (matched to original site)
+   ============================================================ */
+:root {
+  --primary: #2563eb;
+  --secondary: #64748b;
+  --accent: #f59e0b;
+  --bg: #ffffff;
+  --bg-alt: #f8fafc;
+  --text: #1e293b;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --radius: 12px;
+  --gradient-start: #667eea;
+  --gradient-end: #764ba2;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   Header / Nav
+   ============================================================ */
+.site-header {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.site-header nav {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo { font-weight: 700; font-size: 1.2rem; color: var(--text); text-decoration: none; }
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { color: var(--text-light); text-decoration: none; font-size: 0.95rem; }
+.nav-links a:hover { color: var(--primary); }
+
+/* ============================================================
+   Main
+   ============================================================ */
+.main-content { max-width: 1000px; margin: 0 auto; padding: 3rem 2rem; }
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+}
+.avatar-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+.avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.2);
+}
+.avatar-wrapper::after {
+  content: '';
+  position: absolute;
+  top: -6px; left: -6px; right: -6px; bottom: -6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  z-index: -1;
+}
+.hero-text h1 { font-size: 1.8rem; margin-bottom: 0.75rem; font-weight: 600; }
+.position-cn { color: var(--text); font-weight: 500; margin-bottom: 0.25rem; font-size: 1rem; }
+.position-divider { width: 260px; height: 2px; background: linear-gradient(90deg, #667eea, #764ba2); margin: 0.5rem 0; border-radius: 2px; }
+.position-en { color: var(--text-light); margin-bottom: 0.5rem; font-size: 0.95rem; }
+
+/* ============================================================
+   Links & Buttons
+   ============================================================ */
+.links { display: flex; gap: 0.6rem; margin-top: 1.25rem; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0.45rem 0.85rem; border-radius: 6px;
+  background: var(--primary); color: white; text-decoration: none;
+  font-weight: 500; font-size: 0.8rem; height: 32px;
+}
+.btn:hover { opacity: 0.9; text-decoration: none; }
+.btn.scholar { background: #4285f4; }
+.btn.scholar:hover { background: #357ae8; }
+.btn.semantic { background: #0f766e; }
+.btn.semantic:hover { background: #0d6560; }
+.btn.email { background: var(--secondary); }
+.btn.email:hover { background: #475569; }
+.btn svg { width: 13px; height: 13px; }
+
+/* ============================================================
+   Bio Section — original gradient card style
+   ============================================================ */
+.bio-section {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border-left: 4px solid;
+  border-image: linear-gradient(180deg, #667eea, #764ba2) 1;
+  position: relative;
+}
+.bio-section::before {
+  content: '\201C';
+  position: absolute;
+  top: 0.5rem; left: 1.2rem;
+  font-size: 3rem; color: #667eea;
+  opacity: 0.3; font-family: Georgia, serif; line-height: 1;
+}
+.bio-cn, .bio-en {
+  color: var(--text); font-size: 0.95rem; line-height: 1.8;
+  padding-left: 1.5rem;
+}
+.bio-cn p, .bio-en p { margin: 0; }
+.bio-divider { border: none; border-top: 1px solid var(--border); margin: 1.2rem 0; }
+.highlight-tag {
+  background: #fef3c7; color: #92400e; padding: 0.05rem 0.4rem;
+  border-radius: 4px; font-size: 0.85rem; font-weight: 600;
+}
+.bio-en .project-link {
+  font-style: normal; color: var(--primary);
+}
+
+/* ============================================================
+   News Section — simple list
+   ============================================================ */
+.news-list { display: flex; flex-direction: column; gap: 0; }
+.news-entry {
+  display: flex; gap: 1rem; align-items: baseline;
+  padding: 0.55rem 0; border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+.news-entry:last-child { border-bottom: none; }
+.news-date { flex-shrink: 0; width: 90px; font-size: 0.78rem; color: var(--text-light); font-weight: 500; }
+.news-entry p { margin: 0; line-height: 1.6; }
+.news-entry a { color: var(--primary); font-weight: 500; }
+
+/* ============================================================
+   Sections
+   ============================================================ */
+.section { margin-bottom: 3rem; }
+.section h2 {
+  font-size: 1.3rem; margin-bottom: 1.25rem;
+  border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+
+/* ============================================================
+   Publications
+   ============================================================ */
+.pub-list { display: flex; flex-direction: column; gap: 1.25rem; }
+.pub {
+  padding: 1.25rem 1.5rem; background: var(--bg-alt); border-radius: var(--radius);
+}
+.pub h3 { margin: 0.5rem 0 0.25rem; font-size: 1rem; line-height: 1.45; }
+.pub .authors { color: var(--text-light); font-size: 0.88rem; margin-bottom: 0.2rem; }
+.pub .venue { color: var(--text-light); font-size: 0.82rem; font-style: italic; margin-bottom: 0.6rem; }
+.badge {
+  display: inline-block; padding: 0.2rem 0.65rem; border-radius: 20px;
+  font-size: 0.75rem; font-weight: 500;
+}
+.badge.spotlight { background: #dbeafe; color: #1e40af; }
+.badge.oral { background: #fef3c7; color: #92400e; }
+.pub-links { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.6rem; }
+.pub-link {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  padding: 0.25rem 0.65rem; border-radius: 6px;
+  font-size: 0.75rem; font-weight: 500; text-decoration: none;
+}
+.pub-link.pdf { background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; }
+.pub-link.pdf:hover { background: #fee2e2; }
+.pub-link.code { background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; }
+.pub-link.code:hover { background: #dcfce7; }
+.gh-stars {
+  display: inline-flex; align-items: center;
+  padding: 0.05rem 0.4rem; border-radius: 20px;
+  font-size: 0.7rem; font-weight: 600;
+  background: #24292e; color: #e8c56a; vertical-align: middle;
+}
+.gh-stars::before { content: '★ '; font-size: 0.62rem; }
+
+/* ============================================================
+   Timeline
+   ============================================================ */
+.timeline { display: flex; flex-direction: column; gap: 1.25rem; }
+.timeline .item { display: flex; gap: 1.5rem; }
+.timeline .date { width: 120px; color: var(--text-light); font-weight: 500; flex-shrink: 0; font-size: 0.88rem; padding-top: 0.1rem; }
+.timeline .content h3 { font-size: 1rem; margin-bottom: 0.2rem; }
+.timeline .content p { color: var(--text-light); font-size: 0.88rem; }
+.tag {
+  display: inline-block; padding: 0.15rem 0.5rem; border-radius: 20px;
+  font-size: 0.72rem; font-weight: 600; margin-top: 0.3rem;
+}
+.tag.highlight { background: #fef3c7; color: #92400e; }
+
+/* ============================================================
+   Services
+   ============================================================ */
+.services { list-style: none; }
+.services li { padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.services li:last-child { border-bottom: none; }
+.services li strong { color: var(--text); }
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer {
+  text-align: center; padding: 2rem; color: var(--text-light); font-size: 0.85rem;
+  border-top: 1px solid var(--border); margin-top: 2rem;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero { flex-direction: column; align-items: center; text-align: center; }
+  .links { justify-content: center; }
+  .bio-section { padding: 1.25rem 1.5rem; }
+  .bio-cn, .bio-en { padding-left: 0; }
+  .timeline .item { flex-direction: column; gap: 0.4rem; }
+  .timeline .date { width: auto; }
+}
+  </style>
+</head>
+<body>
+
+  <!-- ======================= NAV ======================= -->
+  <header class="site-header">
+    <nav>
+      <a href="/" class="logo">Ji-Zhe Zhou</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/blog/">Blog</a>
+        <a href="https://github.com/Knightzjz" target="_blank">GitHub</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main-content">
+
+    <!-- ======================= HERO ======================= -->
+    <header class="hero">
+      <div class="avatar-wrapper">
+        <img src="https://avatars.githubusercontent.com/u/10630688?v=4" alt="Ji-Zhe Zhou" class="avatar">
+      </div>
+      <div class="hero-text">
+        <h1>Ji-Zhe Zhou （周吉喆）</h1>
+        <p class="position-cn">四川大学计算机学院副教授</p>
+        <div class="position-divider"></div>
+        <p class="position-en">Associate Professor at Sichuan University</p>
+        <div class="links">
+          <a href="https://github.com/Knightzjz" target="_blank" class="btn">
+            <svg height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://scholar.google.com/citations?user=-cNWmJMAAAAJ" target="_blank" class="btn scholar">
+            <svg height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+            Scholar <span id="citation-count"></span>
+          </a>
+          <a href="/blog/" class="btn semantic">
+            <svg height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            Blog
+          </a>
+          <a href="mailto:jzzhou@scu.edu.cn" class="btn email">
+            <svg height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Email
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ======================= BIO ======================= -->
+    <section class="bio-section">
+      <div class="bio-cn">
+        <p>
+          周吉喆，四川大学计算机学院副教授，
+          <span class="highlight-tag">天府峨眉计划入选者</span>，
+          IEEE <a class="project-link" href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank">TETCI 副主编</a>，
+          J. Imaging <a class="project-link" href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank">客座主编</a>。
+          主要研究方向为<strong>伪造图像检测</strong>（Fake Image Detection）及<strong>生成与取证统一</strong>（Forensic-Embedded Generation）。
+          主导开发了 IML-ViT、Sparse-ViT、IMDL-BenCo、ForensicHub、SICA（OpenMMSec）、Defake 等多个开源项目。
+          更多详情请见 GitHub 与 Google Scholar 主页。
+        </p>
+      </div>
+      <hr class="bio-divider">
+      <div class="bio-en">
+        <p>
+          Ji-Zhe Zhou is an Associate Professor at the College of Computer Science, Sichuan University,
+          and a recipient of the Sichuan Provincial Thousand Talents Program.
+          He serves as Associate Editor of <a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank" class="project-link"><em>IEEE TETCI</em></a>
+          and Guest Editor of <a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank" class="project-link"><em>J. Imaging</em></a>.
+          His research focuses on <strong style="font-style:normal">Fake Image Detection</strong>
+          and <strong style="font-style:normal">Forensic-Embedded Generation</strong>.
+          He has led the development of several open-source projects, including
+          IML-ViT, Sparse-ViT, IMDL-BenCo, ForensicHub, SICA (OpenMMSec), and Defake.
+          For more details, please visit his GitHub and Google Scholar profiles.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================= NEWS ======================= -->
+    <section class="section" id="news">
+      <h2>📣 News</h2>
+      <div class="news-list">
+        <div class="news-entry">
+          <span class="news-date">Feb 2026</span>
+          <p><a href="https://arxiv.org/abs/2602.06676" target="_blank">SICA preprint</a> — Can We Build a Monolithic Model for Fake Image Detection? — on arXiv.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= PUBLICATIONS ======================= -->
+    <section class="section" id="pubs">
+      <h2>📚 Selected Publications</h2>
+      <div class="pub-list">
+
+        <!-- NeurIPS 2024 Spotlight -->
+        <article class="pub">
+          <span class="badge spotlight">🎯 NeurIPS 2024 Spotlight</span>
+          <h3>IMDL-BenCo: A Comprehensive Benchmark for Image Manipulation Detection &amp; Localization</h3>
+          <p class="authors">Xiaochen Ma, Xuekang Zhu, Lei Su, Bo Du, Zhuohang Jiang, Bingkui Tong, Zeyu Lei, Xinyu Yang, Chi-Man Pun, Jiancheng Lv, <strong>Jizhe Zhou</strong></p>
+          <p class="venue">Advances in Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track, 2024</p>
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" class="pub-link pdf">📄 Paper</a>
+            <a href="https://github.com/scu-zjz/IMDLBenCo" target="_blank" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="scu-zjz/IMDLBenCo"></span>
+          </div>
+        </article>
+
+        <!-- ICCV 2023 Oral -->
+        <article class="pub">
+          <span class="badge oral">⭐ ICCV 2023 Oral (Top 5%)</span>
+          <h3>Pre-training-free Image Manipulation Localization via Non-Mutually Contrastive Learning</h3>
+          <p class="authors"><strong>Jizhe Zhou</strong>, Xiaochen Ma, Xia Du, Ahmed Y. Alhammadi, Wentao Feng</p>
+          <p class="venue">IEEE/CVF International Conference on Computer Vision (ICCV), pp. 22346–22356, 2023</p>
+          <div class="pub-links">
+            <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Zhou_Pre-Training-Free_Image_Manipulation_Localization_through_Non-Mutually_Exclusive_Contrastive_Learning_ICCV_2023_paper.pdf" target="_blank" class="pub-link pdf">📄 Paper</a>
+            <a href="https://github.com/Knightzjz/NCL-IML" target="_blank" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="Knightzjz/NCL-IML"></span>
+          </div>
+        </article>
+
+        <!-- NeurIPS 2025 -->
+        <article class="pub">
+          <span class="badge">NeurIPS 2025</span>
+          <h3>ForensicHub: Towards Universal Fake Image Detection and Localization</h3>
+          <p class="authors">Bo Du, Xuekang Zhu, Xiaochen Ma, Chenfan Qu, Kaiwen Feng, Zhe Yang, Chi-Man Pun, Jian Liu, <strong>Ji-Zhe Zhou</strong></p>
+          <p class="venue">Advances in Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track, 2025</p>
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2505.11003" target="_blank" class="pub-link pdf">📄 Paper</a>
+            <a href="https://github.com/scu-zjz/ForensicHub" target="_blank" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="scu-zjz/ForensicHub"></span>
+          </div>
+        </article>
+
+        <!-- IML-ViT -->
+        <article class="pub">
+          <h3>IML-ViT: Benchmarking Image Manipulation Localization by Vision Transformer</h3>
+          <p class="authors">Xiaochen Ma, Bo Du, Zhuohang Jiang, Xia Du, Ahmed Y. Al Hammadi, <strong>Jizhe Zhou</strong></p>
+          <p class="venue">arXiv preprint arXiv:2307.14863, 2023</p>
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2307.14863" target="_blank" class="pub-link pdf">📄 arXiv</a>
+            <a href="https://github.com/SunnyHaze/IML-ViT" target="_blank" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="SunnyHaze/IML-ViT"></span>
+          </div>
+        </article>
+
+        <!-- SICA -->
+        <article class="pub">
+          <h3>Can We Build a Monolithic Model for Fake Image Detection? SICA: Semantic-Induced Constrained Adaptation for Unified-Yet-Discriminative Artifact Feature Space Reconstruction</h3>
+          <p class="authors">Bo Du, Xiaochen Ma, Xuekang Zhu, Zhe Yang, Chaogun Niu, Chenfan Qu, Mingqi Fang, Zhenming Wang, Jingjing Liu, Jian Liu, <strong>Ji-Zhe Zhou</strong></p>
+          <p class="venue">arXiv preprint arXiv:2602.06676, 2026</p>
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2602.06676" target="_blank" class="pub-link pdf">📄 arXiv</a>
+            <a href="https://github.com/scu-zjz/SICA_OpenMMSec" target="_blank" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="scu-zjz/SICA_OpenMMSec"></span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ======================= EXPERIENCE ======================= -->
+    <section class="section" id="exp">
+      <h2>💼 Experience</h2>
+      <div class="timeline">
+        <div class="item">
+          <span class="date">2022 – Present</span>
+          <div class="content">
+            <h3>Associate Professor</h3>
+            <p>Sichuan University, College of Computer Science</p>
+            <span class="tag highlight">天府峨眉计划入选者</span>
+          </div>
+        </div>
+        <div class="item">
+          <span class="date">Education</span>
+          <div class="content">
+            <h3>B.S., M.S., Ph.D.</h3>
+            <p>University of Macau</p>
+            <span class="tag highlight">Ph.D. Supervisor: Prof. Chi-Man Pun</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Ji-Zhe Zhou. Built with Jekyll.</p>
+  </footer>
+
+  <!-- ======================= JS: Scholar Counter + GitHub Stars ======================= -->
+  <script>
+    /* Google Scholar citations — real-time with 8-hour cache */
+    (function () {
+      var KEY = 'gs_citations_v2';
+      var CACHE_TTL = 8 * 60 * 60 * 1000; // 8 hours
+
+      function load(el) {
+        var target = 'https://scholar.google.com/citations?hl=en&user=-cNWmJMAAAAJ';
+        fetch('https://corsproxy.io/?' + encodeURIComponent(target), { cache: 'no-store' })
+          .then(function (r) { return r.text(); })
+          .then(function (html) {
+            var m = html.match(/"citation_total":(\d+)/) ||
+                    html.match(/(\d[\d,]+)\s+citations/i) ||
+                    html.match(/Total\s+cites\s*[\d,]+/i);
+            var count = m ? parseInt(m[1].replace(/,/g, ''), 10) : null;
+            var text = count !== null && !isNaN(count) ? '(' + count.toLocaleString() + ')' : '';
+            el.textContent = text;
+            try { localStorage.setItem(KEY, JSON.stringify({ v: count, t: Date.now() })); } catch (_) {}
+          })
+          .catch(function () {
+            // fallback: try session cache
+            try {
+              var raw = localStorage.getItem(KEY);
+              if (raw) { var o = JSON.parse(raw); el.textContent = o.v ? '(' + o.v.toLocaleString() + ')' : ''; }
+            } catch (_) {}
+          });
+      }
+
+      var el = document.getElementById('citation-count');
+      if (!el) return;
+      try {
+        var raw = localStorage.getItem(KEY);
+        if (raw) {
+          var o = JSON.parse(raw);
+          if (Date.now() - o.t < CACHE_TTL && o.v) {
+            el.textContent = '(' + o.v.toLocaleString() + ')';
+            return; // cached, skip fetch
+          }
+        }
+      } catch (_) {}
+      load(el);
+    })();
+
+    /* GitHub Stars — always fresh, no cache */
+    (function () {
+      var badges = document.querySelectorAll('.gh-stars[data-repo]');
+      if (!badges.length) return;
+      var pending = badges.length, done = 0;
+      badges.forEach(function (b) {
+        var repo = b.dataset.repo;
+        b.textContent = '…';
+        fetch('https://api.github.com/repos/' + repo, {
+          headers: { 'Accept': 'application/vnd.github.v3+json' },
+          cache: 'no-store'
+        })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (j) {
+            var n = j && j.stargazers_count;
+            b.textContent = (n !== undefined && n !== null) ? Number(n).toLocaleString() : '—';
+            b.title = (n !== undefined && n !== null) ? n + ' stars on GitHub' : '';
+          })
+          .catch(function () { b.textContent = '—'; });
+      });
+    })();
+  </script>
+
+</body>
+</html>
