@@ -13,7 +13,7 @@
 
   <style>
 /* ============================================================
-   Global Styles (matched to original site)
+   Global Styles
    ============================================================ */
 :root {
   --primary: #2563eb;
@@ -46,6 +46,10 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: box-shadow 0.3s ease;
+}
+.site-header:hover {
+  box-shadow: 0 2px 16px rgba(37, 99, 235, 0.08);
 }
 .site-header nav {
   max-width: 1000px;
@@ -54,10 +58,21 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-.logo { font-weight: 700; font-size: 1.2rem; color: var(--text); text-decoration: none; }
+.logo { font-weight: 700; font-size: 1.2rem; color: var(--text); text-decoration: none; transition: color 0.2s; }
+.logo:hover { color: var(--primary); }
 .nav-links { display: flex; gap: 2rem; }
-.nav-links a { color: var(--text-light); text-decoration: none; font-size: 0.95rem; }
+.nav-links a {
+  color: var(--text-light); text-decoration: none; font-size: 0.95rem;
+  position: relative; padding-bottom: 2px; transition: color 0.2s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--primary); transform: scaleX(0); transition: transform 0.25s ease;
+  border-radius: 2px;
+}
 .nav-links a:hover { color: var(--primary); }
+.nav-links a:hover::after { transform: scaleX(1); }
 
 /* ============================================================
    Main
@@ -76,7 +91,9 @@ body {
 .avatar-wrapper {
   position: relative;
   flex-shrink: 0;
+  transition: transform 0.3s ease;
 }
+.avatar-wrapper:hover { transform: scale(1.04); }
 .avatar {
   width: 180px;
   height: 180px;
@@ -84,6 +101,10 @@ body {
   object-fit: cover;
   border: 4px solid white;
   box-shadow: 0 8px 32px rgba(37, 99, 235, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+.avatar-wrapper:hover .avatar {
+  box-shadow: 0 12px 40px rgba(37, 99, 235, 0.35);
 }
 .avatar-wrapper::after {
   content: '';
@@ -107,18 +128,25 @@ body {
   padding: 0.45rem 0.85rem; border-radius: 6px;
   background: var(--primary); color: white; text-decoration: none;
   font-weight: 500; font-size: 0.8rem; height: 32px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
 }
-.btn:hover { opacity: 0.9; text-decoration: none; }
+.btn:hover {
+  opacity: 0.93;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  text-decoration: none;
+}
+.btn:active { transform: translateY(0); }
 .btn.scholar { background: #4285f4; }
-.btn.scholar:hover { background: #357ae8; }
+.btn.scholar:hover { background: #357ae8; box-shadow: 0 4px 14px rgba(66, 133, 244, 0.35); }
 .btn.semantic { background: #0f766e; }
-.btn.semantic:hover { background: #0d6560; }
+.btn.semantic:hover { background: #0d6560; box-shadow: 0 4px 14px rgba(15, 118, 110, 0.35); }
 .btn.email { background: var(--secondary); }
-.btn.email:hover { background: #475569; }
+.btn.email:hover { background: #475569; box-shadow: 0 4px 14px rgba(100, 116, 139, 0.3); }
 .btn svg { width: 13px; height: 13px; }
 
 /* ============================================================
-   Bio Section — original gradient card style
+   Bio Section
    ============================================================ */
 .bio-section {
   margin-bottom: 2.5rem;
@@ -128,6 +156,11 @@ body {
   border-left: 4px solid;
   border-image: linear-gradient(180deg, #667eea, #764ba2) 1;
   position: relative;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.bio-section:hover {
+  box-shadow: 0 6px 24px rgba(102, 126, 234, 0.12);
+  transform: translateY(-2px);
 }
 .bio-section::before {
   content: '\201C';
@@ -145,24 +178,30 @@ body {
 .highlight-tag {
   background: #fef3c7; color: #92400e; padding: 0.05rem 0.4rem;
   border-radius: 4px; font-size: 0.85rem; font-weight: 600;
+  transition: background 0.2s;
 }
+.highlight-tag:hover { background: #fde68a; }
 .bio-en .project-link {
   font-style: normal; color: var(--primary);
 }
 
 /* ============================================================
-   News Section — simple list
+   News Section
    ============================================================ */
 .news-list { display: flex; flex-direction: column; gap: 0; }
 .news-entry {
   display: flex; gap: 1rem; align-items: baseline;
-  padding: 0.55rem 0; border-bottom: 1px solid var(--border);
+  padding: 0.55rem 0.5rem; border-bottom: 1px solid var(--border);
   font-size: 0.9rem;
+  border-radius: 6px;
+  transition: background 0.2s ease;
 }
 .news-entry:last-child { border-bottom: none; }
+.news-entry:hover { background: #f8fafc; }
 .news-date { flex-shrink: 0; width: 90px; font-size: 0.78rem; color: var(--text-light); font-weight: 500; }
 .news-entry p { margin: 0; line-height: 1.6; }
-.news-entry a { color: var(--primary); font-weight: 500; }
+.news-entry a { color: var(--primary); font-weight: 500; transition: text-decoration 0.15s; }
+.news-entry a:hover { text-decoration: underline; }
 
 /* ============================================================
    Sections
@@ -180,6 +219,14 @@ body {
 .pub-list { display: flex; flex-direction: column; gap: 1.25rem; }
 .pub {
   padding: 1.25rem 1.5rem; background: var(--bg-alt); border-radius: var(--radius);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease;
+  border: 1px solid transparent;
+}
+.pub:hover {
+  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.1);
+  transform: translateY(-3px);
+  border-color: rgba(37, 99, 235, 0.12);
+  background: #fff;
 }
 .pub h3 { margin: 0.5rem 0 0.25rem; font-size: 1rem; line-height: 1.45; }
 .pub .authors { color: var(--text-light); font-size: 0.88rem; margin-bottom: 0.2rem; }
@@ -195,7 +242,9 @@ body {
   display: inline-flex; align-items: center; gap: 0.3rem;
   padding: 0.25rem 0.65rem; border-radius: 6px;
   font-size: 0.75rem; font-weight: 500; text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+.pub-link:hover { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
 .pub-link.pdf { background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; }
 .pub-link.pdf:hover { background: #fee2e2; }
 .pub-link.code { background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; }
@@ -212,7 +261,15 @@ body {
    Timeline
    ============================================================ */
 .timeline { display: flex; flex-direction: column; gap: 1.25rem; }
-.timeline .item { display: flex; gap: 1.5rem; }
+.timeline .item {
+  display: flex; gap: 1.5rem;
+  padding: 0.8rem 1rem; border-radius: 8px;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.timeline .item:hover {
+  background: #f8fafc;
+  box-shadow: 0 2px 12px rgba(37, 99, 235, 0.07);
+}
 .timeline .date { width: 120px; color: var(--text-light); font-weight: 500; flex-shrink: 0; font-size: 0.88rem; padding-top: 0.1rem; }
 .timeline .content h3 { font-size: 1rem; margin-bottom: 0.2rem; }
 .timeline .content p { color: var(--text-light); font-size: 0.88rem; }
@@ -226,8 +283,13 @@ body {
    Services
    ============================================================ */
 .services { list-style: none; }
-.services li { padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.services li {
+  padding: 0.6rem 0.5rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
 .services li:last-child { border-bottom: none; }
+.services li:hover { background: #f8fafc; }
 .services li strong { color: var(--text); }
 
 /* ============================================================
@@ -236,6 +298,17 @@ body {
 .site-footer {
   text-align: center; padding: 2rem; color: var(--text-light); font-size: 0.85rem;
   border-top: 1px solid var(--border); margin-top: 2rem;
+}
+.visitor-counter {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  margin-top: 0.6rem; padding: 0.3rem 0.9rem;
+  background: var(--bg-alt); border: 1px solid var(--border);
+  border-radius: 20px; font-size: 0.82rem; color: var(--text-light);
+}
+.visitor-counter svg { width: 14px; height: 14px; color: var(--primary); }
+#visitor-num {
+  font-weight: 600; color: var(--primary);
+  min-width: 2em; display: inline-block; text-align: center;
 }
 
 /* ============================================================
@@ -284,7 +357,7 @@ body {
           </a>
           <a href="https://scholar.google.com/citations?user=-cNWmJMAAAAJ" target="_blank" class="btn scholar">
             <svg height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
-            Scholar <span id="citation-count"></span>
+            Scholar <span id="citation-count" title="Google Scholar citations"></span>
           </a>
           <a href="/blog/" class="btn semantic">
             <svg height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
@@ -303,7 +376,7 @@ body {
       <div class="bio-cn">
         <p>
           周吉喆，四川大学计算机学院副教授，
-          <span class="highlight-tag">天府峨眉计划入选者</span>，
+          <span class="highlight-tag">四川省千人计划入选者</span>，
           IEEE <a class="project-link" href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank">TETCI 副主编</a>，
           J. Imaging <a class="project-link" href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank">客座主编</a>。
           主要研究方向为<strong>伪造图像检测</strong>（Fake Image Detection）及<strong>生成与取证统一</strong>（Forensic-Embedded Generation）。
@@ -413,7 +486,7 @@ body {
           <div class="content">
             <h3>Associate Professor</h3>
             <p>Sichuan University, College of Computer Science</p>
-            <span class="tag highlight">天府峨眉计划入选者</span>
+            <span class="tag highlight">四川省千人计划入选者</span>
           </div>
         </div>
         <div class="item">
@@ -427,63 +500,100 @@ body {
       </div>
     </section>
 
-    
-
   </main>
 
+  <!-- ======================= FOOTER ======================= -->
   <footer class="site-footer">
     <p>© 2026 Ji-Zhe Zhou. Built with Jekyll.</p>
+    <div class="visitor-counter">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+      访客总数：<span id="visitor-num">…</span>
+    </div>
   </footer>
 
-  <!-- ======================= JS: Scholar Counter + GitHub Stars ======================= -->
+  <!-- ======================= JS ======================= -->
   <script>
-    /* Google Scholar citations — real-time with 8-hour cache */
+    /* ── 1. Google Scholar citations — CORS proxy + 8h cache ── */
     (function () {
-      var KEY = 'gs_citations_v2';
-      var CACHE_TTL = 8 * 60 * 60 * 1000; // 8 hours
+      var KEY = 'gs_citations_v3';
+      var CACHE_TTL = 8 * 60 * 60 * 1000;
+      var PROXIES = [
+        'https://corsproxy.io/?',
+        'https://api.allorigins.win/raw?url='
+      ];
+      var SCHOLAR_URL = 'https://scholar.google.com/citations?hl=en&user=-cNWmJMAAAAJ';
 
-      function load(el) {
-        var target = 'https://scholar.google.com/citations?hl=en&user=-cNWmJMAAAAJ';
-        fetch('https://corsproxy.io/?' + encodeURIComponent(target), { cache: 'no-store' })
+      function parseCount(html) {
+        // Multiple patterns to match different Scholar page layouts
+        var patterns = [
+          /"cites":(\d+)/,
+          /id="ci-graph-years-link"[^>]*data-link="[^"]*&cites=(\d+)/,
+          /<td[^>]+class="gsc_rsb_std"[^>]*>(\d[\d,]*)<\/td>/,
+          /(\d[\d,]+)\s*(?:citations|cites)/i
+        ];
+        for (var i = 0; i < patterns.length; i++) {
+          var m = html.match(patterns[i]);
+          if (m) {
+            var n = parseInt(m[1].replace(/,/g, ''), 10);
+            if (!isNaN(n) && n > 0) return n;
+          }
+        }
+        return null;
+      }
+
+      function updateEl(el, count) {
+        if (count !== null && !isNaN(count)) {
+          el.textContent = '(' + count.toLocaleString() + ')';
+          el.title = count.toLocaleString() + ' total citations (Google Scholar)';
+        }
+      }
+
+      function fetchWithProxy(proxyIdx, el) {
+        if (proxyIdx >= PROXIES.length) return;
+        fetch(PROXIES[proxyIdx] + encodeURIComponent(SCHOLAR_URL), { cache: 'no-store' })
           .then(function (r) { return r.text(); })
           .then(function (html) {
-            var m = html.match(/"citation_total":(\d+)/) ||
-                    html.match(/(\d[\d,]+)\s+citations/i) ||
-                    html.match(/Total\s+cites\s*[\d,]+/i);
-            var count = m ? parseInt(m[1].replace(/,/g, ''), 10) : null;
-            var text = count !== null && !isNaN(count) ? '(' + count.toLocaleString() + ')' : '';
-            el.textContent = text;
-            try { localStorage.setItem(KEY, JSON.stringify({ v: count, t: Date.now() })); } catch (_) {}
+            var count = parseCount(html);
+            if (count !== null) {
+              updateEl(el, count);
+              try { localStorage.setItem(KEY, JSON.stringify({ v: count, t: Date.now() })); } catch (_) {}
+            } else {
+              // Try next proxy
+              fetchWithProxy(proxyIdx + 1, el);
+            }
           })
-          .catch(function () {
-            // fallback: try session cache
-            try {
-              var raw = localStorage.getItem(KEY);
-              if (raw) { var o = JSON.parse(raw); el.textContent = o.v ? '(' + o.v.toLocaleString() + ')' : ''; }
-            } catch (_) {}
-          });
+          .catch(function () { fetchWithProxy(proxyIdx + 1, el); });
       }
 
       var el = document.getElementById('citation-count');
       if (!el) return;
+
+      // Check cache first
       try {
         var raw = localStorage.getItem(KEY);
         if (raw) {
           var o = JSON.parse(raw);
-          if (Date.now() - o.t < CACHE_TTL && o.v) {
-            el.textContent = '(' + o.v.toLocaleString() + ')';
-            return; // cached, skip fetch
+          if (o.v && Date.now() - o.t < CACHE_TTL) {
+            updateEl(el, o.v);
+            return;
           }
+          // Stale cache: show stale while fetching
+          if (o.v) updateEl(el, o.v);
         }
       } catch (_) {}
-      load(el);
+
+      fetchWithProxy(0, el);
     })();
 
-    /* GitHub Stars — always fresh, no cache */
+    /* ── 2. GitHub Stars ── */
     (function () {
       var badges = document.querySelectorAll('.gh-stars[data-repo]');
       if (!badges.length) return;
-      var pending = badges.length, done = 0;
       badges.forEach(function (b) {
         var repo = b.dataset.repo;
         b.textContent = '…';
@@ -499,6 +609,33 @@ body {
           })
           .catch(function () { b.textContent = '—'; });
       });
+    })();
+
+    /* ── 3. Visitor Counter — hits.sh (no API key needed) ── */
+    (function () {
+      var el = document.getElementById('visitor-num');
+      if (!el) return;
+      // hits.sh increments on each page load and returns total as SVG badge
+      // We use countapi.xyz as a simple JSON endpoint (no key needed)
+      var NS = 'knightzjz.github.io';
+      var KEY = 'pageviews';
+      fetch('https://api.countapi.xyz/hit/' + NS + '/' + KEY)
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          var v = j && j.value;
+          el.textContent = (v !== undefined && v !== null)
+            ? Number(v).toLocaleString()
+            : '—';
+        })
+        .catch(function () {
+          // Fallback: show a local estimate from localStorage
+          try {
+            var lk = 'local_visits';
+            var n = parseInt(localStorage.getItem(lk) || '0', 10) + 1;
+            localStorage.setItem(lk, String(n));
+            el.textContent = n.toLocaleString() + '+';
+          } catch (_) { el.textContent = '—'; }
+        });
     })();
   </script>
 
