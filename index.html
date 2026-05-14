@@ -301,6 +301,74 @@ body {
 }
 
 /* ============================================================
+   Cards Grid
+   ============================================================ */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.student-card {
+  background: var(--bg);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  transition: box-shadow 0.2s ease;
+}
+.student-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.student-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.student-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 14px;
+  color: white;
+  flex-shrink: 0;
+}
+.student-info {
+  flex: 1;
+  min-width: 0;
+}
+.student-name {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text);
+  margin: 0;
+}
+.student-role {
+  font-size: 11px;
+  color: var(--text-light);
+  margin: 0;
+}
+.student-research {
+  font-size: 12px;
+  color: var(--text-light);
+  margin: 0 0 8px 0;
+}
+.student-papers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.paper-tag {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* ============================================================
    Sections
    ============================================================ */
 .section { margin-bottom: 3rem; }
@@ -717,6 +785,173 @@ body {
             <h3>B.S., M.S., Ph.D.</h3>
             <p>University of Macau & CUHK</p>
             <span class="tag highlight">Supervisor: <a href="https://cmpun.github.io/" target="_blank" style="color:inherit;text-decoration:none;font-weight:600">Prof. Chi-Man Pun</a></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= STUDENTS & ALUMNI ======================= -->
+    <section class="section" id="students">
+      <h2>🎓 Students & Alumni</h2>
+
+      <h3 style="font-size: 0.95rem; color: var(--text); margin: 1.5rem 0 1rem 0;">Current Students 在读学生</h3>
+      <div class="cards-grid">
+        <!-- 朱学康 -->
+        <div class="student-card">
+          <div class="student-card-header">
+            <div class="student-avatar" style="background: #2563eb;">朱</div>
+            <div class="student-info">
+              <p class="student-name">朱学康</p>
+              <p class="student-role">PhD Student</p>
+            </div>
+          </div>
+          <p class="student-research">FEG, Mesorch</p>
+          <div class="student-papers">
+            <span class="paper-tag" style="color: #d97706; background: #fffbeb;">RITA</span>
+          </div>
+        </div>
+
+        <!-- 杜博 -->
+        <div class="student-card">
+          <div class="student-card-header">
+            <div class="student-avatar" style="background: #7c3aed;">杜</div>
+            <div class="student-info">
+              <p class="student-name">杜博</p>
+              <p class="student-role">PhD Student</p>
+            </div>
+          </div>
+          <p class="student-research">FID</p>
+          <div class="student-papers">
+            <span class="paper-tag" style="color: #059669; background: #ecfdf5;">ForensicHub</span>
+            <span class="paper-tag" style="color: #0891b2; background: #ecfeff;">SICA</span>
+          </div>
+        </div>
+
+        <!-- 王韵菲 -->
+        <div class="student-card">
+          <div class="student-card-header">
+            <div class="student-avatar" style="background: #dc2626;">王</div>
+            <div class="student-info">
+              <p class="student-name">王韵菲</p>
+              <p class="student-role">Master Student</p>
+            </div>
+          </div>
+          <p class="student-research">FID</p>
+          <div class="student-papers">
+          </div>
+        </div>
+
+        <!-- 冯凯文 -->
+        <div class="student-card">
+          <div class="student-card-header">
+            <div class="student-avatar" style="background: #10b981;">冯</div>
+            <div class="student-info">
+              <p class="student-name">冯凯文</p>
+              <p class="student-role">Master Student</p>
+            </div>
+          </div>
+          <p class="student-research">FID</p>
+          <div class="student-papers">
+            <span class="paper-tag" style="color: #059669; background: #ecfdf5;">ForensicHub</span>
+            <span class="paper-tag" style="color: #0891b2; background: #ecfeff;">SICA</span>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-size: 0.95rem; color: var(--text); margin: 1.5rem 0 1rem 0;">Alumni 已毕业学生</h3>
+      <div class="cards-grid">
+        <!-- 马晓晨 -->
+        <div class="student-card">
+          <div class="student-card-header">
+            <div class="student-avatar" style="background: #2563eb;">马</div>
+            <div class="student-info">
+              <p class="student-name">马晓晨</p>
+              <p class="student-role">PhD @ HKUST</p>
+            </div>
+          </div>
+          <p class="student-research">图像取证 (IML)</p>
+          <div class="student-papers">
+            <span class="paper-tag" style="color: #2563eb; background: #eff6ff;">IML-ViT</span>
+            <span class="paper-tag" style="color: #059669; background: #ecfdf5;">IMDL-BenCo</span>
+          </div>
+        </div>
+
+        <!-- 张健 -->
+        <div class="student-card">
+          <div class="student-card-header">
+            <div class="student-avatar" style="background: #7c3aed;">张</div>
+            <div class="student-info">
+              <p class="student-name">张健</p>
+              <p class="student-role">Master → 宁德时代</p>
+            </div>
+          </div>
+          <p class="student-research">缺陷检测</p>
+          <div class="student-papers">
+            <span class="paper-tag" style="color: #64748b; background: #f1f5f9;">工业视觉</span>
+          </div>
+        </div>
+
+        <!-- 倪睿洋 -->
+        <div class="student-card">
+          <div class="student-card-header">
+            <div class="student-avatar" style="background: #dc2626;">倪</div>
+            <div class="student-info">
+              <p class="student-name">倪睿洋</p>
+              <p class="student-role">PhD → 中国电信</p>
+            </div>
+          </div>
+          <p class="student-research">因果推理</p>
+          <div class="student-papers">
+            <span class="paper-tag" style="color: #d97706; background: #fffbeb;">Beyond Visual Privacy</span>
+            <span class="paper-tag" style="color: #059669; background: #ecfdf5;">IMDL-BenCo</span>
+          </div>
+        </div>
+
+        <!-- 蒋卓航 -->
+        <div class="student-card">
+          <div class="student-card-header">
+            <div class="student-avatar" style="background: #0891b2;">蒋</div>
+            <div class="student-info">
+              <p class="student-name">蒋卓航</p>
+              <p class="student-role">PhD @ HKPolyU</p>
+            </div>
+          </div>
+          <p class="student-research">因果推理</p>
+          <div class="student-papers">
+            <span class="paper-tag" style="color: #d97706; background: #fffbeb;">Beyond Visual Appearances</span>
+            <span class="paper-tag" style="color: #059669; background: #ecfdf5;">IMDL-BenCo</span>
+          </div>
+        </div>
+
+        <!-- 童炳魁 -->
+        <div class="student-card">
+          <div class="student-card-header">
+            <div class="student-avatar" style="background: #10b981;">童</div>
+            <div class="student-info">
+              <p class="student-name">童炳魁</p>
+              <p class="student-role">PhD @ MBZUI</p>
+            </div>
+          </div>
+          <p class="student-research">因果推理</p>
+          <div class="student-papers">
+            <span class="paper-tag" style="color: #d97706; background: #fffbeb;">Beyond Visual Appearances</span>
+            <span class="paper-tag" style="color: #059669; background: #ecfdf5;">IMDL-BenCo</span>
+          </div>
+        </div>
+
+        <!-- 杨欣宇 -->
+        <div class="student-card">
+          <div class="student-card-header">
+            <div class="student-avatar" style="background: #f59e0b;">杨</div>
+            <div class="student-info">
+              <p class="student-name">杨欣宇</p>
+              <p class="student-role">Master → 清华直博</p>
+            </div>
+          </div>
+          <p class="student-research">图像取证 (IML)</p>
+          <div class="student-papers">
+            <span class="paper-tag" style="color: #2563eb; background: #eff6ff;">M3</span>
+            <span class="paper-tag" style="color: #059669; background: #ecfdf5;">IMDL-BenCo</span>
           </div>
         </div>
       </div>
