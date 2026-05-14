@@ -49,7 +49,7 @@ body {
   transition: box-shadow 0.3s ease;
 }
 .site-header:hover {
-  box-shadow: 0 2px 16px rgba(37, 99, 235, 0.08);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.12);
 }
 .site-header nav {
   max-width: 1000px;
@@ -59,7 +59,7 @@ body {
   align-items: center;
 }
 .logo { font-weight: 700; font-size: 1.2rem; color: var(--text); text-decoration: none; transition: color 0.2s; }
-.logo:hover { color: var(--primary); }
+.logo:hover { color: var(--primary); text-shadow: 0 0 12px rgba(37, 99, 235, 0.3); }
 .nav-links { display: flex; gap: 2rem; }
 .nav-links a {
   color: var(--text-light); text-decoration: none; font-size: 0.95rem;
@@ -71,7 +71,7 @@ body {
   background: var(--primary); transform: scaleX(0); transition: transform 0.25s ease;
   border-radius: 2px;
 }
-.nav-links a:hover { color: var(--primary); }
+.nav-links a:hover { color: var(--primary); text-shadow: 0 0 8px rgba(37, 99, 235, 0.2); }
 .nav-links a:hover::after { transform: scaleX(1); }
 
 /* ============================================================
@@ -93,7 +93,7 @@ body {
   flex-shrink: 0;
   transition: transform 0.3s ease;
 }
-.avatar-wrapper:hover { transform: scale(1.04); }
+.avatar-wrapper:hover { transform: scale(1.08); }
 .avatar {
   width: 180px;
   height: 180px;
@@ -104,7 +104,7 @@ body {
   transition: box-shadow 0.3s ease;
 }
 .avatar-wrapper:hover .avatar {
-  box-shadow: 0 12px 40px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 16px 48px rgba(37, 99, 235, 0.45);
 }
 .avatar-wrapper::after {
   content: '';
@@ -131,18 +131,18 @@ body {
   transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
 }
 .btn:hover {
-  opacity: 0.93;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  opacity: 0.95;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
   text-decoration: none;
 }
 .btn:active { transform: translateY(0); }
 .btn.scholar { background: #4285f4; }
-.btn.scholar:hover { background: #357ae8; box-shadow: 0 4px 14px rgba(66, 133, 244, 0.35); }
+.btn.scholar:hover { background: #357ae8; box-shadow: 0 8px 20px rgba(66, 133, 244, 0.45); transform: translateY(-4px); }
 .btn.semantic { background: #0f766e; }
-.btn.semantic:hover { background: #0d6560; box-shadow: 0 4px 14px rgba(15, 118, 110, 0.35); }
+.btn.semantic:hover { background: #0d6560; box-shadow: 0 8px 20px rgba(15, 118, 110, 0.45); transform: translateY(-4px); }
 .btn.email { background: var(--secondary); }
-.btn.email:hover { background: #475569; box-shadow: 0 4px 14px rgba(100, 116, 139, 0.3); }
+.btn.email:hover { background: #475569; box-shadow: 0 8px 20px rgba(100, 116, 139, 0.4); transform: translateY(-4px); }
 .btn svg { width: 13px; height: 13px; }
 
 /* ============================================================
@@ -150,37 +150,77 @@ body {
    ============================================================ */
 .bio-section {
   margin-bottom: 2.5rem;
-  padding: 1.5rem 2rem;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border-radius: 12px;
-  border-left: 4px solid;
-  border-image: linear-gradient(180deg, #667eea, #764ba2) 1;
+  padding: 1.75rem 2rem;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
   position: relative;
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
-}
-.bio-section:hover {
-  box-shadow: 0 6px 24px rgba(102, 126, 234, 0.12);
-  transform: translateY(-2px);
+  overflow: hidden;
 }
 .bio-section::before {
-  content: '\201C';
+  content: '';
   position: absolute;
-  top: 0.5rem; left: 1.2rem;
-  font-size: 3rem; color: #667eea;
-  opacity: 0.3; font-family: Georgia, serif; line-height: 1;
+  top: 0; left: 0; right: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #a855f7);
+}
+.bio-section::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle at top right, rgba(99,102,241,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.bio-section:hover {
+  box-shadow: 0 4px 16px rgba(99,102,241,0.1), 0 1px 3px rgba(0,0,0,0.05);
+  transform: translateY(-2px);
+  border-color: #c7d2fe;
 }
 .bio-cn, .bio-en {
-  color: var(--text); font-size: 0.95rem; line-height: 1.8;
-  padding-left: 1.5rem;
+  color: var(--text); font-size: 0.95rem; line-height: 1.85;
 }
-.bio-cn p, .bio-en p { margin: 0; }
-.bio-divider { border: none; border-top: 1px solid var(--border); margin: 1.2rem 0; }
+.bio-cn p, .bio-en p { margin: 0.5rem 0 0; }
+.bio-cn p:first-child, .bio-en p:first-child { margin-top: 0; }
+.bio-cn p + p, .bio-en p + p { margin-top: 0.8rem; }
+.bio-divider { border: none; border-top: 1px solid #e0e7ff; margin: 1.2rem 0; background: linear-gradient(90deg, #c7d2fe, transparent); height: 1px; }
 .highlight-tag {
-  background: #fef3c7; color: #92400e; padding: 0.05rem 0.4rem;
-  border-radius: 4px; font-size: 0.85rem; font-weight: 600;
-  transition: background 0.2s;
+  display: inline-block;
+  background: linear-gradient(135deg, #fef9c3, #fef3c7);
+  color: #92400e; padding: 0.1rem 0.5rem;
+  border-radius: 6px; font-size: 0.82rem; font-weight: 600;
+  border: 1px solid #fde68a;
+  box-shadow: 0 1px 3px rgba(146, 64, 14, 0.08);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
-.highlight-tag:hover { background: #fde68a; }
+.highlight-tag:hover { background: linear-gradient(135deg, #fef08a, #fde68a); box-shadow: 0 2px 8px rgba(146, 64, 14, 0.18); transform: scale(1.05); }
+.highlight-tag a { color: #92400e; text-decoration: none; font-weight: 600; }
+.highlight-tag a:hover { color: #78350f; text-decoration: underline; }
+
+.project-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, #eef2ff, #ede9fe);
+  color: #4338ca; padding: 0.1rem 0.5rem;
+  border-radius: 6px; font-size: 0.82rem; font-weight: 600;
+  border: 1px solid #c7d2fe;
+  box-shadow: 0 1px 3px rgba(67, 56, 202, 0.08);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  text-decoration: none;
+}
+.project-tag:hover { background: linear-gradient(135deg, #e0e7ff, #ddd6fe); box-shadow: 0 2px 8px rgba(99, 102, 241, 0.18); transform: scale(1.05); color: #3730a3; }
+
+.research-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, #f0fdfa, #ecfeff);
+  color: #0f766e; padding: 0.1rem 0.5rem;
+  border-radius: 6px; font-size: 0.82rem; font-weight: 700;
+  border: 1px solid #99f6e4;
+  box-shadow: 0 1px 3px rgba(15, 118, 110, 0.08);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.research-tag:hover { background: linear-gradient(135deg, #ccfbf1, #cffafe); box-shadow: 0 2px 8px rgba(15, 118, 110, 0.18); transform: scale(1.05); }
 .bio-en .project-link {
   font-style: normal; color: var(--primary);
 }
@@ -197,7 +237,7 @@ body {
   transition: background 0.2s ease;
 }
 .news-entry:last-child { border-bottom: none; }
-.news-entry:hover { background: #f8fafc; }
+.news-entry:hover { background: #f1f5f9; transform: translateX(4px); }
 .news-date { flex-shrink: 0; width: 90px; font-size: 0.78rem; color: var(--text-light); font-weight: 500; }
 .news-entry p { margin: 0; line-height: 1.6; }
 .news-entry a { color: var(--primary); font-weight: 500; transition: text-decoration 0.15s; }
@@ -223,9 +263,9 @@ body {
   border: 1px solid transparent;
 }
 .pub:hover {
-  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.1);
-  transform: translateY(-3px);
-  border-color: rgba(37, 99, 235, 0.12);
+  box-shadow: 0 12px 36px rgba(37, 99, 235, 0.18);
+  transform: translateY(-5px);
+  border-color: rgba(37, 99, 235, 0.25);
   background: #fff;
 }
 .pub h3 { margin: 0.5rem 0 0.25rem; font-size: 1rem; line-height: 1.45; }
@@ -235,8 +275,10 @@ body {
   display: inline-block; padding: 0.2rem 0.65rem; border-radius: 20px;
   font-size: 0.75rem; font-weight: 500;
 }
-.badge.spotlight { background: #dbeafe; color: #1e40af; }
-.badge.oral { background: #fef3c7; color: #92400e; }
+.badge.spotlight { background: #dbeafe; color: #1e40af; transition: background 0.2s, box-shadow 0.2s; }
+.badge.spotlight:hover { background: #bfdbfe; box-shadow: 0 2px 8px rgba(30, 64, 175, 0.2); }
+.badge.oral { background: #fef3c7; color: #92400e; transition: background 0.2s, box-shadow 0.2s; }
+.badge.oral:hover { background: #fde68a; box-shadow: 0 2px 8px rgba(146, 64, 14, 0.2); }
 .pub-links { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.6rem; }
 .pub-link {
   display: inline-flex; align-items: center; gap: 0.3rem;
@@ -244,7 +286,7 @@ body {
   font-size: 0.75rem; font-weight: 500; text-decoration: none;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.pub-link:hover { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
+.pub-link:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
 .pub-link.pdf { background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; }
 .pub-link.pdf:hover { background: #fee2e2; }
 .pub-link.code { background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; }
@@ -267,8 +309,9 @@ body {
   transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 .timeline .item:hover {
-  background: #f8fafc;
-  box-shadow: 0 2px 12px rgba(37, 99, 235, 0.07);
+  background: #f1f5f9;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.1);
+  transform: translateX(4px);
 }
 .timeline .date { width: 120px; color: var(--text-light); font-weight: 500; flex-shrink: 0; font-size: 0.88rem; padding-top: 0.1rem; }
 .timeline .content h3 { font-size: 1rem; margin-bottom: 0.2rem; }
@@ -289,7 +332,7 @@ body {
   transition: background 0.2s ease;
 }
 .services li:last-child { border-bottom: none; }
-.services li:hover { background: #f8fafc; }
+.services li:hover { background: #f1f5f9; transform: translateX(4px); }
 .services li strong { color: var(--text); }
 
 /* ============================================================
@@ -376,26 +419,33 @@ body {
       <div class="bio-cn">
         <p>
           周吉喆，四川大学计算机学院副教授，
-          <span class="highlight-tag">四川省千人计划入选者</span>，
-          IEEE <a class="project-link" href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank">TETCI 副主编</a>，
-          J. Imaging <a class="project-link" href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank">客座主编</a>。
+          <span class="highlight-tag">四川省千人</span>，
+          <span class="highlight-tag"><a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank">IEEE TETCI 副主编</a></span>
+          <span class="highlight-tag"><a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank">J. Imaging 客座主编</a></span>。
           主要研究方向为<strong>伪造图像检测</strong>（Fake Image Detection）及<strong>生成与取证统一</strong>（Forensic-Embedded Generation）。
-          主导开发了 IML-ViT、Sparse-ViT、IMDL-BenCo、ForensicHub、SICA（OpenMMSec）、Defake 等多个开源项目。
-          更多详情请见 GitHub 与 Google Scholar 主页。
+我主导开发了
+          <a class="project-tag" href="https://github.com/SunnyHaze/IML-ViT" target="_blank">IML-ViT</a>
+          <a class="project-tag" href="https://github.com/Knightzjz" target="_blank">Sparse-ViT</a>
+          <a class="project-tag" href="https://github.com/scu-zjz/IMDLBenCo" target="_blank">IMDL-BenCo</a>
+          <a class="project-tag" href="https://github.com/scu-zjz/ForensicHub" target="_blank">ForensicHub</a>
+          等多个开源项目，更多详情请见 GitHub 与 Google Scholar 主页。
         </p>
       </div>
       <hr class="bio-divider">
       <div class="bio-en">
         <p>
-          Ji-Zhe Zhou is an Associate Professor at the College of Computer Science, Sichuan University,
-          and a recipient of the Sichuan Provincial Thousand Talents Program.
-          He serves as Associate Editor of <a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank" class="project-link"><em>IEEE TETCI</em></a>
-          and Guest Editor of <a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank" class="project-link"><em>J. Imaging</em></a>.
-          His research focuses on <strong style="font-style:normal">Fake Image Detection</strong>
-          and <strong style="font-style:normal">Forensic-Embedded Generation</strong>.
-          He has led the development of several open-source projects, including
-          IML-ViT, Sparse-ViT, IMDL-BenCo, ForensicHub, SICA (OpenMMSec), and Defake.
-          For more details, please visit his GitHub and Google Scholar profiles.
+          I am an Associate Professor at the College of Computer Science, Sichuan University,
+          and <span class="highlight-tag">Sichuan Provincial Thousand Talents</span>.
+          I serve as <span class="highlight-tag"><a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank">Associate Editor of IEEE TETCI</a></span>
+          and <span class="highlight-tag"><a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank">Guest Editor of J. Imaging</a></span>.
+          My research focuses on <strong>Fake Image Detection</strong>
+          and <strong>Forensic-Embedded Generation</strong>.
+          I have led the development of several open-source projects, including
+          <a class="project-tag" href="https://github.com/SunnyHaze/IML-ViT" target="_blank">IML-ViT</a>
+          <a class="project-tag" href="https://github.com/Knightzjz" target="_blank">Sparse-ViT</a>
+          <a class="project-tag" href="https://github.com/scu-zjz/IMDLBenCo" target="_blank">IMDL-BenCo</a>
+          <a class="project-tag" href="https://github.com/scu-zjz/ForensicHub" target="_blank">ForensicHub</a>.
+          For more details, please visit my GitHub and Google Scholar profiles.
         </p>
       </div>
     </section>
@@ -486,15 +536,15 @@ body {
           <div class="content">
             <h3>Associate Professor</h3>
             <p>Sichuan University, College of Computer Science</p>
-            <span class="tag highlight">四川省千人计划入选者</span>
+            <span class="tag highlight">入选天府峨眉计划</span>
           </div>
         </div>
         <div class="item">
           <span class="date">Education</span>
           <div class="content">
             <h3>B.S., M.S., Ph.D.</h3>
-            <p>University of Macau</p>
-            <span class="tag highlight">Ph.D. Supervisor: Prof. Chi-Man Pun</span>
+            <p>University of Macau & CUHK</p>
+            <span class="tag highlight">Supervisor: <a href="https://cmpun.github.io/" target="_blank" style="color:inherit;text-decoration:none;font-weight:600">Prof. Chi-Man Pun</a></span>
           </div>
         </div>
       </div>
