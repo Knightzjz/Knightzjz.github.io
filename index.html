@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ji-Zhe Zhou | 四川大学</title>
-  <meta name="description" content="Associate Professor at Sichuan University | Neural Networks & Generative AI Security">
+  <title>周吉喆 | 四川大学</title>
+  <meta name="description" content="川大周吉喆主页">
+  <link rel="icon" href="images/avatar.jpeg" type="image/jpeg">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,8 +59,15 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-.logo { font-weight: 700; font-size: 1.2rem; color: var(--text); text-decoration: none; transition: color 0.2s; }
+.logo { 
+  font-weight: 700; font-size: 1.2rem; color: var(--text); text-decoration: none; transition: color 0.2s; 
+  display: flex; align-items: center; gap: 0.6rem;
+}
 .logo:hover { color: var(--primary); text-shadow: 0 0 12px rgba(37, 99, 235, 0.3); }
+.logo-avatar {
+  width: 36px; height: 36px; border-radius: 50%; object-fit: cover;
+  border: 2px solid var(--primary); box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+}
 .nav-links { display: flex; gap: 2rem; }
 .nav-links a {
   color: var(--text-light); text-decoration: none; font-size: 0.95rem;
@@ -243,6 +251,55 @@ body {
 .news-entry a { color: var(--primary); font-weight: 500; transition: text-decoration 0.15s; }
 .news-entry a:hover { text-decoration: underline; }
 
+/* News Type Tags */
+.news-tag {
+  display: inline-block;
+  padding: 0.12rem 0.45rem;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+  margin-right: 0.3rem;
+  flex-shrink: 0;
+}
+.news-tag.paper {
+  background: linear-gradient(135deg, #ccfbf1, #99f6e4);
+  color: #0f766e;
+  border: 1px solid #5eead4;
+  font-size: 0.78rem;
+  padding: 0.2rem 0.5rem;
+}
+.news-tag.paper:hover {
+  background: linear-gradient(135deg, #99f6e4, #5eead4);
+}
+.news-tag.service {
+  background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+  color: #4338ca;
+  border: 1px solid #a5b4fc;
+}
+.news-tag.service:hover {
+  background: linear-gradient(135deg, #c7d2fe, #a5b4fc);
+}
+.news-tag.award {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  color: #b45309;
+  border: 1px solid #fcd34d;
+  box-shadow: 0 1px 3px rgba(180, 83, 9, 0.12);
+}
+.news-tag.award:hover {
+  background: linear-gradient(135deg, #fde68a, #fcd34d);
+}
+.news-desc {
+  color: var(--text-light);
+  font-size: 0.82rem;
+  margin-left: 0.25rem;
+}
+.news-desc::before {
+  content: '— ';
+  color: #cbd5e1;
+}
+
 /* ============================================================
    Sections
    ============================================================ */
@@ -372,7 +429,10 @@ body {
   <!-- ======================= NAV ======================= -->
   <header class="site-header">
     <nav>
-      <a href="/" class="logo">Ji-Zhe Zhou</a>
+      <a href="/" class="logo">
+        <img src="images/avatar.jpeg" alt="周吉喆" class="logo-avatar">
+        <span>周吉喆</span>
+      </a>
       <div class="nav-links">
         <a href="/">Home</a>
         <a href="/blog/">Blog</a>
@@ -454,10 +514,122 @@ body {
     <section class="section" id="news">
       <h2>📣 News</h2>
       <div class="news-list">
+
+        <!-- 2026 -->
         <div class="news-entry">
-          <span class="news-date">Feb 2026</span>
-          <p><a href="https://arxiv.org/abs/2602.06676" target="_blank">SICA preprint</a> — Can We Build a Monolithic Model for Fake Image Detection? — on arXiv.</p>
+          <span class="news-date">May 2026</span>
+          <p>
+            <span class="news-tag paper">📄 ICML 2026</span>
+            <a href="https://arxiv.org/abs/2602.06676" target="_blank">SICA</a>: First monolithic FID model via semantic-induced constrained adaptation, outperforming 15 state-of-the-art methods.
+          </p>
         </div>
+
+        <div class="news-entry">
+          <span class="news-date">Apr 2026</span>
+          <p>
+            <span class="news-tag service">🏛️ Service</span>
+            Invited as <strong>Guest Editor</strong> of the special issue <em>"Recent Advances in Multimedia Imaging and Content Security"</em> for <a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank">Journal of Imaging</a>.
+          </p>
+        </div>
+
+        <div class="news-entry">
+          <span class="news-date">Jan 2026</span>
+          <p>
+            <span class="news-tag paper">📄 IEEE TMM</span>
+            <a href="https://doi.org/10.1109/TMM.2026.3651071" target="_blank">PASK</a>: Sparse framework for crafting natural adversarial examples against ASR via pitch-aware perturbations.
+          </p>
+        </div>
+
+        <div class="news-entry">
+          <span class="news-date">Jan 2026</span>
+          <p>
+            <span class="news-tag paper">📄 AAAI 2026</span>
+            <a href="https://ojs.aaai.org/index.php/AAAI/article/view/38243" target="_blank">FGM-HD</a>: Boosting generation diversity of fractal generative models through Hausdorff Dimension induction.
+          </p>
+        </div>
+
+        <div class="news-entry">
+          <span class="news-date">Jan 2026</span>
+          <p>
+            <span class="news-tag paper">📄 AAAI 2026</span>
+            <a href="https://ojs.aaai.org/index.php/AAAI/article/view/37140" target="_blank">IO-RAE</a>: Pioneering reversible adversarial example framework for audio privacy protection via LLM-guided content obfuscation.
+          </p>
+        </div>
+
+        <div class="news-entry">
+          <span class="news-date">Jan 2026</span>
+          <p>
+            <span class="news-tag service">🏛️ Service</span>
+            Promoted as <strong>Associate Editor</strong> for <a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank">IEEE TETCI</a>.
+          </p>
+        </div>
+
+        <div class="news-entry">
+          <span class="news-date">Jan 2026</span>
+          <p>
+            <span class="news-tag service">🏛️ Service</span>
+            Program Committee Member for <strong>ICML 2026</strong>, <strong>MM 2026</strong>, and <strong>ECCV 2026</strong>.
+          </p>
+        </div>
+
+        <!-- 2025 -->
+        <div class="news-entry">
+          <span class="news-date">Nov 2025</span>
+          <p>
+            <span class="news-tag paper">📄 IEEE TDSC</span>
+            <a href="https://arxiv.org/abs/2506.10685" target="_blank">Defensive Adversarial CAPTCHA</a>: LLM-guided semantics-driven framework for generating high-fidelity adversarial CAPTCHA from scratch.
+          </p>
+        </div>
+
+        <div class="news-entry">
+          <span class="news-date">Oct 2025</span>
+          <p>
+            <span class="news-tag paper">📄 IEEE TDSC</span>
+            <a href="https://ieeexplore.ieee.org/document/11134103" target="_blank">DP-TRAE</a>: Dual-phase merging transferable reversible adversarial example for image privacy protection.
+          </p>
+        </div>
+
+        <div class="news-entry">
+          <span class="news-date">Oct 2025</span>
+          <p>
+            <span class="news-tag award">🏆 Award</span>
+            <strong>1st Prize</strong> in Tencent AI Arena Competition <em>(1/2200+)</em>.
+          </p>
+        </div>
+
+        <div class="news-entry">
+          <span class="news-date">Sep 2025</span>
+          <p>
+            <span class="news-tag service">🏛️ Service</span>
+            Program Committee Member for <strong>ICLR 2026</strong>.
+          </p>
+        </div>
+
+        <div class="news-entry">
+          <span class="news-date">Jul 2025</span>
+          <p>
+            <span class="news-tag service">🏛️ Service</span>
+            Program Committee Member for <strong>AAAI 2026</strong>.
+          </p>
+        </div>
+
+        <!-- Awards -->
+        <div class="news-entry">
+          <span class="news-date">Nov 2024</span>
+          <p>
+            <span class="news-tag award">🏆 Award</span>
+            <strong>2nd Prize</strong> in Alibaba Tianchi AI Challenge Track 1 <em>(2/1574)</em>.
+          </p>
+        </div>
+
+        <div class="news-entry">
+          <span class="news-date">Sep 2024</span>
+          <p>
+            <span class="news-tag award">🏆 Award</span>
+            <strong>1st Prize</strong> in Tencent AI Arena Competition <em>(1/2000+)</em>.
+          </p>
+        </div>
+
       </div>
     </section>
 
