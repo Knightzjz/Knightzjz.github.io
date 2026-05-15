@@ -305,8 +305,14 @@ body {
    ============================================================ */
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
+}
+@media (max-width: 768px) {
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .cards-grid { grid-template-columns: 1fr; }
 }
 .student-card {
   background: var(--bg);
@@ -828,6 +834,22 @@ body {
           </div>
         </div>
 
+        <!-- 牛超群 -->
+        <div class="student-card">
+          <div class="student-card-header">
+            <div class="student-avatar" style="background: #0891b2;">牛</div>
+            <div class="student-info">
+              <p class="student-name">牛超群</p>
+              <p class="student-role">PhD · CSC @ NUS</p>
+            </div>
+          </div>
+          <p class="student-research">FEG</p>
+          <div class="student-papers">
+            <a href="https://dl.acm.org/doi/10.1145/3664647.3681174" target="_blank" class="paper-tag" style="color: #dc2626; background: #fef2f2; text-decoration: none;">Boneprint</a>
+            <a href="https://www.sciencedirect.com/science/article/pii/S003132032600676X" target="_blank" class="paper-tag" style="color: #7c3aed; background: #f5f3ff; text-decoration: none;">Bones to Identity</a>
+          </div>
+        </div>
+
         <!-- 王汐文 -->
         <div class="student-card">
           <div class="student-card-header">
@@ -937,12 +959,13 @@ body {
             <div class="student-avatar" style="background: #64748b;">粟</div>
             <div class="student-info">
               <p class="student-name">粟磊</p>
-              <p class="student-role">Master Student</p>
+              <p class="student-role">Master · Intern @ 腾讯</p>
             </div>
           </div>
           <p class="student-research">IML</p>
           <div class="student-papers">
-            <a href="https://github.com/Knightzjz/Sparse-ViT" target="_blank" class="paper-tag" style="color: #2563eb; background: #eff6ff; text-decoration: none;">Sparse-ViT</a>
+            <a href="https://arxiv.org/abs/2412.14598" target="_blank" class="paper-tag" style="color: #2563eb; background: #eff6ff; text-decoration: none;">Sparse-ViT</a>
+            <a href="https://arxiv.org/abs/2602.06676" target="_blank" class="paper-tag" style="color: #0891b2; background: #ecfeff; text-decoration: none;">SICA</a>
           </div>
         </div>
       </div>
@@ -985,7 +1008,7 @@ body {
             <div class="student-avatar" style="background: #dc2626;">倪</div>
             <div class="student-info">
               <p class="student-name">倪睿洋</p>
-              <p class="student-role">PhD → 中国电信</p>
+              <p class="student-role">Master → 中国电信</p>
             </div>
           </div>
           <p class="student-research">因果推理</p>
