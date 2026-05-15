@@ -314,65 +314,96 @@ body {
 @media (max-width: 480px) {
   .cards-grid { grid-template-columns: 1fr; }
 }
+/* ============================================================
+   Student Cards
+   ============================================================ */
 .student-card {
-  background: var(--bg);
-  border: 0.5px solid var(--border);
-  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
   padding: 16px;
-  transition: box-shadow 0.2s ease;
+  transition: all 0.25s ease;
+  position: relative;
+}
+.student-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  border-radius: 12px 12px 0 0;
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 .student-card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  border-color: #d1d5db;
+}
+.student-card:hover::before {
+  opacity: 1;
 }
 .student-card-header {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 .student-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 72px;
+  height: 36px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  font-size: 11px;
+  font-size: 12px;
   color: white;
   flex-shrink: 0;
-  letter-spacing: -0.5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.25s ease;
+}
+.student-card:hover .student-avatar {
+  transform: scale(1.05);
 }
 .student-info {
-  flex: 1;
-  min-width: 0;
-}
-.student-name {
-  font-weight: 500;
-  font-size: 14px;
-  color: var(--text);
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
 }
 .student-role {
   font-size: 11px;
-  color: var(--text-light);
+  color: #6b7280;
   margin: 0;
 }
 .student-research {
-  font-size: 12px;
-  color: var(--text-light);
-  margin: 0 0 8px 0;
+  font-size: 11px;
+  color: #4b5563;
+  margin: 0 0 10px 0;
+  font-weight: 500;
+  background: #f3f4f6;
+  padding: 5px 10px;
+  border-radius: 6px;
+  display: inline-block;
+  border: 1px solid #e5e7eb;
 }
 .student-papers {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 5px;
 }
 .paper-tag {
   font-size: 10px;
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 3px 8px;
+  border-radius: 5px;
   display: inline-block;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.paper-tag:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
 }
 
 /* ============================================================
@@ -806,9 +837,8 @@ body {
         <!-- 朱学康 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #2563eb;">ZXK</div>
+            <div class="student-avatar" style="background: #2563eb;">朱学康</div>
             <div class="student-info">
-              <p class="student-name">朱学康</p>
               <p class="student-role">Master · Intern @ 蚂蚁安全</p>
             </div>
           </div>
@@ -826,9 +856,8 @@ body {
         <!-- 杜博 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #7c3aed;">DB</div>
+            <div class="student-avatar" style="background: #7c3aed;">杜博</div>
             <div class="student-info">
-              <p class="student-name">杜博</p>
               <p class="student-role">Master · Intern @ 蚂蚁安全</p>
             </div>
           </div>
@@ -843,9 +872,8 @@ body {
         <!-- 牛超群 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #0891b2;">NCQ</div>
+            <div class="student-avatar" style="background: #0891b2;">牛超群</div>
             <div class="student-info">
-              <p class="student-name">牛超群</p>
               <p class="student-role">PhD · CSC @ NUS</p>
             </div>
           </div>
@@ -861,9 +889,8 @@ body {
         <!-- 王汐文 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #059669;">WXW</div>
+            <div class="student-avatar" style="background: #059669;">王汐文</div>
             <div class="student-info">
-              <p class="student-name">王汐文</p>
               <p class="student-role">PhD Student</p>
             </div>
           </div>
@@ -877,9 +904,8 @@ body {
         <!-- 何雨声 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #0891b2;">HYS</div>
+            <div class="student-avatar" style="background: #0891b2;">何雨声</div>
             <div class="student-info">
-              <p class="student-name">何雨声</p>
               <p class="student-role">PhD Student</p>
             </div>
           </div>
@@ -891,9 +917,8 @@ body {
         <!-- 杨哲 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #dc2626;">YZ</div>
+            <div class="student-avatar" style="background: #dc2626;">杨哲</div>
             <div class="student-info">
-              <p class="student-name">杨哲</p>
               <p class="student-role">Master Student</p>
             </div>
           </div>
@@ -905,9 +930,8 @@ body {
         <!-- 周莉婷 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #f59e0b;">ZLT</div>
+            <div class="student-avatar" style="background: #f59e0b;">周莉婷</div>
             <div class="student-info">
-              <p class="student-name">周莉婷</p>
               <p class="student-role">Master Student</p>
             </div>
           </div>
@@ -920,9 +944,8 @@ body {
         <!-- 王韵菲 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #10b981;">WYF</div>
+            <div class="student-avatar" style="background: #10b981;">王韵菲</div>
             <div class="student-info">
-              <p class="student-name">王韵菲</p>
               <p class="student-role">Master · Intern @ 腾讯混元</p>
             </div>
           </div>
@@ -934,9 +957,8 @@ body {
         <!-- 冯凯文 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #be185d;">FKW</div>
+            <div class="student-avatar" style="background: #be185d;">冯凯文</div>
             <div class="student-info">
-              <p class="student-name">冯凯文</p>
               <p class="student-role">Master Student</p>
             </div>
           </div>
@@ -950,9 +972,8 @@ body {
         <!-- 张皓为 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #6366f1;">ZHW</div>
+            <div class="student-avatar" style="background: #6366f1;">张皓为</div>
             <div class="student-info">
-              <p class="student-name">张皓为</p>
               <p class="student-role">Master · Intern @ 腾讯混元</p>
             </div>
           </div>
@@ -965,9 +986,8 @@ body {
         <!-- 粟磊 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #64748b;">SL</div>
+            <div class="student-avatar" style="background: #64748b;">粟磊</div>
             <div class="student-info">
-              <p class="student-name">粟磊</p>
               <p class="student-role">Master · Intern @ 腾讯</p>
             </div>
           </div>
@@ -984,9 +1004,8 @@ body {
         <!-- 马晓晨 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #2563eb;">MXC</div>
+            <div class="student-avatar" style="background: #2563eb;">马晓晨</div>
             <div class="student-info">
-              <p class="student-name">马晓晨</p>
               <p class="student-role">PhD @ HKUST</p>
             </div>
           </div>
@@ -1001,9 +1020,8 @@ body {
         <!-- 张健 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #7c3aed;">ZJ</div>
+            <div class="student-avatar" style="background: #7c3aed;">张健</div>
             <div class="student-info">
-              <p class="student-name">张健</p>
               <p class="student-role">Master → 宁德时代</p>
             </div>
           </div>
@@ -1015,9 +1033,8 @@ body {
         <!-- 倪睿洋 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #dc2626;">NRY</div>
+            <div class="student-avatar" style="background: #dc2626;">倪睿洋</div>
             <div class="student-info">
-              <p class="student-name">倪睿洋</p>
               <p class="student-role">Master → 中国电信</p>
             </div>
           </div>
@@ -1029,9 +1046,8 @@ body {
         <!-- 蒋卓航 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #0891b2;">JZH</div>
+            <div class="student-avatar" style="background: #0891b2;">蒋卓航</div>
             <div class="student-info">
-              <p class="student-name">蒋卓航</p>
               <p class="student-role">PhD @ HKPolyU</p>
             </div>
           </div>
@@ -1045,9 +1061,8 @@ body {
         <!-- 童炳魁 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #10b981;">TBK</div>
+            <div class="student-avatar" style="background: #10b981;">童炳魁</div>
             <div class="student-info">
-              <p class="student-name">童炳魁</p>
               <p class="student-role">PhD @ MBZUI</p>
             </div>
           </div>
@@ -1061,9 +1076,8 @@ body {
         <!-- 杨欣宇 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #f59e0b;">YXY</div>
+            <div class="student-avatar" style="background: #f59e0b;">杨欣宇</div>
             <div class="student-info">
-              <p class="student-name">杨欣宇</p>
               <p class="student-role">Undergraduate → 清华直博</p>
             </div>
           </div>
