@@ -1,16 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>周吉喆 | 四川大学</title>
-  <meta name="description" content="川大周吉喆主页">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light">
+  <meta name="format-detection" content="telephone=no">
+  <title>周吉喆 | 四川大学计算机学院副教授 | 伪造图像检测 | 生成取证</title>
+  <meta name="description" content="周吉喆（Jizhe Zhou），四川大学计算机学院副教授，四川省千人。研究方向：伪造图像检测、生成取证统一、人工智能安全。发表ICML、NeurIPS、AAAI、ICCV论文30余篇，Google Scholar引用800+。">
+  <meta name="keywords" content="周吉喆, Jizhe Zhou, 伪造图像检测, Fake Image Detection, 生成取证统一, 图像篡改检测, 副教授, 四川大学, 计算机学院, F06, F02, F0116, 国家自然科学基金, 面上项目, 青年基金, 重点基金, 科技部重点研发, 国家重点研发, 会评专家, 函评专家, AAAI, CVPR, MM, ICML, ICCV, ECCV, ICLR, PAMI, TIP, TIFS, AC, SPC, deepfake detection, multimodal, 人工智能, 信息科学, 计算机应用, 人工智能安全, 多模态大模型, 四川省千人">
+  <meta name="author" content="Jizhe Zhou">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+  <link rel="canonical" href="https://knightzjz.github.io/">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://knightzjz.github.io/">
+  <meta property="og:title" content="周吉喆 | 四川大学计算机学院副教授">
+  <meta property="og:description" content="周吉喆（Jizhe Zhou），四川大学计算机学院副教授。研究方向：伪造图像检测、生成取证统一、人工智能安全。发表ICML、NeurIPS、AAAI、ICCV论文30余篇。">
+  <meta property="og:locale" content="zh_CN">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://knightzjz.github.io/">
+  <meta name="twitter:title" content="周吉喆 | 四川大学计算机学院副教授 | 伪造图像检测">
+  <meta name="twitter:description" content="周吉喆（Jizhe Zhou），四川大学计算机学院副教授。研究方向：伪造图像检测、生成取证统一、人工智能安全。">
+
   <link rel="icon" href="images/avatar.jpeg" type="image/jpeg">
+  <link rel="apple-touch-icon" href="images/avatar.jpeg">
+
+  <!-- DNS Prefetch / Preconnect -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://scholar.google.com">
+  <link rel="dns-prefetch" href="https://arxiv.org">
+  <link rel="dns-prefetch" href="https://github.com">
+  <link rel="dns-prefetch" href="https://avatars.githubusercontent.com">
+  <link rel="preconnect" href="https://scholar.google.com" crossorigin>
+  <link rel="preconnect" href="https://arxiv.org" crossorigin>
+  <link rel="preconnect" href="https://github.com" crossorigin>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "周吉喆",
+    "alternateName": "Jizhe Zhou",
+    "url": "https://knightzjz.github.io/",
+    "jobTitle": "副教授",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "四川大学计算机学院",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "成都",
+        "addressRegion": "四川",
+        "addressCountry": "CN"
+      }
+    },
+    "sameAs": [
+      "https://scholar.google.com/citations?user=-cNWmJMAAAAJ",
+      "https://github.com/Knightzjz"
+    ],
+    "description": "四川大学计算机学院副教授，研究方向为伪造图像检测及生成取证统一",
+    "knowsAbout": ["伪造图像检测", "Fake Image Detection", "生成取证", "Deepfake Detection", "多模态大模型", "图像篡改检测", "人工智能安全", "NeurIPS", "ICML", "AAAI", "CVPR", "ICCV", "MM", "ECCV", "ICLR", "PAMI", "TIP", "TIFS"]
+  }
+  </script>
 
   <style>
 /* ============================================================
@@ -193,7 +256,20 @@ body {
 .bio-cn p, .bio-en p { margin: 0.5rem 0 0; }
 .bio-cn p:first-child, .bio-en p:first-child { margin-top: 0; }
 .bio-cn p + p, .bio-en p + p { margin-top: 0.8rem; }
-.bio-divider { border: none; border-top: 1px solid #e0e7ff; margin: 1.2rem 0; background: linear-gradient(90deg, #c7d2fe, transparent); height: 1px; }
+.bio-divider {
+  border: none;
+  border-top: 1px solid #e0e7ff;
+  margin: 1.2rem -40px;
+  height: 1px;
+  position: relative;
+}
+.bio-divider::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #93c5fd, #c7d2fe, #ddd6fe, transparent);
+}
 .highlight-tag {
   display: inline-block;
   background: linear-gradient(135deg, #fef9c3, #fef3c7);
@@ -302,21 +378,25 @@ body {
 .news-more-btn {
   display: block;
   width: 100%;
-  padding: 12px;
-  margin-top: 8px;
-  border: 1px dashed #d1d5db;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--text-light);
+  padding: 14px 20px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  color: #64748b;
   font-size: 0.85rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8);
+  letter-spacing: 0.02em;
 }
 .news-more-btn:hover {
-  background: #f8fafc;
-  border-color: #94a3b8;
-  color: var(--text);
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+  color: #475569;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+  transform: translateY(-1px);
 }
 .news-entry.hidden { display: none; }
 .news-entry.fade-in {
@@ -549,11 +629,97 @@ body {
    ============================================================ */
 @media (max-width: 768px) {
   .hero { flex-direction: column; align-items: center; text-align: center; }
-  .links { justify-content: center; }
+  .links { justify-content: center; flex-wrap: wrap; gap: 0.5rem; }
   .bio-section { padding: 1.25rem 1.5rem; }
   .bio-cn, .bio-en { padding-left: 0; }
   .timeline .item { flex-direction: column; gap: 0.4rem; }
   .timeline .date { width: auto; }
+  .main-content { padding: 1.5rem 1rem; }
+  .section { padding: 1.5rem 0; }
+  .bio-divider { margin: 1rem -16px; }
+  .site-header { padding: 0.75rem 1rem; }
+  .nav-links { gap: 1rem; }
+  .nav-links a { font-size: 0.85rem; }
+  .hero-text h1 { font-size: 1.5rem; }
+  .avatar { width: 120px; height: 120px; }
+  .news-entry { padding: 0.75rem 0; }
+  .news-date { width: 70px; font-size: 0.72rem; }
+  .news-tag { font-size: 0.68rem; padding: 0.15rem 0.35rem; }
+  .student-card { padding: 12px; }
+  .student-avatar { width: 60px; height: 30px; font-size: 10px; }
+  .student-role { font-size: 0.78rem; }
+  .student-research { font-size: 10px; }
+  .paper-tag { font-size: 9px; padding: 2px 6px; }
+  .news-more-btn { padding: 12px 16px; font-size: 0.8rem; }
+  .pub { padding: 1.25rem; }
+  .pub h3 { font-size: 1rem; }
+  .pub .authors { font-size: 0.8rem; }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+}
+
+@media (max-width: 480px) {
+  .hero-text h1 { font-size: 1.3rem; }
+  .position-cn { font-size: 0.95rem; }
+  .position-en { font-size: 0.8rem; }
+  .avatar { width: 100px; height: 100px; }
+  .links { flex-direction: column; width: 100%; }
+  .links .btn { width: 100%; justify-content: center; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .student-card { padding: 10px; }
+  .student-card-header { flex-wrap: wrap; }
+  .news-entry p { font-size: 0.82rem; line-height: 1.5; }
+  .pub-links { flex-wrap: wrap; }
+  .pub-link { flex: 1; min-width: 80px; text-align: center; }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .student-card:hover { transform: none; }
+  .student-card:active { transform: scale(0.98); }
+  .news-entry:hover { transform: none; }
+  .btn:hover { transform: none; }
+  .pub-link:hover { transform: translateY(-2px); }
+  .paper-tag:hover { transform: none; }
+  .nav-links a:hover { color: var(--text); }
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .news-entry.fade-in { animation: none; }
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: var(--text);
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.mobile-menu-btn:hover { background: var(--bg-alt); }
+.mobile-menu-btn svg { display: block; }
+
+@media (max-width: 768px) {
+  .mobile-menu-btn { display: block; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .nav-links.active { display: flex; }
+  .nav-links a { padding: 0.5rem 0; }
 }
   </style>
 </head>
@@ -563,9 +729,16 @@ body {
   <header class="site-header">
     <nav>
       <a href="/" class="logo">
-        <img src="images/avatar.jpeg" alt="周吉喆" class="logo-avatar">
+        <img src="images/avatar.jpeg" alt="周吉喆" class="logo-avatar" loading="eager" decoding="sync">
         <span>周吉喆</span>
       </a>
+      <button class="mobile-menu-btn" aria-label="菜单" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
       <div class="nav-links">
         <a href="/">Home</a>
         <a href="/blog/">Blog</a>
@@ -579,7 +752,7 @@ body {
     <!-- ======================= HERO ======================= -->
     <header class="hero">
       <div class="avatar-wrapper">
-        <img src="https://avatars.githubusercontent.com/u/10630688?v=4" alt="Ji-Zhe Zhou" class="avatar">
+        <img src="https://avatars.githubusercontent.com/u/10630688?v=4" alt="Ji-Zhe Zhou" class="avatar" loading="lazy" decoding="async">
       </div>
       <div class="hero-text">
         <h1>Ji-Zhe Zhou （周吉喆）</h1>
@@ -1122,7 +1295,7 @@ body {
           <div class="student-card-header">
             <div class="student-avatar" style="background: #f59e0b;">杨欣宇</div>
             <div class="student-info">
-              <p class="student-role">Undergraduate → 清华直博</p>
+              <p class="student-role">Master @ Tsinghua</p>
             </div>
           </div>
           <p class="student-research">图像取证 (IML)</p>
@@ -1277,6 +1450,36 @@ body {
           }
         });
         btn.textContent = expanded ? '▲ Show Less' : '▼ Show More';
+      });
+    })();
+
+    /* ── 5. Mobile Menu Toggle ── */
+    (function () {
+      var btn = document.querySelector('.mobile-menu-btn');
+      var nav = document.querySelector('.nav-links');
+      if (!btn || !nav) return;
+
+      btn.addEventListener('click', function () {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !expanded);
+        nav.classList.toggle('active');
+      });
+
+      // Close menu when clicking a link
+      nav.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          nav.classList.remove('active');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Close menu on escape key
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('active')) {
+          nav.classList.remove('active');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.focus();
+        }
       });
     })();
   </script>

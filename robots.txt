@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://knightzjz.github.io/sitemap.xml
