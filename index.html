@@ -327,6 +327,29 @@ body {
   font-style: normal;
   color: #ff8fba;
   font-weight: 500;
+  transition: color 0.2s;
+}
+.thanks-heart {
+  display: inline-block;
+  transition: transform 0.3s, color 0.3s;
+}
+.thanks-line:hover .thanks-heart {
+  transform: scale(1.4);
+  color: #ff4d8d;
+}
+.thanks-line:hover em {
+  color: #ffb3d1;
+}
+.floating-heart {
+  position: fixed;
+  pointer-events: none;
+  font-size: 1.2rem;
+  animation: floatUp 1.2s ease-out forwards;
+  z-index: 9999;
+}
+@keyframes floatUp {
+  0%   { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-80px) scale(0.5); }
 }
 
 /* ============================================================
@@ -836,8 +859,8 @@ body {
     </section>
 
     <!-- ======================= THANKS ======================= -->
-    <div class="thanks-line">
-      <span>♥</span> Special Thanks to <em>Ms. Helen Wang. YY</em>
+    <div class="thanks-line" id="thanks-line" style="cursor:pointer;" title="Click for love!">
+      <span class="thanks-heart">♥</span> Special Thanks to <em>Ms. Helen Wang. YY</em>
     </div>
 
     <!-- ======================= NEWS ======================= -->
@@ -1596,6 +1619,23 @@ body {
           }
         })
         .catch(function () {});
+    })();
+    // Floating hearts on thanks line click
+    (function () {
+      var el = document.getElementById('thanks-line');
+      if (!el) return;
+      var hearts = ['♥', '💕', '💗', '💖', '✨'];
+      el.addEventListener('click', function (e) {
+        for (var i = 0; i < 6; i++) {
+          var h = document.createElement('span');
+          h.className = 'floating-heart';
+          h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+          h.style.left = (e.clientX - 10 + (Math.random() - 0.5) * 60) + 'px';
+          h.style.top  = (e.clientY - 10 + (Math.random() - 0.5) * 30) + 'px';
+          document.body.appendChild(h);
+          setTimeout(function (node) { node.remove(); }, 1200, h);
+        }
+      });
     })();
   </script>
 
