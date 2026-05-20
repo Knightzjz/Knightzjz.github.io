@@ -1162,21 +1162,6 @@ body {
 
       var el = document.getElementById('citation-count');
       if (!el) return;
-
-      // Check cache first
-      try {
-        var raw = localStorage.getItem(KEY);
-        if (raw) {
-          var o = JSON.parse(raw);
-          if (o.v && Date.now() - o.t < CACHE_TTL) {
-            updateEl(el, o.v);
-            return;
-          }
-          // Stale cache: show stale while fetching
-          if (o.v) updateEl(el, o.v);
-        }
-      } catch (_) {}
-
       fetchWithProxy(0, el);
     })();
 
