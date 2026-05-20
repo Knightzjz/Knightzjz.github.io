@@ -299,6 +299,33 @@ body {
   content: '— ';
   color: #cbd5e1;
 }
+.news-more-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border: 1px dashed #d1d5db;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-light);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+.news-more-btn:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  color: var(--text);
+}
+.news-entry.hidden { display: none; }
+.news-entry.fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 /* ============================================================
    Cards Grid
@@ -623,10 +650,10 @@ body {
 
         <!-- 2026 -->
         <div class="news-entry">
-          <span class="news-date">Mar 2026</span>
+          <span class="news-date">May 2026</span>
           <p>
-            <span class="news-tag award">🏆 DCIC 2026</span>
-            <strong>Champion</strong> (1st / 173 teams) in the track <em>"基于多模态大模型的场景文本图像伪造分析"</em>.
+            <span class="news-tag service">🏛️ Service</span>
+            <strong>Gold Reviewer</strong> for <strong>ICML 2026</strong>.
           </p>
         </div>
 
@@ -643,6 +670,14 @@ body {
           <p>
             <span class="news-tag service">🏛️ Service</span>
             Invited as <strong>Guest Editor</strong> of the special issue <em>"Recent Advances in Multimedia Imaging and Content Security"</em> for <a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank">Journal of Imaging</a>.
+          </p>
+        </div>
+
+        <div class="news-entry">
+          <span class="news-date">Apr 2026</span>
+          <p>
+            <span class="news-tag award">🏆 DCIC 2026</span>
+            <strong>Champion</strong> (1st / 173 teams) — 数字中国创新大赛 · 数据应用赛道：<em>基于多模态大模型的场景文本图像伪造分析</em>.
           </p>
         </div>
 
@@ -670,7 +705,7 @@ body {
           </p>
         </div>
 
-        <div class="news-entry">
+        <div class="news-entry hidden fade-in">
           <span class="news-date">Jan 2026</span>
           <p>
             <span class="news-tag service">🏛️ Service</span>
@@ -678,7 +713,7 @@ body {
           </p>
         </div>
 
-        <div class="news-entry">
+        <div class="news-entry hidden fade-in">
           <span class="news-date">Jan 2026</span>
           <p>
             <span class="news-tag service">🏛️ Service</span>
@@ -687,7 +722,7 @@ body {
         </div>
 
         <!-- 2025 -->
-        <div class="news-entry">
+        <div class="news-entry hidden fade-in">
           <span class="news-date">Nov 2025</span>
           <p>
             <span class="news-tag paper">📄 IEEE TDSC</span>
@@ -695,7 +730,7 @@ body {
           </p>
         </div>
 
-        <div class="news-entry">
+        <div class="news-entry hidden fade-in">
           <span class="news-date">Oct 2025</span>
           <p>
             <span class="news-tag paper">📄 IEEE TDSC</span>
@@ -703,7 +738,7 @@ body {
           </p>
         </div>
 
-        <div class="news-entry">
+        <div class="news-entry hidden fade-in">
           <span class="news-date">Oct 2025</span>
           <p>
             <span class="news-tag award">🏆 Award</span>
@@ -711,7 +746,7 @@ body {
           </p>
         </div>
 
-        <div class="news-entry">
+        <div class="news-entry hidden fade-in">
           <span class="news-date">Sep 2025</span>
           <p>
             <span class="news-tag service">🏛️ Service</span>
@@ -719,7 +754,7 @@ body {
           </p>
         </div>
 
-        <div class="news-entry">
+        <div class="news-entry hidden fade-in">
           <span class="news-date">Jul 2025</span>
           <p>
             <span class="news-tag service">🏛️ Service</span>
@@ -728,7 +763,7 @@ body {
         </div>
 
         <!-- Awards -->
-        <div class="news-entry">
+        <div class="news-entry hidden fade-in">
           <span class="news-date">Nov 2024</span>
           <p>
             <span class="news-tag award">🏆 Award</span>
@@ -736,7 +771,7 @@ body {
           </p>
         </div>
 
-        <div class="news-entry">
+        <div class="news-entry hidden fade-in">
           <span class="news-date">Sep 2024</span>
           <p>
             <span class="news-tag award">🏆 Award</span>
@@ -745,6 +780,7 @@ body {
         </div>
 
       </div>
+      <button class="news-more-btn" id="news-toggle">▼ Show More</button>
     </section>
 
     <!-- ======================= PUBLICATIONS ======================= -->
@@ -1219,6 +1255,29 @@ body {
             el.textContent = n.toLocaleString() + '+';
           } catch (_) { el.textContent = '—'; }
         });
+    })();
+
+    /* ── 4. News Show More / Less ── */
+    (function () {
+      var btn = document.getElementById('news-toggle');
+      if (!btn) return;
+      var hidden = document.querySelectorAll('.news-entry.hidden');
+      if (!hidden.length) { btn.style.display = 'none'; return; }
+
+      var expanded = false;
+      btn.addEventListener('click', function () {
+        expanded = !expanded;
+        hidden.forEach(function (el, i) {
+          if (expanded) {
+            el.classList.remove('hidden');
+            el.style.animationDelay = (i * 50) + 'ms';
+          } else {
+            el.classList.add('hidden');
+            el.style.animationDelay = '';
+          }
+        });
+        btn.textContent = expanded ? '▲ Show Less' : '▼ Show More';
+      });
     })();
   </script>
 
