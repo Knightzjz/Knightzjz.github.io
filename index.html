@@ -1506,12 +1506,11 @@ body {
       });
     })();
 
-    /* ── 3. Visitor Counter — deduplicated session + countapi.xyz ── */
+    /* ── 3. Visitor Counter — deduplicated session + countapi.mileshilliard.com ── */
     (function () {
       var el = document.getElementById('visitor-num');
       if (!el) return;
-      var NS = 'knightzjz.github.io';
-      var KEY = 'pageviews';
+      var KEY = 'knightzjz-pageviews';
       var SESSION_KEY = 'visitor_session_ts';
       var SESSION_MS = 3600000; // 1-hour dedup window
 
@@ -1521,10 +1520,10 @@ body {
 
       // New session → hit (increment). Returning → get (read only).
       var base = isNewSession
-        ? 'https://api.countapi.xyz/hit/'
-        : 'https://api.countapi.xyz/get/';
+        ? 'https://countapi.mileshilliard.com/api/v1/hit/'
+        : 'https://countapi.mileshilliard.com/api/v1/get/';
 
-      fetch(base + NS + '/' + KEY)
+      fetch(base + KEY)
         .then(function (r) { return r.json(); })
         .then(function (j) {
           if (isNewSession) {
