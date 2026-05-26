@@ -1506,30 +1506,38 @@ body {
       });
     })();
 
-    /* ── 3. Visitor Counter — hits.sh (no API key needed) ── */
+    /* ── 3. Visitor Counter — deduplicated session + countapi.xyz ── */
     (function () {
       var el = document.getElementById('visitor-num');
       if (!el) return;
-      // hits.sh increments on each page load and returns total as SVG badge
-      // We use countapi.xyz as a simple JSON endpoint (no key needed)
       var NS = 'knightzjz.github.io';
       var KEY = 'pageviews';
-      fetch('https://api.countapi.xyz/hit/' + NS + '/' + KEY)
+      var SESSION_KEY = 'visitor_session_ts';
+      var SESSION_MS = 3600000; // 1-hour dedup window
+
+      var now = Date.now();
+      var lastHit = parseInt(localStorage.getItem(SESSION_KEY) || '0', 10);
+      var isNewSession = (now - lastHit) > SESSION_MS;
+
+      // New session → hit (increment). Returning → get (read only).
+      var base = isNewSession
+        ? 'https://api.countapi.xyz/hit/'
+        : 'https://api.countapi.xyz/get/';
+
+      fetch(base + NS + '/' + KEY)
         .then(function (r) { return r.json(); })
         .then(function (j) {
+          if (isNewSession) {
+            try { localStorage.setItem(SESSION_KEY, String(now)); } catch (_) {}
+          }
           var v = j && j.value;
           el.textContent = (v !== undefined && v !== null)
             ? Number(v).toLocaleString()
             : '—';
         })
         .catch(function () {
-          // Fallback: show a local estimate from localStorage
-          try {
-            var lk = 'local_visits';
-            var n = parseInt(localStorage.getItem(lk) || '0', 10) + 1;
-            localStorage.setItem(lk, String(n));
-            el.textContent = n.toLocaleString() + '+';
-          } catch (_) { el.textContent = '—'; }
+          // API unreachable — don't show misleading local numbers
+          el.textContent = '—';
         });
     })();
 
