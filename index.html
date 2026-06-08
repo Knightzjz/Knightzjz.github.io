@@ -27,18 +27,19 @@
   <meta property="og:title" content="周吉喆 | 四川大学计算机学院">
   <meta property="og:description" content="周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。">
   <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://knightzjz.github.io/images/avatar.jpeg">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://knightzjz.github.io/">
   <meta name="twitter:title" content="周吉喆 | 四川大学计算机学院">
   <meta name="twitter:description" content="周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。">
+  <meta name="twitter:image" content="https://knightzjz.github.io/images/avatar.jpeg">
 
   <link rel="icon" href="images/avatar.jpeg" type="image/jpeg">
   <link rel="apple-touch-icon" href="images/avatar.jpeg">
 
   <!-- DNS Prefetch / Preconnect -->
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="dns-prefetch" href="https://scholar.google.com">
   <link rel="dns-prefetch" href="https://arxiv.org">
@@ -77,6 +78,7 @@
       "https://github.com/Knightzjz"
     ],
     "description": "四川大学计算机学院副教授，研究方向为伪造图像检测及生成与取证统一",
+    "image": "https://knightzjz.github.io/images/avatar.jpeg",
     "knowsAbout": ["伪造图像检测", "Fake Image Detection", "生成取证", "Deepfake Detection", "多模态大模型", "图像篡改检测", "人工智能安全", "NeurIPS", "ICML", "AAAI", "CVPR", "ICCV", "MM", "ECCV", "ICLR", "PAMI", "TIP", "TIFS"]
   }
   </script>
@@ -364,7 +366,8 @@ body {
 .news-list { display: flex; flex-direction: column; gap: 0; }
 .news-entry {
   display: flex; gap: 1rem; align-items: baseline;
-  padding: 0.55rem 0.5rem; border-bottom: 1px solid var(--border);
+  padding: 0.55rem 0.5rem; min-height: 2.6rem;
+  border-bottom: 1px solid var(--border);
   font-size: 0.9rem;
   border-radius: 6px;
   transition: background 0.2s ease;
@@ -389,7 +392,7 @@ body {
   flex-shrink: 0;
 }
 .news-tag.paper {
-  background: linear-gradient(135deg, #ccfbf1, #99f6e4);
+  background: #ccfbf1;
   color: #0f766e;
   border: 1px solid #5eead4;
   font-size: 0.78rem;
@@ -399,7 +402,7 @@ body {
   background: linear-gradient(135deg, #99f6e4, #5eead4);
 }
 .news-tag.service {
-  background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+  background: #e0e7ff;
   color: #4338ca;
   border: 1px solid #a5b4fc;
 }
@@ -407,7 +410,7 @@ body {
   background: linear-gradient(135deg, #c7d2fe, #a5b4fc);
 }
 .news-tag.award {
-  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  background: #fef3c7;
   color: #b45309;
   border: 1px solid #fcd34d;
   box-shadow: 0 1px 3px rgba(180, 83, 9, 0.12);
@@ -839,7 +842,7 @@ body {
           <span class="highlight-tag"><a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank">J. Imaging 客座主编</a></span>，主要研究方向为<strong>伪造图像检测</strong>（Fake Image Detection）及<strong>生成与取证统一</strong>（Unified Generation and Forensics）。
 我主导开发了
           <a class="project-tag" href="https://github.com/SunnyHaze/IML-ViT" target="_blank">IML-ViT</a>
-          <a class="project-tag" href="https://github.com/Knightzjz" target="_blank">Sparse-ViT</a>
+          <a class="project-tag" href="https://github.com/scu-zjz/SparseViT" target="_blank">Sparse-ViT</a>
           <a class="project-tag" href="https://github.com/scu-zjz/IMDLBenCo" target="_blank">IMDL-BenCo</a>
           <a class="project-tag" href="https://github.com/scu-zjz/ForensicHub" target="_blank">ForensicHub</a>
           等多个开源项目，更多详情请见 GitHub 与 Google Scholar 主页。
@@ -856,7 +859,7 @@ body {
           and <strong>Unified Generation and Forensics</strong>.
           I have led the development of several open-source projects, including
           <a class="project-tag" href="https://github.com/SunnyHaze/IML-ViT" target="_blank">IML-ViT</a>
-          <a class="project-tag" href="https://github.com/Knightzjz" target="_blank">Sparse-ViT</a>
+          <a class="project-tag" href="https://github.com/scu-zjz/SparseViT" target="_blank">Sparse-ViT</a>
           <a class="project-tag" href="https://github.com/scu-zjz/IMDLBenCo" target="_blank">IMDL-BenCo</a>
           <a class="project-tag" href="https://github.com/scu-zjz/ForensicHub" target="_blank">ForensicHub</a>.
           For more details, please visit my GitHub and Google Scholar profiles.
@@ -1076,7 +1079,7 @@ body {
           <p class="venue">arXiv preprint arXiv:2602.06676, 2026</p>
           <div class="pub-links">
             <a href="https://arxiv.org/abs/2602.06676" target="_blank" class="pub-link pdf">📄 arXiv</a>
-            <a href="https://github.com/venus-guangjian/SICA_OpenMMSec" target="_blank" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="scu-zjz/SICA_OpenMMSec"></span>
+            <a href="https://github.com/venus-guangjian/SICA_OpenMMSec" target="_blank" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="venus-guangjian/SICA_OpenMMSec"></span>
           </div>
         </article>
 
