@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light">
   <meta name="format-detection" content="telephone=no">
-  <title>周吉喆 | 四川大学计算机学院</title>
+  <title>周吉喆 - 四川大学计算机学院</title>
   <meta name="description" content="周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。">
   <meta name="keywords" content="周吉喆, Jizhe Zhou, 伪造图像检测, Fake Image Detection, 生成与取证统一, 图像篡改检测, 副教授, 四川大学, 计算机学院, F06, F02, F0116, 国家自然科学基金, 面上项目, 青年基金, 重点基金, 科技部重点研发, 国家重点研发, 会评专家, 函评专家, AAAI, CVPR, MM, ICML, ICCV, ECCV, ICLR, PAMI, TIP, TIFS, AC, SPC, deepfake detection, multimodal, 人工智能, 信息科学, 计算机应用, 人工智能安全, 多模态大模型, 四川省千人">
   <meta name="author" content="Jizhe Zhou">
@@ -24,7 +24,7 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://knightzjz.github.io/">
-  <meta property="og:title" content="周吉喆 | 四川大学计算机学院">
+  <meta property="og:title" content="周吉喆 - 四川大学计算机学院">
   <meta property="og:description" content="周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:image" content="https://knightzjz.github.io/images/avatar.jpeg">
@@ -32,7 +32,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://knightzjz.github.io/">
-  <meta name="twitter:title" content="周吉喆 | 四川大学计算机学院">
+  <meta name="twitter:title" content="周吉喆 - 四川大学计算机学院">
   <meta name="twitter:description" content="周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。">
   <meta name="twitter:image" content="https://knightzjz.github.io/images/avatar.jpeg">
 
@@ -365,8 +365,8 @@ body {
    ============================================================ */
 .news-list { display: flex; flex-direction: column; gap: 0; }
 .news-entry {
-  display: flex; gap: 1rem; align-items: baseline;
-  padding: 0.55rem 0.5rem; min-height: 2.6rem;
+  display: flex; gap: 1rem; align-items: stretch;
+  padding: 0; min-height: 3rem;
   border-bottom: 1px solid var(--border);
   font-size: 0.9rem;
   border-radius: 6px;
@@ -374,8 +374,17 @@ body {
 }
 .news-entry:last-child { border-bottom: none; }
 .news-entry:hover { background: #f1f5f9; transform: translateX(4px); }
-.news-date { flex-shrink: 0; width: 90px; font-size: 0.78rem; color: var(--text-light); font-weight: 500; }
-.news-entry p { margin: 0; line-height: 1.6; }
+.news-date {
+  flex-shrink: 0; width: 90px;
+  font-size: 0.78rem; color: var(--text-light); font-weight: 500;
+  display: flex; align-items: center;
+  padding: 0.55rem 0 0.55rem 0.5rem;
+}
+.news-entry p {
+  margin: 0; line-height: 1.6;
+  display: flex; align-items: center; flex-wrap: wrap; gap: 0.2rem;
+  padding: 0.55rem 0.5rem 0.55rem 0;
+}
 .news-entry a { color: var(--primary); font-weight: 500; transition: text-decoration 0.15s; }
 .news-entry a:hover { text-decoration: underline; }
 
@@ -879,6 +888,14 @@ body {
 
         <!-- 2026 -->
         <div class="news-entry">
+          <span class="news-date">Jun 2026</span>
+          <p>
+            <span class="news-tag paper">📄 ICMR 2026</span>
+            <a href="https://arxiv.org/abs/2605.16879" target="_blank">DiffIML</a>: Towards generalized image manipulation localization via score-based model. <strong>Accepted to ACM ICMR 2026</strong>.
+          </p>
+        </div>
+
+        <div class="news-entry">
           <span class="news-date">May 2026</span>
           <p>
             <span class="news-tag paper">📄 arXiv</span>
@@ -926,7 +943,7 @@ body {
           </p>
         </div>
 
-        <div class="news-entry">
+        <div class="news-entry hidden fade-in">
           <span class="news-date">Jan 2026</span>
           <p>
             <span class="news-tag paper">📄 AAAI 2026</span>
@@ -934,7 +951,7 @@ body {
           </p>
         </div>
 
-        <div class="news-entry">
+        <div class="news-entry hidden fade-in">
           <span class="news-date">Jan 2026</span>
           <p>
             <span class="news-tag paper">📄 AAAI 2026</span>
