@@ -42,9 +42,6 @@
 
   <!-- DNS Prefetch / Preconnect -->
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-  <link rel="dns-prefetch" href="https://scholar.google.com">
-  <link rel="dns-prefetch" href="https://arxiv.org">
-  <link rel="dns-prefetch" href="https://github.com">
   <link rel="preconnect" href="https://scholar.google.com" crossorigin>
   <link rel="preconnect" href="https://arxiv.org" crossorigin>
   <link rel="preconnect" href="https://github.com" crossorigin>
@@ -657,19 +654,6 @@ body {
 .tag.highlight { background: #fef3c7; color: #92400e; }
 
 /* ============================================================
-   Services
-   ============================================================ */
-.services { list-style: none; }
-.services li {
-  padding: 0.6rem 0.5rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
-  border-radius: 6px;
-  transition: background 0.2s ease;
-}
-.services li:last-child { border-bottom: none; }
-.services li:hover { background: #f1f5f9; transform: translateX(4px); }
-.services li strong { color: var(--text); }
-
-/* ============================================================
    Footer
    ============================================================ */
 .site-footer {
@@ -809,7 +793,7 @@ body {
       <div class="nav-links">
         <a href="/">Home</a>
         <a href="/blog/">Blog</a>
-        <a href="https://github.com/Knightzjz" target="_blank">GitHub</a>
+        <a href="https://github.com/Knightzjz" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </nav>
   </header>
@@ -830,11 +814,11 @@ body {
         <div class="position-divider"></div>
         <p class="position-en">Associate Professor at Sichuan University</p>
         <div class="links">
-          <a href="https://github.com/Knightzjz" target="_blank" class="btn">
+          <a href="https://github.com/Knightzjz" target="_blank" rel="noopener noreferrer" class="btn">
             <svg height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             GitHub
           </a>
-          <a href="https://scholar.google.com/citations?user=-cNWmJMAAAAJ" target="_blank" class="btn scholar">
+          <a href="https://scholar.google.com/citations?user=-cNWmJMAAAAJ" target="_blank" rel="noopener noreferrer" class="btn scholar">
             <svg height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
             Scholar <span id="citation-count" title="Google Scholar citations"></span>
           </a>
@@ -856,13 +840,13 @@ body {
         <p>
           周吉喆，四川大学计算机学院副教授，
           <span class="highlight-tag">四川省千人</span>
-          <span class="highlight-tag"><a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank">IEEE TETCI 副主编</a></span>
-          <span class="highlight-tag"><a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank">J. Imaging 客座主编</a></span>，主要研究方向为<strong>伪造图像检测</strong>（Fake Image Detection）及<strong>生成与取证统一</strong>（Unified Generation and Forensics）。
+          <span class="highlight-tag"><a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank" rel="noopener noreferrer">IEEE TETCI 副主编</a></span>
+          <span class="highlight-tag"><a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank" rel="noopener noreferrer">J. Imaging 客座主编</a></span>，主要研究方向为<strong>伪造图像检测</strong>（Fake Image Detection）及<strong>生成与取证统一</strong>（Unified Generation and Forensics）。
 我主导开发了
-          <a class="project-tag" href="https://github.com/SunnyHaze/IML-ViT" target="_blank">IML-ViT</a>
-          <a class="project-tag" href="https://github.com/scu-zjz/SparseViT" target="_blank">Sparse-ViT</a>
-          <a class="project-tag" href="https://github.com/scu-zjz/IMDLBenCo" target="_blank">IMDL-BenCo</a>
-          <a class="project-tag" href="https://github.com/scu-zjz/ForensicHub" target="_blank">ForensicHub</a>
+          <a class="project-tag" href="https://github.com/SunnyHaze/IML-ViT" target="_blank" rel="noopener noreferrer">IML-ViT</a>
+          <a class="project-tag" href="https://github.com/scu-zjz/SparseViT" target="_blank" rel="noopener noreferrer">Sparse-ViT</a>
+          <a class="project-tag" href="https://github.com/scu-zjz/IMDLBenCo" target="_blank" rel="noopener noreferrer">IMDL-BenCo</a>
+          <a class="project-tag" href="https://github.com/scu-zjz/ForensicHub" target="_blank" rel="noopener noreferrer">ForensicHub</a>
           等多个开源项目，更多详情请见 GitHub 与 Google Scholar 主页。
         </p>
       </div>
@@ -871,15 +855,15 @@ body {
         <p>
           I am an Associate Professor at the College of Computer Science, Sichuan University,
           and <span class="highlight-tag">Sichuan Provincial Thousand Talents</span>.
-          I serve as <span class="highlight-tag"><a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank">Associate Editor of IEEE TETCI</a></span>
-          and <span class="highlight-tag"><a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank">Guest Editor of J. Imaging</a></span>.
+          I serve as <span class="highlight-tag"><a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank" rel="noopener noreferrer">Associate Editor of IEEE TETCI</a></span>
+          and <span class="highlight-tag"><a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank" rel="noopener noreferrer">Guest Editor of J. Imaging</a></span>.
           My research focuses on <strong>Fake Image Detection</strong>
           and <strong>Unified Generation and Forensics</strong>.
           I have led the development of several open-source projects, including
-          <a class="project-tag" href="https://github.com/SunnyHaze/IML-ViT" target="_blank">IML-ViT</a>
-          <a class="project-tag" href="https://github.com/scu-zjz/SparseViT" target="_blank">Sparse-ViT</a>
-          <a class="project-tag" href="https://github.com/scu-zjz/IMDLBenCo" target="_blank">IMDL-BenCo</a>
-          <a class="project-tag" href="https://github.com/scu-zjz/ForensicHub" target="_blank">ForensicHub</a>.
+          <a class="project-tag" href="https://github.com/SunnyHaze/IML-ViT" target="_blank" rel="noopener noreferrer">IML-ViT</a>
+          <a class="project-tag" href="https://github.com/scu-zjz/SparseViT" target="_blank" rel="noopener noreferrer">Sparse-ViT</a>
+          <a class="project-tag" href="https://github.com/scu-zjz/IMDLBenCo" target="_blank" rel="noopener noreferrer">IMDL-BenCo</a>
+          <a class="project-tag" href="https://github.com/scu-zjz/ForensicHub" target="_blank" rel="noopener noreferrer">ForensicHub</a>.
           For more details, please visit my GitHub and Google Scholar profiles.
         </p>
       </div>
@@ -900,7 +884,7 @@ body {
           <span class="news-date">Jun 2026</span>
           <p>
             <span class="news-tag paper">📄 ICMR 2026</span>
-            <a href="https://arxiv.org/abs/2605.16879" target="_blank">DiffIML</a>: Towards generalized image manipulation localization via score-based model. <strong>Accepted to ACM ICMR 2026</strong>.
+            <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer">DiffIML</a>: Towards generalized image manipulation localization via score-based model. <strong>Accepted to ACM ICMR 2026</strong>.
           </p>
         </div>
 
@@ -908,7 +892,7 @@ body {
           <span class="news-date">May 2026</span>
           <p>
             <span class="news-tag paper">📄 arXiv</span>
-            <a href="https://arxiv.org/abs/2605.14091" target="_blank">DeFakerOne</a>: The <strong>first foundation model</strong> for unified fake image detection &amp; localization, jointly developed with <strong>Ant Group Guangjian</strong> team.
+            <a href="https://arxiv.org/abs/2605.14091" target="_blank" rel="noopener noreferrer">DeFakerOne</a>: The <strong>first foundation model</strong> for unified fake image detection &amp; localization, jointly developed with <strong>Ant Group Guangjian</strong> team.
           </p>
         </div>
 
@@ -924,7 +908,7 @@ body {
           <span class="news-date">May 2026</span>
           <p>
             <span class="news-tag paper">📄 ICML 2026</span>
-            <a href="https://arxiv.org/abs/2602.06676" target="_blank">SICA</a>: First monolithic FID model via semantic-induced constrained adaptation, outperforming 15 state-of-the-art methods.
+            <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer">SICA</a>: First monolithic FID model via semantic-induced constrained adaptation, outperforming 15 state-of-the-art methods.
           </p>
         </div>
 
@@ -932,7 +916,7 @@ body {
           <span class="news-date">Apr 2026</span>
           <p>
             <span class="news-tag service">🏛️ Service</span>
-            Invited as <strong>Guest Editor</strong> of the special issue <em>"Recent Advances in Multimedia Imaging and Content Security"</em> for <a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank">Journal of Imaging</a>.
+            Invited as <strong>Guest Editor</strong> of the special issue <em>"Recent Advances in Multimedia Imaging and Content Security"</em> for <a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank" rel="noopener noreferrer">Journal of Imaging</a>.
           </p>
         </div>
 
@@ -948,7 +932,7 @@ body {
           <span class="news-date">Jan 2026</span>
           <p>
             <span class="news-tag paper">📄 IEEE TMM</span>
-            <a href="https://doi.org/10.1109/TMM.2026.3651071" target="_blank">PASK</a>: Sparse framework for crafting natural adversarial examples against ASR via pitch-aware perturbations.
+            <a href="https://doi.org/10.1109/TMM.2026.3651071" target="_blank" rel="noopener noreferrer">PASK</a>: Sparse framework for crafting natural adversarial examples against ASR via pitch-aware perturbations.
           </p>
         </div>
 
@@ -956,7 +940,7 @@ body {
           <span class="news-date">Jan 2026</span>
           <p>
             <span class="news-tag paper">📄 AAAI 2026</span>
-            <a href="https://ojs.aaai.org/index.php/AAAI/article/view/38243" target="_blank">FGM-HD</a>: Boosting generation diversity of fractal generative models through Hausdorff Dimension induction.
+            <a href="https://ojs.aaai.org/index.php/AAAI/article/view/38243" target="_blank" rel="noopener noreferrer">FGM-HD</a>: Boosting generation diversity of fractal generative models through Hausdorff Dimension induction.
           </p>
         </div>
 
@@ -964,7 +948,7 @@ body {
           <span class="news-date">Jan 2026</span>
           <p>
             <span class="news-tag paper">📄 AAAI 2026</span>
-            <a href="https://ojs.aaai.org/index.php/AAAI/article/view/37140" target="_blank">IO-RAE</a>: Pioneering reversible adversarial example framework for audio privacy protection via LLM-guided content obfuscation.
+            <a href="https://ojs.aaai.org/index.php/AAAI/article/view/37140" target="_blank" rel="noopener noreferrer">IO-RAE</a>: Pioneering reversible adversarial example framework for audio privacy protection via LLM-guided content obfuscation.
           </p>
         </div>
 
@@ -972,7 +956,7 @@ body {
           <span class="news-date">Jan 2026</span>
           <p>
             <span class="news-tag service">🏛️ Service</span>
-            Promoted as <strong>Associate Editor</strong> for <a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank">IEEE TETCI</a>.
+            Promoted as <strong>Associate Editor</strong> for <a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank" rel="noopener noreferrer">IEEE TETCI</a>.
           </p>
         </div>
 
@@ -989,7 +973,7 @@ body {
           <span class="news-date">Nov 2025</span>
           <p>
             <span class="news-tag paper">📄 IEEE TDSC</span>
-            <a href="https://arxiv.org/abs/2506.10685" target="_blank">Defensive Adversarial CAPTCHA</a>: LLM-guided semantics-driven framework for generating high-fidelity adversarial CAPTCHA from scratch.
+            <a href="https://arxiv.org/abs/2506.10685" target="_blank" rel="noopener noreferrer">Defensive Adversarial CAPTCHA</a>: LLM-guided semantics-driven framework for generating high-fidelity adversarial CAPTCHA from scratch.
           </p>
         </div>
 
@@ -997,7 +981,7 @@ body {
           <span class="news-date">Oct 2025</span>
           <p>
             <span class="news-tag paper">📄 IEEE TDSC</span>
-            <a href="https://ieeexplore.ieee.org/document/11134103" target="_blank">DP-TRAE</a>: Dual-phase merging transferable reversible adversarial example for image privacy protection.
+            <a href="https://ieeexplore.ieee.org/document/11134103" target="_blank" rel="noopener noreferrer">DP-TRAE</a>: Dual-phase merging transferable reversible adversarial example for image privacy protection.
           </p>
         </div>
 
@@ -1058,8 +1042,8 @@ body {
           <p class="authors">Xiaochen Ma, Xuekang Zhu, Lei Su, Bo Du, Zhuohang Jiang, Bingkui Tong, Zeyu Lei, Xinyu Yang, Chi-Man Pun, Jiancheng Lv, <strong>Jizhe Zhou</strong></p>
           <p class="venue">Advances in Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track, 2024</p>
           <div class="pub-links">
-            <a href="https://arxiv.org/abs/2406.10580" target="_blank" class="pub-link pdf">📄 Paper</a>
-            <a href="https://github.com/scu-zjz/IMDLBenCo" target="_blank" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="scu-zjz/IMDLBenCo"></span>
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
+            <a href="https://github.com/scu-zjz/IMDLBenCo" target="_blank" rel="noopener noreferrer" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="scu-zjz/IMDLBenCo"></span>
           </div>
         </article>
 
@@ -1070,8 +1054,8 @@ body {
           <p class="authors"><strong>Jizhe Zhou</strong>, Xiaochen Ma, Xia Du, Ahmed Y. Alhammadi, Wentao Feng</p>
           <p class="venue">IEEE/CVF International Conference on Computer Vision (ICCV), pp. 22346–22356, 2023</p>
           <div class="pub-links">
-            <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Zhou_Pre-Training-Free_Image_Manipulation_Localization_through_Non-Mutually_Exclusive_Contrastive_Learning_ICCV_2023_paper.pdf" target="_blank" class="pub-link pdf">📄 Paper</a>
-            <a href="https://github.com/Knightzjz/NCL-IML" target="_blank" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="Knightzjz/NCL-IML"></span>
+            <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Zhou_Pre-Training-Free_Image_Manipulation_Localization_through_Non-Mutually_Exclusive_Contrastive_Learning_ICCV_2023_paper.pdf" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
+            <a href="https://github.com/Knightzjz/NCL-IML" target="_blank" rel="noopener noreferrer" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="Knightzjz/NCL-IML"></span>
           </div>
         </article>
 
@@ -1082,8 +1066,8 @@ body {
           <p class="authors">Bo Du, Xuekang Zhu, Xiaochen Ma, Chenfan Qu, Kaiwen Feng, Zhe Yang, Chi-Man Pun, Jian Liu, <strong>Ji-Zhe Zhou</strong></p>
           <p class="venue">Advances in Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track, 2025</p>
           <div class="pub-links">
-            <a href="https://arxiv.org/abs/2505.11003" target="_blank" class="pub-link pdf">📄 Paper</a>
-            <a href="https://github.com/scu-zjz/ForensicHub" target="_blank" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="scu-zjz/ForensicHub"></span>
+            <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
+            <a href="https://github.com/scu-zjz/ForensicHub" target="_blank" rel="noopener noreferrer" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="scu-zjz/ForensicHub"></span>
           </div>
         </article>
 
@@ -1093,8 +1077,8 @@ body {
           <p class="authors">Xiaochen Ma, Bo Du, Zhuohang Jiang, Xia Du, Ahmed Y. Al Hammadi, <strong>Jizhe Zhou</strong></p>
           <p class="venue">arXiv preprint arXiv:2307.14863, 2023</p>
           <div class="pub-links">
-            <a href="https://arxiv.org/abs/2307.14863" target="_blank" class="pub-link pdf">📄 arXiv</a>
-            <a href="https://github.com/SunnyHaze/IML-ViT" target="_blank" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="SunnyHaze/IML-ViT"></span>
+            <a href="https://arxiv.org/abs/2307.14863" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 arXiv</a>
+            <a href="https://github.com/SunnyHaze/IML-ViT" target="_blank" rel="noopener noreferrer" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="SunnyHaze/IML-ViT"></span>
           </div>
         </article>
 
@@ -1102,10 +1086,30 @@ body {
         <article class="pub">
           <h3>Can We Build a Monolithic Model for Fake Image Detection? SICA: Semantic-Induced Constrained Adaptation for Unified-Yet-Discriminative Artifact Feature Space Reconstruction</h3>
           <p class="authors">Bo Du, Xiaochen Ma, Xuekang Zhu, Zhe Yang, Chaogun Niu, Chenfan Qu, Mingqi Fang, Zhenming Wang, Jingjing Liu, Jian Liu, <strong>Ji-Zhe Zhou</strong></p>
-          <p class="venue">arXiv preprint arXiv:2602.06676, 2026</p>
+          <p class="venue">International Conference on Machine Learning (ICML), 2026</p>
           <div class="pub-links">
-            <a href="https://arxiv.org/abs/2602.06676" target="_blank" class="pub-link pdf">📄 arXiv</a>
-            <a href="https://github.com/venus-guangjian/SICA_OpenMMSec" target="_blank" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="venus-guangjian/SICA_OpenMMSec"></span>
+            <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
+            <a href="https://github.com/venus-guangjian/SICA_OpenMMSec" target="_blank" rel="noopener noreferrer" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="venus-guangjian/SICA_OpenMMSec"></span>
+          </div>
+        </article>
+
+        <!-- DiffIML -->
+        <article class="pub">
+          <h3>Towards Generalized Image Manipulation Localization via Score-based Model</h3>
+          <p class="authors">Yunfei Wang, Bo Du, Zhe Yang, Xin Liu, Zhiyu Lin, Tianxin Xu, <strong>Ji-Zhe Zhou</strong></p>
+          <p class="venue">ACM International Conference on Multimedia Retrieval (ICMR), 2026</p>
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
+          </div>
+        </article>
+
+        <!-- PASK -->
+        <article class="pub">
+          <h3>PASK: A Sparse Framework for Crafting Natural Adversarial Example</h3>
+          <p class="authors">Xiaoyuan Liu, Xia Du, Guoqing Chen, <strong>Jizhe Zhou</strong>, Qizhen Xu, Chi-Man Pun</p>
+          <p class="venue">IEEE Transactions on Multimedia (TMM), vol. 28, pp. 3010–3022, 2026</p>
+          <div class="pub-links">
+            <a href="https://doi.org/10.1109/TMM.2026.3651071" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
           </div>
         </article>
 
@@ -1129,7 +1133,7 @@ body {
           <div class="content">
             <h3>B.S., M.S., Ph.D.</h3>
             <p>University of Macau & The Chinese University of Hong Kong</p>
-            <span class="tag highlight">Supervisor: <a href="https://cmpun.github.io/" target="_blank" style="color:inherit;text-decoration:none;font-weight:600">Prof. Chi-Man Pun</a></span>
+            <span class="tag highlight">Supervisor: <a href="https://cmpun.github.io/" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;font-weight:600">Prof. Chi-Man Pun</a></span>
           </div>
         </div>
       </div>
@@ -1151,13 +1155,13 @@ body {
           </div>
           <p class="student-research">生成与取证统一</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2509.20006" target="_blank" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">RITA</a>
-            <a href="https://arxiv.org/abs/2412.13753" target="_blank" class="paper-tag" style="color: #7c3aed; background: #f5f3ff; text-decoration: none;">Mesorch</a>
-            <a href="https://arxiv.org/abs/2505.11003" target="_blank" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">ForensicHub</a>
-            <a href="https://arxiv.org/abs/2406.10580" target="_blank" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
-            <a href="https://arxiv.org/abs/2603.01601" target="_blank" class="paper-tag" style="color: #dc2626; background: #fef2f2; text-decoration: none;">dehallu3D</a>
-            <a href="https://arxiv.org/abs/2407.03695" target="_blank" class="paper-tag" style="color: #2563eb; background: #eff6ff; text-decoration: none;">M³</a>
-            <a href="https://arxiv.org/abs/2605.14091" target="_blank" class="paper-tag" style="color: #b45309; background: #fffbeb; text-decoration: none;">DeFakerOne</a>
+            <a href="https://arxiv.org/abs/2509.20006" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">RITA</a>
+            <a href="https://arxiv.org/abs/2412.13753" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #7c3aed; background: #f5f3ff; text-decoration: none;">Mesorch</a>
+            <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">ForensicHub</a>
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
+            <a href="https://arxiv.org/abs/2603.01601" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #dc2626; background: #fef2f2; text-decoration: none;">dehallu3D</a>
+            <a href="https://arxiv.org/abs/2407.03695" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #2563eb; background: #eff6ff; text-decoration: none;">M³</a>
+            <a href="https://arxiv.org/abs/2605.14091" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #b45309; background: #fffbeb; text-decoration: none;">DeFakerOne</a>
           </div>
         </div>
 
@@ -1171,11 +1175,11 @@ body {
           </div>
           <p class="student-research">伪造图像检测</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2602.06676" target="_blank" class="paper-tag" style="color: #0891b2; background: #ecfeff; text-decoration: none;">SICA</a>
-            <a href="https://arxiv.org/abs/2505.11003" target="_blank" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">ForensicHub</a>
-            <a href="https://arxiv.org/abs/2406.10580" target="_blank" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
-            <a href="https://arxiv.org/abs/2605.14091" target="_blank" class="paper-tag" style="color: #b45309; background: #fffbeb; text-decoration: none;">DeFakerOne</a>
-            <a href="https://arxiv.org/abs/2605.16879" target="_blank" class="paper-tag" style="color: #db2777; background: #fdf2f8; text-decoration: none;">DiffIML</a>
+            <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #0891b2; background: #ecfeff; text-decoration: none;">SICA</a>
+            <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">ForensicHub</a>
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
+            <a href="https://arxiv.org/abs/2605.14091" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #b45309; background: #fffbeb; text-decoration: none;">DeFakerOne</a>
+            <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #db2777; background: #fdf2f8; text-decoration: none;">DiffIML</a>
           </div>
         </div>
 
@@ -1189,10 +1193,10 @@ body {
           </div>
           <p class="student-research">生成与取证统一</p>
           <div class="student-papers">
-            <a href="https://www.sciencedirect.com/science/article/pii/S003132032600676X" target="_blank" class="paper-tag" style="color: #7c3aed; background: #f5f3ff; text-decoration: none;">Bones to Identity</a>
-            <a href="https://dl.acm.org/doi/10.1145/3664647.3681174" target="_blank" class="paper-tag" style="color: #dc2626; background: #fef2f2; text-decoration: none;">Boneprint</a>
-            <a href="https://arxiv.org/abs/2602.06676" target="_blank" class="paper-tag" style="color: #0891b2; background: #ecfeff; text-decoration: none;">SICA</a>
-            <a href="https://arxiv.org/abs/2412.14598" target="_blank" class="paper-tag" style="color: #2563eb; background: #eff6ff; text-decoration: none;">Sparse-ViT</a>
+            <a href="https://www.sciencedirect.com/science/article/pii/S003132032600676X" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #7c3aed; background: #f5f3ff; text-decoration: none;">Bones to Identity</a>
+            <a href="https://dl.acm.org/doi/10.1145/3664647.3681174" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #dc2626; background: #fef2f2; text-decoration: none;">Boneprint</a>
+            <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #0891b2; background: #ecfeff; text-decoration: none;">SICA</a>
+            <a href="https://arxiv.org/abs/2412.14598" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #2563eb; background: #eff6ff; text-decoration: none;">Sparse-ViT</a>
           </div>
         </div>
 
@@ -1206,8 +1210,8 @@ body {
           </div>
           <p class="student-research">生成与取证统一</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2603.01601" target="_blank" class="paper-tag" style="color: #dc2626; background: #fef2f2; text-decoration: none;">dehallu3D</a>
-            <a href="https://arxiv.org/abs/2509.20006" target="_blank" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">RITA</a>
+            <a href="https://arxiv.org/abs/2603.01601" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #dc2626; background: #fef2f2; text-decoration: none;">dehallu3D</a>
+            <a href="https://arxiv.org/abs/2509.20006" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">RITA</a>
           </div>
         </div>
 
@@ -1247,7 +1251,7 @@ body {
           </div>
           <p class="student-research">生成与取证统一</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2509.20006" target="_blank" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">RITA</a>
+            <a href="https://arxiv.org/abs/2509.20006" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">RITA</a>
           </div>
         </div>
 
@@ -1261,7 +1265,7 @@ body {
           </div>
           <p class="student-research">伪造图像检测</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2605.16879" target="_blank" class="paper-tag" style="color: #db2777; background: #fdf2f8; text-decoration: none;">DiffIML</a>
+            <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #db2777; background: #fdf2f8; text-decoration: none;">DiffIML</a>
           </div>
         </div>
 
@@ -1275,8 +1279,8 @@ body {
           </div>
           <p class="student-research">伪造图像检测</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2505.11003" target="_blank" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">ForensicHub</a>
-            <a href="https://arxiv.org/abs/2602.06676" target="_blank" class="paper-tag" style="color: #0891b2; background: #ecfeff; text-decoration: none;">SICA</a>
+            <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">ForensicHub</a>
+            <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #0891b2; background: #ecfeff; text-decoration: none;">SICA</a>
           </div>
         </div>
 
@@ -1290,7 +1294,7 @@ body {
           </div>
           <p class="student-research">生成与取证统一</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2511.08945" target="_blank" class="paper-tag" style="color: #7c3aed; background: #f5f3ff; text-decoration: none;">FGM-HD</a>
+            <a href="https://arxiv.org/abs/2511.08945" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #7c3aed; background: #f5f3ff; text-decoration: none;">FGM-HD</a>
           </div>
         </div>
 
@@ -1304,8 +1308,8 @@ body {
           </div>
           <p class="student-research">图像篡改检测</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2412.14598" target="_blank" class="paper-tag" style="color: #2563eb; background: #eff6ff; text-decoration: none;">Sparse-ViT</a>
-            <a href="https://arxiv.org/abs/2406.10580" target="_blank" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
+            <a href="https://arxiv.org/abs/2412.14598" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #2563eb; background: #eff6ff; text-decoration: none;">Sparse-ViT</a>
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
           </div>
         </div>
       </div>
@@ -1322,7 +1326,7 @@ body {
           </div>
           <p class="student-research">图像篡改检测</p>
           <div class="student-papers">
-            <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Zhou_Pre-Training-Free_Image_Manipulation_Localization_through_Non-Mutually_Exclusive_Contrastive_Learning_ICCV_2023_paper.pdf" target="_blank" class="paper-tag" style="color: #dc2626; background: #fef2f2; text-decoration: none;">NCL</a>
+            <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Zhou_Pre-Training-Free_Image_Manipulation_Localization_through_Non-Mutually_Exclusive_Contrastive_Learning_ICCV_2023_paper.pdf" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #dc2626; background: #fef2f2; text-decoration: none;">NCL</a>
             <span class="paper-tag" style="color: #2563eb; background: #eff6ff;">IML-ViT</span>
             <span class="paper-tag" style="color: #059669; background: #ecfdf5;">IMDL-BenCo</span>
           </div>
@@ -1364,8 +1368,8 @@ body {
           </div>
           <p class="student-research">因果推理</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2406.12736" target="_blank" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">Beyond Visual Appearances</a>
-            <a href="https://arxiv.org/abs/2406.10580" target="_blank" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
+            <a href="https://arxiv.org/abs/2406.12736" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">Beyond Visual Appearances</a>
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
           </div>
         </div>
 
@@ -1379,8 +1383,8 @@ body {
           </div>
           <p class="student-research">因果推理</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2406.12736" target="_blank" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">Beyond Visual Appearances</a>
-            <a href="https://arxiv.org/abs/2406.10580" target="_blank" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
+            <a href="https://arxiv.org/abs/2406.12736" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">Beyond Visual Appearances</a>
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
           </div>
         </div>
 
@@ -1394,8 +1398,8 @@ body {
           </div>
           <p class="student-research">图像篡改检测</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2407.03695" target="_blank" class="paper-tag" style="color: #2563eb; background: #eff6ff; text-decoration: none;">M³</a>
-            <a href="https://arxiv.org/abs/2406.10580" target="_blank" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
+            <a href="https://arxiv.org/abs/2407.03695" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #2563eb; background: #eff6ff; text-decoration: none;">M³</a>
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
           </div>
         </div>
       </div>
@@ -1405,7 +1409,7 @@ body {
 
   <!-- ======================= FOOTER ======================= -->
   <footer class="site-footer">
-    <p>© 2026 Ji-Zhe Zhou. Built with ❤️</p>
+    <p>© 2026 Ji-Zhe Zhou. Powered by ☕</p>
     <div class="visitor-counter">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -1418,7 +1422,7 @@ body {
   </footer>
 
   <!-- ======================= JS ======================= -->
-  <script>
+  <script defer>
     /* ── 1. Google Scholar citations — real-time with proxy fallback ── */
     (function () {
       var KEY = 'gs_citations_v4';
@@ -1640,41 +1644,7 @@ body {
       });
     })();
 
-    /* ── 6. Blog NEW Badge — DISABLED TEMPORARILY ── */
-    /* (function () {
-      var badge = document.getElementById('blog-badge');
-      if (!badge) return;
-
-      // Check cached date first
-      try {
-        var raw = localStorage.getItem('blog_last_push');
-        if (raw) {
-          var diff = Date.now() - parseInt(raw, 10);
-          if (diff < 30 * 24 * 60 * 60 * 1000) {
-            badge.style.display = 'inline';
-            return;
-          }
-        }
-      } catch (_) {}
-
-      // Fetch latest commit on _posts/ folder
-      fetch('https://api.github.com/repos/Knightzjz/Knightzjz.github.io/commits?path=_posts&per_page=1', {
-        headers: { 'Accept': 'application/vnd.github.v3+json' },
-        cache: 'no-store'
-      })
-        .then(function (r) { return r.ok ? r.json() : null; })
-        .then(function (data) {
-          if (!data || !data[0] || !data[0].commit || !data[0].commit.author || !data[0].commit.author.date) return;
-          var pushDate = new Date(data[0].commit.author.date).getTime();
-          var diff = Date.now() - pushDate;
-          if (diff < 30 * 24 * 60 * 60 * 1000) {
-            try { localStorage.setItem('blog_last_push', String(pushDate)); } catch (_) {}
-            badge.style.display = 'inline';
-          }
-        })
-        .catch(function () {});
-    })(); */
-    // Floating hearts on thanks line click
+    /* ── 6. Floating hearts on thanks line click ── */
     (function () {
       var el = document.getElementById('thanks-line');
       if (!el) return;
