@@ -36,7 +36,8 @@
   <meta name="twitter:description" content="周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。">
   <meta name="twitter:image" content="https://knightzjz.github.io/images/avatar.jpeg">
 
-  <link rel="icon" href="images/avatar.jpeg" type="image/jpeg">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="images/avatar-180w.webp" type="image/webp">
   <link rel="apple-touch-icon" href="images/avatar.jpeg">
 
   <!-- DNS Prefetch / Preconnect -->
@@ -44,7 +45,6 @@
   <link rel="dns-prefetch" href="https://scholar.google.com">
   <link rel="dns-prefetch" href="https://arxiv.org">
   <link rel="dns-prefetch" href="https://github.com">
-  <link rel="dns-prefetch" href="https://avatars.githubusercontent.com">
   <link rel="preconnect" href="https://scholar.google.com" crossorigin>
   <link rel="preconnect" href="https://arxiv.org" crossorigin>
   <link rel="preconnect" href="https://github.com" crossorigin>
@@ -75,6 +75,8 @@
     },
     "sameAs": [
       "https://scholar.google.com/citations?user=-cNWmJMAAAAJ",
+      "https://dblp.org/pid/249/3969",
+      "https://www.semanticscholar.org/author/Jizhe-Zhou/2238645",
       "https://github.com/Knightzjz"
     ],
     "description": "四川大学计算机学院副教授，研究方向为伪造图像检测及生成与取证统一",
@@ -609,6 +611,8 @@ body {
 .badge.spotlight:hover { background: #bfdbfe; box-shadow: 0 2px 8px rgba(30, 64, 175, 0.2); }
 .badge.oral { background: #fef3c7; color: #92400e; transition: background 0.2s, box-shadow 0.2s; }
 .badge.oral:hover { background: #fde68a; box-shadow: 0 2px 8px rgba(146, 64, 14, 0.2); }
+.badge.benchmark { background: #e0e7ff; color: #3730a3; transition: background 0.2s, box-shadow 0.2s; }
+.badge.benchmark:hover { background: #c7d2fe; box-shadow: 0 2px 8px rgba(55, 48, 163, 0.2); }
 .pub-links { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.6rem; }
 .pub-link {
   display: inline-flex; align-items: center; gap: 0.3rem;
@@ -789,7 +793,10 @@ body {
   <header class="site-header">
     <nav>
       <a href="/" class="logo">
-        <img src="images/avatar.jpeg" alt="周吉喆" class="logo-avatar" loading="eager" decoding="sync">
+        <picture>
+          <source srcset="images/avatar-180w.webp" type="image/webp">
+          <img src="images/avatar.jpeg" alt="周吉喆" class="logo-avatar" fetchpriority="high" decoding="sync">
+        </picture>
         <span>周吉喆</span>
       </a>
       <button class="mobile-menu-btn" aria-label="菜单" aria-expanded="false">
@@ -812,7 +819,10 @@ body {
     <!-- ======================= HERO ======================= -->
     <header class="hero">
       <div class="avatar-wrapper">
-        <img src="https://avatars.githubusercontent.com/u/10630688?v=4" alt="周吉喆, Ji-Zhe Zhou" class="avatar" loading="lazy" decoding="async">
+        <picture>
+          <source srcset="images/avatar-393w.webp" type="image/webp">
+          <img src="images/avatar.jpeg" alt="周吉喆, Ji-Zhe Zhou" class="avatar" fetchpriority="high" decoding="async">
+        </picture>
       </div>
       <div class="hero-text">
         <h1>周吉喆, Ji-Zhe Zhou</h1>
@@ -1067,7 +1077,7 @@ body {
 
         <!-- NeurIPS 2025 -->
         <article class="pub">
-          <span class="badge">NeurIPS 2025</span>
+          <span class="badge benchmark">🏆 NeurIPS 2025</span>
           <h3>ForensicHub: Towards Universal Fake Image Detection and Localization</h3>
           <p class="authors">Bo Du, Xuekang Zhu, Xiaochen Ma, Chenfan Qu, Kaiwen Feng, Zhe Yang, Chi-Man Pun, Jian Liu, <strong>Ji-Zhe Zhou</strong></p>
           <p class="venue">Advances in Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track, 2025</p>
@@ -1134,7 +1144,7 @@ body {
         <!-- 朱学康 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #2563eb;">朱学康</div>
+            <div class="student-avatar" style="background: #2563eb;" role="img" aria-label="朱学康">朱学康</div>
             <div class="student-info">
               <p class="student-role">Master · Intern @ 蚂蚁安全</p>
             </div>
@@ -1154,7 +1164,7 @@ body {
         <!-- 杜博 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #7c3aed;">杜博</div>
+            <div class="student-avatar" style="background: #7c3aed;" role="img" aria-label="杜博">杜博</div>
             <div class="student-info">
               <p class="student-role">Master · Intern @ 蚂蚁安全</p>
             </div>
@@ -1172,7 +1182,7 @@ body {
         <!-- 牛超群 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #0891b2;">牛超群</div>
+            <div class="student-avatar" style="background: #0891b2;" role="img" aria-label="牛超群">牛超群</div>
             <div class="student-info">
               <p class="student-role">PhD · CSC @ NUS</p>
             </div>
@@ -1189,7 +1199,7 @@ body {
         <!-- 王汐文 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #059669;">王汐文</div>
+            <div class="student-avatar" style="background: #059669;" role="img" aria-label="王汐文">王汐文</div>
             <div class="student-info">
               <p class="student-role">PhD Student</p>
             </div>
@@ -1204,7 +1214,7 @@ body {
         <!-- 何雨声 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #0891b2;">何雨声</div>
+            <div class="student-avatar" style="background: #0891b2;" role="img" aria-label="何雨声">何雨声</div>
             <div class="student-info">
               <p class="student-role">PhD Student</p>
             </div>
@@ -1217,7 +1227,7 @@ body {
         <!-- 杨哲 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #dc2626;">杨哲</div>
+            <div class="student-avatar" style="background: #dc2626;" role="img" aria-label="杨哲">杨哲</div>
             <div class="student-info">
               <p class="student-role">Master Student</p>
             </div>
@@ -1230,7 +1240,7 @@ body {
         <!-- 周莉婷 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #f59e0b;">周莉婷</div>
+            <div class="student-avatar" style="background: #f59e0b;" role="img" aria-label="周莉婷">周莉婷</div>
             <div class="student-info">
               <p class="student-role">Master Student</p>
             </div>
@@ -1244,7 +1254,7 @@ body {
         <!-- 王韵菲 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #10b981;">王韵菲</div>
+            <div class="student-avatar" style="background: #10b981;" role="img" aria-label="王韵菲">王韵菲</div>
             <div class="student-info">
               <p class="student-role">Master · Intern @ 腾讯混元</p>
             </div>
@@ -1258,7 +1268,7 @@ body {
         <!-- 冯凯文 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #be185d;">冯凯文</div>
+            <div class="student-avatar" style="background: #be185d;" role="img" aria-label="冯凯文">冯凯文</div>
             <div class="student-info">
               <p class="student-role">Master Student</p>
             </div>
@@ -1273,7 +1283,7 @@ body {
         <!-- 张皓为 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #6366f1;">张皓为</div>
+            <div class="student-avatar" style="background: #6366f1;" role="img" aria-label="张皓为">张皓为</div>
             <div class="student-info">
               <p class="student-role">Master · Intern @ 腾讯混元</p>
             </div>
@@ -1287,7 +1297,7 @@ body {
         <!-- 粟磊 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #64748b;">粟磊</div>
+            <div class="student-avatar" style="background: #64748b;" role="img" aria-label="粟磊">粟磊</div>
             <div class="student-info">
               <p class="student-role">Master · Intern @ 腾讯</p>
             </div>
@@ -1305,7 +1315,7 @@ body {
         <!-- 马晓晨 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #2563eb;">马晓晨</div>
+            <div class="student-avatar" style="background: #2563eb;" role="img" aria-label="马晓晨">马晓晨</div>
             <div class="student-info">
               <p class="student-role">PhD @ HKUST</p>
             </div>
@@ -1321,7 +1331,7 @@ body {
         <!-- 张健 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #7c3aed;">张健</div>
+            <div class="student-avatar" style="background: #7c3aed;" role="img" aria-label="张健">张健</div>
             <div class="student-info">
               <p class="student-role">Master → 宁德时代 (CATL)</p>
             </div>
@@ -1334,7 +1344,7 @@ body {
         <!-- 倪睿洋 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #dc2626;">倪睿洋</div>
+            <div class="student-avatar" style="background: #dc2626;" role="img" aria-label="倪睿洋">倪睿洋</div>
             <div class="student-info">
               <p class="student-role">Master → 中国电信 (China Telecom)</p>
             </div>
@@ -1347,7 +1357,7 @@ body {
         <!-- 蒋卓航 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #0891b2;">蒋卓航</div>
+            <div class="student-avatar" style="background: #0891b2;" role="img" aria-label="蒋卓航">蒋卓航</div>
             <div class="student-info">
               <p class="student-role">PhD @ HKPolyU</p>
             </div>
@@ -1362,7 +1372,7 @@ body {
         <!-- 童炳魁 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #10b981;">童炳魁</div>
+            <div class="student-avatar" style="background: #10b981;" role="img" aria-label="童炳魁">童炳魁</div>
             <div class="student-info">
               <p class="student-role">PhD @ MBZUI</p>
             </div>
@@ -1377,7 +1387,7 @@ body {
         <!-- 杨欣宇 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #f59e0b;">杨欣宇</div>
+            <div class="student-avatar" style="background: #f59e0b;" role="img" aria-label="杨欣宇">杨欣宇</div>
             <div class="student-info">
               <p class="student-role">Master @ Tsinghua</p>
             </div>
@@ -1395,7 +1405,7 @@ body {
 
   <!-- ======================= FOOTER ======================= -->
   <footer class="site-footer">
-    <p>© 2026 Ji-Zhe Zhou. Built with Jekyll.</p>
+    <p>© 2026 Ji-Zhe Zhou. Built with ❤️</p>
     <div class="visitor-counter">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
