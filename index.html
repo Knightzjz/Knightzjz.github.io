@@ -360,6 +360,96 @@ body {
 }
 
 /* ============================================================
+   Eat More Group
+   ============================================================ */
+.emg-section {
+  margin-bottom: 2.5rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #fffdf7 0%, #fffbf0 40%, #ffffff 100%);
+  border-radius: 14px;
+  border: 2px solid #fcd34d;
+  box-shadow: 0 1px 3px rgba(245, 158, 11, 0.06), 0 4px 12px rgba(245, 158, 11, 0.04);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+.emg-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f59e0b, #fbbf24, #fcd34d, #f59e0b);
+  border-radius: 14px 14px 0 0;
+}
+.emg-section:hover {
+  border-color: #f59e0b;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.1), 0 8px 24px rgba(245, 158, 11, 0.08);
+  background: linear-gradient(135deg, #fffdf4 0%, #fffbe8 40%, #fffbeb 100%);
+}
+.emg-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.8rem;
+  flex-wrap: wrap;
+}
+.emg-logo-badge {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.12));
+  transition: transform 0.3s ease;
+}
+.emg-logo-badge:hover {
+  transform: rotate(-8deg) scale(1.08);
+}
+.emg-title h2 {
+  font-size: 1.35rem;
+  margin: 0 0 0.2rem;
+  color: var(--text);
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.emg-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin: 0;
+}
+.emg-subtitle .motto {
+  display: inline-block;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+}
+.emg-flyer-wrapper {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+.emg-flyer {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.emg-flyer:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+@media (max-width: 600px) {
+  .emg-section { padding: 1.2rem; }
+  .emg-header { gap: 1rem; }
+  .emg-logo-badge { width: 65px; height: 65px; }
+  .emg-title h2 { font-size: 1.1rem; }
+}
+
+/* ============================================================
    News Section
    ============================================================ */
 .news-list { display: flex; flex-direction: column; gap: 0; }
@@ -841,7 +931,7 @@ body {
           周吉喆，四川大学计算机学院副教授，
           <span class="highlight-tag">四川省千人</span>
           <span class="highlight-tag"><a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank" rel="noopener noreferrer">IEEE TETCI 副主编</a></span>
-          <span class="highlight-tag"><a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank" rel="noopener noreferrer">J. Imaging 客座主编</a></span>，主要研究方向为<strong>伪造图像检测</strong>（Fake Image Detection）及<strong>生成与取证统一</strong>（Unified Generation and Forensics）。
+          <span class="highlight-tag"><a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank" rel="noopener noreferrer">J. Imaging 客座主编</a></span>，<span class="highlight-tag"><a href="#eat-more-group">Eat More Group</a></span>负责人，主要研究方向为<strong>伪造图像检测</strong>（Fake Image Detection）及<strong>生成与取证统一</strong>（Unified Generation and Forensics）。
 我主导开发了
           <a class="project-tag" href="https://github.com/SunnyHaze/IML-ViT" target="_blank" rel="noopener noreferrer">IML-ViT</a>
           <a class="project-tag" href="https://github.com/scu-zjz/SparseViT" target="_blank" rel="noopener noreferrer">Sparse-ViT</a>
@@ -856,7 +946,8 @@ body {
           I am an Associate Professor at the College of Computer Science, Sichuan University,
           and <span class="highlight-tag">Sichuan Provincial Thousand Talents</span>.
           I serve as <span class="highlight-tag"><a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank" rel="noopener noreferrer">Associate Editor of IEEE TETCI</a></span>
-          and <span class="highlight-tag"><a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank" rel="noopener noreferrer">Guest Editor of J. Imaging</a></span>.
+          and <span class="highlight-tag"><a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank" rel="noopener noreferrer">Guest Editor of J. Imaging</a></span>,
+          and I lead the <span class="highlight-tag"><a href="#eat-more-group">Eat More Group</a></span>.
           My research focuses on <strong>Fake Image Detection</strong>
           and <strong>Unified Generation and Forensics</strong>.
           I have led the development of several open-source projects, including
@@ -1402,6 +1493,22 @@ body {
             <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ======================= EAT MORE GROUP ======================= -->
+    <section class="emg-section" id="eat-more-group">
+      <div class="emg-header">
+        <img src="images/eat-more-logo.png" alt="Eat More Group" class="emg-logo-badge" loading="lazy">
+        <div class="emg-title">
+          <h2>Eat More Group</h2>
+          <p class="emg-subtitle">
+            <span class="motto">Eat More · Play Smart</span>
+          </p>
+        </div>
+      </div>
+      <div class="emg-flyer-wrapper">
+        <img src="images/eat-more-flyer.png" alt="Eat More Group Research Menu" class="emg-flyer" loading="lazy">
       </div>
     </section>
 
