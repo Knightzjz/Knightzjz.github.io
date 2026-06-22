@@ -677,6 +677,7 @@ body {
    ============================================================ */
 .pub-list { display: flex; flex-direction: column; gap: 1.25rem; }
 .pub {
+  display: flex; gap: 0.9rem; align-items: flex-start;
   padding: 1.25rem 1.5rem; background: var(--bg-alt); border-radius: var(--radius);
   transition: box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease;
   border: 1px solid transparent;
@@ -687,7 +688,13 @@ body {
   border-color: rgba(37, 99, 235, 0.25);
   background: #fff;
 }
-.pub h3 { margin: 0.5rem 0 0.25rem; font-size: 1rem; line-height: 1.45; }
+.pub-thumb { flex-shrink: 0; width: 110px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.pub:hover .pub-thumb { transform: scale(1.04); box-shadow: 0 4px 14px rgba(0,0,0,0.18); }
+/* Horizontal scroll strip — hidden on desktop, shown on mobile */
+.pub-thumbs-strip { display: none; }
+.pub-thumbs-strip img { height: 160px; width: auto; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+.pub-body { flex: 1; min-width: 0; }
+.pub h3 { margin: 0 0 0.25rem; font-size: 1rem; line-height: 1.45; }
 .pub .authors { color: var(--text-light); font-size: 0.88rem; margin-bottom: 0.2rem; }
 .pub .venue { color: var(--text-light); font-size: 0.82rem; font-style: italic; margin-bottom: 0.6rem; }
 .badge {
@@ -789,10 +796,27 @@ body {
   .student-research { font-size: 10px; }
   .paper-tag { font-size: 9px; padding: 2px 6px; }
   .news-more-btn { padding: 12px 16px; font-size: 0.8rem; }
-  .pub { padding: 1.25rem; }
+  .pub { padding: 1rem; }
+  .pub-thumb { width: 90px; }
   .pub h3 { font-size: 1rem; }
   .pub .authors { font-size: 0.8rem; }
   .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+}
+
+@media (max-width: 600px) {
+  .pub { flex-direction: column; padding-top: 0; }
+  .pub > .pub-thumb { display: none; }
+  .pub-thumbs-strip {
+    display: flex; gap: 8px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding: 0 1.25rem 0.5rem 1.25rem;
+    margin: 0 -1.25rem 0.6rem -1.25rem;
+    scrollbar-width: none;  /* Firefox */
+  }
+  .pub-thumbs-strip::-webkit-scrollbar { display: none; }
+  .pub-thumbs-strip img { flex-shrink: 0; height: 155px; width: auto; border-radius: 6px; scroll-snap-align: start; }
+  .pub-body { width: 100%; }
 }
 
 @media (max-width: 480px) {
@@ -975,7 +999,7 @@ body {
           <span class="news-date">Jun 2026</span>
           <p>
             <span class="news-tag paper">📄 ICMR 2026</span>
-            <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer">DiffIML</a>: Towards generalized image manipulation localization via score-based model. <strong>Accepted to ACM ICMR 2026</strong>.
+            <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer">DiffIML</a>: Towards generalized image manipulation localization via score-based model. <strong>ACM ICMR 2026</strong>.
           </p>
         </div>
 
@@ -1128,79 +1152,119 @@ body {
 
         <!-- NeurIPS 2024 Spotlight -->
         <article class="pub">
-          <span class="badge spotlight">🎯 NeurIPS 2024 Spotlight</span>
-          <h3>IMDL-BenCo: A Comprehensive Benchmark for Image Manipulation Detection &amp; Localization</h3>
-          <p class="authors">Xiaochen Ma, Xuekang Zhu, Lei Su, Bo Du, Zhuohang Jiang, Bingkui Tong, Zeyu Lei, Xinyu Yang, Chi-Man Pun, Jiancheng Lv, <strong>Jizhe Zhou</strong></p>
-          <p class="venue">Advances in Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track, 2024</p>
-          <div class="pub-links">
-            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
-            <a href="https://github.com/scu-zjz/IMDLBenCo" target="_blank" rel="noopener noreferrer" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="scu-zjz/IMDLBenCo"></span>
+          <picture>
+            <source srcset="images/pub-thumbs/imdlbenco.webp" type="image/webp">
+            <img src="images/pub-thumbs/imdlbenco.webp" alt="IMDL-BenCo paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
+          </picture>
+          <div class="pub-thumbs-strip">
+            <img src="images/pub-thumbs/imdlbenco.webp" alt="IMDL-BenCo page 1" width="300" height="388" loading="lazy">
+            <img src="images/pub-thumbs/imdlbenco_p2.webp" alt="IMDL-BenCo page 2" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/imdlbenco_p3.webp" alt="IMDL-BenCo page 3" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/imdlbenco_p4.webp" alt="IMDL-BenCo page 4" width="220" height="284" loading="lazy">
+          </div>
+          <div class="pub-body">
+            <span class="badge spotlight">🎯 NeurIPS 2024 Spotlight</span>
+            <h3>IMDL-BenCo: A Comprehensive Benchmark for Image Manipulation Detection &amp; Localization</h3>
+            <p class="authors">Xiaochen Ma, Xuekang Zhu, Lei Su, Bo Du, Zhuohang Jiang, Bingkui Tong, Zeyu Lei, Xinyu Yang, Chi-Man Pun, Jiancheng Lv, <strong>Jizhe Zhou</strong></p>
+            <p class="venue">Advances in Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track, 2024</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
+              <a href="https://github.com/scu-zjz/IMDLBenCo" target="_blank" rel="noopener noreferrer" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="scu-zjz/IMDLBenCo"></span>
+            </div>
           </div>
         </article>
 
         <!-- ICCV 2023 Oral -->
         <article class="pub">
-          <span class="badge oral">⭐ ICCV 2023 Oral (Top 5%)</span>
-          <h3>Pre-training-free Image Manipulation Localization via Non-Mutually Contrastive Learning</h3>
-          <p class="authors"><strong>Jizhe Zhou</strong>, Xiaochen Ma, Xia Du, Ahmed Y. Alhammadi, Wentao Feng</p>
-          <p class="venue">IEEE/CVF International Conference on Computer Vision (ICCV), pp. 22346–22356, 2023</p>
-          <div class="pub-links">
-            <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Zhou_Pre-Training-Free_Image_Manipulation_Localization_through_Non-Mutually_Exclusive_Contrastive_Learning_ICCV_2023_paper.pdf" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
-            <a href="https://github.com/Knightzjz/NCL-IML" target="_blank" rel="noopener noreferrer" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="Knightzjz/NCL-IML"></span>
+          <picture>
+            <source srcset="images/pub-thumbs/ncl-iml.webp" type="image/webp">
+            <img src="images/pub-thumbs/ncl-iml.webp" alt="NCL-IML paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
+          </picture>
+          <div class="pub-thumbs-strip">
+            <img src="images/pub-thumbs/ncl-iml.webp" alt="NCL-IML page 1" width="300" height="388" loading="lazy">
+            <img src="images/pub-thumbs/ncl-iml_p2.webp" alt="NCL-IML page 2" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/ncl-iml_p3.webp" alt="NCL-IML page 3" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/ncl-iml_p4.webp" alt="NCL-IML page 4" width="220" height="284" loading="lazy">
+          </div>
+          <div class="pub-body">
+            <span class="badge oral">⭐ ICCV 2023 Oral (Top 5%)</span>
+            <h3>Pre-training-free Image Manipulation Localization via Non-Mutually Contrastive Learning</h3>
+            <p class="authors"><strong>Jizhe Zhou</strong>, Xiaochen Ma, Xia Du, Ahmed Y. Alhammadi, Wentao Feng</p>
+            <p class="venue">IEEE/CVF International Conference on Computer Vision (ICCV), pp. 22346–22356, 2023</p>
+            <div class="pub-links">
+              <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Zhou_Pre-Training-Free_Image_Manipulation_Localization_through_Non-Mutually_Exclusive_Contrastive_Learning_ICCV_2023_paper.pdf" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
+              <a href="https://github.com/Knightzjz/NCL-IML" target="_blank" rel="noopener noreferrer" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="Knightzjz/NCL-IML"></span>
+            </div>
           </div>
         </article>
 
         <!-- NeurIPS 2025 -->
         <article class="pub">
-          <span class="badge benchmark">🏆 NeurIPS 2025</span>
-          <h3>ForensicHub: Towards Universal Fake Image Detection and Localization</h3>
-          <p class="authors">Bo Du, Xuekang Zhu, Xiaochen Ma, Chenfan Qu, Kaiwen Feng, Zhe Yang, Chi-Man Pun, Jian Liu, <strong>Ji-Zhe Zhou</strong></p>
-          <p class="venue">Advances in Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track, 2025</p>
-          <div class="pub-links">
-            <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
-            <a href="https://github.com/scu-zjz/ForensicHub" target="_blank" rel="noopener noreferrer" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="scu-zjz/ForensicHub"></span>
+          <picture>
+            <source srcset="images/pub-thumbs/forensichub.webp" type="image/webp">
+            <img src="images/pub-thumbs/forensichub.webp" alt="ForensicHub paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
+          </picture>
+          <div class="pub-thumbs-strip">
+            <img src="images/pub-thumbs/forensichub.webp" alt="ForensicHub page 1" width="300" height="388" loading="lazy">
+            <img src="images/pub-thumbs/forensichub_p2.webp" alt="ForensicHub page 2" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/forensichub_p3.webp" alt="ForensicHub page 3" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/forensichub_p4.webp" alt="ForensicHub page 4" width="220" height="284" loading="lazy">
+          </div>
+          <div class="pub-body">
+            <span class="badge benchmark">🏆 NeurIPS 2025</span>
+            <h3>ForensicHub: Towards Universal Fake Image Detection and Localization</h3>
+            <p class="authors">Bo Du, Xuekang Zhu, Xiaochen Ma, Chenfan Qu, Kaiwen Feng, Zhe Yang, Chi-Man Pun, Jian Liu, <strong>Ji-Zhe Zhou</strong></p>
+            <p class="venue">Advances in Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track, 2025</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
+              <a href="https://github.com/scu-zjz/ForensicHub" target="_blank" rel="noopener noreferrer" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="scu-zjz/ForensicHub"></span>
+            </div>
           </div>
         </article>
 
         <!-- IML-ViT -->
         <article class="pub">
-          <h3>IML-ViT: Benchmarking Image Manipulation Localization by Vision Transformer</h3>
-          <p class="authors">Xiaochen Ma, Bo Du, Zhuohang Jiang, Xia Du, Ahmed Y. Al Hammadi, <strong>Jizhe Zhou</strong></p>
-          <p class="venue">arXiv preprint arXiv:2307.14863, 2023</p>
-          <div class="pub-links">
-            <a href="https://arxiv.org/abs/2307.14863" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 arXiv</a>
-            <a href="https://github.com/SunnyHaze/IML-ViT" target="_blank" rel="noopener noreferrer" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="SunnyHaze/IML-ViT"></span>
+          <picture>
+            <source srcset="images/pub-thumbs/iml-vit.webp" type="image/webp">
+            <img src="images/pub-thumbs/iml-vit.webp" alt="IML-ViT paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
+          </picture>
+          <div class="pub-thumbs-strip">
+            <img src="images/pub-thumbs/iml-vit.webp" alt="IML-ViT page 1" width="300" height="388" loading="lazy">
+            <img src="images/pub-thumbs/iml-vit_p2.webp" alt="IML-ViT page 2" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/iml-vit_p3.webp" alt="IML-ViT page 3" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/iml-vit_p4.webp" alt="IML-ViT page 4" width="220" height="284" loading="lazy">
+          </div>
+          <div class="pub-body">
+            <h3>IML-ViT: Benchmarking Image Manipulation Localization by Vision Transformer</h3>
+            <p class="authors">Xiaochen Ma, Bo Du, Zhuohang Jiang, Xia Du, Ahmed Y. Al Hammadi, <strong>Jizhe Zhou</strong></p>
+            <p class="venue">arXiv preprint arXiv:2307.14863, 2023</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2307.14863" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 arXiv</a>
+              <a href="https://github.com/SunnyHaze/IML-ViT" target="_blank" rel="noopener noreferrer" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="SunnyHaze/IML-ViT"></span>
+            </div>
           </div>
         </article>
 
         <!-- SICA -->
         <article class="pub">
-          <h3>Can We Build a Monolithic Model for Fake Image Detection? SICA: Semantic-Induced Constrained Adaptation for Unified-Yet-Discriminative Artifact Feature Space Reconstruction</h3>
-          <p class="authors">Bo Du, Xiaochen Ma, Xuekang Zhu, Zhe Yang, Chaogun Niu, Chenfan Qu, Mingqi Fang, Zhenming Wang, Jingjing Liu, Jian Liu, <strong>Ji-Zhe Zhou</strong></p>
-          <p class="venue">International Conference on Machine Learning (ICML), 2026</p>
-          <div class="pub-links">
-            <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
-            <a href="https://github.com/venus-guangjian/SICA_OpenMMSec" target="_blank" rel="noopener noreferrer" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="venus-guangjian/SICA_OpenMMSec"></span>
+          <picture>
+            <source srcset="images/pub-thumbs/sica.webp" type="image/webp">
+            <img src="images/pub-thumbs/sica.webp" alt="SICA paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
+          </picture>
+          <div class="pub-thumbs-strip">
+            <img src="images/pub-thumbs/sica.webp" alt="SICA page 1" width="300" height="388" loading="lazy">
+            <img src="images/pub-thumbs/sica_p2.webp" alt="SICA page 2" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/sica_p3.webp" alt="SICA page 3" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/sica_p4.webp" alt="SICA page 4" width="220" height="284" loading="lazy">
           </div>
-        </article>
-
-        <!-- DiffIML -->
-        <article class="pub">
-          <h3>Towards Generalized Image Manipulation Localization via Score-based Model</h3>
-          <p class="authors">Yunfei Wang, Bo Du, Zhe Yang, Xin Liu, Zhiyu Lin, Tianxin Xu, <strong>Ji-Zhe Zhou</strong></p>
-          <p class="venue">ACM International Conference on Multimedia Retrieval (ICMR), 2026</p>
-          <div class="pub-links">
-            <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
-          </div>
-        </article>
-
-        <!-- PASK -->
-        <article class="pub">
-          <h3>PASK: A Sparse Framework for Crafting Natural Adversarial Example</h3>
-          <p class="authors">Xiaoyuan Liu, Xia Du, Guoqing Chen, <strong>Jizhe Zhou</strong>, Qizhen Xu, Chi-Man Pun</p>
-          <p class="venue">IEEE Transactions on Multimedia (TMM), vol. 28, pp. 3010–3022, 2026</p>
-          <div class="pub-links">
-            <a href="https://doi.org/10.1109/TMM.2026.3651071" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
+          <div class="pub-body">
+            <h3>Can We Build a Monolithic Model for Fake Image Detection? SICA: Semantic-Induced Constrained Adaptation for Unified-Yet-Discriminative Artifact Feature Space Reconstruction</h3>
+            <p class="authors">Bo Du, Xiaochen Ma, Xuekang Zhu, Zhe Yang, Chaogun Niu, Chenfan Qu, Mingqi Fang, Zhenming Wang, Jingjing Liu, Jian Liu, <strong>Ji-Zhe Zhou</strong></p>
+            <p class="venue">International Conference on Machine Learning (ICML), 2026</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
+              <a href="https://github.com/venus-guangjian/SICA_OpenMMSec" target="_blank" rel="noopener noreferrer" class="pub-link code">💻 Code</a><span class="gh-stars" data-repo="venus-guangjian/SICA_OpenMMSec"></span>
+            </div>
           </div>
         </article>
 
