@@ -677,7 +677,7 @@ body {
    ============================================================ */
 .pub-list { display: flex; flex-direction: column; gap: 1.25rem; }
 .pub {
-  display: flex; gap: 0.9rem; align-items: flex-start;
+  display: flex; gap: 0.9rem; align-items: stretch;
   padding: 1.25rem 1.5rem; background: var(--bg-alt); border-radius: var(--radius);
   transition: box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease;
   border: 1px solid transparent;
@@ -688,7 +688,7 @@ body {
   border-color: rgba(37, 99, 235, 0.25);
   background: #fff;
 }
-.pub-thumb { flex-shrink: 0; width: 110px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.pub-thumb { flex-shrink: 0; width: 100px; height: 100%; object-fit: cover; object-position: top; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .pub:hover .pub-thumb { transform: scale(1.04); box-shadow: 0 4px 14px rgba(0,0,0,0.18); }
 /* Horizontal scroll strip — hidden on desktop, shown on mobile */
 .pub-thumbs-strip { display: none; }
@@ -998,6 +998,14 @@ body {
         <div class="news-entry">
           <span class="news-date">Jun 2026</span>
           <p>
+            <span class="news-tag paper">📄 CVPR 2026</span>
+            <a href="https://openaccess.thecvf.com/content/CVPR2026F/papers/Zhu_Revisiting_Image_Manipulation_Localization_under_Realistic_Manipulation_Scenarios_CVPRF_2026_paper.pdf" target="_blank" rel="noopener noreferrer">RITA</a>: Revisiting Image Manipulation Localization under Realistic Manipulation Scenarios. <strong>CVPR 2026</strong>.
+          </p>
+        </div>
+
+        <div class="news-entry">
+          <span class="news-date">Jun 2026</span>
+          <p>
             <span class="news-tag paper">📄 ICMR 2026</span>
             <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer">DiffIML</a>: Towards generalized image manipulation localization via score-based model. <strong>ACM ICMR 2026</strong>.
           </p>
@@ -1149,6 +1157,29 @@ body {
     <section class="section" id="pubs">
       <h2>📚 Selected Publications</h2>
       <div class="pub-list">
+
+        <!-- CVPR 2026 -->
+        <article class="pub">
+          <picture>
+            <source srcset="images/pub-thumbs/rita.webp" type="image/webp">
+            <img src="images/pub-thumbs/rita.webp" alt="RITA paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
+          </picture>
+          <div class="pub-thumbs-strip">
+            <img src="images/pub-thumbs/rita.webp" alt="RITA page 1" width="300" height="388" loading="lazy">
+            <img src="images/pub-thumbs/rita_p2.webp" alt="RITA page 2" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/rita_p3.webp" alt="RITA page 3" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/rita_p4.webp" alt="RITA page 4" width="220" height="284" loading="lazy">
+          </div>
+          <div class="pub-body">
+            <span class="badge oral">🏅 CVPR 2026</span>
+            <h3>Revisiting Image Manipulation Localization under Realistic Manipulation Scenarios</h3>
+            <p class="authors">Xuekang Zhu, <strong>Ji-Zhe Zhou</strong>, Kaiwen Feng, Chenfan Qu, Xiwen Wang, Yunfei Wang, Liting Zhou, Jian Liu</p>
+            <p class="venue">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2026</p>
+            <div class="pub-links">
+              <a href="https://openaccess.thecvf.com/content/CVPR2026F/papers/Zhu_Revisiting_Image_Manipulation_Localization_under_Realistic_Manipulation_Scenarios_CVPRF_2026_paper.pdf" target="_blank" rel="noopener noreferrer" class="pub-link pdf">📄 Paper</a>
+            </div>
+          </div>
+        </article>
 
         <!-- NeurIPS 2024 Spotlight -->
         <article class="pub">
