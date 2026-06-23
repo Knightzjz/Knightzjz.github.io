@@ -677,7 +677,7 @@ body {
    ============================================================ */
 .pub-list { display: flex; flex-direction: column; gap: 1.25rem; }
 .pub {
-  display: flex; gap: 0.9rem; align-items: stretch;
+  display: flex; gap: 0.9rem; align-items: flex-start;
   padding: 1.25rem 1.5rem; background: var(--bg-alt); border-radius: var(--radius);
   transition: box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease;
   border: 1px solid transparent;
@@ -688,7 +688,7 @@ body {
   border-color: rgba(37, 99, 235, 0.25);
   background: #fff;
 }
-.pub-thumb { flex-shrink: 0; width: 100px; height: 100%; object-fit: cover; object-position: top; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.pub-thumb { flex-shrink: 0; width: 100px; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .pub:hover .pub-thumb { transform: scale(1.04); box-shadow: 0 4px 14px rgba(0,0,0,0.18); }
 /* Horizontal scroll strip — hidden on desktop, shown on mobile */
 .pub-thumbs-strip { display: none; }
