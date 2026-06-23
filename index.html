@@ -688,8 +688,21 @@ body {
   border-color: rgba(37, 99, 235, 0.25);
   background: #fff;
 }
-.pub-thumb { flex-shrink: 0; width: 100px; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.pub-thumb-wrap { flex-shrink: 0; position: relative; line-height: 0; align-self: flex-start; }
+.pub-thumb { display: block; width: 100px; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .pub:hover .pub-thumb { transform: scale(1.04); box-shadow: 0 4px 14px rgba(0,0,0,0.18); }
+.pub-venue-badge {
+  position: absolute; top: 0; left: 0;
+  font-size: 0.55rem; font-weight: 700;
+  padding: 2px 6px; border-radius: 4px 0 6px 0;
+  letter-spacing: 0.04em; line-height: 1.4;
+  pointer-events: none; z-index: 1;
+}
+.pub-venue-badge.cvpr   { background: #2563eb; color: #fff; }
+.pub-venue-badge.neurips{ background: #7c3aed; color: #fff; }
+.pub-venue-badge.iccv   { background: #059669; color: #fff; }
+.pub-venue-badge.icml   { background: #dc2626; color: #fff; }
+.pub-venue-badge.arxiv  { background: #b45309; color: #fff; }
 /* Horizontal scroll strip — hidden on desktop, shown on mobile */
 .pub-thumbs-strip { display: none; }
 .pub-thumbs-strip img { height: 160px; width: auto; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
@@ -805,7 +818,7 @@ body {
 
 @media (max-width: 600px) {
   .pub { flex-direction: column; padding-top: 0; }
-  .pub > .pub-thumb { display: none; }
+  .pub .pub-thumb-wrap { display: none; }
   .pub-thumbs-strip {
     display: flex; gap: 8px;
     overflow-x: auto; -webkit-overflow-scrolling: touch;
@@ -1160,10 +1173,13 @@ body {
 
         <!-- CVPR 2026 -->
         <article class="pub">
-          <picture>
-            <source srcset="images/pub-thumbs/rita.webp" type="image/webp">
-            <img src="images/pub-thumbs/rita.webp" alt="RITA paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
-          </picture>
+          <div class="pub-thumb-wrap">
+            <picture>
+              <source srcset="images/pub-thumbs/rita.webp" type="image/webp">
+              <img src="images/pub-thumbs/rita.webp" alt="RITA paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
+            </picture>
+            <span class="pub-venue-badge cvpr">CVPR'26</span>
+          </div>
           <div class="pub-thumbs-strip">
             <img src="images/pub-thumbs/rita.webp" alt="RITA page 1" width="300" height="388" loading="lazy">
             <img src="images/pub-thumbs/rita_p2.webp" alt="RITA page 2" width="220" height="284" loading="lazy">
@@ -1183,10 +1199,13 @@ body {
 
         <!-- NeurIPS 2024 Spotlight -->
         <article class="pub">
-          <picture>
-            <source srcset="images/pub-thumbs/imdlbenco.webp" type="image/webp">
-            <img src="images/pub-thumbs/imdlbenco.webp" alt="IMDL-BenCo paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
-          </picture>
+          <div class="pub-thumb-wrap">
+            <picture>
+              <source srcset="images/pub-thumbs/imdlbenco.webp" type="image/webp">
+              <img src="images/pub-thumbs/imdlbenco.webp" alt="IMDL-BenCo paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
+            </picture>
+            <span class="pub-venue-badge neurips">NeurIPS'24</span>
+          </div>
           <div class="pub-thumbs-strip">
             <img src="images/pub-thumbs/imdlbenco.webp" alt="IMDL-BenCo page 1" width="300" height="388" loading="lazy">
             <img src="images/pub-thumbs/imdlbenco_p2.webp" alt="IMDL-BenCo page 2" width="220" height="284" loading="lazy">
@@ -1207,10 +1226,13 @@ body {
 
         <!-- ICCV 2023 Oral -->
         <article class="pub">
-          <picture>
-            <source srcset="images/pub-thumbs/ncl-iml.webp" type="image/webp">
-            <img src="images/pub-thumbs/ncl-iml.webp" alt="NCL-IML paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
-          </picture>
+          <div class="pub-thumb-wrap">
+            <picture>
+              <source srcset="images/pub-thumbs/ncl-iml.webp" type="image/webp">
+              <img src="images/pub-thumbs/ncl-iml.webp" alt="NCL-IML paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
+            </picture>
+            <span class="pub-venue-badge iccv">ICCV'23</span>
+          </div>
           <div class="pub-thumbs-strip">
             <img src="images/pub-thumbs/ncl-iml.webp" alt="NCL-IML page 1" width="300" height="388" loading="lazy">
             <img src="images/pub-thumbs/ncl-iml_p2.webp" alt="NCL-IML page 2" width="220" height="284" loading="lazy">
@@ -1231,10 +1253,13 @@ body {
 
         <!-- NeurIPS 2025 -->
         <article class="pub">
-          <picture>
-            <source srcset="images/pub-thumbs/forensichub.webp" type="image/webp">
-            <img src="images/pub-thumbs/forensichub.webp" alt="ForensicHub paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
-          </picture>
+          <div class="pub-thumb-wrap">
+            <picture>
+              <source srcset="images/pub-thumbs/forensichub.webp" type="image/webp">
+              <img src="images/pub-thumbs/forensichub.webp" alt="ForensicHub paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
+            </picture>
+            <span class="pub-venue-badge neurips">NeurIPS'25</span>
+          </div>
           <div class="pub-thumbs-strip">
             <img src="images/pub-thumbs/forensichub.webp" alt="ForensicHub page 1" width="300" height="388" loading="lazy">
             <img src="images/pub-thumbs/forensichub_p2.webp" alt="ForensicHub page 2" width="220" height="284" loading="lazy">
@@ -1255,10 +1280,13 @@ body {
 
         <!-- IML-ViT -->
         <article class="pub">
-          <picture>
-            <source srcset="images/pub-thumbs/iml-vit.webp" type="image/webp">
-            <img src="images/pub-thumbs/iml-vit.webp" alt="IML-ViT paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
-          </picture>
+          <div class="pub-thumb-wrap">
+            <picture>
+              <source srcset="images/pub-thumbs/iml-vit.webp" type="image/webp">
+              <img src="images/pub-thumbs/iml-vit.webp" alt="IML-ViT paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
+            </picture>
+            <span class="pub-venue-badge arxiv">arXiv</span>
+          </div>
           <div class="pub-thumbs-strip">
             <img src="images/pub-thumbs/iml-vit.webp" alt="IML-ViT page 1" width="300" height="388" loading="lazy">
             <img src="images/pub-thumbs/iml-vit_p2.webp" alt="IML-ViT page 2" width="220" height="284" loading="lazy">
@@ -1278,10 +1306,13 @@ body {
 
         <!-- SICA -->
         <article class="pub">
-          <picture>
-            <source srcset="images/pub-thumbs/sica.webp" type="image/webp">
-            <img src="images/pub-thumbs/sica.webp" alt="SICA paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
-          </picture>
+          <div class="pub-thumb-wrap">
+            <picture>
+              <source srcset="images/pub-thumbs/sica.webp" type="image/webp">
+              <img src="images/pub-thumbs/sica.webp" alt="SICA paper first page" class="pub-thumb" width="300" height="388" loading="lazy">
+            </picture>
+            <span class="pub-venue-badge icml">ICML'26</span>
+          </div>
           <div class="pub-thumbs-strip">
             <img src="images/pub-thumbs/sica.webp" alt="SICA page 1" width="300" height="388" loading="lazy">
             <img src="images/pub-thumbs/sica_p2.webp" alt="SICA page 2" width="220" height="284" loading="lazy">
