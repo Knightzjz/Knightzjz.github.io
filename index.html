@@ -823,15 +823,22 @@ body {
   .pub { flex-direction: column; padding-top: 0; }
   .pub .pub-thumb-wrap { display: none; }
   .pub-thumbs-strip {
-    display: flex; gap: 8px;
+    display: flex; gap: 10px;
     overflow-x: auto; -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    padding: 0 1.25rem 0.5rem 1.25rem;
-    margin: 0 -1.25rem 0.6rem -1.25rem;
-    scrollbar-width: none;  /* Firefox */
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
   }
   .pub-thumbs-strip::-webkit-scrollbar { display: none; }
-  .pub-thumbs-strip img { flex-shrink: 0; height: 155px; width: auto; border-radius: 6px; scroll-snap-align: start; }
+  .pub-thumbs-strip img {
+    flex-shrink: 0;
+    width: 82%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    scroll-snap-align: center;
+  }
   .pub-body { width: 100%; }
 }
 
@@ -1187,6 +1194,7 @@ body {
             <img src="images/pub-thumbs/sica.webp" alt="SICA page 1" width="300" height="388" loading="lazy">
             <img src="images/pub-thumbs/sica_p2.webp" alt="SICA page 2" width="220" height="284" loading="lazy">
             <img src="images/pub-thumbs/sica_p3.webp" alt="SICA page 3" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/sica_p4.webp" alt="SICA page 4" width="220" height="284" loading="lazy">
           </div>
           <div class="pub-body">
             <span class="badge oral">⭐ ICML 2026</span>
@@ -1213,6 +1221,7 @@ body {
             <img src="images/pub-thumbs/rita.webp" alt="RITA page 1" width="300" height="388" loading="lazy">
             <img src="images/pub-thumbs/rita_p2.webp" alt="RITA page 2" width="220" height="284" loading="lazy">
             <img src="images/pub-thumbs/rita_p3.webp" alt="RITA page 3" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/rita_p4.webp" alt="RITA page 4" width="220" height="284" loading="lazy">
           </div>
           <div class="pub-body">
             <span class="badge oral">⭐ CVPR 2026</span>
@@ -1239,6 +1248,7 @@ body {
             <img src="images/pub-thumbs/iml-vit.webp" alt="IML-ViT page 1" width="300" height="388" loading="lazy">
             <img src="images/pub-thumbs/iml-vit_p2.webp" alt="IML-ViT page 2" width="220" height="284" loading="lazy">
             <img src="images/pub-thumbs/iml-vit_p3.webp" alt="IML-ViT page 3" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/iml-vit_p4.webp" alt="IML-ViT page 4" width="220" height="284" loading="lazy">
           </div>
           <div class="pub-body">
             <h3>IML-ViT: Benchmarking Image Manipulation Localization by Vision Transformer</h3>
@@ -1264,6 +1274,7 @@ body {
             <img src="images/pub-thumbs/forensichub.webp" alt="ForensicHub page 1" width="300" height="388" loading="lazy">
             <img src="images/pub-thumbs/forensichub_p2.webp" alt="ForensicHub page 2" width="220" height="284" loading="lazy">
             <img src="images/pub-thumbs/forensichub_p3.webp" alt="ForensicHub page 3" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/forensichub_p4.webp" alt="ForensicHub page 4" width="220" height="284" loading="lazy">
           </div>
           <div class="pub-body">
             <span class="badge benchmark">⭐ NeurIPS 2025</span>
@@ -1290,6 +1301,7 @@ body {
             <img src="images/pub-thumbs/sparsevit.webp" alt="Sparse-ViT page 1" width="300" height="388" loading="lazy">
             <img src="images/pub-thumbs/sparsevit_p2.webp" alt="Sparse-ViT page 2" width="220" height="284" loading="lazy">
             <img src="images/pub-thumbs/sparsevit_p3.webp" alt="Sparse-ViT page 3" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/sparsevit_p4.webp" alt="Sparse-ViT page 4" width="220" height="284" loading="lazy">
           </div>
           <div class="pub-body">
             <span class="badge conference">⭐ AAAI 2025</span>
@@ -1316,6 +1328,7 @@ body {
             <img src="images/pub-thumbs/imdlbenco.webp" alt="IMDL-BenCo page 1" width="300" height="388" loading="lazy">
             <img src="images/pub-thumbs/imdlbenco_p2.webp" alt="IMDL-BenCo page 2" width="220" height="284" loading="lazy">
             <img src="images/pub-thumbs/imdlbenco_p3.webp" alt="IMDL-BenCo page 3" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/imdlbenco_p4.webp" alt="IMDL-BenCo page 4" width="220" height="284" loading="lazy">
           </div>
           <div class="pub-body">
             <span class="badge spotlight">⭐ NeurIPS 2024 Spotlight</span>
@@ -1342,6 +1355,7 @@ body {
             <img src="images/pub-thumbs/ncl-iml.webp" alt="NCL-IML page 1" width="300" height="388" loading="lazy">
             <img src="images/pub-thumbs/ncl-iml_p2.webp" alt="NCL-IML page 2" width="220" height="284" loading="lazy">
             <img src="images/pub-thumbs/ncl-iml_p3.webp" alt="NCL-IML page 3" width="220" height="284" loading="lazy">
+            <img src="images/pub-thumbs/ncl-iml_p4.webp" alt="NCL-IML page 4" width="220" height="284" loading="lazy">
           </div>
           <div class="pub-body">
             <span class="badge oral">⭐ ICCV 2023 Oral (Top 5%)</span>
