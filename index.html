@@ -8,18 +8,13 @@
   <meta name="format-detection" content="telephone=no">
   <title>周吉喆 - 四川大学计算机学院</title>
   <meta name="description" content="周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。">
-  <meta name="keywords" content="周吉喆, Jizhe Zhou, 伪造图像检测, Fake Image Detection, 生成与取证统一, 图像篡改检测, 副教授, 四川大学, 计算机学院, F06, F02, F0116, 国家自然科学基金, 面上项目, 青年基金, 重点基金, 科技部重点研发, 国家重点研发, 会评专家, 函评专家, AAAI, CVPR, MM, ICML, ICCV, ECCV, ICLR, PAMI, TIP, TIFS, AC, SPC, deepfake detection, multimodal, 人工智能, 信息科学, 计算机应用, 人工智能安全, 多模态大模型, 四川省千人">
   <meta name="author" content="Jizhe Zhou">
   <meta name="robots" content="index, follow">
-  <meta name="googlebot" content="index, follow">
-  <meta name="bingbot" content="index, follow">
-  <meta name="baiduspider" content="index, follow">
   <meta http-equiv="Cache-Control" content="no-transform">
   <meta name="renderer" content="webkit">
   <meta name="applicable-device" content="pc,mobile">
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="canonical" href="https://knightzjz.github.io/">
-  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -28,6 +23,9 @@
   <meta property="og:description" content="周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:image" content="https://knightzjz.github.io/images/og-banner.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="周吉喆 Ji-Zhe Zhou — 四川大学计算机学院副教授">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
@@ -35,16 +33,14 @@
   <meta name="twitter:title" content="周吉喆 - 四川大学计算机学院">
   <meta name="twitter:description" content="周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。">
   <meta name="twitter:image" content="https://knightzjz.github.io/images/og-banner.png">
+  <meta name="twitter:image:alt" content="周吉喆 Ji-Zhe Zhou — 四川大学计算机学院副教授">
 
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="images/avatar-180w.webp" type="image/webp">
   <link rel="apple-touch-icon" href="images/avatar.jpeg">
 
-  <!-- DNS Prefetch / Preconnect -->
+  <!-- DNS Prefetch -->
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-  <link rel="preconnect" href="https://scholar.google.com" crossorigin>
-  <link rel="preconnect" href="https://arxiv.org" crossorigin>
-  <link rel="preconnect" href="https://github.com" crossorigin>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -233,11 +229,6 @@ body {
 .btn svg { width: 13px; height: 13px; }
 .btn:focus-visible, .nav-links a:focus-visible, .logo:focus-visible {
   outline: 2px solid var(--primary); outline-offset: 2px;
-}
-.blog-badge {
-  display: none; margin-left: 6px; padding: 1px 6px;
-  border-radius: 10px; font-size: 0.65rem; font-weight: 700;
-  background: #ef4444; color: #fff; vertical-align: middle; line-height: 1.4;
 }
 
 /* ============================================================
@@ -980,19 +971,18 @@ body {
         </picture>
         <span>周吉喆</span>
       </a>
-      <button class="mobile-menu-btn" aria-label="菜单" aria-expanded="false">
+      <button class="mobile-menu-btn" aria-label="菜单" aria-expanded="false" aria-controls="nav-links">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="3" y1="6" x2="21" y2="6"/>
           <line x1="3" y1="12" x2="21" y2="12"/>
           <line x1="3" y1="18" x2="21" y2="18"/>
         </svg>
       </button>
-      <div class="nav-links">
+      <div class="nav-links" id="nav-links">
         <a href="/">Home</a>
         <a href="#news">News</a>
         <a href="#pubs">Publications</a>
         <a href="#students">Team</a>
-        <a href="/blog/">Blog</a>
         <a href="https://github.com/Knightzjz" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </nav>
@@ -1021,10 +1011,6 @@ body {
           <a href="https://scholar.google.com/citations?user=-cNWmJMAAAAJ" target="_blank" rel="noopener noreferrer" class="btn scholar">
             <svg height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
             Scholar <span id="citation-count" title="Google Scholar citations"></span>
-          </a>
-          <a href="/blog/" class="btn semantic">
-            <svg height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-            Blog<span id="blog-badge" class="blog-badge">🔥 NEW</span>
           </a>
           <a href="mailto:jzzhou@scu.edu.cn" class="btn email">
             <svg height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
