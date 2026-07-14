@@ -984,7 +984,7 @@ body {
       <a href="/" class="logo">
         <picture>
           <source srcset="images/avatar-180w.webp" type="image/webp">
-          <img src="images/avatar.jpeg" alt="周吉喆" class="logo-avatar" fetchpriority="high" decoding="sync">
+          <img src="images/avatar.jpeg" alt="周吉喆" class="logo-avatar" decoding="sync" width="180" height="180">
         </picture>
         <span>周吉喆</span>
       </a>
@@ -2069,6 +2069,7 @@ body {
       var el = document.getElementById('visitor-num');
       if (!el) return;
       var KEY = 'knightzjz-pageviews';
+      var CACHE_KEY = 'visitor_count_cache';
       var SESSION_KEY = 'visitor_session_ts';
       var SESSION_MS = 3600000; // 1-hour dedup window
 
@@ -2091,10 +2092,19 @@ body {
           el.textContent = (v !== undefined && v !== null)
             ? Number(v).toLocaleString()
             : '—';
+          // Cache successful count for fallback
+          if (v !== undefined && v !== null) {
+            try { localStorage.setItem(CACHE_KEY, String(v)); } catch (_) {}
+          }
         })
         .catch(function () {
-          // API unreachable — don't show misleading local numbers
-          el.textContent = '—';
+          // API unreachable — show last cached value instead of "—"
+          var cached = localStorage.getItem(CACHE_KEY);
+          if (cached) {
+            el.textContent = Number(cached).toLocaleString();
+          } else {
+            el.textContent = '—';
+          }
         });
     })();
 
