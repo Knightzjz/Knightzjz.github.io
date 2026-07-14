@@ -100,6 +100,13 @@
   --gradient-end: #764ba2;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
+.skip-link {
+  position: absolute; top: -100px; left: 0;
+  background: var(--primary); color: #fff; padding: 8px 16px;
+  z-index: 1000; font-size: 0.9rem; border-radius: 0 0 8px 0;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; outline: 2px solid var(--accent); }
 body {
   font-family: 'Inter', -apple-system, sans-serif;
   background: var(--bg);
@@ -222,6 +229,14 @@ body {
 .btn.email { background: var(--secondary); }
 .btn.email:hover { background: #475569; box-shadow: 0 8px 20px rgba(100, 116, 139, 0.4); transform: translateY(-4px); }
 .btn svg { width: 13px; height: 13px; }
+.btn:focus-visible, .nav-links a:focus-visible, .logo:focus-visible {
+  outline: 2px solid var(--primary); outline-offset: 2px;
+}
+.blog-badge {
+  display: none; margin-left: 6px; padding: 1px 6px;
+  border-radius: 10px; font-size: 0.65rem; font-weight: 700;
+  background: #ef4444; color: #fff; vertical-align: middle; line-height: 1.4;
+}
 
 /* ============================================================
    Bio Section
@@ -661,6 +676,14 @@ body {
   transform: translateY(-1px);
   filter: brightness(1.05);
 }
+.paper-tag-blue   { color: #2563eb; background: #eff6ff; }
+.paper-tag-green  { color: #059669; background: #ecfdf5; }
+.paper-tag-red    { color: #dc2626; background: #fef2f2; }
+.paper-tag-amber  { color: #d97706; background: #fffbeb; }
+.paper-tag-brown  { color: #b45309; background: #fffbeb; }
+.paper-tag-purple { color: #7c3aed; background: #f5f3ff; }
+.paper-tag-pink   { color: #db2777; background: #fdf2f8; }
+.paper-tag-teal   { color: #0891b2; background: #ecfeff; }
 
 /* ============================================================
    Sections
@@ -671,6 +694,7 @@ body {
   border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem;
   display: flex; align-items: center; gap: 0.4rem;
 }
+.alumni-heading { font-size: 0.95rem; color: var(--text); margin: 1.5rem 0 1rem 0; }
 
 /* ============================================================
    Publications
@@ -844,6 +868,14 @@ body {
     overscroll-behavior-x: contain;
   }
   .pub-thumbs-strip::-webkit-scrollbar { display: none; }
+  .pub-thumbs-strip::after {
+    content: '← swipe →';
+    position: sticky; right: 0; align-self: center;
+    font-size: 9px; color: rgba(100,116,139,0.5);
+    padding: 2px 8px; background: inherit;
+    flex-shrink: 0; pointer-events: none;
+  }
+  .pub-thumbs-strip.scrolled::after { content: ''; }
   .pub-thumbs-strip img {
     flex-shrink: 0;
     height: 150px;
@@ -941,6 +973,7 @@ body {
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
   <!-- ======================= NAV ======================= -->
   <header class="site-header">
@@ -967,10 +1000,10 @@ body {
     </nav>
   </header>
 
-  <main class="main-content">
+  <main class="main-content" id="main-content">
 
     <!-- ======================= HERO ======================= -->
-    <header class="hero">
+    <section class="hero">
       <div class="avatar-wrapper">
         <picture>
           <source srcset="images/avatar-393w.webp" type="image/webp">
@@ -993,7 +1026,7 @@ body {
           </a>
           <a href="/blog/" class="btn semantic">
             <svg height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-            Blog<span id="blog-badge" style="display:none; margin-left:6px; padding:1px 6px; border-radius:10px; font-size:0.65rem; font-weight:700; background:#ef4444; color:#fff; vertical-align:middle; line-height:1.4;">🔥 NEW</span>
+            Blog<span id="blog-badge" class="blog-badge">🔥 NEW</span>
           </a>
           <a href="mailto:jzzhou@scu.edu.cn" class="btn email">
             <svg height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -1001,7 +1034,7 @@ body {
           </a>
         </div>
       </div>
-    </header>
+    </section>
 
     <!-- ======================= BIO ======================= -->
     <section class="bio-section">
@@ -1046,7 +1079,7 @@ body {
 
     <!-- ======================= NEWS ======================= -->
     <section class="section" id="news">
-      <h2>📣 News</h2>
+      <h2><span aria-hidden="true">📣</span> News</h2>
       <div class="news-list">
 
         <!-- 2026 -->
@@ -1210,7 +1243,7 @@ body {
 
     <!-- ======================= PUBLICATIONS ======================= -->
     <section class="section" id="pubs">
-      <h2>📚 Selected Publications</h2>
+      <h2><span aria-hidden="true">📚</span> Selected Publications</h2>
       <div class="pub-list">
 
         <!-- ICML 2026 -->
@@ -1513,7 +1546,7 @@ body {
 
     <!-- ======================= EXPERIENCE ======================= -->
     <section class="section" id="exp">
-      <h2>💼 Experience</h2>
+      <h2><span aria-hidden="true">💼</span> Experience</h2>
       <div class="timeline">
         <div class="item">
           <span class="date">2022 – Present</span>
@@ -1536,166 +1569,166 @@ body {
 
     <!-- ======================= STUDENTS & ALUMNI ======================= -->
     <section class="section" id="students">
-      <h2>🎓 Students & Alumni</h2>
+      <h2><span aria-hidden="true">🎓</span> Students & Alumni</h2>
 
       <h3 style="font-size: 0.95rem; color: var(--text); margin: 1.5rem 0 1rem 0;">Current Students 在读学生</h3>
       <div class="cards-grid">
         <!-- 杜博 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #7c3aed;" role="img" aria-label="杜博">杜博</div>
+            <div class="student-avatar" style="background: #7c3aed;">杜博</div>
             <div class="student-info">
               <p class="student-role">Master · Intern @ 蚂蚁安全</p>
             </div>
           </div>
           <p class="student-research">伪造图像检测</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #0891b2; background: #ecfeff; text-decoration: none;">SICA</a>
-            <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">ForensicHub</a>
-            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
-            <a href="https://arxiv.org/abs/2605.14091" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #b45309; background: #fffbeb; text-decoration: none;">DeFakerOne</a>
-            <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #db2777; background: #fdf2f8; text-decoration: none;">DiffIML</a>
+            <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-teal">SICA</a>
+            <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-green">ForensicHub</a>
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-green">IMDL-BenCo</a>
+            <a href="https://arxiv.org/abs/2605.14091" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-brown">DeFakerOne</a>
+            <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-pink">DiffIML</a>
           </div>
         </div>
 
         <!-- 牛超群 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #0891b2;" role="img" aria-label="牛超群">牛超群</div>
+            <div class="student-avatar" style="background: #0891b2;">牛超群</div>
             <div class="student-info">
               <p class="student-role">PhD · CSC @ NUS</p>
             </div>
           </div>
           <p class="student-research">生成与取证统一</p>
           <div class="student-papers">
-            <a href="https://www.sciencedirect.com/science/article/pii/S003132032600676X" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #7c3aed; background: #f5f3ff; text-decoration: none;">Bones to Identity</a>
-            <a href="https://dl.acm.org/doi/10.1145/3664647.3681174" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #dc2626; background: #fef2f2; text-decoration: none;">Boneprint</a>
-            <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #0891b2; background: #ecfeff; text-decoration: none;">SICA</a>
-            <a href="https://arxiv.org/abs/2412.14598" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #2563eb; background: #eff6ff; text-decoration: none;">Sparse-ViT</a>
+            <a href="https://www.sciencedirect.com/science/article/pii/S003132032600676X" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-purple">Bones to Identity</a>
+            <a href="https://dl.acm.org/doi/10.1145/3664647.3681174" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-red">Boneprint</a>
+            <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-teal">SICA</a>
+            <a href="https://arxiv.org/abs/2412.14598" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-blue">Sparse-ViT</a>
           </div>
         </div>
 
         <!-- 王汐文 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #059669;" role="img" aria-label="王汐文">王汐文</div>
+            <div class="student-avatar" style="background: #059669;">王汐文</div>
             <div class="student-info">
               <p class="student-role">PhD Student</p>
             </div>
           </div>
           <p class="student-research">生成与取证统一</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2603.01601" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #dc2626; background: #fef2f2; text-decoration: none;">dehallu3D</a>
-            <a href="https://arxiv.org/abs/2509.20006" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">RITA</a>
+            <a href="https://arxiv.org/abs/2603.01601" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-red">dehallu3D</a>
+            <a href="https://arxiv.org/abs/2509.20006" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-amber">RITA</a>
           </div>
         </div>
 
         <!-- 何雨声 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #0891b2;" role="img" aria-label="何雨声">何雨声</div>
+            <div class="student-avatar" style="background: #0891b2;">何雨声</div>
             <div class="student-info">
               <p class="student-role">PhD Student</p>
             </div>
           </div>
           <p class="student-research">生成与取证统一</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2605.30911" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #7c3aed; background: #f5f3ff; text-decoration: none;">CoSimUE</a>
+            <a href="https://arxiv.org/abs/2605.30911" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-purple">CoSimUE</a>
           </div>
         </div>
 
         <!-- 杨哲 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #dc2626;" role="img" aria-label="杨哲">杨哲</div>
+            <div class="student-avatar" style="background: #dc2626;">杨哲</div>
             <div class="student-info">
               <p class="student-role">Master Student</p>
             </div>
           </div>
           <p class="student-research">伪造图像检测</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">ForensicHub</a>
-            <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #0891b2; background: #ecfeff; text-decoration: none;">SICA</a>
-            <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #db2777; background: #fdf2f8; text-decoration: none;">DiffIML</a>
+            <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-green">ForensicHub</a>
+            <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-teal">SICA</a>
+            <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-pink">DiffIML</a>
           </div>
         </div>
 
         <!-- 周莉婷 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #f59e0b;" role="img" aria-label="周莉婷">周莉婷</div>
+            <div class="student-avatar" style="background: #f59e0b;">周莉婷</div>
             <div class="student-info">
               <p class="student-role">Master Student</p>
             </div>
           </div>
           <p class="student-research">生成与取证统一</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2509.20006" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">RITA</a>
+            <a href="https://arxiv.org/abs/2509.20006" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-amber">RITA</a>
           </div>
         </div>
 
         <!-- 王韵菲 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #10b981;" role="img" aria-label="王韵菲">王韵菲</div>
+            <div class="student-avatar" style="background: #10b981;">王韵菲</div>
             <div class="student-info">
               <p class="student-role">Master · Intern @ 腾讯混元</p>
             </div>
           </div>
           <p class="student-research">伪造图像检测</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #db2777; background: #fdf2f8; text-decoration: none;">DiffIML</a>
+            <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-pink">DiffIML</a>
           </div>
         </div>
 
         <!-- 冯凯文 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #be185d;" role="img" aria-label="冯凯文">冯凯文</div>
+            <div class="student-avatar" style="background: #be185d;">冯凯文</div>
             <div class="student-info">
               <p class="student-role">Master Student</p>
             </div>
           </div>
           <p class="student-research">伪造图像检测</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">ForensicHub</a>
-            <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #0891b2; background: #ecfeff; text-decoration: none;">SICA</a>
-            <a href="https://arxiv.org/abs/2509.20006" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">RITA</a>
+            <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-green">ForensicHub</a>
+            <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-teal">SICA</a>
+            <a href="https://arxiv.org/abs/2509.20006" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-amber">RITA</a>
           </div>
         </div>
 
         <!-- 张皓为 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #6366f1;" role="img" aria-label="张皓为">张皓为</div>
+            <div class="student-avatar" style="background: #6366f1;">张皓为</div>
             <div class="student-info">
               <p class="student-role">Master · Intern @ 腾讯混元</p>
             </div>
           </div>
           <p class="student-research">生成与取证统一</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2511.08945" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #7c3aed; background: #f5f3ff; text-decoration: none;">FGM-HD</a>
+            <a href="https://arxiv.org/abs/2511.08945" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-purple">FGM-HD</a>
           </div>
         </div>
 
         <!-- 刘鑫 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #0ea5e9;" role="img" aria-label="刘鑫">刘鑫</div>
+            <div class="student-avatar" style="background: #0ea5e9;">刘鑫</div>
             <div class="student-info">
               <p class="student-role">Master Student</p>
             </div>
           </div>
           <p class="student-research">伪造图像检测</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #db2777; background: #fdf2f8; text-decoration: none;">DiffIML</a>
+            <a href="https://arxiv.org/abs/2605.16879" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-pink">DiffIML</a>
           </div>
         </div>
 
         <!-- 张程洋 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #8b5cf6;" role="img" aria-label="张程洋">张程洋</div>
+            <div class="student-avatar" style="background: #8b5cf6;">张程洋</div>
             <div class="student-info">
               <p class="student-role">Master Student</p>
             </div>
@@ -1708,7 +1741,7 @@ body {
         <!-- 李璐影 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #14b8a6;" role="img" aria-label="李璐影">李璐影</div>
+            <div class="student-avatar" style="background: #14b8a6;">李璐影</div>
             <div class="student-info">
               <p class="student-role">Master Student</p>
             </div>
@@ -1720,63 +1753,63 @@ body {
 
       </div>
 
-      <h3 style="font-size: 0.95rem; color: var(--text); margin: 1.5rem 0 1rem 0;">Alumni 已毕业学生</h3>
+      <h3 class="alumni-heading">Alumni 已毕业学生</h3>
       <div class="cards-grid">
         <!-- 朱学康 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #2563eb;" role="img" aria-label="朱学康">朱学康</div>
+            <div class="student-avatar" style="background: #2563eb;">朱学康</div>
             <div class="student-info">
               <p class="student-role">Master → 蚂蚁安全 (Ant Group)</p>
             </div>
           </div>
           <p class="student-research">生成与取证统一</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2509.20006" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">RITA</a>
-            <a href="https://arxiv.org/abs/2412.13753" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #7c3aed; background: #f5f3ff; text-decoration: none;">Mesorch</a>
-            <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">ForensicHub</a>
-            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
-            <a href="https://arxiv.org/abs/2603.01601" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #dc2626; background: #fef2f2; text-decoration: none;">dehallu3D</a>
-            <a href="https://arxiv.org/abs/2407.03695" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #2563eb; background: #eff6ff; text-decoration: none;">M³</a>
-            <a href="https://arxiv.org/abs/2605.14091" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #b45309; background: #fffbeb; text-decoration: none;">DeFakerOne</a>
+            <a href="https://arxiv.org/abs/2509.20006" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-amber">RITA</a>
+            <a href="https://arxiv.org/abs/2412.13753" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-purple">Mesorch</a>
+            <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-green">ForensicHub</a>
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-green">IMDL-BenCo</a>
+            <a href="https://arxiv.org/abs/2603.01601" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-red">dehallu3D</a>
+            <a href="https://arxiv.org/abs/2407.03695" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-blue">M³</a>
+            <a href="https://arxiv.org/abs/2605.14091" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-brown">DeFakerOne</a>
           </div>
         </div>
 
         <!-- 粟磊 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #64748b;" role="img" aria-label="粟磊">粟磊</div>
+            <div class="student-avatar" style="background: #64748b;">粟磊</div>
             <div class="student-info">
               <p class="student-role">Master → WPS武汉 (Kingsoft)</p>
             </div>
           </div>
           <p class="student-research">图像篡改检测</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2412.14598" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #2563eb; background: #eff6ff; text-decoration: none;">Sparse-ViT</a>
-            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
+            <a href="https://arxiv.org/abs/2412.14598" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-blue">Sparse-ViT</a>
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-green">IMDL-BenCo</a>
           </div>
         </div>
 
         <!-- 马晓晨 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #2563eb;" role="img" aria-label="马晓晨">马晓晨</div>
+            <div class="student-avatar" style="background: #2563eb;">马晓晨</div>
             <div class="student-info">
               <p class="student-role">PhD @ HKUST · Intern @ 腾讯混元 (Tencent Hunyuan)</p>
             </div>
           </div>
           <p class="student-research">图像篡改检测</p>
           <div class="student-papers">
-            <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Zhou_Pre-Training-Free_Image_Manipulation_Localization_through_Non-Mutually_Exclusive_Contrastive_Learning_ICCV_2023_paper.pdf" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #dc2626; background: #fef2f2; text-decoration: none;">NCL</a>
-            <span class="paper-tag" style="color: #2563eb; background: #eff6ff;">IML-ViT</span>
-            <span class="paper-tag" style="color: #059669; background: #ecfdf5;">IMDL-BenCo</span>
+            <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Zhou_Pre-Training-Free_Image_Manipulation_Localization_through_Non-Mutually_Exclusive_Contrastive_Learning_ICCV_2023_paper.pdf" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-red">NCL</a>
+            <a href="https://arxiv.org/abs/2304.05853" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-blue">IML-ViT</a>
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-green">IMDL-BenCo</a>
           </div>
         </div>
 
         <!-- 张健 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #7c3aed;" role="img" aria-label="张健">张健</div>
+            <div class="student-avatar" style="background: #7c3aed;">张健</div>
             <div class="student-info">
               <p class="student-role">Master → 宁德时代 (CATL)</p>
             </div>
@@ -1789,7 +1822,7 @@ body {
         <!-- 倪睿洋 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #dc2626;" role="img" aria-label="倪睿洋">倪睿洋</div>
+            <div class="student-avatar" style="background: #dc2626;">倪睿洋</div>
             <div class="student-info">
               <p class="student-role">Master → 中国电信 (China Telecom)</p>
             </div>
@@ -1802,45 +1835,45 @@ body {
         <!-- 蒋卓航 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #0891b2;" role="img" aria-label="蒋卓航">蒋卓航</div>
+            <div class="student-avatar" style="background: #0891b2;">蒋卓航</div>
             <div class="student-info">
               <p class="student-role">PhD @ HKPolyU · Intern @ 快手 (Kuaishou)</p>
             </div>
           </div>
           <p class="student-research">因果推理</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2406.12736" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">Beyond Visual Appearances</a>
-            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
+            <a href="https://arxiv.org/abs/2406.12736" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-amber">Beyond Visual Appearances</a>
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-green">IMDL-BenCo</a>
           </div>
         </div>
 
         <!-- 童炳魁 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #10b981;" role="img" aria-label="童炳魁">童炳魁</div>
+            <div class="student-avatar" style="background: #10b981;">童炳魁</div>
             <div class="student-info">
               <p class="student-role">PhD @ MBZUI</p>
             </div>
           </div>
           <p class="student-research">因果推理</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2406.12736" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #d97706; background: #fffbeb; text-decoration: none;">Beyond Visual Appearances</a>
-            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
+            <a href="https://arxiv.org/abs/2406.12736" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-amber">Beyond Visual Appearances</a>
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-green">IMDL-BenCo</a>
           </div>
         </div>
 
         <!-- 杨欣宇 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #f59e0b;" role="img" aria-label="杨欣宇">杨欣宇</div>
+            <div class="student-avatar" style="background: #f59e0b;">杨欣宇</div>
             <div class="student-info">
               <p class="student-role">Master @ Tsinghua</p>
             </div>
           </div>
           <p class="student-research">图像篡改检测</p>
           <div class="student-papers">
-            <a href="https://arxiv.org/abs/2407.03695" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #2563eb; background: #eff6ff; text-decoration: none;">M³</a>
-            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag" style="color: #059669; background: #ecfdf5; text-decoration: none;">IMDL-BenCo</a>
+            <a href="https://arxiv.org/abs/2407.03695" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-blue">M³</a>
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-green">IMDL-BenCo</a>
           </div>
         </div>
       </div>
@@ -1885,7 +1918,7 @@ body {
   </footer>
 
   <!-- ======================= JS ======================= -->
-  <script defer>
+  <script>
     /* ── 1. Google Scholar citations — real-time with proxy fallback ── */
     (function () {
       var KEY = 'gs_citations_v4';
@@ -1945,8 +1978,9 @@ body {
         if (cached !== null) updateEl(el, cached);
         if (proxyIdx >= PROXIES.length) return;
         var url = PROXIES[proxyIdx] + encodeURIComponent(SCHOLAR_URL);
+        var timeoutId = setTimeout(function () { proxyIdx++; fetchWithProxy(); }, 8000);
         fetch(url, { cache: 'no-store' })
-          .then(function (r) { return r.ok ? r.text() : null; })
+          .then(function (r) { clearTimeout(timeoutId); return r.ok ? r.text() : null; })
           .then(function (html) {
             if (!html) { proxyIdx++; fetchWithProxy(); return; }
             var count = parseCount(html);
@@ -1957,7 +1991,7 @@ body {
               proxyIdx++; fetchWithProxy();
             }
           })
-          .catch(function () { proxyIdx++; fetchWithProxy(); });
+          .catch(function () { clearTimeout(timeoutId); proxyIdx++; fetchWithProxy(); });
       }
 
       fetchWithProxy();
@@ -2122,6 +2156,16 @@ body {
           document.body.appendChild(h);
           setTimeout(function (node) { node.remove(); }, 1200, h);
         }
+      });
+    })();
+
+    /* ── 7. Hide scroll hint on first carousel swipe ── */
+    (function () {
+      var strips = document.querySelectorAll('.pub-thumbs-strip');
+      strips.forEach(function (s) {
+        s.addEventListener('scroll', function () {
+          s.classList.add('scrolled');
+        }, { once: true, passive: true });
       });
     })();
   </script>
