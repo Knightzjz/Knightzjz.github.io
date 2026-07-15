@@ -226,6 +226,11 @@ body {
 :where(a, button, input, select, textarea):focus-visible {
   outline: 2px solid var(--primary); outline-offset: 2px;
 }
+.blog-badge {
+  display: none; margin-left: 6px; padding: 1px 6px;
+  border-radius: 10px; font-size: 0.65rem; font-weight: 700;
+  background: #ef4444; color: #fff; vertical-align: middle; line-height: 1.4;
+}
 
 /* ============================================================
    Bio Section
@@ -976,6 +981,7 @@ body {
         <a href="#news">News</a>
         <a href="#pubs">Publications</a>
         <a href="#students">Team</a>
+        <a href="/blog/">Blog</a>
         <a href="https://github.com/Knightzjz" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </nav>
@@ -1004,6 +1010,10 @@ body {
           <a href="https://scholar.google.com/citations?user=-cNWmJMAAAAJ" target="_blank" rel="noopener noreferrer" class="btn scholar">
             <svg aria-hidden="true" focusable="false" height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
             Scholar <span id="citation-count" title="Google Scholar citations"></span>
+          </a>
+          <a href="/blog/" class="btn semantic">
+            <svg aria-hidden="true" focusable="false" height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            Blog<span id="blog-badge" class="blog-badge">🔥 NEW</span>
           </a>
           <a href="mailto:jzzhou@scu.edu.cn" class="btn email">
             <svg aria-hidden="true" focusable="false" height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
