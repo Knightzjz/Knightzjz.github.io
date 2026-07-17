@@ -18,6 +18,7 @@
   <meta property="og:title" content="周吉喆 - 四川大学计算机学院">
   <meta property="og:description" content="周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。">
   <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="Ji-Zhe Zhou Academic Homepage">
   <meta property="og:image" content="https://knightzjz.github.io/images/og-banner.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -35,9 +36,6 @@
   <link rel="icon" href="images/avatar-180w.webp" type="image/webp">
   <link rel="apple-touch-icon" href="images/avatar.jpeg">
 
-  <!-- DNS Prefetch -->
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,16 +48,19 @@
     "@type": "ProfilePage",
     "@id": "https://knightzjz.github.io/#profile",
     "url": "https://knightzjz.github.io/",
+    "dateModified": "2026-07-17",
     "mainEntity": {
       "@type": "Person",
       "@id": "https://knightzjz.github.io/#person",
       "name": "周吉喆",
-      "alternateName": "Jizhe Zhou",
+      "alternateName": ["Ji-Zhe Zhou", "Jizhe Zhou"],
       "url": "https://knightzjz.github.io/",
       "jobTitle": "副教授",
       "worksFor": {
         "@type": "Organization",
+        "@id": "https://cs.scu.edu.cn/#organization",
         "name": "四川大学计算机学院",
+        "url": "https://cs.scu.edu.cn/",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "成都",
@@ -1084,7 +1085,7 @@ body {
       </div>
       <hr class="bio-divider">
       <div class="bio-en">
-        <p>
+        <p lang="en">
           I am an Associate Professor at the College of Computer Science, Sichuan University,
           and <span class="highlight-tag">Sichuan Provincial Thousand Talents</span>.
           I serve as <span class="highlight-tag"><a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank" rel="noopener noreferrer">Associate Editor of IEEE TETCI</a></span>
@@ -2014,7 +2015,7 @@ body {
         <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
       </svg>
-      访客总数：<span id="visitor-num">…</span>
+      访客总数：<span id="visitor-num" hidden>…</span>
     </div>
   </footer>
 
@@ -2180,21 +2181,25 @@ body {
             try { localStorage.setItem(SESSION_KEY, String(now)); } catch (_) {}
           }
           var v = j && j.value;
-          el.textContent = (v !== undefined && v !== null)
-            ? Number(v).toLocaleString()
-            : '—';
-          // Cache successful count for fallback
-          if (v !== undefined && v !== null) {
+          if (v !== undefined && v !== null && Number.isFinite(Number(v))) {
+            el.textContent = Number(v).toLocaleString();
+            el.hidden = false;
             try { localStorage.setItem(CACHE_KEY, String(v)); } catch (_) {}
+          } else {
+            // Fallback to cache, otherwise keep hidden
+            var cached = localStorage.getItem(CACHE_KEY);
+            if (cached && Number.isFinite(Number(cached))) {
+              el.textContent = Number(cached).toLocaleString();
+              el.hidden = false;
+            }
           }
         })
         .catch(function () {
-          // API unreachable — show last cached value instead of "—"
+          // API unreachable — show cached value if available, otherwise stay hidden
           var cached = localStorage.getItem(CACHE_KEY);
-          if (cached) {
+          if (cached && Number.isFinite(Number(cached))) {
             el.textContent = Number(cached).toLocaleString();
-          } else {
-            el.textContent = '—';
+            el.hidden = false;
           }
         });
     })();

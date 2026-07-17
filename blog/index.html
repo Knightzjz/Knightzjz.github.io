@@ -177,6 +177,12 @@
       text-align: center;
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .bean { animation: none !important; }
+      .photo-placeholder, .photo-real { transition: none !important; }
+      .cta { transition: none !important; }
+    }
+
     @media (max-width: 640px) {
       .container { padding: 1.5rem 1rem; }
       .photo-caption { padding: 1.1rem 1.2rem; }
@@ -187,7 +193,7 @@
 <body>
 
   <!-- Floating emojis -->
-  <div class="beans" id="beans"></div>
+  <div class="beans" id="beans" aria-hidden="true"></div>
 
   <div class="container">
     <div class="code">0x194</div>
@@ -226,8 +232,9 @@
   </div>
 
   <script>
-    // Generate floating emojis
+    // Generate floating emojis (skip if user prefers reduced motion)
     (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       var emojis = ['✨', '🌊', '🐚', '☀️', '📝'];
       var container = document.getElementById('beans');
       for (var i = 0; i < 25; i++) {
