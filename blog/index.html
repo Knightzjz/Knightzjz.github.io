@@ -24,7 +24,7 @@
       padding: 2rem 1rem;
     }
 
-    /* Floating coffee beans */
+    /* Floating emojis */
     .beans {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -69,16 +69,6 @@
       font-weight: 600;
       color: #1e293b;
       margin-bottom: 0.5rem;
-    }
-
-    .desc {
-      font-size: clamp(0.9rem, 2vw, 1.05rem);
-      color: #64748b;
-      margin-bottom: 2.5rem;
-      max-width: 420px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
     }
 
     /* Photo card — same max-width as container for alignment */
@@ -149,17 +139,6 @@
       margin-top: 0.5rem;
     }
 
-    .coffee-mug {
-      display: inline-block;
-      margin-bottom: 2rem;
-      animation: sip 3s ease-in-out infinite;
-    }
-    @keyframes sip {
-      0%, 100% { transform: rotate(0deg); }
-      15%  { transform: rotate(-15deg); }
-      30%  { transform: rotate(0deg); }
-    }
-
     .cta {
       display: inline-flex;
       align-items: center;
@@ -207,15 +186,12 @@
 </head>
 <body>
 
-  <!-- Floating coffee beans -->
+  <!-- Floating emojis -->
   <div class="beans" id="beans"></div>
 
   <div class="container">
-    <div class="coffee-mug">☕</div>
     <div class="code">0x194</div>
     <p class="subtitle">Blog Coming Soon</p>
-    <p class="desc">The blog you're looking for hasn't been written yet.<br>The author is too busy brewing research papers (and coffee).</p>
-
     <div class="photo-card">
       <div class="photo-wrap">
         <div class="photo-placeholder" style="background-image: url('seaside-tiny.jpg');"></div>
@@ -233,7 +209,7 @@
         </picture>
       </div>
       <div class="photo-caption">
-        <p>I haven't started writing my blog yet —<br>I went to the sea instead. ¯\_(ツ)_/¯</p>
+        <p>I haven't started writing my blog yet —<br>I went to the sea instead. You can take this time to eat more first. ¯\_(ツ)_/¯</p>
         <span class="loc">📍 Busan · Cheongsapo</span>
       </div>
     </div>
@@ -250,9 +226,9 @@
   </div>
 
   <script>
-    // Generate floating coffee beans
+    // Generate floating emojis
     (function () {
-      var emojis = ['☕', '🫘', '✨', '📝', '💡'];
+      var emojis = ['✨', '🌊', '🐚', '☀️', '📝'];
       var container = document.getElementById('beans');
       for (var i = 0; i < 25; i++) {
         var span = document.createElement('span');
