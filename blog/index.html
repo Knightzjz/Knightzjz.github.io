@@ -19,8 +19,9 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow-x: hidden;
       position: relative;
+      padding: 2rem 1rem;
     }
 
     /* Floating coffee beans */
@@ -46,11 +47,13 @@
     .container {
       text-align: center;
       z-index: 1;
-      padding: 2rem;
+      padding: 2rem 1.5rem;
+      max-width: 760px;
+      width: 100%;
     }
 
     .code {
-      font-size: clamp(8rem, 20vw, 14rem);
+      font-size: clamp(6rem, 16vw, 10rem);
       font-weight: 800;
       line-height: 1;
       background: linear-gradient(135deg, #2563eb 0%, #f59e0b 100%);
@@ -73,7 +76,77 @@
       color: #64748b;
       margin-bottom: 2.5rem;
       max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
       line-height: 1.6;
+    }
+
+    /* Photo card — same max-width as container for alignment */
+    .photo-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(30, 41, 59, 0.12), 0 8px 24px rgba(30, 41, 59, 0.06);
+      overflow: hidden;
+      margin: 0 auto 2.5rem;
+      width: 100%;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    .photo-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #e2e8f0;
+      overflow: hidden;
+    }
+
+    .photo-placeholder {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: blur(18px) saturate(1.1);
+      transform: scale(1.05);
+      transition: opacity 0.6s ease;
+    }
+
+    .photo-real {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    .photo-real.loaded {
+      opacity: 1;
+    }
+
+    .photo-wrap:has(.photo-real.loaded) .photo-placeholder {
+      opacity: 0;
+    }
+
+    .photo-caption {
+      padding: 1.4rem 1.6rem;
+      text-align: left;
+      background: #fff;
+    }
+
+    .photo-caption p {
+      font-size: 1rem;
+      color: #475569;
+      line-height: 1.7;
+    }
+
+    .photo-caption .loc {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.5rem;
     }
 
     .coffee-mug {
@@ -110,7 +183,6 @@
       margin-top: 2.5rem;
       font-size: 0.85rem;
       color: #94a3b8;
-      font-style: italic;
     }
     .hint em {
       font-style: normal;
@@ -119,10 +191,17 @@
 
     /* Footer */
     .footer {
-      position: fixed;
-      bottom: 1.5rem;
+      margin-top: 3rem;
       font-size: 0.75rem;
       color: #cbd5e1;
+      z-index: 1;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 1.5rem 1rem; }
+      .photo-caption { padding: 1.1rem 1.2rem; }
+      .photo-caption p { font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -136,17 +215,39 @@
     <div class="code">0x194</div>
     <p class="subtitle">Blog Coming Soon</p>
     <p class="desc">The blog you're looking for hasn't been written yet.<br>The author is too busy brewing research papers (and coffee).</p>
+
+    <div class="photo-card">
+      <div class="photo-wrap">
+        <div class="photo-placeholder" style="background-image: url('seaside-tiny.jpg');"></div>
+        <picture>
+          <source media="(max-width: 640px)" srcset="seaside-800.webp">
+          <img
+            src="seaside-1400.webp"
+            alt="Seaside tram and blue sky — Busan Cheongsapo"
+            class="photo-real"
+            loading="lazy"
+            decoding="async"
+            onload="this.classList.add('loaded')"
+            width="1400"
+            height="788">
+        </picture>
+      </div>
+      <div class="photo-caption">
+        <p>I haven't started writing my blog yet —<br>I went to the sea instead. ¯\_(ツ)_/¯</p>
+        <span class="loc">📍 Busan · Cheongsapo</span>
+      </div>
+    </div>
+
     <a href="/" class="cta">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
       Back to Home
     </a>
     <p class="hint">
-      其实我还没开始写 blog 🤷‍♂️<br>
       <em>…but the idea is brewing. Pun intended.</em>
     </p>
-  </div>
 
-  <div class="footer">© 2026 Ji-Zhe Zhou</div>
+    <div class="footer">© 2026 Ji-Zhe Zhou</div>
+  </div>
 
   <script>
     // Generate floating coffee beans
