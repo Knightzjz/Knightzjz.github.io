@@ -623,11 +623,24 @@ body {
   font-size: 12px;
   color: white;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.student-avatar::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 30px;
+  height: 60px;
+  background: rgba(255,255,255,0.15);
+  transform: rotate(35deg);
 }
 .student-card:hover .student-avatar {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
 }
 .student-info {
   display: flex;
@@ -638,6 +651,12 @@ body {
   font-size: 11px;
   color: #6b7280;
   margin: 0;
+}
+.student-honors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 3px;
 }
 .student-research {
   font-size: 11px;
@@ -676,6 +695,24 @@ body {
 .paper-tag-purple { color: #7c3aed; background: #f5f3ff; }
 .paper-tag-pink   { color: #db2777; background: #fdf2f8; }
 .paper-tag-teal   { color: #0891b2; background: #ecfeff; }
+
+.honor-tag {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  display: inline-block;
+  font-weight: 600;
+  margin-right: 4px;
+  border: 1.5px solid;
+  background: transparent;
+  line-height: 1.4;
+}
+.honor-tag-gold { color: #8b5e5e; border-color: #c9a0a0; }
+.honor-tag-teal { color: #8b5e5e; border-color: #c9a0a0; }
+.honor-tag-amber { color: #8b5e5e; border-color: #c9a0a0; }
+.honor-tag-indigo { color: #8b5e5e; border-color: #c9a0a0; }
+.honor-tag-red { color: #8b5e5e; border-color: #c9a0a0; }
+.honor-tag-blue { color: #8b5e5e; border-color: #c9a0a0; }
 
 /* ============================================================
    Sections
@@ -1569,9 +1606,10 @@ body {
         <!-- 杜博 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #7c3aed;">杜博</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">杜博</div>
             <div class="student-info">
               <p class="student-role">Master · Intern @ 蚂蚁安全</p>
+              <div class="student-honors"><span class="honor-tag honor-tag-gold">优秀毕业论文</span></div>
             </div>
           </div>
           <p class="student-research">伪造图像检测</p>
@@ -1587,9 +1625,10 @@ body {
         <!-- 牛超群 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #0891b2;">牛超群</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #0891b2, #22d3ee);">牛超群</div>
             <div class="student-info">
-              <p class="student-role">PhD · CSC @ NUS</p>
+              <p class="student-role">PhD @ NUS</p>
+              <div class="student-honors"><span class="honor-tag honor-tag-teal">CSC公派</span></div>
             </div>
           </div>
           <p class="student-research">生成与取证统一</p>
@@ -1604,9 +1643,10 @@ body {
         <!-- 王汐文 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #059669;">王汐文</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #059669, #34d399);">王汐文</div>
             <div class="student-info">
               <p class="student-role">PhD Student</p>
+              <div class="student-honors"><span class="honor-tag honor-tag-indigo">硕博连读</span></div>
             </div>
           </div>
           <p class="student-research">生成与取证统一</p>
@@ -1619,9 +1659,10 @@ body {
         <!-- 何雨声 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #0891b2;">何雨声</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #0891b2, #67e8f9);">何雨声</div>
             <div class="student-info">
               <p class="student-role">PhD Student</p>
+              <div class="student-honors"><span class="honor-tag honor-tag-indigo">直博</span></div>
             </div>
           </div>
           <p class="student-research">生成与取证统一</p>
@@ -1633,7 +1674,7 @@ body {
         <!-- 杨哲 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #dc2626;">杨哲</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #dc2626, #f87171);">杨哲</div>
             <div class="student-info">
               <p class="student-role">Master Student</p>
             </div>
@@ -1649,7 +1690,7 @@ body {
         <!-- 周莉婷 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #f59e0b;">周莉婷</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">周莉婷</div>
             <div class="student-info">
               <p class="student-role">Master Student</p>
             </div>
@@ -1663,7 +1704,7 @@ body {
         <!-- 王韵菲 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #10b981;">王韵菲</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #10b981, #6ee7b7);">王韵菲</div>
             <div class="student-info">
               <p class="student-role">Master · Intern @ 腾讯混元</p>
             </div>
@@ -1677,7 +1718,7 @@ body {
         <!-- 冯凯文 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #be185d;">冯凯文</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #be185d, #f472b6);">冯凯文</div>
             <div class="student-info">
               <p class="student-role">Master Student</p>
             </div>
@@ -1693,7 +1734,7 @@ body {
         <!-- 张皓为 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #6366f1;">张皓为</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #6366f1, #818cf8);">张皓为</div>
             <div class="student-info">
               <p class="student-role">Master · Intern @ 腾讯混元</p>
             </div>
@@ -1707,7 +1748,7 @@ body {
         <!-- 刘鑫 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #0ea5e9;">刘鑫</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #0ea5e9, #38bdf8);">刘鑫</div>
             <div class="student-info">
               <p class="student-role">Master Student</p>
             </div>
@@ -1721,7 +1762,7 @@ body {
         <!-- 张程洋 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #8b5cf6;">张程洋</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #8b5cf6, #c4b5fd);">张程洋</div>
             <div class="student-info">
               <p class="student-role">Master Student</p>
             </div>
@@ -1734,12 +1775,26 @@ body {
         <!-- 李璐颖 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #14b8a6;">李璐颖</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #14b8a6, #5eead4);">李璐颖</div>
             <div class="student-info">
               <p class="student-role">Master Student</p>
             </div>
           </div>
           <p class="student-research">生成与取证统一</p>
+          <div class="student-papers">
+          </div>
+        </div>
+
+        <!-- 陈相羽 -->
+        <div class="student-card">
+          <div class="student-card-header">
+            <div class="student-avatar" style="background: linear-gradient(135deg, #475569, #94a3b8);">陈相羽</div>
+            <div class="student-info">
+              <p class="student-role">PhD Student</p>
+              <div class="student-honors"><span class="honor-tag honor-tag-red">中核集团定向委培</span></div>
+            </div>
+          </div>
+          <p class="student-research">缺陷检测</p>
           <div class="student-papers">
           </div>
         </div>
@@ -1751,9 +1806,10 @@ body {
         <!-- 朱学康 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #2563eb;">朱学康</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #0f766e, #2563eb);">朱学康</div>
             <div class="student-info">
-              <p class="student-role">Master → 蚂蚁安全 (Ant Group)</p>
+              <p class="student-role">Master → 蚂蚁安全</p>
+              <div class="student-honors"><span class="honor-tag honor-tag-amber">蚂蚁光鉴 Team Leader</span></div>
             </div>
           </div>
           <p class="student-research">生成与取证统一</p>
@@ -1768,12 +1824,31 @@ body {
           </div>
         </div>
 
+        <!-- 雷泽宇 -->
+        <div class="student-card">
+          <div class="student-card-header">
+            <div class="student-avatar" style="background: linear-gradient(135deg, #9333ea, #c084fc);">雷泽宇</div>
+            <div class="student-info">
+              <p class="student-role">MSc @ USC (南加大)</p>
+              <div class="student-honors"><span class="honor-tag honor-tag-gold">吴玉章学院</span> <span class="honor-tag honor-tag-teal">澳大交换生</span></div>
+            </div>
+          </div>
+          <p class="student-research">图像篡改检测与定位</p>
+          <div class="student-papers">
+            <a href="https://arxiv.org/abs/2406.10580" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-green">IMDL-BenCo</a>
+            <a href="https://arxiv.org/abs/2412.14598" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-blue">SparseViT</a>
+            <a href="https://arxiv.org/abs/2412.13753" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-purple">Mesorch</a>
+            <a href="https://arxiv.org/abs/2407.03695" target="_blank" rel="noopener noreferrer" class="paper-tag paper-tag-blue">M³</a>
+          </div>
+        </div>
+
         <!-- 粟磊 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #64748b;">粟磊</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #64748b, #94a3b8);">粟磊</div>
             <div class="student-info">
               <p class="student-role">Master → WPS武汉 (Kingsoft)</p>
+              <div class="student-honors"><span class="honor-tag honor-tag-gold">优秀论文</span></div>
             </div>
           </div>
           <p class="student-research">图像篡改检测</p>
@@ -1786,9 +1861,10 @@ body {
         <!-- 马晓晨 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #2563eb;">马晓晨</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #2563eb, #60a5fa);">马晓晨</div>
             <div class="student-info">
               <p class="student-role">PhD @ HKUST · Intern @ 腾讯混元 (Tencent Hunyuan)</p>
+              <div class="student-honors"><span class="honor-tag honor-tag-gold">优秀毕业论文</span></div>
             </div>
           </div>
           <p class="student-research">图像篡改检测</p>
@@ -1802,7 +1878,7 @@ body {
         <!-- 张健 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #7c3aed;">张健</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #7c3aed, #c084fc);">张健</div>
             <div class="student-info">
               <p class="student-role">Master → 宁德时代 (CATL)</p>
             </div>
@@ -1815,7 +1891,7 @@ body {
         <!-- 倪睿洋 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #dc2626;">倪睿洋</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #dc2626, #fb7185);">倪睿洋</div>
             <div class="student-info">
               <p class="student-role">Master → 中国电信 (China Telecom)</p>
             </div>
@@ -1828,9 +1904,10 @@ body {
         <!-- 蒋卓航 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #0891b2;">蒋卓航</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #0891b2, #a5f3fc);">蒋卓航</div>
             <div class="student-info">
               <p class="student-role">PhD @ HKPolyU · Intern @ 快手 (Kuaishou)</p>
+              <div class="student-honors"><span class="honor-tag honor-tag-blue">计科之星</span></div>
             </div>
           </div>
           <p class="student-research">因果推理</p>
@@ -1843,7 +1920,7 @@ body {
         <!-- 童炳魁 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #10b981;">童炳魁</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #10b981, #a7f3d0);">童炳魁</div>
             <div class="student-info">
               <p class="student-role">PhD @ MBZUAI</p>
             </div>
@@ -1858,9 +1935,10 @@ body {
         <!-- 杨欣宇 -->
         <div class="student-card">
           <div class="student-card-header">
-            <div class="student-avatar" style="background: #f59e0b;">杨欣宇</div>
+            <div class="student-avatar" style="background: linear-gradient(135deg, #f59e0b, #fde68a);">杨欣宇</div>
             <div class="student-info">
               <p class="student-role">Master @ Tsinghua</p>
+              <div class="student-honors"><span class="honor-tag honor-tag-gold">川大CCF学生主席</span> <span class="honor-tag honor-tag-red">清华研究生院团委副书记</span></div>
             </div>
           </div>
           <p class="student-research">图像篡改检测</p>
