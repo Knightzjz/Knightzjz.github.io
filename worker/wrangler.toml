@@ -1,0 +1,5 @@
+name = "scholar-proxy"
+main = "worker.js"
+compatibility_date = "2025-07-01"
+
+# Free plan: 100k req/day — more than enough for a personal site
