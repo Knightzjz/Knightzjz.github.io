@@ -1848,85 +1848,19 @@ body {
 
   <!-- ======================= JS ======================= -->
   <script>
-    /* ── 1. Google Scholar citations — real-time with proxy fallback ── */
+    /* ── 1. Google Scholar citations — static JSON, updated by GitHub Actions every 8h ── */
     (function () {
-      var KEY = 'gs_citations_v4';
-      var CACHE_TTL = 30 * 60 * 1000; // 30-min fallback cache
-
-      var PROXIES = [
-        // Primary: your own Cloudflare Worker (deploy worker/worker.js, then paste URL here)
-        // 'https://scholar-proxy.YOUR-SUBDOMAIN.workers.dev/?url=',
-        // Fallbacks (third-party — remove once your worker is live)
-        'https://corsproxy.io/?',
-        'https://api.allorigins.win/raw?url=',
-        'https://api.codetabs.com/v1/proxy?quest=',
-        'https://yacdn.org/proxy/'
-      ];
-      var SCHOLAR_URL = 'https://scholar.google.com/citations?hl=en&user=-cNWmJMAAAAJ';
-      var proxyIdx = 0;
-
-      function parseCount(html) {
-        var patterns = [
-          /"cites":\s*(\d+)/,
-          /<td[^>]+class="gsc_rsb_std"[^>]*>\s*(\d[\d,]*)\s*<\/td>/,
-          /(\d[\d,]+)\s*(?:total citations|citations)/i,
-          /cited [b ]?\s*(\d+)/i
-        ];
-        for (var i = 0; i < patterns.length; i++) {
-          var m = html.match(patterns[i]);
-          if (m) {
-            var n = parseInt(m[1].replace(/,/g, ''), 10);
-            if (!isNaN(n) && n > 0) return n;
+      var el = document.getElementById('citation-count');
+      if (!el) return;
+      fetch('citations.json')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data && data.count > 0) {
+            el.textContent = '(' + data.count.toLocaleString() + ')';
+            el.title = data.count.toLocaleString() + ' total citations (Google Scholar)';
           }
-        }
-        return null;
-      }
-
-      function updateEl(el, count) {
-        if (count !== null && !isNaN(count)) {
-          el.textContent = '(' + count.toLocaleString() + ')';
-          el.title = count.toLocaleString() + ' total citations (Google Scholar)';
-        }
-      }
-
-      function saveCache(count) {
-        try { localStorage.setItem(KEY, JSON.stringify({ v: count, t: Date.now() })); } catch (_) {}
-      }
-
-      function getCache() {
-        try {
-          var raw = localStorage.getItem(KEY);
-          if (!raw) return null;
-          var o = JSON.parse(raw);
-          if (o && o.v && Date.now() - o.t < CACHE_TTL) return o.v;
-        } catch (_) {}
-        return null;
-      }
-
-      function fetchWithProxy() {
-        var el = document.getElementById('citation-count');
-        if (!el) return;
-        var cached = getCache();
-        if (cached !== null) updateEl(el, cached);
-        if (proxyIdx >= PROXIES.length) return;
-        var url = PROXIES[proxyIdx] + encodeURIComponent(SCHOLAR_URL);
-        var timeoutId = setTimeout(function () { proxyIdx++; fetchWithProxy(); }, 8000);
-        fetch(url, { cache: 'no-store' })
-          .then(function (r) { clearTimeout(timeoutId); return r.ok ? r.text() : null; })
-          .then(function (html) {
-            if (!html) { proxyIdx++; fetchWithProxy(); return; }
-            var count = parseCount(html);
-            if (count !== null) {
-              updateEl(el, count);
-              saveCache(count);
-            } else {
-              proxyIdx++; fetchWithProxy();
-            }
-          })
-          .catch(function () { clearTimeout(timeoutId); proxyIdx++; fetchWithProxy(); });
-      }
-
-      fetchWithProxy();
+        })
+        .catch(function () { /* silent — button just shows no number */ });
     })();
 
     /* ── 2. GitHub Stars — real-time with 5-min cache ── */
