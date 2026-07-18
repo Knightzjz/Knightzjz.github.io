@@ -120,10 +120,11 @@ body {
 .site-header {
   padding: 1rem 2rem;
   border-bottom: 1px solid var(--border);
-  background: var(--bg);
+  background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 2px 12px rgba(37, 99, 235, 0.05);
   transition: box-shadow 0.3s ease;
 }
 .site-header:hover {
@@ -337,9 +338,9 @@ body {
   border-radius: 4px;
 }
 .supervisor-link {
-  color: inherit;
+  color: #92400e;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
 }
 .supervisor-link:hover {
   text-decoration: underline;
@@ -822,10 +823,22 @@ body {
 .timeline .content h3 { font-size: 1rem; margin-bottom: 0.2rem; }
 .timeline .content p { color: var(--text-light); font-size: 0.88rem; }
 .tag {
-  display: inline-block; padding: 0.15rem 0.5rem; border-radius: 20px;
-  font-size: 0.72rem; font-weight: 600; margin-top: 0.3rem;
+  display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px;
+  font-size: 0.72rem; font-weight: 700; margin-top: 0.3rem; margin-right: 0.35rem;
+  letter-spacing: 0.02em;
+  transition: filter 0.2s ease, transform 0.2s ease;
 }
-.tag.highlight { background: #fef3c7; color: #92400e; }
+.tag.highlight {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  color: #92400e;
+  border: 1px solid #fcd34d;
+  box-shadow: 0 1px 3px rgba(180, 83, 9, 0.1);
+}
+.tag.highlight:hover {
+  filter: brightness(0.97);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(180, 83, 9, 0.15);
+}
 
 /* ============================================================
    Footer
@@ -1212,8 +1225,8 @@ body {
         <div class="news-entry hidden fade-in">
           <span class="news-date">Apr 2026</span>
           <p>
-            <span class="news-tag award">🏆 DCIC 2026</span>
-            <strong>Champion</strong> (1st / 173 teams) — 数字中国创新大赛 · 数据应用赛道：<em>基于多模态大模型的场景文本图像伪造分析</em>.
+            <span class="news-tag award">🏆 Award</span>
+            <strong>DCIC 2026 Champion</strong> (1st / 173 teams) — 数字中国创新大赛 · 数据应用赛道：<em>基于多模态大模型的场景文本图像伪造分析</em>.
           </p>
         </div>
 
@@ -1469,6 +1482,7 @@ body {
             <h3>Associate Professor</h3>
             <p>Sichuan University, College of Computer Science</p>
             <span class="tag highlight">天府峨眉</span>
+            <span class="tag highlight">援藏教师</span>
           </div>
         </div>
         <div class="item">
