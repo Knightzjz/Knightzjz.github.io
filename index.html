@@ -33,7 +33,7 @@
   <meta name="twitter:image:alt" content="周吉喆 Ji-Zhe Zhou — 四川大学计算机学院副教授">
 
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link rel="icon" href="images/avatar-180w.webp" type="image/webp">
+  <link rel="icon" href="images/avatar-180w.webp" type="image/webp" sizes="180x180">
   <link rel="apple-touch-icon" href="images/avatar.jpeg">
 
   <!-- Fonts -->
@@ -323,6 +323,20 @@ body {
   color: var(--text-light);
   margin: -0.5rem 0 2rem;
   letter-spacing: 0.02em;
+  cursor: pointer;
+}
+.thanks-line:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.supervisor-link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+}
+.supervisor-link:hover {
+  text-decoration: underline;
 }
 .thanks-line span {
   color: #ff6b9d;
@@ -1112,7 +1126,7 @@ body {
     </section>
 
     <!-- ======================= THANKS ======================= -->
-    <div class="thanks-line" id="thanks-line" style="cursor:pointer;" title="Click for love!">
+    <div class="thanks-line" id="thanks-line" role="button" tabindex="0" title="Click for love!" aria-label="Special thanks to Ms. Helen Wang, click for hearts">
       <span class="thanks-heart">♥</span> Special Thanks to <em>Ms. Helen Wang. YY</em>
     </div>
 
@@ -1293,7 +1307,7 @@ body {
         </div>
 
       </div>
-      <button class="news-more-btn" id="news-toggle">▼ Show More</button>
+      <button class="news-more-btn" id="news-toggle" aria-expanded="false">▼ Show More</button>
     </section>
 
     <!-- ======================= PUBLICATIONS ======================= -->
@@ -1453,7 +1467,7 @@ body {
           <div class="content">
             <h3>B.S., M.S., Ph.D.</h3>
             <p>University of Macau & The Chinese University of Hong Kong</p>
-            <span class="tag highlight">Supervisor: <a href="https://cmpun.github.io/" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;font-weight:600">Prof. Chi-Man Pun</a></span>
+            <span class="tag highlight">Supervisor: <a class="supervisor-link" href="https://cmpun.github.io/" target="_blank" rel="noopener noreferrer">Prof. Chi-Man Pun</a></span>
           </div>
         </div>
       </div>
@@ -1463,7 +1477,7 @@ body {
     <section class="section" id="students">
       <h2><span aria-hidden="true">🎓</span> Students & Alumni</h2>
 
-      <h3 style="font-size: 0.95rem; color: var(--text); margin: 1.5rem 0 1rem 0;">Current Students 在读学生</h3>
+      <h3 class="alumni-heading">Current Students 在读学生</h3>
       <div class="cards-grid">
         <!-- 杜博 -->
         <div class="student-card">
@@ -1857,7 +1871,7 @@ body {
   <!-- ======================= FOOTER ======================= -->
   <footer class="site-footer">
     <div class="footer-inner">
-      <p>© 2026 Ji-Zhe Zhou — brewed with ☕</p>
+      <p>© 2026 Ji-Zhe Zhou — crafted by the sea 🌊</p>
       <div class="visitor-counter">
         <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -1982,6 +1996,7 @@ body {
           }
         });
         btn.textContent = expanded ? '▲ Show Less' : '▼ Show More';
+        btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
       });
     })();
 
@@ -2020,15 +2035,25 @@ body {
       var el = document.getElementById('thanks-line');
       if (!el) return;
       var hearts = ['♥', '💕', '💗', '💖', '✨'];
-      el.addEventListener('click', function (e) {
+      function spawnHearts(x, y) {
         for (var i = 0; i < 6; i++) {
           var h = document.createElement('span');
           h.className = 'floating-heart';
           h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-          h.style.left = (e.clientX - 10 + (Math.random() - 0.5) * 60) + 'px';
-          h.style.top  = (e.clientY - 10 + (Math.random() - 0.5) * 30) + 'px';
+          h.style.left = (x - 10 + (Math.random() - 0.5) * 60) + 'px';
+          h.style.top  = (y - 10 + (Math.random() - 0.5) * 30) + 'px';
           document.body.appendChild(h);
           setTimeout(function (node) { node.remove(); }, 1200, h);
+        }
+      }
+      el.addEventListener('click', function (e) {
+        spawnHearts(e.clientX, e.clientY);
+      });
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          var rect = el.getBoundingClientRect();
+          spawnHearts(rect.left + rect.width / 2, rect.top + rect.height / 2);
         }
       });
     })();
