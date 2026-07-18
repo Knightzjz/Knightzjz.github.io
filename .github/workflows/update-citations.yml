@@ -2,8 +2,9 @@ name: Update Scholar Citations
 
 on:
   schedule:
-    # Once daily at 08:00 UTC (16:00 Beijing time)
-    - cron: '0 8 * * *'
+    # Every 8 hours (UTC): 0:00, 8:00, 16:00 → Beijing 8:00, 16:00, 0:00
+    # 3 runs/day × 31 days = 93 < 250 free monthly searches
+    - cron: '0 */8 * * *'
   # Also allow manual trigger from GitHub Actions tab
   workflow_dispatch:
 
