@@ -48,7 +48,7 @@
     "@type": "ProfilePage",
     "@id": "https://knightzjz.github.io/#profile",
     "url": "https://knightzjz.github.io/",
-    "dateModified": "2026-07",
+    "dateModified": "2026-07-18",
     "mainEntity": {
       "@type": "Person",
       "@id": "https://knightzjz.github.io/#person",
@@ -950,6 +950,7 @@ body {
 
 /* Prefers reduced motion */
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .news-entry.fade-in { animation: none; }
 }
@@ -1016,7 +1017,7 @@ body {
     </nav>
   </header>
 
-  <main class="main-content" id="main-content">
+  <main class="main-content" id="main-content" tabindex="-1">
 
     <!-- ======================= HERO ======================= -->
     <section class="hero">

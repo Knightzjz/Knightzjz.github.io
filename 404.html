@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#ffffff">
+  <title>404 - Page Not Found | Ji-Zhe Zhou</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .container {
+      text-align: center;
+      max-width: 480px;
+    }
+    .code {
+      font-size: clamp(5rem, 15vw, 8rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #0f766e, #2563eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .message {
+      font-size: 1.2rem;
+      color: #64748b;
+      margin-bottom: 0.5rem;
+    }
+    .hint {
+      font-size: 0.95rem;
+      color: #94a3b8;
+      margin-bottom: 2.5rem;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #0f766e, #2563eb);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+    }
+    .cta svg { width: 18px; height: 18px; }
+    @media (prefers-reduced-motion: reduce) {
+      .cta { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="code">404</div>
+    <p class="message">This page drifted away like a wave.</p>
+    <p class="hint">The page you're looking for doesn't exist.</p>
+    <a href="/" class="cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
+      </svg>
+      Back to Home
+    </a>
+  </main>
+</body>
+</html>

@@ -58,6 +58,19 @@ def main():
         print(f"Response keys: {list(data.keys())}", file=sys.stderr)
         sys.exit(1)
 
+    # Skip writing if values are unchanged (avoids unnecessary bot commits)
+    from pathlib import Path
+    if Path(OUTPUT_FILE).exists():
+        try:
+            old = json.loads(Path(OUTPUT_FILE).read_text("utf-8"))
+            if (old.get("count") == count
+                    and old.get("h_index") == h_index
+                    and old.get("i10_index") == i10_index):
+                print(f"Unchanged: {count:,} citations (h={h_index}, i10={i10_index}) — skipping write")
+                return
+        except Exception:
+            pass  # If old file is corrupt, proceed to write
+
     now = datetime.now(timezone.utc).isoformat()
     out = {
         "count": count,

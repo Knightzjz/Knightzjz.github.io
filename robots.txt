@@ -1,10 +1,4 @@
 User-agent: *
 Allow: /
 
-User-agent: Baiduspider
-Allow: /
-
-User-agent: bingbot
-Allow: /
-
 Sitemap: https://knightzjz.github.io/sitemap.xml
