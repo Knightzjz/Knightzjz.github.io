@@ -2,8 +2,8 @@ name: Update Scholar Citations
 
 on:
   schedule:
-    # Every 8 hours (UTC): 0:00, 8:00, 16:00 → Beijing 8:00, 16:00, 0:00
-    - cron: '0 */8 * * *'
+    # Once daily at 08:00 UTC (16:00 Beijing time)
+    - cron: '0 8 * * *'
   # Also allow manual trigger from GitHub Actions tab
   workflow_dispatch:
 
@@ -19,7 +19,9 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Fetch citations
+      - name: Fetch citations via SerpAPI
+        env:
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
         run: python scripts/fetch_citations.py
 
       - name: Commit if changed
