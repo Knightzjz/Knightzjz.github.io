@@ -8,6 +8,7 @@ import os
 import sys
 import urllib.request
 from datetime import datetime, timezone
+from pathlib import Path
 
 REPOS = [
     "venus-guangjian/SICA_OpenMMSec",
@@ -40,19 +41,46 @@ def fetch_stars(repo, token):
 def main():
     token = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN", "")
 
+    # Load old data — used both for unchanged-check (skip unnecessary commits)
+    # and as fallback for repos that fail on this run (prevents data loss).
+    output_path = Path(OUTPUT_FILE)
+    old_data = {}
+    if output_path.exists():
+        try:
+            old_data = json.loads(output_path.read_text("utf-8"))
+        except (OSError, json.JSONDecodeError):
+            pass
+    old_repos = old_data.get("repos", {}) if isinstance(old_data, dict) else {}
+
     print("Fetching GitHub star counts...")
     repos = {}
+    failed = []
     for repo in REPOS:
         count = fetch_stars(repo, token)
         if count is not None:
             repos[repo] = count
             print(f"  {repo}: {count} stars")
+        elif repo in old_repos:
+            # Preserve historical value instead of dropping the repo from output
+            repos[repo] = old_repos[repo]
+            failed.append(repo)
+            print(f"  {repo}: FAILED — kept previous value ({old_repos[repo]})")
         else:
-            print(f"  {repo}: FAILED (skipped)")
+            failed.append(repo)
+            print(f"  {repo}: FAILED — no previous value available")
 
     if not repos:
-        print("ERROR: No repos fetched successfully", file=sys.stderr)
+        print("ERROR: No repos fetched and no prior data to fall back on", file=sys.stderr)
         sys.exit(1)
+
+    if failed:
+        print(f"Warning: {len(failed)} repo(s) failed this run: {failed}", file=sys.stderr)
+
+    # Skip writing if star counts are unchanged (avoids ~3 bot commits/day
+    # that would otherwise happen purely from the updated timestamp).
+    if old_repos == repos and isinstance(old_data, dict):
+        print(f"Unchanged: {len(repos)} repos — skipping write")
+        return
 
     now = datetime.now(timezone.utc).isoformat()
     out = {"repos": repos, "updated": now}

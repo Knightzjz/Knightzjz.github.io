@@ -2,8 +2,10 @@ name: Update GitHub Stars
 
 on:
   schedule:
-    # Every 8 hours (UTC): 0:00, 8:00, 16:00
-    - cron: '0 */8 * * *'
+    # Every 8 hours, offset 15 min from citations (UTC): 0:15, 8:15, 16:15
+    # The 15-min stagger + concurrency group prevents non-fast-forward push
+    # conflicts when both workflows are scheduled near the same wall-clock time.
+    - cron: '15 */8 * * *'
   workflow_dispatch:
 
 jobs:
@@ -11,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    concurrency:
+      group: site-data
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v5
 

@@ -13,6 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    # Serialize with the stars workflow — if stars is still running,
+    # this one waits instead of producing a non-fast-forward push conflict.
+    concurrency:
+      group: site-data
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v5
 
