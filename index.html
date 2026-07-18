@@ -312,7 +312,13 @@ body {
 }
 .project-tag:hover { background: linear-gradient(135deg, #e0e7ff, #ddd6fe); box-shadow: 0 2px 8px rgba(99, 102, 241, 0.18); transform: scale(1.05); color: #3730a3; }
 
-.research-keyword { font-weight: 700; color: #0f766e; }
+.research-keyword {
+  font-weight: 700;
+  background: linear-gradient(transparent 55%, rgba(15, 118, 110, 0.18) 55%);
+  padding: 0 2px; border-radius: 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
 
 /* ============================================================
    Thanks Line
@@ -476,10 +482,12 @@ body {
 .news-entry:last-child { border-bottom: none; }
 .news-entry:hover { background: #f1f5f9; transform: translateX(4px); }
 .news-date {
-  flex-shrink: 0; width: 90px;
-  font-size: 0.78rem; color: var(--text-light); font-weight: 500;
-  display: flex; align-items: center;
-  padding: 0.55rem 0 0.55rem 0.5rem;
+  flex-shrink: 0; align-self: center;
+  background: linear-gradient(135deg, #0f766e, #2563eb);
+  color: #fff; font-size: 0.78rem; font-weight: 600;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.3rem 0.75rem; border-radius: 999px;
+  white-space: nowrap; letter-spacing: 0.02em; min-width: 80px;
 }
 .news-entry p {
   margin: 0; line-height: 1.6;
@@ -748,16 +756,17 @@ body {
 .pub-venue-badge {
   position: absolute; top: 0; left: 0;
   font-size: 0.55rem; font-weight: 700;
-  padding: 2px 6px; border-radius: 4px 0 6px 0;
+  padding: 3px 10px; border-radius: 999px;
   letter-spacing: 0.04em; line-height: 1.4;
-  pointer-events: none; z-index: 1;
+  pointer-events: none; z-index: 1; color: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
 }
-.pub-venue-badge.cvpr   { background: #2563eb; color: #fff; }
-.pub-venue-badge.neurips{ background: #7c3aed; color: #fff; }
-.pub-venue-badge.iccv   { background: #059669; color: #fff; }
-.pub-venue-badge.icml   { background: #dc2626; color: #fff; }
-.pub-venue-badge.arxiv  { background: #b45309; color: #fff; }
-.pub-venue-badge.aaai   { background: #1e40af; color: #fff; }
+.pub-venue-badge.cvpr   { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+.pub-venue-badge.neurips{ background: linear-gradient(135deg, #7c3aed, #a855f7); }
+.pub-venue-badge.iccv   { background: linear-gradient(135deg, #059669, #10b981); }
+.pub-venue-badge.icml   { background: linear-gradient(135deg, #dc2626, #ef4444); }
+.pub-venue-badge.arxiv  { background: linear-gradient(135deg, #b45309, #d97706); }
+.pub-venue-badge.aaai   { background: linear-gradient(135deg, #1e40af, #2563eb); }
 /* Horizontal scroll strip — hidden on desktop, shown on mobile */
 .pub-thumbs-strip { display: none; }
 .pub-thumbs-strip img { height: 160px; width: auto; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
@@ -877,7 +886,7 @@ body {
   .hero-text h1 { font-size: 1.5rem; }
   .avatar { width: 120px; height: 120px; }
   .news-entry { padding: 0.75rem 0; }
-  .news-date { width: 70px; font-size: 0.72rem; }
+  .news-date { font-size: 0.72rem; padding: 0.25rem 0.6rem; min-width: 68px; }
   .news-tag { font-size: 0.68rem; padding: 0.15rem 0.35rem; }
   .student-card { padding: 12px; }
   .student-avatar { width: 60px; height: 30px; font-size: 10px; }
@@ -1171,7 +1180,7 @@ body {
         <div class="news-entry">
           <span class="news-date">May 2026</span>
           <p>
-            <span class="news-tag paper">📄 arXiv</span>
+            <span class="news-tag paper">📄 Tech Report</span>
             <a href="https://arxiv.org/abs/2605.14091" target="_blank" rel="noopener noreferrer">DeFakerOne</a>: The <strong>first foundation model</strong> for unified fake image detection &amp; localization, jointly developed with <strong>Ant Group Guangjian</strong> team.
           </p>
         </div>
