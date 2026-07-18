@@ -1862,61 +1862,25 @@ body {
         .catch(function () { /* silent — button just shows no number */ });
     })();
 
-    /* ── 2. GitHub Stars — real-time with 5-min cache ── */
+    /* ── 2. GitHub Stars — static JSON, updated by GitHub Actions every 8h ── */
     (function () {
       var badges = document.querySelectorAll('.gh-stars[data-repo]');
       if (!badges.length) return;
 
-      var CACHE_TTL = 5 * 60 * 1000;
-
-      function cacheKey(repo) { return 'gh_stars_' + repo.replace(/\//g, '_'); }
-
-      function getCached(repo) {
-        try {
-          var raw = localStorage.getItem(cacheKey(repo));
-          if (!raw) return null;
-          var o = JSON.parse(raw);
-          if (o && o.v && Date.now() - o.t < CACHE_TTL) return o.v;
-        } catch (_) {}
-        return null;
-      }
-
-      function setCached(repo, val) {
-        try { localStorage.setItem(cacheKey(repo), JSON.stringify({ v: val, t: Date.now() })); } catch (_) {}
-      }
-
-      // Show cached immediately, then refresh
-      var uniqueRepos = [];
-      badges.forEach(function (b) {
-        var repo = b.dataset.repo;
-        if (uniqueRepos.indexOf(repo) === -1) uniqueRepos.push(repo);
-        var cached = getCached(repo);
-        if (cached !== null) {
-          b.textContent = Number(cached).toLocaleString();
-          b.title = cached + ' stars on GitHub';
-        } else {
-          b.textContent = '…';
-        }
-      });
-
-      uniqueRepos.forEach(function (repo) {
-        fetch('https://api.github.com/repos/' + repo, {
-          headers: { 'Accept': 'application/vnd.github.v3+json' },
-          cache: 'no-store'
-        })
-          .then(function (r) { return r.ok ? r.json() : null; })
-          .then(function (j) {
-            var n = j && j.stargazers_count;
+      fetch('stars.json')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (!data || !data.repos) return;
+          badges.forEach(function (b) {
+            var repo = b.dataset.repo;
+            var n = data.repos[repo];
             if (n !== undefined && n !== null) {
-              setCached(repo, n);
-              document.querySelectorAll('.gh-stars[data-repo="' + repo + '"]').forEach(function (b) {
-                b.textContent = Number(n).toLocaleString();
-                b.title = n + ' stars on GitHub';
-              });
+              b.textContent = Number(n).toLocaleString();
+              b.title = n + ' stars on GitHub';
             }
-          })
-          .catch(function () {});
-      });
+          });
+        })
+        .catch(function () { /* silent */ });
     })();
 
     /* ── 3. Visitor Counter — deduplicated session + countapi.mileshilliard.com ── */
