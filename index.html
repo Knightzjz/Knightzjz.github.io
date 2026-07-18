@@ -382,6 +382,7 @@ body {
    Eat More Group
    ============================================================ */
 .emg-section {
+  scroll-margin-top: 80px;
   margin-bottom: 2.5rem;
   padding: 2rem;
   background: linear-gradient(135deg, #fffdf7 0%, #fffbf0 40%, #ffffff 100%);
@@ -438,6 +439,7 @@ body {
 }
 .emg-subtitle .motto {
   display: inline-block;
+  color: #1f3823; /* fallback for browsers without background-clip: text */
   background: linear-gradient(135deg, #1f3823 0%, #31442e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -492,7 +494,7 @@ body {
   line-height: 1.2; text-transform: uppercase; letter-spacing: 0.02em;
 }
 .news-year {
-  font-size: 0.68rem; font-weight: 500; color: #94a3b8;
+  font-size: 0.68rem; font-weight: 500; color: #64748b;
   line-height: 1.2;
 }
 .news-entry p {
@@ -533,15 +535,6 @@ body {
 }
 .news-tag.award:hover {
   background: linear-gradient(135deg, #d97706, #fbbf24);
-}
-.news-desc {
-  color: var(--text-light);
-  font-size: 0.82rem;
-  margin-left: 0.25rem;
-}
-.news-desc::before {
-  content: '— ';
-  color: #cbd5e1;
 }
 .news-more-btn {
   display: block;
@@ -834,9 +827,6 @@ body {
   border: 1px solid #fcd34d;
   box-shadow: 0 1px 3px rgba(180, 83, 9, 0.1);
 }
-.tag.highlight:hover {
-  filter: brightness(0.97);
-  transform: translateY(-1px);
   box-shadow: 0 2px 6px rgba(180, 83, 9, 0.15);
 }
 
@@ -1052,7 +1042,7 @@ body {
 
   <!-- ======================= NAV ======================= -->
   <header class="site-header">
-    <nav>
+    <nav aria-label="Main navigation">
       <a href="/" class="logo">
         <img src="images/avatar-72w.webp" alt="" class="logo-avatar" decoding="async" width="36" height="36">
         <span>周吉喆</span>
@@ -1112,7 +1102,7 @@ body {
     </section>
 
     <!-- ======================= BIO ======================= -->
-    <section class="bio-section">
+    <section class="bio-section" aria-label="Biography">
       <div class="bio-cn">
         <p>
           周吉喆，四川大学计算机学院副教授，
