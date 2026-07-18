@@ -482,12 +482,17 @@ body {
 .news-entry:last-child { border-bottom: none; }
 .news-entry:hover { background: #f1f5f9; transform: translateX(4px); }
 .news-date {
-  flex-shrink: 0; align-self: center;
-  background: linear-gradient(135deg, #0f766e, #2563eb);
-  color: #fff; font-size: 0.78rem; font-weight: 600;
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 0.3rem 0.75rem; border-radius: 999px;
-  white-space: nowrap; letter-spacing: 0.02em; min-width: 80px;
+  flex-shrink: 0; align-self: flex-start;
+  display: flex; flex-direction: column; align-items: center;
+  min-width: 48px; padding-top: 0.6rem;
+}
+.news-month {
+  font-size: 0.82rem; font-weight: 700; color: #0f766e;
+  line-height: 1.2; text-transform: uppercase; letter-spacing: 0.02em;
+}
+.news-year {
+  font-size: 0.68rem; font-weight: 500; color: #94a3b8;
+  line-height: 1.2;
 }
 .news-entry p {
   margin: 0; line-height: 1.6;
@@ -499,41 +504,34 @@ body {
 /* News Type Tags */
 .news-tag {
   display: inline-block;
-  padding: 0.12rem 0.45rem;
-  border-radius: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   vertical-align: middle;
   margin-right: 0.3rem;
   flex-shrink: 0;
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
 }
 .news-tag.paper {
-  background: #ccfbf1;
-  color: #0f766e;
-  border: 1px solid #5eead4;
-  font-size: 0.78rem;
-  padding: 0.2rem 0.5rem;
+  background: linear-gradient(135deg, #0f766e, #14b8a6);
 }
 .news-tag.paper:hover {
-  background: linear-gradient(135deg, #99f6e4, #5eead4);
+  background: linear-gradient(135deg, #14b8a6, #2dd4bf);
 }
 .news-tag.service {
-  background: #e0e7ff;
-  color: #4338ca;
-  border: 1px solid #a5b4fc;
+  background: linear-gradient(135deg, #4338ca, #6366f1);
 }
 .news-tag.service:hover {
-  background: linear-gradient(135deg, #c7d2fe, #a5b4fc);
+  background: linear-gradient(135deg, #6366f1, #818cf8);
 }
 .news-tag.award {
-  background: #fef3c7;
-  color: #b45309;
-  border: 1px solid #fcd34d;
-  box-shadow: 0 1px 3px rgba(180, 83, 9, 0.12);
+  background: linear-gradient(135deg, #b45309, #f59e0b);
 }
 .news-tag.award:hover {
-  background: linear-gradient(135deg, #fde68a, #fcd34d);
+  background: linear-gradient(135deg, #d97706, #fbbf24);
 }
 .news-desc {
   color: var(--text-light);
@@ -886,8 +884,10 @@ body {
   .hero-text h1 { font-size: 1.5rem; }
   .avatar { width: 120px; height: 120px; }
   .news-entry { padding: 0.75rem 0; }
-  .news-date { font-size: 0.72rem; padding: 0.25rem 0.6rem; min-width: 68px; }
-  .news-tag { font-size: 0.68rem; padding: 0.15rem 0.35rem; }
+  .news-date { min-width: 42px; padding-top: 0.75rem; }
+  .news-month { font-size: 0.75rem; }
+  .news-year { font-size: 0.62rem; }
+  .news-tag { font-size: 0.65rem; padding: 2px 8px; }
   .student-card { padding: 12px; }
   .student-avatar { width: 60px; height: 30px; font-size: 10px; }
   .student-role { font-size: 0.78rem; }
@@ -2009,7 +2009,17 @@ body {
       });
     })();
 
-    /* ── 5. Mobile Menu Toggle ── */
+    /* ── 5. Split news dates into month/year ── */
+    (function () {
+      document.querySelectorAll('.news-date').forEach(function (el) {
+        var parts = el.textContent.trim().split(/\s+/);
+        if (parts.length === 2) {
+          el.innerHTML = '<span class="news-month">' + parts[0] + '</span><span class="news-year">' + parts[1] + '</span>';
+        }
+      });
+    })();
+
+    /* ── 6. Mobile Menu Toggle ── */
     (function () {
       var btn = document.querySelector('.mobile-menu-btn');
       var nav = document.querySelector('.nav-links');
@@ -2039,7 +2049,7 @@ body {
       });
     })();
 
-    /* ── 6. Floating hearts on thanks line click ── */
+    /* ── 7. Floating hearts on thanks line click ── */
     (function () {
       var el = document.getElementById('thanks-line');
       if (!el) return;
@@ -2067,7 +2077,7 @@ body {
       });
     })();
 
-    /* ── 7. Lazy-inject publication thumbnails (mobile only) ── */
+    /* ── 8. Lazy-inject publication thumbnails (mobile only) ── */
     (function () {
       var THUMBS = {
         'sica':        { base: 'sica',        pages: 22 },
