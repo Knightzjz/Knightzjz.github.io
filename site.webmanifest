@@ -1,0 +1,22 @@
+{
+  "name": "周吉喆 - 四川大学计算机学院",
+  "short_name": "周吉喆",
+  "description": "周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#fefdfb",
+  "theme_color": "#fefdfb",
+  "icons": [
+    {
+      "src": "images/avatar-180w.webp",
+      "sizes": "180x180",
+      "type": "image/webp"
+    },
+    {
+      "src": "images/avatar-393w.webp",
+      "sizes": "393x393",
+      "type": "image/webp"
+    }
+  ]
+}

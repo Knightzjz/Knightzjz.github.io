@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#fefdfb">
   <meta name="color-scheme" content="light">
   <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://countapi.mileshilliard.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
   <title>周吉喆 - 四川大学计算机学院</title>
   <meta name="description" content="周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。">
   <meta name="author" content="Jizhe Zhou">
@@ -39,7 +40,9 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="images/avatar-393w.webp" type="image/webp" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="site.webmanifest">
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -56,6 +59,24 @@
       "alternateName": ["Ji-Zhe Zhou", "Jizhe Zhou"],
       "url": "https://knightzjz.github.io/",
       "jobTitle": "副教授",
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Associate Professor",
+        "occupationLocation": {
+          "@type": "City",
+          "name": "Chengdu"
+        }
+      },
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "University of Macau"
+        },
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "The Chinese University of Hong Kong"
+        }
+      ],
       "worksFor": {
         "@type": "Organization",
         "@id": "https://cs.scu.edu.cn/#organization",
