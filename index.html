@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <meta name="theme-color" content="#fefdfb">
   <meta name="color-scheme" content="light">
   <meta name="format-detection" content="telephone=no">
@@ -140,6 +140,8 @@ body {
    ============================================================ */
 .site-header {
   padding: 1rem 2rem;
+  padding-left: max(2rem, env(safe-area-inset-left));
+  padding-right: max(2rem, env(safe-area-inset-right));
   border-bottom: 1px solid var(--border);
   background: linear-gradient(180deg, #eff6ff 0%, var(--bg) 100%);
   position: sticky;
@@ -842,6 +844,8 @@ body {
    ============================================================ */
 .site-footer {
   text-align: center; padding: 2rem 2rem 0; color: var(--text-light); font-size: 0.85rem;
+  padding-left: max(2rem, env(safe-area-inset-left));
+  padding-right: max(2rem, env(safe-area-inset-right));
   border-top: 1px solid var(--border); margin-top: 2rem;
   position: relative; overflow: hidden; z-index: 1;
 }
@@ -885,10 +889,18 @@ body {
   .bio-cn, .bio-en { padding-left: 0; }
   .timeline .item { flex-direction: column; gap: 0.4rem; }
   .timeline .date { width: auto; }
-  .main-content { padding: 1.5rem 1rem; }
+  .main-content {
+    padding: 1.5rem 1rem;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
   .section { padding: 1.5rem 0; }
-  .bio-divider { margin: 1rem -16px; }
-  .site-header { padding: 0.75rem 1rem; }
+  .bio-divider { margin: 1rem -24px; }
+  .site-header {
+    padding: 0.75rem 1rem;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
   .nav-links { gap: 1rem; }
   .nav-links a { font-size: 0.85rem; }
   .hero-text h1 { font-size: 1.5rem; }
@@ -998,6 +1010,17 @@ body {
   .pub-link:hover { transform: translateY(-2px); }
   .paper-tag:hover { transform: none; }
   .nav-links a:hover { color: var(--text); }
+  /* Neutralize sticky hover transforms (tap-and-stick) on touch */
+  .avatar-wrapper:hover,
+  .bio-section:hover,
+  .pub:hover,
+  .pub:hover .pub-thumb,
+  .timeline .item:hover,
+  .highlight-tag:hover,
+  .project-tag:hover,
+  .emg-logo-badge:hover,
+  .emg-flyer:hover,
+  .news-more-btn:hover { transform: none; }
 }
 
 /* Prefers reduced motion */
@@ -1012,7 +1035,7 @@ body {
   display: none;
   background: none;
   border: none;
-  padding: 8px;
+  padding: 10px;
   cursor: pointer;
   color: var(--text);
   border-radius: 6px;
@@ -2100,30 +2123,52 @@ body {
 
       var MOBILE_MQ = window.matchMedia('(max-width: 768px)');
 
-      function inject() {
-        document.querySelectorAll('.pub-thumbs-strip[data-pub]:not(.injected)').forEach(function (strip) {
-          strip.classList.add('injected');
-          var key = strip.getAttribute('data-pub');
-          var info = THUMBS[key];
-          if (!info) return;
-          var html = '';
-          var prefix = 'images/pub-thumbs/' + info.base;
-          html += '<img src="' + prefix + '.webp" alt="Page 1" height="150" loading="lazy">';
-          for (var i = 2; i <= info.pages; i++) {
-            html += '<img src="' + prefix + '_p' + i + '.webp" alt="Page ' + i + '" height="150" loading="lazy">';
-          }
-          strip.innerHTML = html;
-          strip.addEventListener('scroll', function () {
-            this.classList.add('scrolled');
-          }, { once: true, passive: true });
-        });
+      function fill(strip) {
+        if (strip.classList.contains('injected')) return;
+        strip.classList.add('injected');
+        var key = strip.getAttribute('data-pub');
+        var info = THUMBS[key];
+        if (!info) return;
+        var html = '';
+        var prefix = 'images/pub-thumbs/' + info.base;
+        html += '<img src="' + prefix + '.webp" alt="Page 1" height="150" loading="lazy">';
+        for (var i = 2; i <= info.pages; i++) {
+          html += '<img src="' + prefix + '_p' + i + '.webp" alt="Page ' + i + '" height="150" loading="lazy">';
+        }
+        strip.innerHTML = html;
+        strip.addEventListener('scroll', function () {
+          this.classList.add('scrolled');
+        }, { once: true, passive: true });
+      }
+
+      /* IntersectionObserver: only inject a strip when it approaches the viewport
+         (avoids creating ~135 img nodes up-front on mobile). Fallback: inject all. */
+      var io = null;
+      function arm() {
+        var strips = document.querySelectorAll('.pub-thumbs-strip[data-pub]:not(.injected)');
+        if (!strips.length) return;
+        if (!('IntersectionObserver' in window)) {
+          strips.forEach(fill);
+          return;
+        }
+        if (!io) {
+          io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                fill(e.target);
+                io.unobserve(e.target);
+              }
+            });
+          }, { rootMargin: '400px 0px' });
+        }
+        strips.forEach(function (s) { io.observe(s); });
       }
 
       if (MOBILE_MQ.matches) {
-        inject();
+        arm();
       }
       MOBILE_MQ.addEventListener('change', function (e) {
-        if (e.matches) inject();
+        if (e.matches) arm();
       });
     })();
 
