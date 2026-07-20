@@ -50,6 +50,8 @@
     }
 
     .blog-title {
+      position: relative;
+      z-index: 2;
       font-size: clamp(2.5rem, 7.5vw, 4.2rem);
       font-weight: 800;
       line-height: 1.05;
@@ -59,6 +61,15 @@
       background-clip: text;
       margin-bottom: 2.25rem;
       user-select: none;
+    }
+    /* Opaque backdrop so the faint floating emojis don't show through the
+       transparent-fill gradient letters (otherwise "Digest" looks obscured). */
+    .blog-title::before {
+      content: "";
+      position: absolute;
+      inset: -0.4rem -1rem;
+      background: #ffffff;
+      z-index: -1;
     }
 
     /* ── Cover (latest highlight) — photo + only time & location, no prose ── */
@@ -261,7 +272,7 @@
       </div>
       <figcaption class="cover-meta">
         <span class="cover-date">Jul 10, 2026 · 15:48:28</span>
-        <span class="cover-loc">📍 Busan · Cheongsapo · 35.162&deg;N&nbsp;129.188&deg;E</span>
+        <span class="cover-loc">📍 35.162&deg;N&nbsp;129.188&deg;E · Busan · Cheongsapo</span>
       </figcaption>
     </figure>
 
