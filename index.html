@@ -774,6 +774,7 @@ body {
 /* Horizontal scroll strip — hidden on desktop, shown on mobile */
 .pub-thumbs-strip { display: none; }
 .pub-thumbs-strip img { height: 160px; width: auto; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+.pub-swipe-hint { display: none; }
 .pub-body { flex: 1; min-width: 0; }
 .pub h3 { margin: 0 0 0.25rem; font-size: 1rem; line-height: 1.45; }
 .pub .authors { color: var(--text-light); font-size: 0.88rem; margin-bottom: 0.2rem; }
@@ -933,6 +934,7 @@ body {
     box-shadow: 0 2px 16px rgba(0,0,0,0.08);
     overflow: hidden;
     border: 1px solid rgba(0,0,0,0.06);
+    position: relative;
   }
   .pub + .pub { margin-top: 0; }
   .pub .pub-thumb-wrap { display: none; }
@@ -948,14 +950,22 @@ body {
     overscroll-behavior-x: contain;
   }
   .pub-thumbs-strip::-webkit-scrollbar { display: none; }
-  .pub-thumbs-strip::after {
-    content: '← swipe →';
-    position: sticky; right: 0; align-self: center;
-    font-size: 9px; color: rgba(100,116,139,0.5);
-    padding: 2px 8px; background: inherit;
-    flex-shrink: 0; pointer-events: none;
+  /* Stable swipe hint: absolutely positioned over the strip's top-right corner,
+     anchored to the (position:relative) .pub card so it never scrolls with content
+     nor jumps between browsers. Fades out after the first scroll. */
+  .pub-swipe-hint {
+    display: inline-block;
+    position: absolute;
+    top: 10px; right: 10px; z-index: 3;
+    font-size: 9px; line-height: 1; white-space: nowrap;
+    color: #64748b;
+    background: rgba(255,255,255,0.9);
+    padding: 3px 8px; border-radius: 10px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.12);
+    pointer-events: none;
+    transition: opacity 0.35s ease;
   }
-  .pub-thumbs-strip.scrolled::after { content: ''; }
+  .pub-swipe-hint.is-hidden { opacity: 0; }
   .pub-thumbs-strip img {
     flex-shrink: 0;
     height: 150px;
@@ -2126,8 +2136,14 @@ body {
           html += '<img src="' + prefix + '_p' + i + '.webp" alt="Page ' + i + '" height="150" loading="lazy">';
         }
         strip.innerHTML = html;
+        var hint = document.createElement('span');
+        hint.className = 'pub-swipe-hint';
+        hint.setAttribute('aria-hidden', 'true');
+        hint.textContent = '← swipe →';
+        strip.insertAdjacentElement('afterend', hint);
         strip.addEventListener('scroll', function () {
           this.classList.add('scrolled');
+          hint.classList.add('is-hidden');
         }, { once: true, passive: true });
       }
 
