@@ -2,10 +2,9 @@ name: Update Scholar Citations
 
 on:
   schedule:
-    # Once a day at 00:00 UTC → 08:00 Beijing.
-    # SerpAPI free tier = 100 searches/month, so 1 run/day (~31/month)
-    # keeps us far below the cap with headroom for manual re-runs.
-    - cron: '0 0 * * *'
+    # Every 8 hours (UTC 0/8/16 → Beijing 8:00, 16:00, 0:00).
+    # 3 runs/day × 31 ≈ 93 searches/month — well under the 250/month plan.
+    - cron: '0 */8 * * *'
   # Also allow manual trigger from GitHub Actions tab
   workflow_dispatch:
 

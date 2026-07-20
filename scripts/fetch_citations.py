@@ -77,6 +77,15 @@ def fetch_via_direct():
 
 
 def main():
+    # Missing key = config error (not a transient API issue). Fail loudly so it
+    # is noticed — GitHub emails on scheduled-workflow failure. A transient
+    # SerpAPI/captcha error below is handled softly instead (keep old + warn).
+    if not os.environ.get("SERPAPI_KEY"):
+        print("ERROR: SERPAPI_KEY secret is not set for this repo. Add it under "
+              "Settings -> Secrets and variables -> Actions -> New repository secret.",
+              file=sys.stderr)
+        sys.exit(1)
+
     result = None
     errors = []
     for name, fn in (("SerpAPI", fetch_via_serpapi), ("direct", fetch_via_direct)):
