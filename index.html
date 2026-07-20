@@ -35,7 +35,7 @@
 
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="icon" href="images/avatar-180w.webp" type="image/webp" sizes="180x180">
-  <link rel="apple-touch-icon" href="images/avatar.jpeg">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +51,7 @@
     "@type": "ProfilePage",
     "@id": "https://knightzjz.github.io/#profile",
     "url": "https://knightzjz.github.io/",
-    "dateModified": "2026-07-18",
+    "dateModified": "2026-07-20",
     "mainEntity": {
       "@type": "Person",
       "@id": "https://knightzjz.github.io/#person",
@@ -1948,7 +1948,7 @@ body {
       var el = document.getElementById('citation-count');
       if (!el) return;
       fetch('citations.json')
-        .then(function (r) { return r.json(); })
+        .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
         .then(function (data) {
           if (data && data.count > 0) {
             el.textContent = '(' + data.count.toLocaleString() + ')';
@@ -1964,7 +1964,7 @@ body {
       if (!badges.length) return;
 
       fetch('stars.json')
-        .then(function (r) { return r.json(); })
+        .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
         .then(function (data) {
           if (!data || !data.repos) return;
           badges.forEach(function (b) {
@@ -2121,7 +2121,9 @@ body {
         'ncl-iml':     { base: 'ncl-iml',     pages: 11 }
       };
 
-      var MOBILE_MQ = window.matchMedia('(max-width: 768px)');
+      /* Match the ≤600px breakpoint where the strip is actually displayed
+         (avoids injecting ~135 hidden img nodes in the 601–768px band). */
+      var MOBILE_MQ = window.matchMedia('(max-width: 600px)');
 
       function fill(strip) {
         if (strip.classList.contains('injected')) return;
@@ -2176,6 +2178,22 @@ body {
       MOBILE_MQ.addEventListener('change', function (e) {
         if (e.matches) arm();
       });
+    })();
+
+    /* ── 8. Keep JSON-LD dateModified fresh — derived from the page's
+           Last-Modified header (GitHub Pages sets it to the last deploy time),
+           so it auto-updates on every deploy without manual edits. ── */
+    (function () {
+      var ld = document.querySelector('script[type="application/ld+json"]');
+      if (!ld) return;
+      try {
+        var d = new Date(document.lastModified);
+        if (isNaN(d.getTime())) return;
+        var iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        var data = JSON.parse(ld.textContent);
+        data.dateModified = iso;
+        ld.textContent = JSON.stringify(data, null, 2);
+      } catch (_) { /* keep the static fallback date */ }
     })();
 
     /* ── Page-wide floating ocean emojis ── */
