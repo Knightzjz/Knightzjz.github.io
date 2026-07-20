@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, follow">
-  <title>0x194 — Blog | Ji-Zhe Zhou</title>
+  <title>Eat More Digest — Blog | Ji-Zhe Zhou</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,13 +15,9 @@
       background: #ffffff;
       color: #1e293b;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       overflow-x: hidden;
       position: relative;
-      padding: 2rem 1rem;
+      padding: 2.75rem 1rem 3rem;
     }
 
     /* Floating emojis */
@@ -45,41 +41,84 @@
     }
 
     .container {
-      text-align: center;
+      position: relative;
       z-index: 1;
-      padding: 2rem 1.5rem;
       max-width: 760px;
       width: 100%;
+      margin: 0 auto;
+      text-align: center;
     }
 
-    .code {
-      font-size: clamp(6rem, 16vw, 10rem);
+    .blog-title {
+      font-size: clamp(2.5rem, 7.5vw, 4.2rem);
       font-weight: 800;
-      line-height: 1;
+      line-height: 1.05;
       background: linear-gradient(135deg, #2563eb 0%, #f59e0b 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 0.5rem;
+      margin-bottom: 2.25rem;
       user-select: none;
     }
 
-    .subtitle {
-      font-size: clamp(1.2rem, 3vw, 1.6rem);
-      font-weight: 600;
+    /* ── Cover (latest highlight) — photo + only time & location, no prose ── */
+    .cover {
+      width: 100%;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(30, 41, 59, 0.12), 0 8px 24px rgba(30, 41, 59, 0.06);
+      overflow: hidden;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+    .cover-meta {
+      padding: 1.1rem 1.2rem 1.3rem;
+      text-align: center;
+    }
+    .cover-date {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       color: #1e293b;
-      margin-bottom: 0.5rem;
+    }
+    .cover-loc {
+      display: block;
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: #94a3b8;
+      letter-spacing: 0.04em;
     }
 
-    /* Photo card — same max-width as container for alignment */
+    /* ── "Post Incoming" — sits below the cover ── */
+    .incoming {
+      margin: 2.75rem 0 2.25rem;
+      font-size: clamp(1.1rem, 2.8vw, 1.4rem);
+      font-weight: 600;
+      color: #1e293b;
+    }
+    .incoming .in {
+      color: #0f766e;
+      font-style: italic;
+      font-weight: 800;
+    }
+
+    /* ── Blog post list — one card per row (一条一条) ── */
+    .post-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2.75rem;
+      width: 100%;
+    }
+
     .photo-card {
       background: #fff;
       border-radius: 20px;
       box-shadow: 0 20px 60px rgba(30, 41, 59, 0.12), 0 8px 24px rgba(30, 41, 59, 0.06);
       overflow: hidden;
-      margin: 0 auto 2.5rem;
       width: 100%;
       border: 1px solid rgba(226, 232, 240, 0.8);
+      text-align: left;
     }
 
     .photo-wrap {
@@ -109,21 +148,27 @@
       opacity: 0;
       transition: opacity 0.8s ease;
     }
-
-    .photo-real.loaded {
-      opacity: 1;
-    }
-
-    .photo-wrap:has(.photo-real.loaded) .photo-placeholder {
-      opacity: 0;
-    }
+    .photo-real.loaded { opacity: 1; }
+    .photo-wrap:has(.photo-real.loaded) .photo-placeholder { opacity: 0; }
 
     .photo-caption {
       padding: 1.4rem 1.6rem;
-      text-align: left;
       background: #fff;
     }
-
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.7rem;
+    }
+    .post-date {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #0f766e;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
     .photo-caption p {
       font-size: 1rem;
       color: #475569;
@@ -138,14 +183,12 @@
       color: #0f766e;
       letter-spacing: 0.02em;
     }
-
     .photo-caption .loc {
       font-size: 0.85rem;
       color: #94a3b8;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      margin-top: 0.5rem;
     }
 
     .cta {
@@ -159,6 +202,7 @@
       border-radius: 8px;
       font-weight: 600;
       font-size: 0.95rem;
+      margin-top: 3rem;
       transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
     }
     .cta:hover {
@@ -167,12 +211,10 @@
       box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     }
 
-    /* Footer */
     .footer {
-      margin-top: 3rem;
+      margin-top: 2.5rem;
       font-size: 0.75rem;
       color: #cbd5e1;
-      z-index: 1;
       text-align: center;
     }
 
@@ -183,7 +225,8 @@
     }
 
     @media (max-width: 640px) {
-      .container { padding: 1.5rem 1rem; }
+      body { padding: 2rem 1rem 2.5rem; }
+      .post-list { gap: 2rem; }
       .photo-caption { padding: 1.1rem 1.2rem; }
       .photo-caption p { font-size: 0.95rem; }
     }
@@ -195,9 +238,13 @@
   <div class="beans" id="beans" aria-hidden="true"></div>
 
   <div class="container">
-    <div class="code">0x194</div>
-    <p class="subtitle">Blog Coming Soon</p>
-    <div class="photo-card">
+    <h1 class="blog-title">Eat More Digest</h1>
+
+    <!-- COVER — the latest highlight. Only time & location, no prose.
+         Capture time from the ORIGINAL photo's EXIF: 2026-07-10 15:48:28 (+09:00,
+         Xiaomi 15 Ultra). The photo embeds NO GPS, so the coordinates shown are
+         Cheongsapo's place values (35.162°N, 129.188°E), not from the file. -->
+    <figure class="cover">
       <div class="photo-wrap">
         <div class="photo-placeholder" style="background-image: url('seaside-tiny.jpg');"></div>
         <picture>
@@ -208,16 +255,60 @@
             class="photo-real"
             loading="lazy"
             decoding="async"
-            onload="this.classList.add('loaded')"
             width="1400"
             height="788">
         </picture>
       </div>
-      <div class="photo-caption">
-        <p>I haven't started writing my blog yet — I went to the sea instead.<br><span class="pun-line">You can take this time to Eat More first. 🦐</span></p>
-        <span class="loc">📍 Busan · Cheongsapo</span>
-      </div>
-    </div>
+      <figcaption class="cover-meta">
+        <span class="cover-date">Jul 10, 2026 · 15:48:28</span>
+        <span class="cover-loc">📍 Busan · Cheongsapo · 35.162&deg;N&nbsp;129.188&deg;E</span>
+      </figcaption>
+    </figure>
+
+    <p class="incoming"><span class="in">Post Incoming</span> — fresh posts &amp; fresh dishes on the way. 🍽️</p>
+
+    <main class="post-list" id="post-list">
+      <!-- ════════════════════════════════════════════════════════════
+           BLOG POSTS — newest goes at the TOP.
+           To add a post: scroll to the "NEW POST TEMPLATE" comment at the
+           bottom of this list, copy it, fill it in, and paste it as the
+           first <article class="photo-card"> right here.
+           ════════════════════════════════════════════════════════════ -->
+
+      <!-- ══════════════════ NEW POST TEMPLATE ══════════════════
+           This block is COMMENTED OUT, so it does NOT show on the page.
+
+           How to add a post (usually done by the assistant from an .md/.doc
+           the user provides):
+             1) Copy everything between the TEMPLATE markers and uncomment it.
+             2) Move it to the TOP of .post-list (newest first).
+             3) Put the photo(s) in this blog/ folder. Recommended: export a
+                1400px .webp (+ optional 800px .webp for mobile + a tiny
+                blurred placeholder). Delete the whole .photo-wrap block for
+                a text-only post.
+             4) Fill in the date, location (optional), image, alt text, and
+                the caption HTML. The caption can hold several <p> paragraphs;
+                use <span class="pun-line">…</span> for an italic punch-line.
+           ────────────────────────────────────────────────────────────
+      <article class="photo-card">
+        <div class="photo-wrap">
+          <div class="photo-placeholder" style="background-image: url('POST-tiny.jpg');"></div>
+          <picture>
+            <source media="(max-width: 640px)" srcset="POST-800.webp">
+            <img src="POST-1400.webp" alt="DESCRIBE THE PHOTO" class="photo-real" loading="lazy" decoding="async" width="1400" height="788">
+          </picture>
+        </div>
+        <div class="photo-caption">
+          <div class="post-meta">
+            <span class="post-date">Mon YYYY</span>
+            <span class="loc">📍 Place (optional)</span>
+          </div>
+          <p>Your text here. <span class="pun-line">Optional italic punch-line. 🍽️</span></p>
+        </div>
+      </article>
+      ══════════════════ END NEW POST TEMPLATE ══════════════════ -->
+
+    </main>
 
     <a href="/" class="cta">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
@@ -228,6 +319,15 @@
   </div>
 
   <script>
+    // Progressive photo reveal (blur-up) for every post image — no inline onload needed.
+    (function () {
+      document.querySelectorAll('.photo-real').forEach(function (img) {
+        function done() { img.classList.add('loaded'); }
+        if (img.complete && img.naturalWidth > 0) done();
+        else img.addEventListener('load', done);
+      });
+    })();
+
     // Generate floating emojis (skip if user prefers reduced motion)
     (function () {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
