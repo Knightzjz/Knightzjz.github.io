@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#fefdfb">
   <meta name="robots" content="noindex, follow">
   <title>Eat More Digest — Blog | Ji-Zhe Zhou</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +18,7 @@
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
-      padding: 2.75rem 1rem 3rem;
+      padding: calc(2.75rem + env(safe-area-inset-top)) calc(1rem + env(safe-area-inset-right)) calc(3rem + env(safe-area-inset-bottom)) calc(1rem + env(safe-area-inset-left));
     }
 
     /* Floating emojis */
