@@ -313,6 +313,7 @@ body {
 }
 .highlight-tag {
   display: inline-block;
+  white-space: nowrap;
   background: linear-gradient(135deg, #fef9c3, #fef3c7);
   color: #92400e; padding: 0.1rem 0.5rem;
   border-radius: 6px; font-size: 0.82rem; font-weight: 600;
@@ -890,6 +891,9 @@ body {
   .links { justify-content: center; flex-wrap: wrap; gap: 0.5rem; }
   .bio-section { padding: 1.25rem 1.5rem; }
   .bio-cn, .bio-en { padding-left: 0; }
+  /* on narrow screens let the long English clause wrap between words
+     (the pill itself stays on one line via .highlight-tag nowrap) */
+  .nobr { white-space: normal; }
   .timeline .item { flex-direction: column; gap: 0.4rem; }
   .timeline .date { width: auto; }
   .main-content {
