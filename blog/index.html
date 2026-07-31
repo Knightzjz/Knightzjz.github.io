@@ -11,6 +11,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    .skip-link {
+      position: absolute; top: -100px; left: 0;
+      background: #2563eb; color: #fff; padding: 8px 16px;
+      z-index: 1000; font-size: 0.9rem; border-radius: 0 0 8px 0;
+      text-decoration: none;
+    }
+    .skip-link:focus { top: 0; outline: 2px solid #f59e0b; }
     body {
       font-family: 'Inter', system-ui, sans-serif;
       background: #ffffff;
@@ -241,6 +248,8 @@
 </head>
 <body>
 
+  <a href="#post-list" class="skip-link">Skip to posts</a>
+
   <!-- Floating emojis -->
   <div class="beans" id="beans" aria-hidden="true"></div>
 
@@ -274,7 +283,7 @@
 
     <p class="incoming"><span class="in">Post Incoming</span> — fresh posts &amp; fresh dishes on the way. 🍽️</p>
 
-    <main class="post-list" id="post-list">
+    <main class="post-list" id="post-list" aria-label="Blog posts">
       <!-- ════════════════════════════════════════════════════════════
            BLOG POSTS — newest goes at the TOP.
            To add a post: scroll to the "NEW POST TEMPLATE" comment at the
