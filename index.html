@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#fefdfb">
   <meta name="color-scheme" content="light">
   <meta name="format-detection" content="telephone=no">
@@ -20,10 +20,10 @@
   <meta property="og:description" content="周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:site_name" content="Ji-Zhe Zhou Academic Homepage">
-  <meta property="og:image" content="https://knightzjz.github.io/images/og-banner.webp">
-  <meta property="og:image:type" content="image/webp">
   <meta property="og:image" content="https://knightzjz.github.io/images/og-banner.png">
   <meta property="og:image:type" content="image/png">
+  <meta property="og:image" content="https://knightzjz.github.io/images/og-banner.webp">
+  <meta property="og:image:type" content="image/webp">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="周吉喆 Ji-Zhe Zhou — 四川大学计算机学院副教授">
@@ -1187,7 +1187,7 @@ body {
     <!-- ======================= NEWS ======================= -->
     <section class="section" id="news">
       <h2><span aria-hidden="true">📣</span> News</h2>
-      <div class="news-list">
+      <div class="news-list" id="news-list">
 
         <!-- 2026 -->
         <div class="news-entry">
@@ -1369,7 +1369,7 @@ body {
         </div>
 
       </div>
-      <button class="news-more-btn" id="news-toggle" aria-expanded="false">▼ Show More</button>
+      <button class="news-more-btn" id="news-toggle" aria-expanded="false" aria-controls="news-list">▼ Show More</button>
     </section>
 
     <!-- ======================= PUBLICATIONS ======================= -->

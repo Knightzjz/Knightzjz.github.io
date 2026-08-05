@@ -11,12 +11,14 @@
     {
       "src": "images/avatar-180w.webp",
       "sizes": "180x180",
-      "type": "image/webp"
+      "type": "image/webp",
+      "purpose": "any maskable"
     },
     {
       "src": "images/avatar-393w.webp",
       "sizes": "393x393",
-      "type": "image/webp"
+      "type": "image/webp",
+      "purpose": "any maskable"
     }
   ]
 }
