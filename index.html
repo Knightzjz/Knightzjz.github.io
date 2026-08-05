@@ -327,8 +327,6 @@ body {
 .highlight-tag:hover { background: linear-gradient(135deg, #fef08a, #fde68a); box-shadow: 0 2px 8px rgba(146, 64, 14, 0.18); transform: scale(1.05); }
 .highlight-tag a { color: #92400e; text-decoration: none; font-weight: 600; }
 .highlight-tag a:hover { color: #78350f; }
-/* keep a short clause together so an inline-block tag isn't orphaned onto its own line */
-.nobr { white-space: nowrap; }
 
 .project-tag {
   display: inline-block;
@@ -894,9 +892,6 @@ body {
   .links { justify-content: center; flex-wrap: wrap; gap: 0.5rem; }
   .bio-section { padding: 1.25rem 1.5rem; }
   .bio-cn, .bio-en { padding-left: 0; }
-  /* on narrow screens let the long English clause wrap between words
-     (the pill itself stays on one line via .highlight-tag nowrap) */
-  .nobr { white-space: normal; }
   .timeline .item { flex-direction: column; gap: 0.4rem; }
   .timeline .date { width: auto; }
   .main-content {
@@ -1168,7 +1163,7 @@ body {
       <div class="bio-en">
         <p lang="en">
           I am an Associate Professor at the College of Computer Science, Sichuan University,
-          <span class="nobr">and <span class="highlight-tag">Sichuan Provincial Thousand Talents</span>.</span>
+          and <span class="highlight-tag">Sichuan Provincial Thousand Talents</span>.
           I serve as <span class="highlight-tag"><a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank" rel="noopener noreferrer">Associate Editor of IEEE TETCI</a></span>
           and <span class="highlight-tag"><a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank" rel="noopener noreferrer">Guest Editor of J. Imaging</a></span>,
           and I lead the <span class="highlight-tag"><a href="#eat-more-group">Eat More Group</a></span>.
