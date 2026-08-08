@@ -2,10 +2,10 @@ name: Update GitHub Stars
 
 on:
   schedule:
-    # Every 8 hours, offset 15 min from citations (UTC): 0:15, 8:15, 16:15
-    # The 15-min stagger + concurrency group prevents non-fast-forward push
-    # conflicts when both workflows are scheduled near the same wall-clock time.
-    - cron: '15 */8 * * *'
+    # Daily at Beijing 08:15, 16:15, 00:15 (UTC 0:15, 8:15, 16:15).
+    # 15-min stagger after citations (Beijing 08:00/16:00/24:00) + shared
+    # concurrency group prevents non-fast-forward push conflicts.
+    - cron: '15 0,8,16 * * *'
   workflow_dispatch:
 
 jobs:
