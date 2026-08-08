@@ -2,10 +2,11 @@ name: Update GitHub Stars
 
 on:
   schedule:
-    # Daily at Beijing 08:15, 16:15, 00:15 (UTC 0:15, 8:15, 16:15).
-    # 15-min stagger after citations (Beijing 08:00/16:00/24:00) + shared
-    # concurrency group prevents non-fast-forward push conflicts.
-    - cron: '15 0,8,16 * * *'
+    # Daily at Beijing 06:15, 14:15, 22:15 (UTC 22:15, 6:15, 14:15).
+    # Shifted 2h earlier to track citations; 15-min stagger after citations
+    # (Beijing 06:00/14:00/22:00) + shared concurrency group prevents
+    # non-fast-forward push conflicts.
+    - cron: '15 22,6,14 * * *'
   workflow_dispatch:
 
 jobs:
