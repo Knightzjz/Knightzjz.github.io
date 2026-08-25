@@ -1,12 +1,12 @@
 {
   "repos": {
     "venus-guangjian/SICA_OpenMMSec": 82,
-    "scu-zjz/RITA": 43,
+    "scu-zjz/RITA": 44,
     "SunnyHaze/IML-ViT": 310,
     "scu-zjz/ForensicHub": 222,
     "scu-zjz/SparseViT": 111,
-    "scu-zjz/IMDLBenCo": 310,
+    "scu-zjz/IMDLBenCo": 309,
     "Knightzjz/NCL-IML": 50
   },
-  "updated": "2026-08-24T07:29:58.342472+00:00"
+  "updated": "2026-08-25T15:07:41.586310+00:00"
 }
