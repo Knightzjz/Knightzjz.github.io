@@ -131,10 +131,6 @@ blockquote p:last-child{margin-bottom:0}
 /* 隐藏答案：白底白字，拖选 / Ctrl+A 才现形 */
 .hidden-ans{color:#fff !important;background:transparent;user-select:text}
 
-/* 文末配图 */
-.endpic{margin:56px 0 64px}
-.endpic img.fig{box-shadow:0 8px 30px rgba(60,80,110,.13);border-radius:5px;border:1px solid var(--line)}
-
 .signoff{margin-top:52px;padding-top:28px;border-top:1px solid var(--line);color:var(--ink-2);font-size:16px}
 .thanks{text-align:center;font-size:16px;letter-spacing:2.5px;
   font-style:italic;margin:34px 0 10px;padding:24px 12px 10px;
@@ -145,6 +141,12 @@ blockquote p:last-child{margin-bottom:0}
 .thanks:hover{color:#d9749a;text-shadow:0 0 12px rgba(233,150,180,.45);transform:scale(1.03)}
 .thanks:active{transform:scale(.97)}
 .thanks-sub{text-align:center;font-size:13.5px;color:var(--ink-3);margin:0 0 4px}
+
+.endpic{margin:42px 0 0}
+.endpic .pic-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--line-2)}
+.endpic .placeholder{position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(8px);transform:scale(1.06)}
+.endpic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .45s ease}
+.endpic img.loaded{opacity:1}
 
 .refs{margin-top:64px;padding-top:30px;border-top:1px solid var(--line-2)}
 .refs h2{border:none;margin:0 0 20px;padding:0}
@@ -393,6 +395,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <div class="signoff">
   <p>感谢大家的耐心阅读，欢迎批评指正。</p>
+  <p>感谢<a href="https://sebastouristtrophyf.github.io/" target="_blank" rel="noopener noreferrer">冯文韬</a>、<a href="https://sites.google.com/site/baoyuanwu2015/" target="_blank" rel="noopener noreferrer">吴保元</a>、<a href="https://cs.xmut.edu.cn/info/1085/4510.htm" target="_blank" rel="noopener noreferrer">杜侠</a>老师对博文的建议和帮助。</p>
   <p>2026 年 8 月 28 日，23:17，家中<br>
   （Helen姐头疼去睡觉了：D 所以今晚我能安心把拖了一个月的博客写完~）</p>
   <p class="thanks">Special Thanks to Helen Wang</p>
@@ -400,11 +403,13 @@ blockquote p:last-child{margin-bottom:0}
 </div>
 
 <figure class="endpic">
-  <picture>
-    <source srcset="img/seaview.webp" type="image/webp">
-    <img class="fig" src="img/seaview.jpg" alt="海边火车站：浪平风静，一列蓝白相间的列车停靠站台"
-         width="1520" height="506" loading="lazy" decoding="async">
-  </picture>
+  <div class="pic-wrap">
+    <div class="placeholder" style="background-image:url('img/endview-tiny.jpg');"></div>
+    <picture>
+      <source media="(max-width:640px)" srcset="img/endview-800.webp">
+      <img src="img/endview-1400.webp" alt="雨后城市天际线：高楼林立，云幕低垂" width="1400" height="788" loading="lazy" decoding="async">
+    </picture>
+  </div>
 </figure>
 
 <section class="refs">
@@ -444,6 +449,14 @@ blockquote p:last-child{margin-bottom:0}
       document.body.appendChild(h);
       (function(node){ setTimeout(function(){ node.remove(); }, 1500); })(h);
     }
+  });
+})();
+
+/* 文末图片淡入 */
+(function(){
+  document.querySelectorAll('.endpic img').forEach(function(img){
+    if(img.complete){ img.classList.add('loaded'); }
+    else { img.addEventListener('load', function(){ this.classList.add('loaded'); }); }
   });
 })();
 </script>
