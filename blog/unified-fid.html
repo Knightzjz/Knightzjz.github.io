@@ -38,9 +38,9 @@ h1 small{display:block;margin-top:18px;font-family:Georgia,"Times New Roman",ser
 
 h2{font-size:22px;margin:58px 0 20px;padding-bottom:12px;border-bottom:1px solid var(--line-2);
   font-weight:700;letter-spacing:.01em}
-h2 .num{font-family:Georgia,serif;color:var(--accent);margin-right:14px;font-size:.9em}
+h2 .num{font-family:Georgia,serif;color:var(--accent);margin-right:14px;font-size:1.32em;font-weight:700;vertical-align:-2px}
 h3{font-size:17.5px;margin:36px 0 14px;font-weight:700;color:var(--ink)}
-h3 .num{font-family:Georgia,serif;color:var(--accent);margin-right:9px;font-size:.92em}
+h3 .num{font-family:Georgia,serif;color:var(--accent);margin-right:9px;font-size:1.18em;font-weight:700;vertical-align:-1px}
 p{margin:0 0 20px;text-align:justify}
 strong{font-weight:700;color:#1c1811}
 code.term{background:#f4eee1;border:1px solid #eaddc4;border-radius:5px;padding:1px 7px;
@@ -132,6 +132,7 @@ blockquote p:last-child{margin-bottom:0}
 .hidden-ans{color:#fff !important;background:transparent;user-select:text}
 
 .signoff{margin-top:52px;padding-top:28px;border-top:1px solid var(--line);color:var(--ink-2);font-size:16px}
+.signoff p.sig-date{text-align:right}
 
 /* 返回博客列表 */
 .back-top{display:inline-flex;align-items:center;gap:7px;margin-top:30px;
@@ -166,7 +167,7 @@ blockquote p:last-child{margin-bottom:0}
 
 .refs{margin-top:64px;padding-top:30px;border-top:1px solid var(--line-2)}
 .refs h2{border:none;margin:0 0 20px;padding:0}
-.refs ol{padding-left:24px;font-size:14px;line-height:1.8}
+.refs ol{list-style:none;padding-left:0;font-size:14px;line-height:1.8}
 .refs li{margin-bottom:12px;color:var(--ink-2)}
 .refs .rmark{color:var(--accent);font-weight:600}
 .refs a{word-break:break-all}
@@ -238,7 +239,7 @@ blockquote p:last-child{margin-bottom:0}
 <p>构建一个<strong>统一伪造图像检测（Unified Fake Image Detection，下称 <abbr class="ufid">Unified FID</abbr>）</strong>模型，也就是不预设图像的伪造手段，对任意方法伪造的图像都可进行检测。那么实际中用户也只需将需要检测的图像输入一个 <abbr class="ufid">Unified FID</abbr> 检测器，就能得到相应的结果。</p>
 
 <div class="note-para">
-<p>其实我认为「伪造图像」这个词本身就有统一的意思——它代表对伪造类型不设限，此前也没有人这样用过。但经过和吕建成老师的讨论，我还是把「统一」单独强调出来，作为这个任务的核心思想。</p>
+<p>其实我认为「伪造图像」这个词本身就有统一的意思——它代表对伪造类型不设限，此前也没有人这样用过。但经过和<strong>吕建成</strong>老师的讨论，我还是把「统一」单独强调出来，作为这个任务的核心思想。</p>
 </div>
 
 <h2><span class="num">二</span>为什么会分成四条独立赛道</h2>
@@ -255,7 +256,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>只需要将时钟回拨一两年，其实大家就能看到，对应不同内容的伪造图像，基本要采取不同的伪造方式。比如人脸伪造，除了 Deepfake 的效果以外，如果你采用 PS 等方法，基本都是一眼假的效果，根本没有检测的必要，人眼就能分辨。而对于文档图像，则必须要逐字手动 PS，保证字体、大小、色号等的一致性，如果简单使用生成模型，那么一定是连基本的字形都生成不对的状态。</p>
 
-<p>因此，这时的需求也很明确，对应不同的图像，其实伪造的手法是相对固定的，针对这一系列伪造手法构建对应模型不仅效果好（专用性强），而且成本低。于是慢慢科研上就对不同的伪造手法发展出了独立的四条赛道，虽然有部分重复的地方，但基本都互相独立：训练数据独立，模型方案独立，测评数据和方式也独立。在使用中也不会导致任何困扰。</p>
+<p>因此，这时的需求也很明确，对应不同的图像，其实伪造的手法是相对固定的，针对这一系列伪造手法构建对应模型不仅效果好（专用性强），而且成本低。于是慢慢科研上就对不同的伪造手法发展出了独立的四条赛道，虽然有部分重复的地方，但基本都互相独立：训练数据独立，模型方案独立，测评数据和方式也独立。<strong>在使用中也不会导致任何困扰。</strong></p>
 
 <h3><span class="num">2.2</span>合：大模型抹平了伪造手段的边界</h3>
 
@@ -269,13 +270,15 @@ blockquote p:last-child{margin-bottom:0}
 
 <div class="keysent">当伪造手段走向统一的时候，伪造检测手段也必然走向统一。</div>
 
-<h3><span class="num">2.3</span>统一伪造图像检测 = AIGC 检测吗</h3>
+<h2><span class="num">三</span>任务定义：B 与 P</h2>
+
+<h3><span class="num">3.1</span>统一伪造图像检测 = AIGC 检测吗</h3>
 
 <p>既然都是大模型伪造，那么 <abbr class="ufid">Unified FID</abbr> 是不是就是一个 AIGC 检测模型呢？</p>
 
 <p>答案是否定的：</p>
 
-<p>首先，大模型伪造重点得益于 harness 工具而非简单的 diffusion 生成。大模型借助理解能力，会在生成的过程中不断监测图像内容是否完美符合用户需求，并且通过 harness 层不断自主调用各类工具修正图像内容，包括抠图，重绘，deepfake 换脸等工具。绝大部分大模型会为此调用数十项工具对图像内容进行精修，比如 GPT-Image-2 的单图生成往往花费数分钟之久就是各类工具不断调用对生成过程进行约束的结果。而 AIGC 图像往往被限定为大模型一次性生成的整张图像。这里包含两个要素：一是整图，不包含大模型在真实图像上的二次或者局部伪造；二是一次性，不考虑大模型调用工具基于生成—理解循环对图像的各类逐步修正。</p>
+<p>首先，大模型伪造能力重点得益于 harness 工具而非简单的 diffusion 生成。大模型借助理解能力，会在生成的过程中不断监测图像内容是否完美符合用户需求，并且通过 harness 层不断自主调用各类工具修正图像内容，包括抠图，重绘，deepfake 换脸等工具。绝大部分大模型会为此调用数十项工具对图像内容进行精修，比如 codex 的单图生成往往花费数分钟之久，就是各类工具不断调用对生成过程进行约束的结果。而 AIGC 图像往往被限定为大模型一次性生成的整张图像。这里包含两个要素：一是整图，不包含大模型在真实图像上的二次或者局部伪造；二是一次性，不考虑大模型调用工具基于生成—理解循环对图像的各类逐步修正。</p>
 
 <div class="concl">
 <p>因此，现有的大模型伪造图像并不简单 = AIGC 图像，而是完全包含了 AIGC 图像。</p>
@@ -283,11 +286,9 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>其次，在很长时间范围内，我们在互联网上面对的都是一个混合环境，也就是有很多大模型伪造的图像，也有很多是手工、小模型伪造的图像。历史上已经积攒了大量非大模型时代的伪造图像，此外，虽然大模型能力不断强化，但至今仍不能完全取代手工、特定模型等的篡改方案。比如，目前最强的文档伪造手段依然是手工抠图 + PS 的方案。如果只能处理大模型伪造的图像也并不能实现 <abbr class="ufid">Unified FID</abbr>。</p>
 
-<h2><span class="num">三</span>任务定义：B 与 P</h2>
+<p>那么 <abbr class="ufid">Unified FID</abbr> 任务到底是什么呢 <strong class="hl">（BP 定义）</strong>：</p>
 
-<p>那么 <abbr class="ufid">Unified FID</abbr> 任务到底是什么呢 （BP 定义）：</p>
-
-<h3><span class="num">3.1</span>B：Binary Classification</h3>
+<h3><span class="num">3.2</span>B：Binary Classification</h3>
 
 <p>首先，从任务范式上（B: Binary Classification）：</p>
 
@@ -307,7 +308,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>4. 利用预训练大模型获取其他相关信息也是合理且可行的，训练集 / 测试集输入均只有图像本身，额外构建 prompt engineering、post-training 等方法从基座大模型中攫取额外图像信息不会对任务范式造成任何影响。这相当于是基于大模型强化了 <code class="term">f(·)</code> 函数，使其可以从 <code class="term">x</code> 中获取额外信息。</p>
 
-<h3><span class="num">3.2</span>P：Polymath</h3>
+<h3><span class="num">3.3</span>P：Polymath</h3>
 
 <p>其次，从模型性能上（P: Polymath）：</p>
 
@@ -354,7 +355,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <div class="jphen">
 <span class="jp-t">吉喆现象（Ji-Zhe Phenomenon）</span>
-<p>我们管 artifacts 在各子领域异构的这个现象叫<strong class="jz">吉喆现象（Ji-Zhe Phenomenon）</strong>。</p>
+<p>我们在 ICML26<sup class="cite"><a href="#r2">[2]</a></sup> 中首次明确了 artifacts 的异构问题，并管这种 artifacts 在各子领域异构的这个现象叫<strong class="jz">吉喆现象（Ji-Zhe Phenomenon）</strong>。</p>
 </div>
 
 <p><span class="jz">吉喆现象</span>在单体小模型中必然会导致一个结果 --- <strong>特征坍塌</strong>，也就是模型基本只会学习各个子领域共同的特征表达，放弃学习每个子领域独特的 artifacts（特异性），最终学到的 artifacts 特征是一个退化后的 trivial 表达，artifacts 特征坍塌，不再对各种篡改手法有区分度。</p>
@@ -386,7 +387,7 @@ blockquote p:last-child{margin-bottom:0}
 <p>在 post-training 阶段这个模型坍塌问题的本质机理我们目前还在探索中，这个问题应该不仅会存在在取证方向上，很多垂直领域随着训练数据量的积攒应该都会有类似问题慢慢出现。这是一个非常有价值也比较难的研究方向，也欢迎大家一起讨论。</p>
 
 <div class="sci">
-<p><strong>其二，推理效率。</strong>大模型的处理效率至今难以提升。在实际场景中，对伪造图像的检测业务会存在明显的波动，有明显波峰波谷。比如，一些生活服务平台在特定日期的优惠活动（比如教师节老师吃饭打折），这就会在短时间（数小时）内涌入海量（百万量级）的检测需求（因为需要上传教师证核验资格，而教师证的伪造基本各类大模型都会帮你做）。大模型检测图像基本在秒级响应，以 5 秒检测一副图像计算，100W 数据需要 500W 秒也就大概 58 天时间。</p>
+<p><strong>其二，推理效率。</strong>大模型的处理效率至今难以提升。在实际场景中，对伪造图像的检测业务会存在明显的波动，有明显波峰波谷。比如，一些生活服务平台在特定日期的优惠活动（比如教师节老师吃饭打折），这就会在短时间（1-2 天）内涌入海量（百万量级）的检测需求（因为需要上传教师证核验资格，而教师证的伪造基本各类大模型都能帮你做）。大模型检测图像基本在秒级响应，以 5 秒检测一副图像计算，100W 数据需要 500W 秒也就大概 58 天时间。</p>
 </div>
 
 <p>因此，如何对<span class="r2">大模型路线</span>下的 <abbr class="ufid">Unified FID</abbr> 模型做推理加速也是一个核心问题。剪枝、并行、硬件尤其国产硬件加速等都是这个问题下的高潜力研究方向。</p>
@@ -416,7 +417,7 @@ blockquote p:last-child{margin-bottom:0}
 <div class="signoff">
   <p>感谢大家的耐心阅读，欢迎批评指正。</p>
   <p>感谢<a href="https://sebastouristtrophyf.github.io/" target="_blank" rel="noopener noreferrer">冯文韬</a>、<a href="https://sites.google.com/site/baoyuanwu2015/" target="_blank" rel="noopener noreferrer">吴保元</a>、<a href="https://cs.xmut.edu.cn/info/1085/4510.htm" target="_blank" rel="noopener noreferrer">杜侠</a>老师对博文的建议和帮助。</p>
-  <p>2026 年 8 月 28 日，23:17，家中<br>
+  <p class="sig-date">2026 年 8 月 28 日，23:17，家中<br>
   （Helen姐头疼去睡觉了：D 所以今晚我能安心把拖了一个月的博客写完~）</p>
   <p class="thanks">Special Thanks to Helen Wang</p>
   <p class="thanks-sub">欢迎转载，只需标明出处</p>
@@ -436,7 +437,7 @@ blockquote p:last-child{margin-bottom:0}
 <h2>参考文献</h2>
 <ol>
   <li id="r1"><span class="rmark">[1]</span> Bo Du, Xuekang Zhu, Xiaochen Ma, Chenfan Qu, Kaiwen Feng, Zhe Yang, Chi-Man Pun, Jian Liu, Jizhe Zhou. <strong>ForensicHub: A Unified Benchmark &amp; Codebase for All-Domain Fake Image Detection and Localization.</strong> NeurIPS 2025, Datasets and Benchmarks Track. arXiv:2505.11003. <a href="https://github.com/scu-zjz/ForensicHub">github.com/scu-zjz/ForensicHub</a>.</li>
-  <li id="r2"><span class="rmark">[2]</span> Bo Du, Xiaochen Ma, Xuekang Zhu, Zhe Yang, Chaoqun Niu, Jian Liu, Ji-Zhe Zhou. <strong>Can We Build a Monolithic Model for Fake Image Detection? SICA: Semantic-Induced Constrained Adaptation for Unified-Yet-Discriminative Artifact Feature Space Reconstruction.</strong> ICML 2026. arXiv:2602.06676. <a href="https://github.com/scu-zjz/SICA_OpenMMSec">github.com/scu-zjz/SICA_OpenMMSec</a>.</li>
+  <li id="r2"><span class="rmark">[2]</span> Bo Du, Xiaochen Ma, Xuekang Zhu, Zhe Yang, Chaoqun Niu, Jian Liu, Ji-Zhe Zhou. <strong>Can We Build a Monolithic Model for Fake Image Detection? SICA: Semantic-Induced Constrained Adaptation for Unified-Yet-Discriminative Artifact Feature Space Reconstruction.</strong> ICML 2026. arXiv:2602.06676. <a href="https://github.com/venus-guangjian/SICA_OpenMMSec">github.com/venus-guangjian/SICA_OpenMMSec</a>.</li>
   <li id="r3"><span class="rmark">[3]</span> <strong>Venus-DeFakerOne: Unified Fake Image Detection &amp; Localization.</strong> arXiv:2605.14091, 2026.</li>
 </ol>
 </section>
