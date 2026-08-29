@@ -16,12 +16,12 @@
   --note-bg:#f2f6f9; --note-line:#cddfeb;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);
   font-family:"Source Han Serif SC","Noto Serif CJK SC","Songti SC",Georgia,"Times New Roman","Microsoft YaHei",serif;
   font-size:17px;line-height:2.0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 ::selection{background:#f1e2c6;color:var(--ink)}
-.wrap{max-width:780px;margin:0 auto;padding:0 24px 110px}
+.wrap{max-width:780px;margin:0 auto;padding:0 24px 110px;position:relative;z-index:1}
 
 header.post-head{padding:26px 0 38px;border-bottom:1px solid var(--line);margin-bottom:44px;
   text-align:center}
@@ -132,7 +132,6 @@ blockquote p:last-child{margin-bottom:0}
 .hidden-ans{color:#fff !important;background:transparent;user-select:text}
 
 .signoff{margin-top:52px;padding-top:28px;border-top:1px solid var(--line);color:var(--ink-2);font-size:16px}
-.signoff p.sig-date{text-align:right}
 
 /* 返回博客列表 */
 .back-top{display:inline-flex;align-items:center;gap:7px;margin-top:30px;
@@ -172,10 +171,26 @@ blockquote p:last-child{margin-bottom:0}
 .refs .rmark{color:var(--accent);font-weight:600}
 .refs a{word-break:break-all}
 
+/* ── 背景漂浮物（比主页更浅，不影响阅读） ── */
+.page-beans{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.page-bean{position:absolute;bottom:-5vh;opacity:0;animation:bean-float linear infinite}
+@keyframes bean-float{
+  0%{transform:translateY(0) rotate(0deg);opacity:0}
+  8%{opacity:.07}
+  92%{opacity:.07}
+  100%{transform:translateY(-110vh) rotate(360deg);opacity:0}
+}
+@media (prefers-reduced-motion:reduce){.page-bean{animation:none;opacity:0}}
+
+/* ── 阅读进度条 ── */
+.readbar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);
+  z-index:100;opacity:.85}
+
 @media print{body{background:#fff;font-size:11pt}.wrap{max-width:100%}
-  .heart{display:none}}
+  .heart,.page-beans,.readbar{display:none}}
 @media (max-width:640px){
-  body{font-size:16px}
+  body{font-size:16.5px}
+  p{text-align:left}       /* 窄屏左对齐，避免中英混排被拉伸出大空隙 */
   h1{font-size:24px}h2{font-size:19.5px}
   .wrap{padding:0 18px 64px}
   header.post-head{padding:20px 0 28px}
@@ -189,6 +204,9 @@ blockquote p:last-child{margin-bottom:0}
 </style>
 </head>
 <body>
+
+<div class="page-beans" id="page-beans" aria-hidden="true"></div>
+<div class="readbar" id="readbar" aria-hidden="true"></div>
 
 <div class="wrap">
 
@@ -417,7 +435,7 @@ blockquote p:last-child{margin-bottom:0}
 <div class="signoff">
   <p>感谢大家的耐心阅读，欢迎批评指正。</p>
   <p>感谢<a href="https://sebastouristtrophyf.github.io/" target="_blank" rel="noopener noreferrer">冯文韬</a>、<a href="https://sites.google.com/site/baoyuanwu2015/" target="_blank" rel="noopener noreferrer">吴保元</a>、<a href="https://cs.xmut.edu.cn/info/1085/4510.htm" target="_blank" rel="noopener noreferrer">杜侠</a>老师对博文的建议和帮助。</p>
-  <p class="sig-date">2026 年 8 月 28 日，23:17，家中<br>
+  <p>2026 年 8 月 28 日，23:17，家中<br>
   （Helen姐头疼去睡觉了：D 所以今晚我能安心把拖了一个月的博客写完~）</p>
   <p class="thanks">Special Thanks to Helen Wang</p>
   <p class="thanks-sub">欢迎转载，只需标明出处</p>
@@ -483,6 +501,39 @@ blockquote p:last-child{margin-bottom:0}
     if(img.complete){ img.classList.add('loaded'); }
     else { img.addEventListener('load', function(){ this.classList.add('loaded'); }); }
   });
+})();
+
+/* 背景漂浮物（比主页更浅：更少、更淡、更慢） */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var c = document.getElementById('page-beans');
+  if(!c) return;
+  var emojis = ['🌊','🐚','☀️','✨','📝','🍃'];
+  var count = Math.min(12, Math.max(5, Math.round(window.innerWidth / 130)));
+  for(var i = 0; i < count; i++){
+    var s = document.createElement('span');
+    s.className = 'page-bean';
+    s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    s.style.left = (Math.random() * 100) + '%';
+    s.style.animationDuration = (18 + Math.random() * 18) + 's';
+    s.style.animationDelay = -(Math.random() * 24) + 's';
+    s.style.fontSize = (1 + Math.random() * 0.8) + 'rem';
+    c.appendChild(s);
+  }
+})();
+
+/* 阅读进度条 */
+(function(){
+  var bar = document.getElementById('readbar');
+  if(!bar) return;
+  var upd = function(){
+    var d = document.documentElement;
+    var max = d.scrollHeight - d.clientHeight;
+    bar.style.width = (max > 0 ? d.scrollTop / max * 100 : 0) + '%';
+  };
+  window.addEventListener('scroll', upd, {passive: true});
+  window.addEventListener('resize', upd);
+  upd();
 })();
 </script>
 
