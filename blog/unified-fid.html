@@ -23,7 +23,7 @@ body{margin:0;background:var(--bg);color:var(--ink);
 ::selection{background:#f1e2c6;color:var(--ink)}
 .wrap{max-width:780px;margin:0 auto;padding:0 24px 110px}
 
-header.post-head{padding:68px 0 38px;border-bottom:1px solid var(--line);margin-bottom:44px;
+header.post-head{padding:26px 0 38px;border-bottom:1px solid var(--line);margin-bottom:44px;
   text-align:center}
 header.post-head::before{content:"";display:block;width:36px;height:3px;border-radius:2px;
   background:var(--accent);margin:0 auto 32px}
@@ -132,6 +132,22 @@ blockquote p:last-child{margin-bottom:0}
 .hidden-ans{color:#fff !important;background:transparent;user-select:text}
 
 .signoff{margin-top:52px;padding-top:28px;border-top:1px solid var(--line);color:var(--ink-2);font-size:16px}
+
+/* 返回博客列表 */
+.back-top{display:inline-flex;align-items:center;gap:7px;margin-top:30px;
+  font-size:13.5px;color:var(--ink-3);text-decoration:none;letter-spacing:.06em;
+  transition:color .2s}
+.back-top:hover{color:var(--accent)}
+.back-top .arr{font-family:Georgia,serif;font-size:15px;transition:transform .2s;display:inline-block}
+.back-top:hover .arr{transform:translateX(-3px)}
+.back-blog-end{display:flex;justify-content:center;margin:60px 0 0}
+.back-blog-end a{display:inline-flex;align-items:center;gap:8px;padding:11px 36px;
+  border:1px solid var(--line-2);border-radius:999px;font-size:14px;color:var(--ink-2);
+  text-decoration:none;letter-spacing:.12em;
+  transition:border-color .25s,color .25s,background .25s}
+.back-blog-end a:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.back-blog-end .arr{font-family:Georgia,serif;display:inline-block;transition:transform .2s}
+.back-blog-end a:hover .arr{transform:translateX(-3px)}
 .thanks{text-align:center;font-size:16px;letter-spacing:2.5px;
   font-style:italic;margin:34px 0 10px;padding:24px 12px 10px;
   border-top:1px solid #f0d9e2;
@@ -161,9 +177,11 @@ blockquote p:last-child{margin-bottom:0}
   body{font-size:16px}
   h1{font-size:24px}h2{font-size:19.5px}
   .wrap{padding:0 18px 64px}
-  header.post-head{padding:48px 0 28px}
+  header.post-head{padding:20px 0 28px}
   header.post-head::before{margin-bottom:24px}
   .byline::before,.byline::after{width:32px}
+  .back-top{margin-top:22px}
+  .back-blog-end{margin:48px 0 0}
   .quiz{padding:16px 18px}
   .sci,.concl,.jphen,.note-para,.mysum{padding:14px 16px}
 }
@@ -172,6 +190,8 @@ blockquote p:last-child{margin-bottom:0}
 <body>
 
 <div class="wrap">
+
+<a class="back-top" href="/blog/"><span class="arr">←</span>返回博客列表</a>
 
 <article>
 
@@ -420,6 +440,10 @@ blockquote p:last-child{margin-bottom:0}
   <li id="r3"><span class="rmark">[3]</span> <strong>Venus-DeFakerOne: Unified Fake Image Detection &amp; Localization.</strong> arXiv:2605.14091, 2026.</li>
 </ol>
 </section>
+
+<div class="back-blog-end">
+  <a href="/blog/"><span class="arr">←</span>返回博客列表</a>
+</div>
 
 </article>
 </div>
