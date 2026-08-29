@@ -197,6 +197,18 @@
       color: #0f766e;
       letter-spacing: 0.02em;
     }
+    .post-title {
+      font-size: 1.3rem; font-weight: 700; color: #0f172a;
+      margin-bottom: 0.65rem; line-height: 1.4;
+    }
+    .post-title a { color: inherit; text-decoration: none; }
+    .post-title a:hover { color: #2563eb; }
+    .read-more {
+      display: inline-block; margin-top: 0.9rem;
+      color: #2563eb; font-weight: 600; text-decoration: none;
+    }
+    .read-more:hover { text-decoration: underline; }
+
     .photo-caption .loc {
       font-size: 0.85rem;
       color: #94a3b8;
@@ -284,6 +296,33 @@
     <p class="incoming"><span class="in">Post Incoming</span> — fresh posts &amp; fresh dishes on the way. 🍽️</p>
 
     <main class="post-list" id="post-list" aria-label="Blog posts">
+
+      <!-- ══ POST ══ 分久必合：统一的伪造图像检测（Unified FID） ══
+           Added 2026-08-28. Photo reuses the existing seaside-* set
+           (same Busan Cheongsapo shot already in this folder). -->
+      <article class="photo-card">
+        <a href="unified-fid.html" aria-label="Read: 分久必合 — Unified Fake Image Detection">
+          <div class="photo-wrap">
+            <div class="photo-placeholder" style="background-image: url('seaside-tiny.jpg');"></div>
+            <picture>
+              <source media="(max-width: 640px)" srcset="seaside-800.webp">
+              <img src="seaside-1400.webp" alt="Seaside tram and blue sky — Busan Cheongsapo"
+                   class="photo-real" loading="lazy" decoding="async" width="1400" height="788">
+            </picture>
+          </div>
+        </a>
+        <div class="photo-caption">
+          <div class="post-meta">
+            <span class="post-date">Aug 28, 2026</span>
+            <span class="loc">📍 Chengdu, China</span>
+          </div>
+          <h2 class="post-title"><a href="unified-fid.html">分久必合：统一的伪造图像检测（Unified FID）</a></h2>
+          <p>伪造手段正被大模型抹平边界——门槛低、数量大、定制化高、欺骗性强。当伪造走向统一，检测也必然走向统一。这篇讲清楚这个任务的定义、三条技术路线，以及为什么「专才打败通才」至今仍是常态。
+            <span class="pun-line">统一伪造检测难在哪？难在让一个模型同时打赢四个专才。 🍽️</span>
+          </p>
+          <p><a class="read-more" href="unified-fid.html">阅读全文 →</a></p>
+        </div>
+      </article>
       <!-- ════════════════════════════════════════════════════════════
            BLOG POSTS — newest goes at the TOP.
            To add a post: scroll to the "NEW POST TEMPLATE" comment at the

@@ -553,6 +553,9 @@ body {
 .news-tag.award {
   background: linear-gradient(135deg, #b45309, #f59e0b);
 }
+.news-tag.blog {
+  background: linear-gradient(135deg, #dc2626, #f97316);
+}
 .news-more-btn {
   display: block;
   width: 100%;
@@ -1103,7 +1106,7 @@ body {
         <a href="#news">News</a>
         <a href="#pubs">Publications</a>
         <a href="#students">Team</a>
-        <a href="/blog/">Blog</a>
+        <a href="/blog/">Blog <span aria-hidden="true">🔥</span></a>
         <a href="https://github.com/Knightzjz" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </nav>
@@ -1135,7 +1138,7 @@ body {
           </a>
           <a href="/blog/" class="btn semantic">
             <svg aria-hidden="true" focusable="false" height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-            Blog
+            Blog <span aria-hidden="true">🔥</span>
           </a>
           <a href="mailto:jzzhou@scu.edu.cn" class="btn email">
             <svg aria-hidden="true" focusable="false" height="16" width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -1193,6 +1196,14 @@ body {
         <div class="news-entry">
           <span class="news-date"><span class="news-month">Aug</span><span class="news-year">2026</span></span>
           <p>
+            <span class="news-tag blog">🔥 Blog</span>
+            发布新博文 <a href="/blog/unified-fid.html"><strong>《分久必合：统一的伪造图像检测（Unified FID）》</strong></a>：当伪造走向统一，检测也必然走向统一——讲清统一伪造检测的任务定义、三条技术路线，以及为什么「专才打败通才」至今仍是常态。
+          </p>
+        </div>
+
+        <div class="news-entry">
+          <span class="news-date"><span class="news-month">Aug</span><span class="news-year">2026</span></span>
+          <p>
             <span class="news-tag award">🏆 Award</span>
             入选蓉漂人才锦鲤计划。
           </p>
@@ -1246,7 +1257,7 @@ body {
           </p>
         </div>
 
-        <div class="news-entry">
+        <div class="news-entry hidden fade-in">
           <span class="news-date"><span class="news-month">May</span><span class="news-year">2026</span></span>
           <p>
             <span class="news-tag paper">📄 ICML 2026</span>

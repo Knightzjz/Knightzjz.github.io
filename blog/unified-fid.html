@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分久必合：统一的伪造图像检测</title>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#ffffff;
+  --ink:#262218; --ink-2:#5b5445; --ink-3:#8d8574;
+  --line:#e7e1d4; --line-2:#d9d2c2;
+  --accent:#a35b22; --accent-deep:#7f4517; --accent-soft:#f6efe3;
+  --sci-bg:#eef4fa; --sci-line:#5d84ab;
+  --concl-bg:#faf3e3; --concl-line:#c08e3e;
+  --sum-bg:#fdf7e1; --sum-line:#dcab41;
+  --note-bg:#f2f6f9; --note-line:#cddfeb;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Source Han Serif SC","Noto Serif CJK SC","Songti SC",Georgia,"Times New Roman","Microsoft YaHei",serif;
+  font-size:17px;line-height:2.0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:#f1e2c6;color:var(--ink)}
+.wrap{max-width:780px;margin:0 auto;padding:0 24px 110px}
+
+header.post-head{padding:68px 0 38px;border-bottom:1px solid var(--line);margin-bottom:44px;
+  text-align:center}
+header.post-head::before{content:"";display:block;width:36px;height:3px;border-radius:2px;
+  background:var(--accent);margin:0 auto 32px}
+h1{font-size:clamp(27px,5.2vw,34px);line-height:1.45;margin:0;font-weight:700;
+  letter-spacing:.02em;text-wrap:balance}
+h1 small{display:block;margin-top:18px;font-family:Georgia,"Times New Roman",serif;
+  font-size:12.5px;font-weight:400;color:var(--ink-3);letter-spacing:.3em;
+  text-transform:uppercase;font-style:normal}
+.byline{display:flex;align-items:center;justify-content:center;gap:18px;
+  margin-top:28px;font-size:13.5px;color:var(--ink-3);letter-spacing:.1em}
+.byline::before,.byline::after{content:"";display:block;width:52px;height:1px;background:var(--line-2)}
+
+h2{font-size:22px;margin:58px 0 20px;padding-bottom:12px;border-bottom:1px solid var(--line-2);
+  font-weight:700;letter-spacing:.01em}
+h2 .num{font-family:Georgia,serif;color:var(--accent);margin-right:14px;font-size:.9em}
+h3{font-size:17.5px;margin:36px 0 14px;font-weight:700;color:var(--ink)}
+h3 .num{font-family:Georgia,serif;color:var(--accent);margin-right:9px;font-size:.92em}
+p{margin:0 0 20px;text-align:justify}
+strong{font-weight:700;color:#1c1811}
+code.term{background:#f4eee1;border:1px solid #eaddc4;border-radius:5px;padding:1px 7px;
+  font-size:14.5px;font-family:ui-monospace,"SF Mono",Consolas,monospace;color:#7a4a1c}
+
+sup.cite{font-size:11.5px;line-height:0;vertical-align:super}
+sup.cite a{color:var(--accent);text-decoration:none;padding:0 1px;font-weight:600}
+sup.cite a:hover{color:var(--accent-deep);text-decoration:underline}
+
+/* 正文分点列表 */
+ol.pts{margin:6px 0 24px;padding:0;list-style:none;counter-reset:pt}
+ol.pts li{counter-increment:pt;position:relative;padding:5px 0 5px 40px;
+  margin:0;text-align:justify}
+ol.pts li::before{content:counter(pt) ".";position:absolute;left:0;top:5px;
+  font-family:Georgia,serif;font-weight:700;color:var(--accent);font-size:17px}
+
+a{color:var(--accent)}
+a:hover{color:var(--accent-deep)}
+
+figure{margin:30px 0}
+img.fig{display:block;margin:0 auto;max-width:100%;border:1px solid var(--line);border-radius:8px;
+  box-shadow:0 4px 18px rgba(70,60,35,.07)}
+figcaption{font-size:13px;color:var(--ink-3);text-align:center;margin-top:10px;letter-spacing:.03em}
+
+.quiz{background:var(--panel);border:1px solid var(--line-2);border-radius:12px;
+  padding:20px 26px;margin:20px 0 30px;box-shadow:0 2px 10px rgba(70,60,35,.04)}
+.quiz .q-title{font-weight:700;margin-bottom:12px;font-size:16px}
+.quiz ol{padding-left:0;list-style:none;counter-reset:opt;margin:0}
+.quiz li{counter-increment:opt;position:relative;padding:7px 0 7px 34px;
+  border-bottom:1px dashed var(--line);color:var(--ink-2)}
+.quiz li:last-child{border-bottom:none}
+.quiz li::before{content:counter(opt,upper-alpha) ".";position:absolute;left:0;top:7px;
+  font-family:Georgia,serif;font-weight:700;color:var(--accent)}
+
+abbr.ufid{font-family:ui-monospace,"SF Mono",Consolas,monospace;font-size:.86em;letter-spacing:.02em;
+  background:#f5eddc;color:#7a4a1c;padding:1px 7px;border-radius:5px;margin:0 .18em;
+  text-decoration:none;font-style:normal;border-bottom:1px solid #e3d3b4;white-space:nowrap}
+
+/* ── callout cards: unified left-rule style ── */
+.concl{background:var(--concl-bg);border-left:3px solid var(--concl-line);
+  border-radius:0 10px 10px 0;padding:16px 22px;margin:28px 0;font-size:16.5px;line-height:1.95}
+.concl p{margin:0}
+
+.sci{background:var(--sci-bg);border-left:3px solid var(--sci-line);
+  border-radius:0 10px 10px 0;padding:18px 22px;margin:28px 0;font-size:16px;line-height:1.95}
+.sci p{margin:0 0 12px}
+.sci p:last-child{margin-bottom:0}
+.sci::before{content:"科学问题";display:inline-block;background:var(--sci-line);color:#fff;
+  font-size:11px;padding:2px 10px;border-radius:4px;margin-right:10px;vertical-align:2px;
+  font-weight:600;letter-spacing:2px}
+
+.keysent{font-size:19px;font-weight:700;color:var(--ink);text-align:center;
+  margin:40px 0;padding:26px 20px;line-height:1.85;letter-spacing:.02em;
+  border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+
+.mysum{background:var(--sum-bg);border:1px solid var(--sum-line);border-radius:12px;
+  padding:20px 22px 24px;margin:16px 0 30px;text-align:center}
+.mysum .ms-t{font-weight:700;color:#8a5a1d;letter-spacing:.06em;font-size:16px}
+.mysum .ms-grid{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:16px}
+.mysum .ms-cell{flex:1 1 120px;max-width:180px;background:rgba(255,255,255,.6);
+  border:1px solid #ecdca4;border-radius:10px;padding:14px 8px 12px}
+.mysum .ms-char{display:block;font-size:30px;font-weight:700;color:#b07a1e;line-height:1.25}
+.mysum .ms-def{display:block;margin-top:6px;font-size:13.5px;color:var(--ink-2)}
+
+/* 直觉 ↔ 回应 callout pair */
+.intu{background:var(--concl-bg);border-left:3px solid var(--concl-line);
+  border-radius:0 10px 10px 0;padding:16px 22px;margin:28px 0;font-size:16.5px;line-height:1.95}
+.intu::before{content:attr(data-label);display:inline-block;background:var(--concl-line);color:#fff;
+  font-size:11px;padding:2px 10px;border-radius:4px;margin-right:10px;vertical-align:2px;
+  font-weight:600;letter-spacing:2px}
+.intu p{margin:0}
+
+.insight{background:var(--accent-soft);border:1px solid #e3d5ba;border-radius:10px;
+  padding:20px 26px;margin:28px 0;font-size:16.5px;line-height:1.95}
+.insight p{margin:0}
+
+.jphen{background:#f0f4f8;border:1px solid #c6d5e3;border-radius:10px;
+  padding:18px 24px;margin:26px 0;font-size:16.5px;line-height:1.95}
+.jphen .jp-t{font-weight:700;color:#46688c;display:block;margin-bottom:8px;font-size:14px;letter-spacing:1.5px}
+.jphen p{margin:0}
+
+.note-para{background:#f6f8f4;border-left:3px solid #a8bf9a;border-radius:0 10px 10px 0;
+  padding:15px 22px;margin:24px 0;font-size:16px;line-height:1.95}
+.note-para p{margin:0}
+
+blockquote{margin:28px 0;padding:6px 0 6px 24px;border-left:3px solid var(--accent);
+  color:var(--ink-2);font-size:16.5px}
+blockquote p:last-child{margin-bottom:0}
+
+/* Special Thanks hearts */
+.heart{position:fixed;z-index:9999;pointer-events:none;user-select:none;
+  font-size:17px;color:#f78fb3;text-shadow:0 1px 3px rgba(217,116,154,.35);
+  animation:heart-float 1.15s cubic-bezier(.25,.6,.4,1) forwards}
+@keyframes heart-float{
+  0%  {opacity:0;transform:translate(-50%,-50%) scale(.4) rotate(0deg)}
+  18% {opacity:1;transform:translate(-50%,-50%) scale(1.2) rotate(var(--rot))}
+  45% {opacity:1;transform:translate(calc(-50% + var(--dx)*.5), calc(-50% - 48px)) scale(1) rotate(var(--rot))}
+  100%{opacity:0;transform:translate(calc(-50% + var(--dx)), calc(-50% - 105px)) scale(.75) rotate(var(--rot))}
+}
+@media (prefers-reduced-motion:reduce){
+  .heart{animation-duration:.01s}
+}
+
+/* 隐藏答案：白底白字，拖选 / Ctrl+A 才现形 */
+.hidden-ans{color:#fff !important;background:transparent;user-select:text}
+
+/* 文末配图 */
+.endpic{margin:56px 0 64px}
+.endpic img.fig{box-shadow:0 8px 30px rgba(60,80,110,.13);border-radius:5px;border:1px solid var(--line)}
+
+.signoff{margin-top:52px;padding-top:28px;border-top:1px solid var(--line);color:var(--ink-2);font-size:16px}
+.thanks{text-align:center;font-size:16px;letter-spacing:2.5px;
+  font-style:italic;margin:34px 0 10px;padding:24px 12px 10px;
+  border-top:1px solid #f0d9e2;
+  color:#e79ab4;
+  cursor:pointer;user-select:none;
+  transition:color .25s, transform .15s, text-shadow .25s}
+.thanks:hover{color:#d9749a;text-shadow:0 0 12px rgba(233,150,180,.45);transform:scale(1.03)}
+.thanks:active{transform:scale(.97)}
+.thanks-sub{text-align:center;font-size:13.5px;color:var(--ink-3);margin:0 0 4px}
+
+.refs{margin-top:64px;padding-top:30px;border-top:1px solid var(--line-2)}
+.refs h2{border:none;margin:0 0 20px;padding:0}
+.refs ol{padding-left:24px;font-size:14px;line-height:1.8}
+.refs li{margin-bottom:12px;color:var(--ink-2)}
+.refs .rmark{color:var(--accent);font-weight:600}
+.refs a{word-break:break-all}
+
+@media print{body{background:#fff;font-size:11pt}.wrap{max-width:100%}
+  .heart{display:none}}
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:24px}h2{font-size:19.5px}
+  .wrap{padding:0 18px 64px}
+  header.post-head{padding:48px 0 28px}
+  header.post-head::before{margin-bottom:24px}
+  .byline::before,.byline::after{width:32px}
+  .quiz{padding:16px 18px}
+  .sci,.concl,.insight,.jphen,.note-para,.intu{padding:14px 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<article>
+
+<header class="post-head">
+  <h1>分久必合：统一伪造图像检测
+    <small>Unified Fake Image Detection</small>
+  </h1>
+  <div class="byline">周吉喆&nbsp;·&nbsp;2026 年 8 月 28 日</div>
+</header>
+
+<p>大家猜猜看下面这张聊天截图用了什么伪造手法：</p>
+
+<figure>
+  <img class="fig" src="img/fig1.png" alt="家长群聊天截图">
+  <figcaption>（家长群聊天截图）</figcaption>
+</figure>
+
+<div class="quiz">
+  <div class="q-title">选项：</div>
+  <ol>
+    <li>两张聊天截图（真图）进行了拼接（把 A 班级群的信息嫁接到了 B 班级群上）</li>
+    <li>PS 了部分家长的聊天内容（文档篡改）</li>
+    <li>更换了老师的头像（Deepfake）</li>
+    <li>直接 AI 模型生成了一张图（AIGC）<span class="hidden-ans">【正确答案】</span></li>
+    <li>A+D/B+D/C+D...即模型生成一张图之后，又进行了各类手动/半自动 PS 修正内容</li>
+  </ol>
+</div>
+
+<p>很难猜吧~需要说明的是，你的答案对应了你需要调用什么样的伪造图像检测模型，因为现有的图像被动取证研究基本拆分为了多个独立的赛道，这些赛道主要包含但不限于 AIGC 检测（整图生成），（自然）图像（部分）篡改检测，（纯）文档（图像）篡改检测，Deepfake（伪造人脸）检测等<sup class="cite"><a href="#r1">[1]</a></sup>。</p>
+
+<p>对应各种赛道的模型是不互通的，也就是一个图像篡改检测模型不能检测文档篡改图像，一个 Deepfake 检测器也对 AIGC 的人脸不起效，以此类推<sup class="cite"><a href="#r1">[1]</a></sup>。</p>
+
+<h2><span class="num">一</span>预判悖论</h2>
+
+<p>那么在实际中，对这张聊天截图进行真伪的检测就陷入了一个"预判悖论"：</p>
+
+<blockquote>
+<p>用户需要对图像的伪造手段进行判断，以调用正确取证模型得到结果，但是如果用户都能预判图像的伪造手段了，那用户还何必需要借助取证模型呢？</p>
+</blockquote>
+
+<p>那这个悖论的解决方案也极其直接：</p>
+
+<p>构建一个<strong>统一伪造图像检测（Unified Fake Image Detection，下称 <abbr class="ufid">Unified FID</abbr>）</strong>模型，也就是不预设图像的伪造手段，对任意方法伪造的图像都可进行检测。那么实际中用户也只需将需要检测的图像输入一个 <abbr class="ufid">Unified FID</abbr> 检测器，就能得到相应的结果。</p>
+
+<div class="note-para">
+<p>其实我认为「伪造图像」这个词本身就有统一的意思——它代表对伪造类型不设限，此前也没有人这样用过。但经过和吕建成老师的讨论，我还是把「统一」单独强调出来，作为这个任务的核心思想。</p>
+</div>
+
+<h2><span class="num">二</span>为什么会分成四条独立赛道</h2>
+
+<p>在我们继续深入 <abbr class="ufid">Unified FID</abbr> 之前，有一个必要讲的问题是，为什么图像被动取证领域或者叫内容安全领域发展成了四条完全独立的赛道呢，难道研究者们没有考虑实际应用情况？</p>
+
+<p>然，天下大势，分久必合，合久必分。</p>
+
+<p>正如实际场景将所有检测方案推向必然统一一样，对不同伪造手法发展出完全独立的检测方案不仅学术上意义明确，也是历史必然。</p>
+
+<p>内容安全 / 被动取证 / 图像伪造检测技术的历史趋势归因于伪造手段的边界从明确到模糊的变化。或者简而言之，是大模型能力快速发展所导致的拟像效应：伪造手段逐渐走向黑盒化和统一化，都由大模型代劳。</p>
+
+<h3><span class="num">2.1</span>分：伪造手段边界明确的年代</h3>
+
+<p>只需要将时钟回拨一两年，其实大家就能看到，对应不同内容的伪造图像，基本要采取不同的伪造方式。比如人脸伪造，除了 Deepfake 的效果以外，如果你采用 PS 等方法，基本都是一眼假的效果，根本没有检测的必要，人眼就能分辨。而对于文档图像，则必须要逐字手动 PS，保证字体、大小、色号等的一致性，如果简单使用生成模型，那么一定是连基本的字形都生成不对的状态。</p>
+
+<p>因此，这时的需求也很明确，对应不同的图像，其实伪造的手法是相对固定的，针对这一系列伪造手法构建对应模型不仅效果好（专用性强），而且成本低。于是慢慢科研上就对不同的伪造手法发展出了独立的四条赛道，虽然有部分略微重复的地方，比如自然图像篡改的 inpainting 手法就包含 AI 生成和 AIGC 检测存在部分重复，但基本都互相独立：训练数据独立，模型方案独立，测评数据和方式也独立。在使用中也不会导致任何困扰。</p>
+
+<h3><span class="num">2.2</span>合：大模型抹平了伪造手段的边界</h3>
+
+<p>然而随着以 GPT-Image-2 为代表的生成与理解统一模型以及大量 harness 工具的上线，大模型直接根据用户需求完成图像伪造的能力得到了质变。以香港保险行业的数据为例，今天绝大部分用于骗保的高质量（肉眼难以分辨的）伪造图像都是由大模型直接完成的（伪造就医证明、伪造索赔金额、伪造保险记录等）。这以前是手动 PS 的活，而 PS 的学习和时间成本都很高，且不是所有场景都适用，但是现在都直接大模型代劳了，而且完成的很出色。导致了现有伪造图像 <strong>低大高强</strong> 的典型特征：门槛低，数量大，定制化程度高，欺骗性强。</p>
+
+<div class="mysum">
+  <div class="ms-t">当前伪造图像的总体特点 ·「低大高强」</div>
+  <div class="ms-grid">
+    <div class="ms-cell"><span class="ms-char">低</span><span class="ms-def">门槛低</span></div>
+    <div class="ms-cell"><span class="ms-char">大</span><span class="ms-def">数量大</span></div>
+    <div class="ms-cell"><span class="ms-char">高</span><span class="ms-def">定制化程度高</span></div>
+    <div class="ms-cell"><span class="ms-char">强</span><span class="ms-def">欺骗性强</span></div>
+  </div>
+</div>
+
+<p>大模型的能力基本覆盖或者模糊了以前图像伪造手段的处理边界，就是对任意内容的图像，其实都大模型代劳即可。</p>
+
+<div class="keysent">那么伪造手法走向统一的时候，伪造检测手法也必然走向统一。</div>
+
+<h3><span class="num">2.3</span>统一伪造图像检测 = AIGC 检测吗</h3>
+
+<p>既然都是大模型伪造，那么 <abbr class="ufid">Unified FID</abbr> 是不是就是一个 AIGC 检测模型呢？</p>
+
+<p>答案是否定的：</p>
+
+<p>首先，大模型伪造重点得益于 harness 工具而非简单的 diffusion 生成。大模型借助理解能力，会在生成的过程中不断监测图像内容是否完美符合用户需求，并且通过 harness 层不断自主调用各类工具修正图像内容，包括抠图，重绘，deepfake 换脸等工具。绝大部分大模型会为此调用数十项工具对图像内容进行精修，比如 GPT-Image-2 的单图生成往往花费数分钟之久就是各类工具不断调用对生成过程进行约束的结果。而 AIGC 图像往往被限定为大模型一次性生成的整张图像。这里包含两个要素：一是整图，不包含大模型在真实图像上的二次伪造；二是一次性，不考虑大模型调用工具基于生成—理解循环对图像的各类逐步修正。</p>
+
+<div class="concl">
+<p>因此，现有的大模型伪造图像并不简单 = AIGC 图像，而是完全包含了 AIGC 图像。</p>
+</div>
+
+<p>其次，在很长时间范围内，我们在互联网上面对的都是一个混合环境，也就是有很多大模型伪造的图像，也有很多是手工、小模型伪造的图像。历史上已经积攒了大量非大模型时代的伪造图像，此外，虽然大模型能力不断强化，但至今仍不能完全取代手工、特定模型等的篡改方案。比如，目前最强的文档伪造依然是手工抠图 + PS 的方案。如果只能处理大模型伪造的图像也并不能实现 <abbr class="ufid">Unified FID</abbr>。</p>
+
+<h2><span class="num">三</span>任务定义：B 与 P</h2>
+
+<p>那么 <abbr class="ufid">Unified FID</abbr> 任务到底是什么呢 （BP 定义）：</p>
+
+<h3><span class="num">3.1</span>B：Binary Classification</h3>
+
+<p>首先，从任务范式上（B: Binary Classification）：</p>
+
+<p><abbr class="ufid">Unified FID</abbr> 是一个图像二分类任务，输入图像，输出该图像对应的 0/1 分类标签。</p>
+
+<p>也就是 <code class="term">f(x) = y,  x = image  y = 0/1</code> 的范式</p>
+
+<p>这个范式里面代表：</p>
+
+<p>首先，标准训练训练数据集的构成为（图像，标签）/ (x, y) pair，即</p>
+
+<p>1. 只需要模型预测图像级别 0/1 标签即可。</p>
+
+<p>2. 不能有关于图像伪造手法的标签其他信息标注在训练数据集中。</p>
+
+<p>3. 但是自监督 / 半监督 / 无监督的方法辅助获取伪造手法等额外信息用于辅助提升分类准确是完全合理也可行的。</p>
+
+<p>4. 利用预训练大模型获取其他相关信息也是合理且可行的，训练集 / 测试集输入均只有图像本身，额外构建 prompt engineering、post-training 等方法从基座大模型中攫取额外图像信息不会对任务范式造成任何影响。这相当于是基于大模型强化了 <code class="term">f(·)</code> 函数，使其可以从 <code class="term">x</code> 中获取额外信息。</p>
+
+<h3><span class="num">3.2</span>P：Polymath</h3>
+
+<p>其次，从模型性能上（P: Polymath）：</p>
+
+<p><abbr class="ufid">Unified FID</abbr> 要求一个通才模型同时超越多个专才模型，也就是一个统一的模型要在各个子领域上，比如典型的我们前面说的四个子领域：Deepfake、AIGC，篡改和文档篡改，同时超越各自子领域的 SOTA 模型。这样一个模型才是真正在实际中有应用价值的模型。</p>
+
+<p>那么有了定义，貌似 <abbr class="ufid">Unified FID</abbr> 任务有很多很简单直接的实现方式，并不难，比如直接找一个基座模型然后把所有子领域数据拉通对基座做 post-training。</p>
+
+<div class="keysent">但这其实是很难做到的，迄今为止，无论大小模型基本都是专才打败通才，构建一个超越多个专才的通才模型，并不简单。</div>
+
+<h2><span class="num">四</span>三条技术路线</h2>
+
+<p>那下面我们具体来讲讲 <abbr class="ufid">Unified FID</abbr>到底难在哪里，也就是技术的 blueprint：</p>
+
+<p><abbr class="ufid">Unified FID</abbr> 的技术路线可以比较清晰的分为三类：</p>
+
+<blockquote>
+<p><strong>单体小模型路线、大模型路线、大小模型协同路线</strong></p>
+</blockquote>
+
+<h3><span class="num">4.1</span>单体小模型路线</h3>
+
+<p>这是目前我们研究最深入的一个路线，因为这个路线首先有一个非常强的领域直觉：</p>
+
+<div class="intu" data-label="直觉">
+<p>图像被动取证这些子领域都在学习同一个东西 :artifacts，也就是伪造手法在图像上留下的痕迹。</p>
+</div>
+
+<p>既然大家学的东西都是相通的，那么每个子领域现在都有这么非常 work 的专用小模型，是不是可以通过将数据集和训练设定对齐拉通的方式，筛选出一个最强小模型，然后在 <abbr class="ufid">Unified FID</abbr> 的数据集上训练就解决问题了呢？</p>
+
+<p>这个思路非常有直觉，而且也很有意义，因为筛选最强单体小模型的过程能帮助我们提炼大量 insights，这对未来如何构建 <abbr class="ufid">Unified FID</abbr> 专用的基座大模型是非常有帮助的。</p>
+
+<p>但是通过我们从 ForensicHub 的测试来看，基本上没有任何一个子领域 SOTA 模型能实现我们 P 的要求，也就是哪怕将所有子领域数据和训练设定打通，也没有任何一个子领域模型能强到通吃其他子领域的模型。也就是哪怕用 B 子领域数据训练 A 子领域的模型之后，A 子领域的模型也打不过 B 子领域的原有模型。甚至经过我们大量实验，把 ABCD 所有子领域数据都喂给某一（A）子领域模型后，他们性能却发生了明显下降，尤其在该（A）子领域本身下降极其明显。我们在 SICA 中管这一发现叫做领域负迁移，也就是只要混入了其他域的训练数据，模型性能必然会下降。领域负迁移现象的存在说明，依靠现有模型和数据拉通训练的思路是无法实现 <abbr class="ufid">Unified FID</abbr> 的<sup class="cite"><a href="#r2">[2]</a></sup>。</p>
+
+<p>但是等等，这个思路至少在一开始我们直觉上是非常正确的啊~所以，应该是直觉错了么？</p>
+
+<p>为此，我们在 SICA 中做了大量实验摸索：</p>
+
+<p>首先，linear probe 了子领域模型在拉通数据集训练后的特征空间，发现所有这样训练后的模型特征矩阵都存在秩问题，SVD 分解后共线性较强（特征冗余太多，表征能力不足）。</p>
+
+<p>其次，我们探查了上述模型在拉通数据训练过程中的特征梯度变化，发现各个子领域数据的梯度严重冲突，互相拉扯，模型梯度基本沿着妥协方向缓慢下降。</p>
+
+<p>最后，我们探查了各个子领域非常有效也常用的手工特征，他们不仅相同，甚至互相不能迁移，比如 deepfake 的 rPPG 人脸生理特征就无法迁移到自然图像或者文档篡改领域上。</p>
+
+<p>因此，我们得出结论：</p>
+
+<div class="intu" data-label="回应">
+<p>是的，我们的直觉确实错了 ---</p>
+</div>
+
+<h3><span class="num">4.1.1</span>artifacts 在各子领域其实非常异构</h3>
+
+<div class="insight">
+<p>图像被动取证这些子领域都在学习同一个东西 :artifacts，也就是伪造手法在图像上留下的痕迹 ---- 虽然在不同子领域他们都叫一个名字，但是其实特征表达上完全不相同，非常异构。</p>
+</div>
+
+<div class="jphen">
+<span class="jp-t">吉喆现象（Ji-Zhe Phenomenon）</span>
+<p>我们管 artifacts 在各子领域异构的这个现象叫<strong>吉喆现象（Ji-Zhe Phenomenon）</strong>。</p>
+</div>
+
+<p>吉喆现象在单体小模型中必然会导致一个结果 --- 特征坍塌，也就是模型基本只会学习各个子领域共同的特征表达，放弃学习每个子领域独特的 artifacts，最终学到的 artifacts 特征是一个退化后的 trivial 表达，artifacts 特征坍塌，不再对各种篡改手法有区分度。</p>
+
+<div class="sci">
+<p>所以，单体小模型的核心难点不在于数据对齐和训练模式拉通，而在于如何构建一个模型能在一个单体 / 统一的特征空间中，有效表征这些完全异构的 artifacts 特征（即统一表征又不丢失区分度）。这是一个典型的<strong>特征坍塌科学问题</strong>，从避免坍塌、检测坍塌和解除坍塌三方面都有很多可能的解决方案（比如梯度手术、特征亲和、坍塌恢复等）可以研究，我们在 SICA 中对此提出了一个避免坍塌的假设并进行了实现和验证<sup class="cite"><a href="#r2">[2]</a></sup>。大家有兴趣可以移步论文详细阅读，我就不再赘述。我个人感觉这也是未来 <abbr class="ufid">Unified FID</abbr> 研究会涌现出现的一个路线。</p>
+</div>
+
+<h3><span class="num">4.2</span>大模型路线</h3>
+
+<p>这是目前我们投入最多的方向。</p>
+
+<ol class="pts">
+<li>因为大模型本身良好的 OOD 泛化能力是解决被动取证领域长期泛化性难点的关键。</li>
+<li>并且，大模型有着超大的特征空间，可以有效解决吉喆现象。也就是可以将特征划分到各个正交或者完全不相交的子空间中去，这样就不会导致模型在统一性和特异性中做两难选择了，有效绕过了特征空间坍塌问题。</li>
+<li>此外，大模型本身具有良好的对话、用户意图理解和 agent 调用能力，所以在对检测结果的迭代、解释、审计和外部工具协作上都潜力非常好，非常具备使用价值。比如可以让大模型做了检测之后自动给出对这个检测结果的解释以及调用外部物理 agent 或工具去审计核验这个解释是否正确，然后继续修正检测结果，这样构成一个 agent-base model 的 harness 环，非常完美。</li>
+</ol>
+
+<p>目前我们上线的 DeFakerOne 大模型也就是根据这套思路做的<sup class="cite"><a href="#r3">[3]</a></sup>。</p>
+
+<p>然而大模型除了训练成本问题以外，大家可以看看我们的 tech report，存在两点非常亟待解决的科学问题：</p>
+
+<div class="sci">
+<p><strong>其一，模型坍塌（能力退化）。</strong>首先，大模型在 <abbr class="ufid">Unified FID</abbr> 中存在模型能力退化问题，我们叫他模型坍塌。也就是从一个 MLLM 基座大模型开始，我们使用大量数据进行 post-training 或者 sft 之后，由于 <abbr class="ufid">Unified FID</abbr> 是一个纯粹的 B（图像二分类）任务，这个基座大模型逐步会丧失包括 next token prediction，prompt understanding，in-context learning 在内的一系列的核心能力，退化为一个只会二分类模型，也就是退化了一个参数空间极大的小模型。</p>
+</div>
+
+<p>这种能力退化或者模型坍塌会导致极其严重的后果，比如大模型的 OOD 数据的泛化能力、大模型对检测结果的自动解释能力、大模型根据用户上下文对检测结果的修正能力、大模型调度 agent 对检测结果进行审计等的可能性都完全丧失了。或者更简而言之，这个模型就不会说话，也不能理解用户指令了，只会机械地对图像做二分类了，完全偏离了我们使用大模型的核心初衷。</p>
+
+<p>在 post-training 阶段这个模型坍塌问题的本质机理我们目前还在探索中，这个问题应该不仅会存在在取证方向上，很多垂直领域随着训练数据量的积攒应该都会有类似问题慢慢出现。这是一个良好的研究方向，也欢迎大家一起讨论。</p>
+
+<div class="sci">
+<p><strong>其二，推理效率。</strong>其次，大模型的处理效率至今难以提升。在实际场景中，对伪造图像的检测业务会存在明显的波动，有明显波峰波谷。比如，一些生活服务平台在特定日期的优惠活动（比如教师节老师吃饭打折），这就会在短时间（数小时）内涌入海量（百万量级）的检测需求（因为需要上传教师证核验资格，而教师证的伪造基本各类大模型都会帮你做）。大模型检测图像基本在秒级响应，以 5 秒检测一副图像计算，100W 数据需要 500W 秒也就大概 58 天时间。</p>
+</div>
+
+<p>因此，如何对大模型路线下的 <abbr class="ufid">Unified FID</abbr> 模型做推理加速也是一个核心问题。剪枝、并行、硬件尤其国产硬件加速等都是这个问题下的高潜力研究方向。</p>
+
+<h3><span class="num">4.3</span>大小模型协同路线</h3>
+
+<p>这是一个最直接、最不绕弯子的路线 --- 反正我们各个子领域都有 sota 了，那就通过大模型路由调度一次吧，把小模型检测结果综合反馈给大模型判断即可（MoE）。目前 <abbr class="ufid">Unified FID</abbr> 除我们组外，很多强组（北大深张健老师、北邮张继威老师、港中深吴保元老师、中科大谢洪涛老师等）都走了这条路线。</p>
+
+<p>这条路线是目前发展最迅速的方向，也是最快能出成果的方向。主要可以继续深入的科学问题在于：</p>
+
+<div class="sci">
+<p><strong>首先是短板效应问题。</strong>大小模型协同的上限天然受制于单个领域小模型的天花板和大模型的路由能力。导致现有方案很难满足 <abbr class="ufid">Unified FID</abbr> 的 P 需求。所以如何让大模型以更优的方式调度小模型并且综合小模型结果成为了核心科学问题。后续研究应该会在大模型对小模型的多轮调度、优先级调度，以及大模型对小模型返回结果的自回归、冗余、可信判定等方向集中涌现。</p>
+</div>
+
+<div class="sci">
+<p><strong>其次是如何构建可生长的大小模型协作框架。</strong>小模型更新后大模型对新专家 / agent 的持续学习 / 适应能力以及可生长的大小模型协同框架的构建。被动取证各个领域最近疯狂发展，小模型快速迭代更新，如何让大小模型框架能够不断兼容新出现的 sota 小模型和更新已有的小模型是一个核心科学问题，这个问题也适用于目前如火如荼的 agent 领域。以及大模型如何持续学习或适应新加入或更新后小模型或者 agent 的领域保证自己的调度和综合判断更加准确也是一个非常有意义的研究方向。</p>
+</div>
+
+<h2><span class="num">五</span>写在最后</h2>
+
+<p>综上我们大概梳理了 <abbr class="ufid">Unified FID</abbr> 这个任务的背景、定义、三条技术路线、各个路线对应的科学问题以及潜在的解决方案。</p>
+
+<p>因为最近收到了太多邮件询问了相关话题，所以我的第一篇博客比较长，对目前 30 多封邮件中的几乎所有问题都做了解答，可能有所遗漏和谬误，也欢迎大家联系我进行指正和修改。</p>
+
+<p>后续有时间我会写一个英文博客，目前也有很多外国研究者对 <abbr class="ufid">Unified FID</abbr> 方向有一定兴趣。不过最近应该写不出来了~希望他们就将就下，直接大模型翻译吧~</p>
+
+<div class="signoff">
+  <p>感谢大家的耐心阅读，欢迎批评指正。</p>
+  <p>2026 年 8 月 28 日，23:17，于家中<br>
+  （Helen姐头疼去睡觉了：D 所以今晚我能安心把拖了一个月的博客写完~）</p>
+  <p class="thanks">Special Thanks to Helen Wang</p>
+  <p class="thanks-sub">欢迎转载，只需表明出处</p>
+</div>
+
+<figure class="endpic">
+  <picture>
+    <source srcset="img/seaview.webp" type="image/webp">
+    <img class="fig" src="img/seaview.jpg" alt="海边火车站：浪平风静，一列蓝白相间的列车停靠站台"
+         width="1520" height="506" loading="lazy" decoding="async">
+  </picture>
+</figure>
+
+<section class="refs">
+<h2>参考文献</h2>
+<ol>
+  <li id="r1"><span class="rmark">[1]</span> Bo Du, Xuekang Zhu, Xiaochen Ma, Chenfan Qu, Kaiwen Feng, Zhe Yang, Chi-Man Pun, Jian Liu, Jizhe Zhou. <strong>ForensicHub: A Unified Benchmark &amp; Codebase for All-Domain Fake Image Detection and Localization.</strong> NeurIPS 2025, Datasets and Benchmarks Track. arXiv:2505.11003. <a href="https://github.com/scu-zjz/ForensicHub">github.com/scu-zjz/ForensicHub</a></li>
+  <li id="r2"><span class="rmark">[2]</span> Bo Du, Xiaochen Ma, Xuekang Zhu, Zhe Yang, Chaoqun Niu, Jian Liu, Ji-Zhe Zhou. <strong>Can We Build a Monolithic Model for Fake Image Detection? SICA: Semantic-Induced Constrained Adaptation for Unified-Yet-Discriminative Artifact Feature Space Reconstruction.</strong> ICML 2026. arXiv:2602.06676. <a href="https://github.com/scu-zjz/SICA_OpenMMSec">github.com/scu-zjz/SICA_OpenMMSec</a></li>
+  <li id="r3"><span class="rmark">[3]</span> <strong>Venus-DeFakerOne: Unified Fake Image Detection &amp; Localization.</strong> arXiv:2605.14091, 2026.</li>
+</ol>
+</section>
+
+</article>
+</div>
+
+<script>
+/* Special Thanks to Helen —— 点击冒爱心 */
+(function(){
+  var el = document.querySelector('.thanks');
+  if(!el) return;
+  var CH = ['❤','❤','❤','💗','💖','💕','💓','✨'];
+  el.title = '点一下试试 ❤';
+  el.addEventListener('click', function(e){
+    var r  = el.getBoundingClientRect();
+    var ox = (e.clientX !== undefined && e.clientX !== 0) ? e.clientX : r.left + r.width  / 2;
+    var oy = (e.clientY !== undefined && e.clientY !== 0) ? e.clientY : r.top  + r.height / 2;
+    var n  = 7 + Math.floor(Math.random() * 5);
+    for (var i = 0; i < n; i++){
+      var h = document.createElement('span');
+      h.className = 'heart';
+      h.textContent = CH[Math.floor(Math.random() * CH.length)];
+      h.style.left = (ox + (Math.random() - .5) * 78) + 'px';
+      h.style.top  = (oy + (Math.random() - .5) * 20) + 'px';
+      h.style.setProperty('--dx',  ((Math.random() - .5) * 120).toFixed(0) + 'px');
+      h.style.setProperty('--rot', ((Math.random() - .5) * 70).toFixed(0) + 'deg');
+      h.style.fontSize = (13 + Math.random() * 9).toFixed(0) + 'px';
+      h.style.animationDelay = (Math.random() * .2).toFixed(2) + 's';
+      document.body.appendChild(h);
+      (function(node){ setTimeout(function(){ node.remove(); }, 1500); })(h);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
