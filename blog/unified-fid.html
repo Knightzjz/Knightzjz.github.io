@@ -35,6 +35,7 @@ h1 small{display:block;margin-top:18px;font-family:Georgia,"Times New Roman",ser
 .byline{display:flex;align-items:center;justify-content:center;gap:18px;
   margin-top:28px;font-size:13.5px;color:var(--ink-3);letter-spacing:.1em}
 .byline::before,.byline::after{content:"";display:block;width:52px;height:1px;background:var(--line-2)}
+.viewcount{margin-top:12px;text-align:center;font-size:12px;color:var(--ink-3);letter-spacing:.14em}
 
 h2{font-size:22px;margin:58px 0 20px;padding-bottom:12px;border-bottom:1px solid var(--line-2);
   font-weight:700;letter-spacing:.01em}
@@ -109,6 +110,13 @@ abbr.ufid{font-family:ui-monospace,"SF Mono",Consolas,monospace;font-size:.86em;
 .note-para{background:#f6f8f4;border-left:3px solid #a8bf9a;border-radius:0 10px 10px 0;
   padding:15px 22px;margin:24px 0;font-size:16px;line-height:1.95}
 .note-para p{margin:0}
+
+/* 特别致谢 — 浅暖沙色卡片，单行居中 */
+.ackcard{margin:30px 0 36px;padding:15px 20px;text-align:center;
+  background:linear-gradient(135deg,#f8ecd9,#f0dcbc);
+  border:1px solid #d9b98c;border-radius:12px;
+  font-size:16.5px;line-height:1.9;color:var(--ink)}
+.ackcard p{margin:0;text-align:center}
 
 blockquote{margin:28px 0;padding:6px 0 6px 24px;border-left:3px solid var(--accent);
   color:var(--ink-2);font-size:16.5px}
@@ -187,7 +195,7 @@ blockquote p:last-child{margin-bottom:0}
   z-index:100;opacity:.85}
 
 @media print{body{background:#fff;font-size:11pt}.wrap{max-width:100%}
-  .heart,.page-beans,.readbar{display:none}}
+  .heart,.page-beans,.readbar,.viewcount{display:none}}
 @media (max-width:640px){
   body{font-size:16.5px}
   p{text-align:left}       /* 窄屏左对齐，避免中英混排被拉伸出大空隙 */
@@ -199,7 +207,8 @@ blockquote p:last-child{margin-bottom:0}
   .back-top{margin-top:22px}
   .back-blog-end{margin:48px 0 0}
   .quiz{padding:16px 18px}
-  .sci,.concl,.jphen,.note-para,.mysum{padding:14px 16px}
+  .sci,.concl,.jphen,.note-para,.mysum,.ackcard{padding:14px 16px}
+  .ackcard{font-size:15.5px}
 }
 </style>
 </head>
@@ -219,6 +228,7 @@ blockquote p:last-child{margin-bottom:0}
     <small>Unified Fake Image Detection</small>
   </h1>
   <div class="byline">周吉喆&nbsp;·&nbsp;2026 年 8 月 28 日</div>
+  <div class="viewcount" id="read-count" hidden></div>
 </header>
 
 <p>大家猜猜看下面这张聊天截图用了什么伪造手法：</p>
@@ -412,7 +422,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <h3><span class="num">4.3</span><span class="r3">大小模型协同路线</span></h3>
 
-<p>这是一个最直接、最不绕弯子的路线 --- 反正我们各个子领域都有 sota 了，那就通过大模型路由调度一次吧，把小模型检测结果综合反馈给大模型判断即可（MoE 思想）。目前 <abbr class="ufid">Unified FID</abbr> 除我们组外，很多强组（港中深吴保元老师、中科大谢洪涛老师、北邮张继威老师等）都走了这条路线。</p>
+<p>这是一个最直接、最不绕弯子的路线 --- 反正我们各个子领域都有 sota 了，那就通过大模型路由调度一次吧，把小模型检测结果综合反馈给大模型判断即可（MoE 思想）。目前 <abbr class="ufid">Unified FID</abbr> 除我们组外，很多强组（港中深吴保元老师、中科大谢洪涛老师、北邮张继威老师等，大家可以多follow他们的工作）都走了这条路线。</p>
 
 <p>这条路线是目前发展最迅速的方向，也是最快能出成果的方向。主要可以继续深入的科学问题在于：</p>
 
@@ -428,13 +438,16 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>综上我们大概梳理了 <abbr class="ufid">Unified FID</abbr> 这个任务的背景、定义、三条技术路线、各个路线对应的科学问题以及潜在的解决方案。</p>
 
-<p>因为最近收到了太多邮件询问了相关话题，所以我的第一篇博客比较长，对目前 30 多封邮件中的几乎所有问题都做了解答，可能有所遗漏和谬误，也欢迎大家联系我进行指正和修改。</p>
+<p>因为最近收到了很多邮件询问相关问题，所以我的第一篇博客比较长，对目前 30 多封邮件中的几乎所有问题都做了解答，可能有所遗漏和谬误，也欢迎大家联系我进行指正和修改。</p>
 
 <p>后续有时间我会写一个英文博客，目前也有很多外国研究者对 <abbr class="ufid">Unified FID</abbr> 方向有一定兴趣。不过最近应该写不出来了~希望他们就将就下，直接大模型翻译吧~</p>
 
+<div class="ackcard">
+<p>感谢<a href="https://sebastouristtrophyf.github.io/" target="_blank" rel="noopener noreferrer">冯文韬</a>、<a href="https://sites.google.com/site/baoyuanwu2015/" target="_blank" rel="noopener noreferrer">吴保元</a>、<a href="https://cs.xmut.edu.cn/info/1085/4510.htm" target="_blank" rel="noopener noreferrer">杜侠</a>老师对博文的建议和帮助。</p>
+</div>
+
 <div class="signoff">
   <p>感谢大家的耐心阅读，欢迎批评指正。</p>
-  <p>感谢<a href="https://sebastouristtrophyf.github.io/" target="_blank" rel="noopener noreferrer">冯文韬</a>、<a href="https://sites.google.com/site/baoyuanwu2015/" target="_blank" rel="noopener noreferrer">吴保元</a>、<a href="https://cs.xmut.edu.cn/info/1085/4510.htm" target="_blank" rel="noopener noreferrer">杜侠</a>老师对博文的建议和帮助。</p>
   <p>2026 年 8 月 28 日，23:17，家中<br>
   （Helen姐头疼去睡觉了：D 所以今晚我能安心把拖了一个月的博客写完~）</p>
   <p class="thanks">Special Thanks to Helen Wang</p>
@@ -534,6 +547,49 @@ blockquote p:last-child{margin-bottom:0}
   window.addEventListener('scroll', upd, {passive: true});
   window.addEventListener('resize', upd);
   upd();
+})();
+
+/* 阅读计数 — 与主页访客计数同款技术：countapi + 1 小时会话去重 */
+(function(){
+  var el = document.getElementById('read-count');
+  if(!el) return;
+  var KEY = 'knightzjz-blog-unified-fid-views';
+  var SESSION_KEY = 'blog_ufid_session_ts';
+  var CACHE_KEY = 'blog_ufid_views_cache';
+  var SESSION_MS = 3600000; // 1-hour dedup window
+
+  var now = Date.now();
+  var lastHit = parseInt(localStorage.getItem(SESSION_KEY) || '0', 10);
+  var isNewSession = (now - lastHit) > SESSION_MS;
+
+  var base = isNewSession
+    ? 'https://countapi.mileshilliard.com/api/v1/hit/'
+    : 'https://countapi.mileshilliard.com/api/v1/get/';
+
+  var show = function(v){
+    el.textContent = Number(v).toLocaleString() + ' 次阅读';
+    el.hidden = false;
+  };
+
+  fetch(base + KEY)
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      if(isNewSession){
+        try { localStorage.setItem(SESSION_KEY, String(now)); } catch (_) {}
+      }
+      var v = j && j.value;
+      if(v !== undefined && v !== null && Number.isFinite(Number(v))){
+        show(v);
+        try { localStorage.setItem(CACHE_KEY, String(v)); } catch (_) {}
+      } else {
+        var cached = localStorage.getItem(CACHE_KEY);
+        if(cached && Number.isFinite(Number(cached))) show(cached);
+      }
+    })
+    .catch(function(){
+      var cached = localStorage.getItem(CACHE_KEY);
+      if(cached && Number.isFinite(Number(cached))) show(cached);
+    });
 })();
 </script>
 
