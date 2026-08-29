@@ -299,31 +299,6 @@
   <div class="container">
     <h1 class="blog-title"><span class="blog-title-text">Eat More Digest</span></h1>
 
-    <!-- COVER — the latest highlight. Only time & location, no prose.
-         Capture time from the ORIGINAL photo's EXIF: 2026-07-10 15:48:28 (+09:00,
-         Xiaomi 15 Ultra). The photo embeds NO GPS, so the coordinates shown are
-         Cheongsapo's place values (35.162°N, 129.188°E), not from the file. -->
-    <figure class="cover">
-      <div class="photo-wrap">
-        <div class="photo-placeholder" style="background-image: url('seaside-tiny.jpg');"></div>
-        <picture>
-          <source media="(max-width: 640px)" srcset="seaside-800.webp">
-          <img
-            src="seaside-1400.webp"
-            alt="Seaside tram and blue sky — Busan Cheongsapo"
-            class="photo-real"
-            loading="lazy"
-            decoding="async"
-            width="1400"
-            height="788">
-        </picture>
-      </div>
-      <figcaption class="cover-meta">
-        <span class="cover-date">Jul 10, 2026 · 15:48:28</span>
-        <span class="cover-loc">📍 Busan · Cheongsapo · 35.162&deg;N&nbsp;129.188&deg;E</span>
-      </figcaption>
-    </figure>
-
     <p class="incoming"><span class="in">Volume 1</span></p>
 
     <main class="post-list" id="post-list" aria-label="Blog posts">
@@ -355,6 +330,32 @@
           <p><a class="read-more" href="unified-fid.html">阅读全文 →</a></p>
         </div>
       </article>
+
+      <!-- COVER — photo moment, moved below the posts (2026-08-29).
+           Capture time from the ORIGINAL photo's EXIF: 2026-07-10 15:48:28 (+09:00,
+           Xiaomi 15 Ultra). The photo embeds NO GPS, so the coordinates shown are
+           Cheongsapo's place values (35.162°N, 129.188°E), not from the file. -->
+      <figure class="cover">
+        <div class="photo-wrap">
+          <div class="photo-placeholder" style="background-image: url('seaside-tiny.jpg');"></div>
+          <picture>
+            <source media="(max-width: 640px)" srcset="seaside-800.webp">
+            <img
+              src="seaside-1400.webp"
+              alt="Seaside tram and blue sky — Busan Cheongsapo"
+              class="photo-real"
+              loading="lazy"
+              decoding="async"
+              width="1400"
+              height="788">
+          </picture>
+        </div>
+        <figcaption class="cover-meta">
+          <span class="cover-date">Jul 10, 2026 · 15:48:28</span>
+          <span class="cover-loc">📍 Busan · Cheongsapo · 35.162&deg;N&nbsp;129.188&deg;E</span>
+        </figcaption>
+      </figure>
+
       <!-- ════════════════════════════════════════════════════════════
            BLOG POSTS — newest goes at the TOP.
            To add a post: scroll to the "NEW POST TEMPLATE" comment at the
