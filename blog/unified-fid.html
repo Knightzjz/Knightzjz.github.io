@@ -650,6 +650,11 @@ blockquote p:last-child{margin-bottom:0}
     var clone = el.cloneNode(true);
     clone.querySelectorAll('sup.cite,.hidden-ans').forEach(function(x){ x.remove(); });
     var t = clone.textContent.replace(/-{2,}/g,'，').replace(/\s+/g,' ').trim();
+    /* 测验选项的 A/B/C/D 是 CSS ::before 计数，DOM 文本里没有 —— 朗读时补上字母 */
+    if(el.matches('.quiz li')){
+      var n = Array.prototype.indexOf.call(el.parentNode.children, el);
+      if(n >= 0) t = String.fromCharCode(65 + n) + '，' + t;
+    }
     if(t) blocks.push({ el: el, text: t });
   });
 
