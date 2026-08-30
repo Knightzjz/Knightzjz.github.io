@@ -169,12 +169,18 @@ abbr.ufid{font-family:ui-monospace,"SF Mono",Consolas,monospace;font-size:.86em;
   padding:15px 22px;margin:24px 0;font-size:16px;line-height:1.95}
 .note-para p{margin:0}
 
-/* 特别致谢 — 浅暖沙色卡片，单行居中 */
-.ackcard{margin:30px 0 36px;padding:15px 20px;text-align:center;
+/* 特别致谢 — 浅暖沙底 + 内嵌双线铜框（证书感） */
+.ackcard{margin:8px 0 30px;padding:16px 22px 18px;text-align:center;
   background:linear-gradient(135deg,#f8ecd9,#f0dcbc);
   border:1px solid #d9b98c;border-radius:12px;
+  box-shadow:inset 0 0 0 1px #fff, inset 0 0 0 4px #f8ecd9, inset 0 0 0 5px #e3cb9f;
   font-size:16.5px;line-height:1.9;color:var(--ink)}
 .ackcard p{margin:0;text-align:center}
+.ackcard a{text-decoration:none;border-bottom:1px solid rgba(163,91,34,.35)}
+/* 致谢卡前的引语行（在正文末尾，衔接下方卡片） */
+.lead-in{margin:10px 0 0;text-align:center;
+  font-family:Georgia,"Times New Roman",serif;font-style:italic;
+  font-size:15.5px;letter-spacing:.1em;color:var(--accent)}
 
 blockquote{margin:28px 0;padding:6px 0 6px 24px;border-left:3px solid var(--accent);
   color:var(--ink-2);font-size:16.5px}
@@ -194,10 +200,29 @@ blockquote p:last-child{margin-bottom:0}
   .heart{animation-duration:.01s}
 }
 
+/* 致谢卡彩蛋：点击冒小气球 */
+.balloon{position:fixed;z-index:9999;pointer-events:none;user-select:none;
+  font-size:22px;line-height:1;filter:drop-shadow(0 2px 3px rgba(163,91,34,.18));
+  animation:balloon-float 2.8s cubic-bezier(.25,.55,.35,1) forwards}
+@keyframes balloon-float{
+  0%  {opacity:0;transform:translate(-50%,-50%) scale(.45) rotate(0deg)}
+  12% {opacity:1;transform:translate(calc(-50% + var(--bx)*.1), calc(-50% - 12px)) scale(1) rotate(calc(var(--br)*.2))}
+  55% {opacity:1;transform:translate(calc(-50% + var(--bx)*.6), calc(-50% - 130px)) scale(1) rotate(var(--br))}
+  100%{opacity:0;transform:translate(calc(-50% + var(--bx)), calc(-50% - 260px)) scale(.92) rotate(calc(var(--br)*1.7))}
+}
+@media (prefers-reduced-motion:reduce){
+  .balloon{animation-duration:.01s}
+}
+
 /* 隐藏答案：白底白字，拖选 / Ctrl+A 才现形 */
 .hidden-ans{color:#fff !important;background:transparent;user-select:text}
 
 .signoff{margin-top:52px;padding-top:28px;border-top:1px solid var(--line);color:var(--ink-2);font-size:16px}
+/* 后记：与正文区分 —— 虚线分隔 + 楷体 + 更轻的字色 */
+.signoff p.postscript{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line-2);
+  font-family:"Kaiti SC","STKaiti","KaiTi","楷体",Georgia,serif;
+  font-size:15.5px;line-height:1.95;color:var(--ink-3);text-align:justify}
+.signoff p.postscript .sig-meta{font-size:13px;letter-spacing:.06em;color:#9a9284}
 
 /* 返回博客列表 */
 .back-top{display:inline-flex;align-items:center;gap:7px;margin-top:30px;
@@ -267,7 +292,8 @@ blockquote p:last-child{margin-bottom:0}
   .back-blog-end{margin:48px 0 0}
   .quiz{padding:16px 18px}
   .sci,.concl,.jphen,.note-para,.mysum,.ackcard{padding:14px 16px}
-  .ackcard{font-size:15.5px}
+  .ackcard{font-size:15.5px;padding:14px 18px}
+  .lead-in{font-size:14.5px}
 }
 </style>
 </head>
@@ -333,9 +359,9 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>（应该）有点小难选的吧~~~</p>
 
-<p><strong>需要说明的是，你的答案对应了你需要调用什么样的伪造图像检测模型</strong>，因为现有的图像被动取证研究基本拆分为了多个独立的赛道，这些赛道主要<strong>包括但不限于</strong> AIGC 检测（整图生成），（自然）图像（部分）篡改检测，（纯）文档（图像）篡改检测，Deepfake（伪造人脸）检测等<sup class="cite"><a href="#r1">[1]</a></sup>。而且这些赛道的模型是不互通的，也就是一个图像篡改检测模型不能检测文档篡改图像，一个 Deepfake 检测器也对 AIGC 的人脸不起效，以此类推<sup class="cite"><a href="#r1">[1]</a></sup>。当然你可以硬用 AIGC 检测器检测 deepfake 图像，只不过结果是类似随机猜测，没有参考价值而已。</p>
+<p><strong>需要说明的是，你的答案对应了你需要调用什么样的伪造图像检测模型</strong>，因为现有的图像被动取证研究基本拆分为了多个独立的赛道，这些赛道主要<strong>包括但不限于</strong> AIGC 检测（整图生成），（自然）图像（部分）篡改检测，（纯）文档（图像）篡改检测，Deepfake（伪造人脸）检测等<sup class="cite"><a href="#r1">[1]</a></sup>。而且这些赛道的模型是不互通的，也就是一个图像篡改检测模型不能检测文档篡改图像，一个 Deepfake 检测器也对 AIGC 的人脸不起效，以此类推<sup class="cite"><a href="#r1">[1]</a></sup>。当然你可以硬用 deepfake 检测器检测 AIGC 图像，只不过结果是类似随机猜测，没有参考价值而已。</p>
 
-<h2><span class="num">一</span>预判悖论</h2>
+<h2><span class="num">一</span>悖论的出现</h2>
 
 <p>那么在实际中，对这张聊天截图进行真伪的检测就陷入了一个「<strong>预判悖论</strong>」：</p>
 
@@ -351,7 +377,7 @@ blockquote p:last-child{margin-bottom:0}
 <p>其实我认为「伪造图像」这个词本身就有统一的意思——它代表对伪造类型不设限，此前在学术上也没有人定义过伪造图像。但经过和<strong>吕建成</strong>老师的讨论，我还是把「统一」单独强调出来，作为这个任务的核心思想。</p>
 </div>
 
-<h2><span class="num">二</span>为什么会分成四条独立赛道</h2>
+<h2><span class="num">二</span>图像被动取证赛道的分与合</h2>
 
 <p>在我们继续深入 <abbr class="ufid">Unified FID</abbr> 之前，有一个必要讲的问题是，为什么图像被动取证领域或者叫内容安全领域发展成了（至少）四条完全独立的赛道呢，难道研究者们没有考虑实际应用情况？</p>
 
@@ -379,7 +405,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <div class="keysent">当伪造手段走向统一的时候，伪造检测手段也必然走向统一。</div>
 
-<h2><span class="num">三</span>任务定义：B 与 P</h2>
+<h2><span class="num">三</span>统一伪造图像检测任务的BP定义</h2>
 
 <h3><span class="num">3.1</span>统一伪造图像检测 = AIGC 检测吗</h3>
 
@@ -395,7 +421,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>其次，在很长时间范围内，我们在互联网上面对的都是一个混合环境，也就是有很多大模型伪造的图像，也有很多是手工、小模型伪造的图像。其一，历史上已经积攒了大量非大模型时代的伪造图像；其二，不能有关于图像伪造手法等的其他信息标注在训练数据中。此外，虽然大模型能力不断强化，但至今仍不能完全取代手工、特定模型等的篡改方案。比如，目前最强的文档伪造手段依然是手工抠图 + PS 的方案。如果只能处理大模型伪造的图像也并不能实现 <abbr class="ufid">Unified FID</abbr>。</p>
 
-<p>那么 <abbr class="ufid">Unified FID</abbr> 任务到底是什么呢 <strong class="hl">（BP 定义）</strong>：</p>
+<p>那么 <abbr class="ufid">Unified FID</abbr> 任务到底是什么呢<strong class="hl">（BP 定义）</strong>：</p>
 
 <h3><span class="num">3.2</span>B：Binary Classification</h3>
 
@@ -403,7 +429,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p><abbr class="ufid">Unified FID</abbr> 是一个图像二分类任务，输入图像，输出该图像对应的 0/1 分类标签。</p>
 
-<p>也就是 <code class="term">f(x) = y,  x = image  y = 0/1</code> 的范式</p>
+<p>也就是 <code class="term">f(x) = y, x = image, y = 0/1</code> 的范式</p>
 
 <p>这个范式里面代表：</p>
 
@@ -427,9 +453,9 @@ blockquote p:last-child{margin-bottom:0}
 
 <div class="keysent">但迄今为止，专才打败通才是常态，构建一个能超越多个专才的通才模型，是很难也很罕见的。</div>
 
-<h2><span class="num">四</span>三条技术路线</h2>
+<h2><span class="num">四</span>统一伪造图像检测任务的研究蓝图</h2>
 
-<p>那 <abbr class="ufid">Unified FID</abbr> 到底难在哪里，我们下面从技术蓝图（blueprint）上来挨个分析：</p>
+<p>那 <abbr class="ufid">Unified FID</abbr> 到底难在哪里，我们下面将梳理研究蓝图（blueprint）并逐点分析：</p>
 
 <p>技术路线可以比较清晰的分为三条：</p>
 
@@ -443,7 +469,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>这个思路非常有直觉，而且也很有意义，因为筛选最强单体小模型的过程能帮助我们提炼大量 insights，这对未来如何构建 <abbr class="ufid">Unified FID</abbr> 专用的基座大模型是非常有帮助的。</p>
 
-<p>但是通过我们从 ForensicHub 的测试来看，基本上没有任何一个子领域 SOTA 模型能实现我们 P 的要求，也就是哪怕将所有子领域数据和训练设定打通，也没有任何一个子领域模型能强到通吃其他子领域的模型。也就是哪怕用 B 子领域数据训练 A 子领域的模型之后，A 子领域的模型也打不过 B 子领域的原有模型。甚至经过我们大量实验，把 ABCD 所有子领域数据都喂给某一（A）子领域模型后，他们性能却发生了明显下降，尤其在该（A）子领域本身下降极其明显。我们在 ForensicHub 上就发现了这一现象，然后在 SICA 中管这一发现叫做<strong>领域负迁移</strong>，也就是只要混入了其他域的训练数据，模型性能必然会下降。领域负迁移现象的存在说明，依靠现有模型和数据拉通训练的方案是注定无法实现 <abbr class="ufid">Unified FID</abbr> 的<sup class="cite"><a href="#r2">[2]</a></sup>。</p>
+<p>但是通过我们从 ForensicHub 的测试来看，基本上没有任何一个子领域 SOTA 模型能实现我们 P 的要求。哪怕将所有子领域数据和训练设定打通，也没有任何一个子领域模型能强到通吃其他子领域的模型。简而言之，就是即便用 B 子领域数据训练 A 子领域的模型之后，A 子领域的模型也打不过 B 子领域的原有模型。甚至经过我们大量实验，把 ABCD 所有子领域数据都喂给某一（A）子领域模型后，他们性能却发生了明显下降，尤其在该（A）子领域本身下降极其明显。我们在 ForensicHub 上就发现了这一现象，然后在 SICA 中管这一发现叫做<strong>领域负迁移</strong>，也就是只要混入了其他域的训练数据，模型性能必然会下降。领域负迁移现象的存在说明，依靠现有模型和数据拉通训练的方案是注定无法实现 <abbr class="ufid">Unified FID</abbr> 的<sup class="cite"><a href="#r2">[2]</a></sup>。</p>
 
 <p>但是等等，这个思路至少在一开始我们直觉上是非常正确的啊~所以，应该是直觉错了么？</p>
 
@@ -458,8 +484,8 @@ blockquote p:last-child{margin-bottom:0}
 <p>综上三点，我们得出结论：</p>
 
 <div class="concl">
-<p>是的，我们的直觉确实错了 ---</p>
-<p>图像被动取证这些子领域都在学习同一个东西 :artifacts---虽然在不同子领域他们都叫同一个名字，但是其实特征表达上完全不相同，<strong>也就是 artifacts 在各子领域其实非常异构</strong>。</p>
+<p>是的，我们的直觉确实错了——</p>
+<p>图像被动取证这些子领域都在学习同一个东西 :artifacts——虽然在不同子领域他们都叫同一个名字，但是其实特征表达上完全不相同，<strong>也就是 artifacts 在各子领域其实非常异构</strong>。</p>
 </div>
 
 <div class="jphen">
@@ -467,7 +493,7 @@ blockquote p:last-child{margin-bottom:0}
 <p>我们在 ICML26<sup class="cite"><a href="#r2">[2]</a></sup> 中首次明确了 artifacts 的异构问题，并管这种 artifacts 在各子领域异构的这个现象叫<strong class="jz">吉喆现象（Ji-Zhe Phenomenon）</strong>。</p>
 </div>
 
-<p><span class="jz">吉喆现象</span>在单体小模型中必然会导致一个结果 --- <strong>特征坍塌</strong>，也就是模型基本只会学习各个子领域共同的特征表达，放弃学习每个子领域独特的 artifacts 表征（特异性），最终学到的 artifacts 特征是一个平均/退化后的表达，导致 artifacts 特征坍塌（到平凡解 trivial solution），不再对各种篡改手法均有效（没有区分度）。简单说就是模型只能尝试为异构的 artifacts 建立一个公共/共享表征，那么结果就是对所有 artifacts 都有点效果，但是也都没有特别好的效果。</p>
+<p><span class="jz">吉喆现象</span>在单体小模型中必然会导致一个结果——<strong>特征坍塌</strong>，也就是模型基本只会学习各个子领域共同的特征表达，放弃学习每个子领域独特的 artifacts 表征（特异性），最终学到的 artifacts 特征是一个平均/退化后的表达，导致 artifacts 特征坍塌（到平凡解 trivial solution），不再对各种篡改手法均有效（没有区分度）。简单说就是模型只能尝试为异构的 artifacts 建立一个公共/共享表征，那么结果就是对所有 artifacts 都有点效果，但是也都没有特别好的效果。</p>
 
 <div class="sci">
 <p>所以，<span class="r1">单体小模型</span>的核心难点不在于数据对齐和训练模式拉通，而在于如何构建一个模型能在一个单体 / 统一的特征空间中，有效表征这些完全异构的 artifacts 特征（即统一表征又不丢失差异/异构性）。这是一个典型的<strong>特征坍塌科学问题</strong>，从避免坍塌、检测坍塌和解除坍塌三方面都有很多可能的解决方案（比如梯度手术、特征亲和、坍塌恢复等）可以研究，我们在 SICA 中对此提出了一个避免坍塌的假设并进行了实现和验证<sup class="cite"><a href="#r2">[2]</a></sup>。大家有兴趣可以移步论文详细阅读，我就不再赘述。我个人感觉这是未来 <abbr class="ufid">Unified FID</abbr> 研究会集中涌现的关键问题点。</p>
@@ -493,7 +519,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>这种能力退化或者模型坍塌会导致极其严重的后果，比如大模型的 OOD 数据的泛化能力、大模型对检测结果的自动解释能力、大模型根据用户上下文对检测结果的修正能力、大模型调度 agent 对检测结果进行审计等的可能性都完全丧失了。或者更简而言之，这个模型就不会说话，也不能理解用户指令了，只会机械地对图像做二分类了，完全偏离了我们使用大模型的核心初衷。</p>
 
-<p>在 post-training 阶段这个模型坍塌问题的本质机理我们目前还在探索中，这个问题应该不仅会存在在取证方向上，很多垂直领域随着训练数据量的积攒应该都会有类似问题慢慢出现。这是一个非常有价值也比较难的研究方向，也欢迎大家一起讨论。</p>
+<p>在 post-training 阶段这个模型坍塌问题的本质机理我们目前还在探索中，这个问题应该不仅会存在在取证方向上，很多垂直领域随着训练数据量的积攒应该都会有类似问题慢慢出现。这是一个非常有价值也比较难的研究方向，欢迎大家一起讨论。</p>
 
 <div class="sci">
 <p><strong>推理效率：</strong>大模型的处理效率至今难以提升。在实际场景中，对伪造图像的检测业务会存在明显的波动，有明显波峰波谷。比如，一些生活服务平台在特定日期的优惠活动（比如教师节老师吃饭打折），这就会在短时间（1-2 天）内涌入海量（百万量级）的检测需求（因为需要上传教师证核验资格，而教师证的伪造基本各类大模型都能帮你做）。大模型检测图像基本在秒级响应，以 5 秒检测一副图像计算，100W 数据需要 500W 秒也就大概 58 天时间。</p>
@@ -503,9 +529,9 @@ blockquote p:last-child{margin-bottom:0}
 
 <h3><span class="num">4.3</span><span class="r3">大小模型协同路线</span></h3>
 
-<p>这是一个最直接、最不绕弯子的路线 --- 反正我们各个子领域都有 sota 了，那就通过大模型路由调度一次吧，把小模型检测结果综合反馈给大模型判断即可（MoE 思想）。目前 <abbr class="ufid">Unified FID</abbr> 除我们组外，很多强组（港中深吴保元老师、中科大谢洪涛老师、北邮张继威老师等，大家可以多follow他们的工作）都走了这条路线。</p>
+<p>这是一个最直接、最不绕弯子的路线——反正我们各个子领域都有 sota 了，那就通过大模型路由调度一次吧，把小模型检测结果综合反馈给大模型判断即可（MoE 思想）。目前 <abbr class="ufid">Unified FID</abbr> 除我们组外，很多强组（包括但不限于港中深吴保元老师、中科大谢洪涛老师、北邮张继威老师、北大深张健老师等）都走了这条路线，大家可以多follow他们的工作。</p>
 
-<p>这条路线是目前发展最迅速的方向，也是最快能出成果的方向。主要可以继续深入的科学问题在于：</p>
+<p>这条路线是目前发展最迅速的方向，也是最快能出成果的方向。需要继续深入研究的两个科学问题在于：</p>
 
 <div class="sci">
 <p><strong>短板 / 木桶效应问题：</strong><span class="r3">大小模型协同</span>的上限天然受制于单个领域小模型的天花板和大模型的路由能力。导致现有方案很难满足 <abbr class="ufid">Unified FID</abbr> 的 P 需求。所以如何让大模型以更优的方式调度小模型以及综合各个模型结果，使其可以超越单个 sota 模型的性能上限，成为了要解决的核心科学问题。后续研究应该会在大模型对小模型的多轮调度、优先级调度，以及大模型对小模型返回结果的自回归、冗余、可信判定等方向集中涌现。</p>
@@ -521,16 +547,19 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>因为最近收到了很多邮件询问相关问题，所以我的第一篇博客比较长，对目前 30 多封邮件中的几乎所有问题都做了解答，可能有所遗漏和谬误，也欢迎大家联系我进行指正和修改。</p>
 
-<p>后续有时间我会写一个英文博客，目前也有很多外国研究者对 <abbr class="ufid">Unified FID</abbr> 方向有一定兴趣。不过最近应该写不出来了~希望他们就将就下，直接大模型翻译吧~</p>
+<p>后续有时间我会写一个英文博客，目前海外也有很多研究者对 <abbr class="ufid">Unified FID</abbr> 方向有一定兴趣。不过最近应该写不出来了~希望他们就将就下，直接大模型翻译吧~</p>
+
+<p class="lead-in">Last but not least,</p>
 
 <div class="ackcard">
-<p>Last but not least, 感谢<a href="https://sebastouristtrophyf.github.io/" target="_blank" rel="noopener noreferrer">冯文韬</a>、<a href="https://sites.google.com/site/baoyuanwu2015/" target="_blank" rel="noopener noreferrer">吴保元</a>、<a href="https://cs.xmut.edu.cn/info/1085/4510.htm" target="_blank" rel="noopener noreferrer">杜侠</a>老师对博文的建议和帮助。</p>
+<p>感谢<a href="https://sebastouristtrophyf.github.io/" target="_blank" rel="noopener noreferrer">冯文韬</a>、<a href="https://sites.google.com/site/baoyuanwu2015/" target="_blank" rel="noopener noreferrer">吴保元</a>、<a href="https://cs.xmut.edu.cn/info/1085/4510.htm" target="_blank" rel="noopener noreferrer">杜侠</a>、<a href="https://cmpun.github.io/" target="_blank" rel="noopener noreferrer">潘治文</a>老师对博文的建议和帮助。</p>
+<p>感谢杜博、杨哲、朱学康对博文的校对和补充。</p>
 </div>
 
 <div class="signoff">
   <p>感谢大家的耐心阅读，欢迎批评指正。</p>
-  <p>2026 年 8 月 28 日，23:17，家中<br>
-  （Helen姐头疼去睡觉了：D 所以今晚我能安心把拖了一个月的博客写完~）</p>
+  <p class="postscript">Helen姐头疼去睡觉了 :D   所以今晚我能安心把拖了一个月的博客写完~<br>
+  <span class="sig-meta">2026 年 8 月 28 日，23:17，家中</span></p>
   <p class="thanks">Special Thanks to Helen Wang</p>
   <p class="thanks-sub">欢迎转载，只需标明出处</p>
 </div>
@@ -548,9 +577,9 @@ blockquote p:last-child{margin-bottom:0}
 <section class="refs">
 <h2>参考文献</h2>
 <ol>
-  <li id="r1"><span class="rmark">[1]</span> Bo Du, Xuekang Zhu, Xiaochen Ma, Chenfan Qu, Kaiwen Feng, Zhe Yang, Chi-Man Pun, Jian Liu, Jizhe Zhou. <strong>ForensicHub: A Unified Benchmark &amp; Codebase for All-Domain Fake Image Detection and Localization.</strong> NeurIPS 2025, Datasets and Benchmarks Track. arXiv:2505.11003. <a href="https://github.com/scu-zjz/ForensicHub">github.com/scu-zjz/ForensicHub</a>.</li>
-  <li id="r2"><span class="rmark">[2]</span> Bo Du, Xiaochen Ma, Xuekang Zhu, Zhe Yang, Chaoqun Niu, Jian Liu, Ji-Zhe Zhou. <strong>Can We Build a Monolithic Model for Fake Image Detection? SICA: Semantic-Induced Constrained Adaptation for Unified-Yet-Discriminative Artifact Feature Space Reconstruction.</strong> ICML 2026. arXiv:2602.06676. <a href="https://github.com/venus-guangjian/SICA_OpenMMSec">github.com/venus-guangjian/SICA_OpenMMSec</a>.</li>
-  <li id="r3"><span class="rmark">[3]</span> <strong>Venus-DeFakerOne: Unified Fake Image Detection &amp; Localization.</strong> arXiv:2605.14091, 2026.</li>
+  <li id="r1"><span class="rmark">[1]</span> Bo Du, Xuekang Zhu, Xiaochen Ma, Chenfan Qu, Kaiwen Feng, Zhe Yang, Chi-Man Pun, Jian Liu, Jizhe Zhou. <strong>ForensicHub: A Unified Benchmark &amp; Codebase for All-Domain Fake Image Detection and Localization.</strong> NeurIPS 2025, Datasets and Benchmarks Track. <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer">arXiv:2505.11003</a>. <a href="https://github.com/scu-zjz/ForensicHub">github.com/scu-zjz/ForensicHub</a>.</li>
+  <li id="r2"><span class="rmark">[2]</span> Bo Du, Xiaochen Ma, Xuekang Zhu, Zhe Yang, Chaoqun Niu, Jian Liu, Ji-Zhe Zhou. <strong>Can We Build a Monolithic Model for Fake Image Detection? SICA: Semantic-Induced Constrained Adaptation for Unified-Yet-Discriminative Artifact Feature Space Reconstruction.</strong> ICML 2026. <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer">arXiv:2602.06676</a>. <a href="https://github.com/venus-guangjian/SICA_OpenMMSec">github.com/venus-guangjian/SICA_OpenMMSec</a>.</li>
+  <li id="r3"><span class="rmark">[3]</span> <strong>Venus-DeFakerOne: Unified Fake Image Detection &amp; Localization.</strong> <a href="https://arxiv.org/abs/2605.14091" target="_blank" rel="noopener noreferrer">arXiv:2605.14091</a>, 2026. <a href="https://github.com/venus-guangjian/Venus-DeFakerOne" target="_blank" rel="noopener noreferrer">github.com/venus-guangjian/Venus-DeFakerOne</a>.</li>
 </ol>
 </section>
 
@@ -586,6 +615,36 @@ blockquote p:last-child{margin-bottom:0}
       h.style.animationDelay = (Math.random() * .2).toFixed(2) + 's';
       document.body.appendChild(h);
       (function(node){ setTimeout(function(){ node.remove(); }, 1500); })(h);
+    }
+  });
+})();
+
+/* 致谢卡 —— 点击冒小气球 */
+(function(){
+  var el = document.querySelector('.ackcard');
+  if(!el) return;
+  var CB = ['🎈','🎈','🎈','🎈','🎈','🎈','🎊','✨'];
+  el.title = '点一下试试 🎈';
+  el.style.cursor = 'pointer';
+  el.addEventListener('click', function(e){
+    if(e.target.closest && e.target.closest('a')) return; /* 点人名照常打开链接 */
+    var r  = el.getBoundingClientRect();
+    var ox = (e.clientX !== undefined && e.clientX !== 0) ? e.clientX : r.left + r.width  / 2;
+    var oy = (e.clientY !== undefined && e.clientY !== 0) ? e.clientY : r.top  + r.height / 2;
+    var n  = 9 + Math.floor(Math.random() * 5);
+    for (var i = 0; i < n; i++){
+      var b = document.createElement('span');
+      b.className = 'balloon';
+      b.setAttribute('aria-hidden','true');
+      b.textContent = CB[Math.floor(Math.random() * CB.length)];
+      b.style.left = (ox + (Math.random() - .5) * Math.min(r.width * .7, 200)) + 'px';
+      b.style.top  = (oy + (Math.random() - .5) * 22) + 'px';
+      b.style.setProperty('--bx', ((Math.random() - .5) * 130).toFixed(0) + 'px');
+      b.style.setProperty('--br', ((Math.random() - .5) * 60).toFixed(0) + 'deg');
+      b.style.fontSize = (16 + Math.random() * 14).toFixed(0) + 'px';
+      b.style.animationDelay = (Math.random() * .35).toFixed(2) + 's';
+      document.body.appendChild(b);
+      (function(node){ setTimeout(function(){ node.remove(); }, 3400); })(b);
     }
   });
 })();
