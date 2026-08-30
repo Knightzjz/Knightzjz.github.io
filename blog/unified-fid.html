@@ -218,8 +218,9 @@ blockquote p:last-child{margin-bottom:0}
 @media (prefers-reduced-motion:reduce){.page-bean{animation:none;opacity:0}}
 
 /* ── 阅读进度条 ── */
-.readbar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);
-  z-index:100;opacity:.85}
+.readbar{position:fixed;top:0;left:0;height:6px;width:0;
+  background:linear-gradient(90deg,var(--accent-deep),var(--accent) 55%,#c98a4b);
+  box-shadow:0 1px 5px rgba(163,91,34,.4);z-index:100}
 
 @media print{body{background:#fff;font-size:11pt}.wrap{max-width:100%}
   .heart,.page-beans,.readbar,.viewcount{display:none}}
@@ -372,13 +373,15 @@ blockquote p:last-child{margin-bottom:0}
 
 <p><abbr class="ufid">Unified FID</abbr> 要求<strong class="hl">一个通才模型同时超越多个专才模型</strong>，也就是一个统一的模型要在各个子领域上，比如典型的我们前面说的四个子领域：Deepfake、AIGC，篡改和文档篡改，同时超越各自子领域的 SOTA 模型。这样一个模型才是真正在实际中有应用价值的模型。</p>
 
+<p>在有了定义之后，<abbr class="ufid">Unified FID</abbr> 任务貌似有很多简单直接的实现方式，比如直接选一个基础模型在拉通的数据集上进行 fine tuning / post training 好像就行了。</p>
+
 <div class="keysent">但迄今为止，专才打败通才是常态，构建一个能超越多个专才的通才模型，是很难也很罕见的。</div>
 
 <h2><span class="num">四</span>三条技术路线</h2>
 
-<p>在有了定义之后，<abbr class="ufid">Unified FID</abbr> 任务貌似有很多简单直接的实现方式，那 <abbr class="ufid">Unified FID</abbr> 到底难在哪里，我们下面从技术蓝图（blueprint）上来挨个分析：</p>
+<p>那 <abbr class="ufid">Unified FID</abbr> 到底难在哪里，我们下面从技术蓝图（blueprint）上来挨个分析：</p>
 
-<p><abbr class="ufid">Unified FID</abbr> 的技术路线可以比较清晰的分为三类：</p>
+<p>技术路线可以比较清晰的分为三条：</p>
 
 <blockquote>
 <p><strong><span class="r1">单体小模型路线</span>、<span class="r2">大模型路线</span>、<span class="r3">大小模型协同路线</span></strong></p>
@@ -459,12 +462,12 @@ blockquote p:last-child{margin-bottom:0}
 </div>
 
 <div class="sci">
-<p><strong>协作框架生长 / 兼容问题：</strong>被动取证各个领域最近疯狂发展，小模型快速迭代更新，如何让大小模型协作框架能够不断生长，兼容新出现或更新后的 sota 小模型或者新的 agent 是一个迫切需要研究的核心科学问题。或者更直白一点就是，大模型应如何持续学习以了解新的小模型或 agent 的能力范围，保证自己的调度和综合判断始终最优。这是一个非常有意义的研究方向，这个问题也适用于目前如火如荼的 agent 领域，有非常巨大的研究潜力和应用前景。</p>
+<p><strong>协作框架生长 / 兼容问题：</strong>被动取证各个领域最近疯狂发展，小模型快速迭代更新，如何让大小模型协作框架能够不断生长，兼容新出现或更新后的 sota 小模型以及新的 agent 是一个迫切需要研究的核心科学问题。或者更直白一点就是，大模型应如何持续学习以了解新的小模型或 agent 的能力范围，保证自己的路由策略和综合判断始终最优。这是一个非常有意义的研究方向，这个问题也适用于目前如火如荼的 agent 领域，有非常巨大的研究潜力和应用前景。</p>
 </div>
 
 <h2><span class="num">五</span>写在最后</h2>
 
-<p>综上我们大概梳理了 <abbr class="ufid">Unified FID</abbr> 这个任务的背景、定义、三条技术路线、各个路线对应的科学问题以及潜在的解决方案。关于 <abbr class="ufid">Unified FID</abbr> 一些具体技术路线的可行性分析和潜力研判我会放到后一篇博文继续深入分析。这相当于为我们组过去 1-2 年的关键研究工作做了一个快速总结和对 <abbr class="ufid">Unified FID</abbr> 问题的阐述做了一个简单的开场。</p>
+<p>综上我们大概梳理了 <abbr class="ufid">Unified FID</abbr> 这个任务的背景、定义、三条技术路线、各个路线对应的科学问题以及潜在的解决方案。这相当于为我们组过去 1-2 年的关键研究工作做了一个快速总结和对 <abbr class="ufid">Unified FID</abbr> 问题的阐述做了一个简单的开场。关于 <abbr class="ufid">Unified FID</abbr> 一些具体技术路线的可行性分析和潜力研判我会放到后一篇博文继续深入分析。</p>
 
 <p>因为最近收到了很多邮件询问相关问题，所以我的第一篇博客比较长，对目前 30 多封邮件中的几乎所有问题都做了解答，可能有所遗漏和谬误，也欢迎大家联系我进行指正和修改。</p>
 
