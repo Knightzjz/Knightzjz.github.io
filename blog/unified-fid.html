@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://countapi.mileshilliard.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://giscus.app; connect-src 'self' https://countapi.mileshilliard.com; frame-src https://giscus.app; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/images/avatar-180w.webp" type="image/webp" sizes="180x180">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
@@ -239,6 +239,15 @@ blockquote p:last-child{margin-bottom:0}
 .back-blog-end a:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
 .back-blog-end .arr{font-family:Georgia,serif;display:inline-block;transition:transform .2s}
 .back-blog-end a:hover .arr{transform:translateX(-3px)}
+
+/* 留言 —— Giscus（基于 GitHub Discussions，渲染在 iframe 内，样式由 giscus-theme.css 控制） */
+.comments{margin:66px 0 0;padding:34px 0 0;border-top:1px solid var(--line)}
+.comments-head{margin:0 0 8px;font-size:20px;font-weight:700;letter-spacing:.02em;
+  display:flex;align-items:center;gap:12px}
+.comments-head::before{content:"";flex:none;width:26px;height:2px;border-radius:2px;
+  background:var(--accent)}
+.comments-tip{margin:0 0 22px;font-size:13.5px;line-height:1.9;color:var(--ink-3)}
+.comments .giscus-frame{width:100%;border:none}
 .thanks{text-align:center;font-size:16px;letter-spacing:2.5px;
   font-style:italic;margin:34px 0 10px;padding:24px 12px 10px;
   border-top:1px solid #f0d9e2;
@@ -279,7 +288,7 @@ blockquote p:last-child{margin-bottom:0}
   box-shadow:0 1px 5px rgba(163,91,34,.4);z-index:100}
 
 @media print{body{background:#fff;font-size:11pt}.wrap{max-width:100%}
-  .heart,.page-beans,.readbar,.viewcount,.listen{display:none}}
+  .heart,.page-beans,.readbar,.viewcount,.listen,.comments{display:none}}
 @media (max-width:640px){
   body{font-size:16.5px}
   p{text-align:left}       /* 窄屏左对齐，避免中英混排被拉伸出大空隙 */
@@ -290,6 +299,8 @@ blockquote p:last-child{margin-bottom:0}
   .byline::before,.byline::after{width:32px}
   .back-top{margin-top:22px}
   .back-blog-end{margin:48px 0 0}
+  .comments{margin:52px 0 0;padding:28px 0 0}
+  .comments-head{font-size:18px}
   .quiz{padding:16px 18px}
   .sci,.concl,.jphen,.note-para,.mysum,.ackcard{padding:14px 16px}
   .ackcard{font-size:15.5px;padding:14px 18px}
@@ -583,6 +594,29 @@ blockquote p:last-child{margin-bottom:0}
 </ol>
 </section>
 
+<section class="comments">
+<h2 class="comments-head">评论</h2>
+<p class="comments-tip">评论托管在本站仓库的 GitHub Discussions，需要 GitHub 账号登录。无论是讨论、纠错还是补充，都欢迎留言。</p>
+
+<script src="https://giscus.app/client.js"
+        data-repo="Knightzjz/Knightzjz.github.io"
+        data-repo-id="R_kgDOKeh7_w"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOKeh7_84DEjHh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="https://knightzjz.github.io/blog/giscus-theme.css"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+<noscript><p class="comments-tip">评论区需要 JavaScript，并依赖 GitHub Discussions。</p></noscript>
+</section>
+
 <div class="back-blog-end">
   <a href="/blog/"><span class="arr">←</span>返回博客列表</a>
 </div>
@@ -704,7 +738,7 @@ blockquote p:last-child{margin-bottom:0}
      跳过参考文献、返回按钮、图片、引用角标和隐藏答案（不剧透） */
   var blocks = [];
   art.querySelectorAll('h2,h3,p,.keysent,.jp-t,.quiz li').forEach(function(el){
-    if(el.closest('.refs,.back-blog-end,.endpic,.figwrap,.listen')) return;
+    if(el.closest('.refs,.back-blog-end,.endpic,.figwrap,.listen,.comments')) return;
     if(el.classList.contains('hidden-ans')) return;
     var clone = el.cloneNode(true);
     clone.querySelectorAll('sup.cite,.hidden-ans').forEach(function(x){ x.remove(); });
