@@ -1,0 +1,92 @@
+/*!
+ * Giscus 自定义主题 —— 与「分久必合」博文的纸感 / 铜色风格保持一致
+ * 用法：giscus 脚本的 data-theme 指向本文件的 HTTPS 地址
+ * 说明：giscus 渲染在 iframe 内，外部页面的 CSS 无法穿透，只能通过主题文件覆盖
+ *       这里覆盖的是 Primer 设计变量（见 https://giscus.app/themes/light.css）
+ */
+
+main {
+  font-family: "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC",
+               Georgia, "Times New Roman", "Microsoft YaHei", serif;
+  font-size: 15.5px;
+  line-height: 1.85;
+
+  /* 画布 —— 纸色 */
+  --color-canvas-default: #fbfaf7;
+  --color-canvas-overlay: #ffffff;
+  --color-canvas-inset: #f6efe3;
+  --color-canvas-subtle: #f6efe3;
+
+  /* 文字 */
+  --color-fg-default: #262218;
+  --color-fg-muted: #5b5445;
+  --color-fg-subtle: #7a7263;
+
+  /* 描边 */
+  --color-border-default: #e7e1d4;
+  --color-border-muted: #d9d2c2;
+  --color-neutral-muted: rgba(70, 60, 35, .10);
+
+  /* 强调 —— 铜色 */
+  --color-accent-fg: #a35b22;
+  --color-accent-emphasis: #a35b22;
+  --color-accent-muted: rgba(163, 91, 34, .28);
+  --color-accent-subtle: #f6efe3;
+
+  /* 状态色 —— 降饱和，融入纸感 */
+  --color-success-fg: #3f7a3a;
+  --color-attention-fg: #8a6a1f;
+  --color-attention-muted: rgba(220, 171, 65, .35);
+  --color-attention-subtle: #fdf7e1;
+  --color-danger-fg: #b23a2c;
+  --color-danger-muted: rgba(178, 58, 44, .28);
+  --color-danger-subtle: #fbe9e6;
+
+  /* 按钮 */
+  --color-btn-text: #5b5445;
+  --color-btn-bg: #ffffff;
+  --color-btn-border: rgba(70, 60, 35, .20);
+  --color-btn-hover-bg: #f6efe3;
+  --color-btn-hover-border: rgba(163, 91, 34, .45);
+  --color-btn-active-bg: #f0e7d6;
+  --color-btn-active-border: rgba(163, 91, 34, .55);
+  --color-btn-selected-bg: #f6efe3;
+  --color-btn-primary-text: #ffffff;
+  --color-btn-primary-bg: #a35b22;
+  --color-btn-primary-border: rgba(163, 91, 34, .9);
+  --color-btn-primary-hover-bg: #7f4517;
+  --color-btn-primary-hover-border: #7f4517;
+  --color-btn-primary-selected-bg: #7f4517;
+  --color-btn-primary-disabled-bg: #d9c3a8;
+}
+
+/* 圆角收敛一点，和站内的卡片语言统一 */
+main .gsc-comment-box,
+main .gsc-reply-box,
+main .gsc-comment {
+  border-radius: 10px;
+}
+
+main .gsc-comment-box-textarea,
+main .gsc-reply-box-textarea {
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.9;
+  border-radius: 10px;
+}
+
+main .gsc-comment-box-tabs {
+  border-radius: 10px 10px 0 0;
+}
+
+/* 顶部的「X 条评论」标题 */
+main .gsc-header {
+  font-size: 15px;
+  letter-spacing: .02em;
+}
+
+/* 头像 —— 略作柔化 */
+main .gsc-comment-author-avatar,
+main .gsc-comment-author {
+  border-radius: 999px;
+}
