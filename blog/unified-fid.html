@@ -241,7 +241,7 @@ blockquote p:last-child{margin-bottom:0}
 .back-blog-end a:hover .arr{transform:translateX(-3px)}
 
 /* 留言 —— Giscus（基于 GitHub Discussions，渲染在 iframe 内，样式由 giscus-theme.css 控制） */
-.comments{margin:66px 0 0;padding:34px 0 0;border-top:1px solid var(--line)}
+.comments{display:none}  /* 评论区暂时隐藏：保留代码，日后恢复只需删除本规则并启用下方 giscus 脚本 */
 .comments-head{margin:0 0 8px;font-size:20px;font-weight:700;letter-spacing:.02em;
   display:flex;align-items:center;gap:12px}
 .comments-head::before{content:"";flex:none;width:26px;height:2px;border-radius:2px;
@@ -598,6 +598,7 @@ blockquote p:last-child{margin-bottom:0}
 <h2 class="comments-head">评论</h2>
 <p class="comments-tip">评论托管在本站仓库的 GitHub Discussions，需要 GitHub 账号登录。无论是讨论、纠错还是补充，都欢迎留言。</p>
 
+<!-- 评论功能暂时关闭：giscus 脚本停用。恢复时删除本注释包裹即可
 <script src="https://giscus.app/client.js"
         data-repo="Knightzjz/Knightzjz.github.io"
         data-repo-id="R_kgDOKeh7_w"
@@ -615,6 +616,7 @@ blockquote p:last-child{margin-bottom:0}
         async>
 </script>
 <noscript><p class="comments-tip">评论区需要 JavaScript，并依赖 GitHub Discussions。</p></noscript>
+-->
 </section>
 
 <div class="back-blog-end">
