@@ -10,13 +10,13 @@
 <link rel="preload" as="image" imagesrcset="img/fig1-480.webp 480w, img/fig1-658.webp 658w" imagesizes="(max-width:640px) 480px, 658px" fetchpriority="high">
 <noscript><style>.figwrap img,.endpic img{opacity:1}</style></noscript>
 <title>分久必合：统一的伪造图像检测（Unified FID）| Ji-Zhe Zhou</title>
-<meta name="description" content="统一伪造图像检测（Unified FID）：AIGC 检测、图像篡改检测、文档篡改检测、Deepfake 检测四大赛道走向统一。任务定义、三条技术路线与核心科学问题，吉喆现象与特征坍塌，一文讲透。">
-<meta name="keywords" content="统一伪造图像检测, 伪造图像检测, 伪造检测, Unified FID, Unified Fake Image Detection, AIGC 检测, 图像篡改检测, 文档篡改检测, Deepfake 检测, 图像被动取证, 图像取证, 吉喆现象, 特征坍塌, SICA, ForensicHub">
+<meta name="description" content="本文系统梳理统一伪造图像检测（Unified FID）：回顾 AIGC 检测、图像篡改检测、文档篡改检测与 Deepfake 检测四条赛道由分到合的历史，指出大模型已抹平伪造手段的边界；给出 B（二分类）+ P（通才）的任务定义，提出单体小模型、大模型与大小模型协同三条技术路线，并讨论吉喆现象、特征坍塌与 Preset Paradox 等科学问题。">
+<meta name="keywords" content="统一伪造图像检测, 伪造图像检测, 伪造检测, Unified FID, Unified Fake Image Detection, AIGC 检测, 图像篡改检测, 文档篡改检测, Deepfake 检测, 图像被动取证, 图像取证, 吉喆现象, 特征坍塌, Preset Paradox, SICA, ForensicHub, 国家自然科学基金, 面上项目">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Ji-Zhe Zhou's Blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:title" content="分久必合：统一的伪造图像检测（Unified FID）">
-<meta property="og:description" content="统一伪造图像检测（Unified FID）：AIGC 检测、图像篡改检测、文档篡改检测、Deepfake 检测四大赛道走向统一。任务定义、三条技术路线与核心科学问题，吉喆现象与特征坍塌，一文讲透。">
+<meta property="og:description" content="统一伪造图像检测（Unified FID）：四条赛道由分到合的历史、BP 任务定义、三条技术路线与科学问题。">
 <meta property="og:url" content="https://knightzjz.github.io/blog/unified-fid.html">
 <meta property="og:image" content="https://knightzjz.github.io/blog/img/og-unified-fid.jpg">
 <meta property="og:image:alt" content="分久必合：统一的伪造图像检测（Unified FID）">
@@ -27,13 +27,13 @@
 <meta property="article:author" content="周吉喆 (Ji-Zhe Zhou)">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="分久必合：统一的伪造图像检测（Unified FID）">
-<meta name="twitter:description" content="统一伪造图像检测（Unified FID）：AIGC 检测、图像篡改检测、文档篡改检测、Deepfake 检测四大赛道走向统一。任务定义、三条技术路线与核心科学问题，吉喆现象与特征坍塌，一文讲透。">
+<meta name="twitter:description" content="统一伪造图像检测（Unified FID）：四条赛道由分到合的历史、BP 任务定义、三条技术路线与科学问题。">
 <meta name="twitter:image" content="https://knightzjz.github.io/blog/img/og-unified-fid.jpg">
 <script type="application/ld+json" id="post-ld">
 {"@context":"https://schema.org","@type":"BlogPosting",
 "mainEntityOfPage":{"@type":"WebPage","@id":"https://knightzjz.github.io/blog/unified-fid.html"},
 "headline":"分久必合：统一的伪造图像检测（Unified FID）",
-"description":"统一伪造图像检测（Unified FID）：AIGC 检测、图像篡改检测、文档篡改检测、Deepfake 检测四大赛道走向统一。任务定义、三条技术路线与核心科学问题，吉喆现象与特征坍塌，一文讲透。",
+"description":"本文系统梳理统一伪造图像检测（Unified FID）：回顾 AIGC 检测、图像篡改检测、文档篡改检测与 Deepfake 检测四条赛道由分到合的历史，指出大模型已抹平伪造手段的边界；给出 B（二分类）+ P（通才）的任务定义，提出单体小模型、大模型与大小模型协同三条技术路线，并讨论吉喆现象、特征坍塌与 Preset Paradox 等科学问题。",
 "image":"https://knightzjz.github.io/blog/img/og-unified-fid.jpg",
 "datePublished":"2026-08-28T23:17:00+08:00",
 "dateModified":"2026-08-31T23:00:00+08:00",
@@ -41,7 +41,7 @@
 "publisher":{"@type":"Person","name":"周吉喆 (Ji-Zhe Zhou)","url":"https://knightzjz.github.io/"},
 "inLanguage":"zh-CN",
 "isAccessibleForFree":true,
-"keywords":"统一伪造图像检测, Unified FID, Unified Fake Image Detection, AIGC 检测, 图像篡改检测, 文档篡改检测, Deepfake 检测, 图像取证, 吉喆现象, 特征坍塌, SICA, ForensicHub"}
+"keywords":"统一伪造图像检测, Unified FID, Unified Fake Image Detection, AIGC 检测, 图像篡改检测, 文档篡改检测, Deepfake 检测, 图像取证, 吉喆现象, 特征坍塌, Preset Paradox, SICA, ForensicHub, 国家自然科学基金, 面上项目"}
 </script>
 <script>
 (function(){try{var ld=document.getElementById('post-ld');var o=JSON.parse(ld.textContent);o.dateModified=new Date(document.lastModified).toISOString();ld.textContent=JSON.stringify(o);}catch(e){}})();
