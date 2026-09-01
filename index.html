@@ -347,6 +347,16 @@ body {
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
+a.research-keyword {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+a.research-keyword:hover,
+a.research-keyword:focus-visible {
+  background: linear-gradient(transparent 55%, rgba(15, 118, 110, 0.38) 55%);
+}
 
 /* ============================================================
    Thanks Line
@@ -1155,7 +1165,7 @@ body {
           周吉喆，四川大学计算机学院副教授，
           <span class="highlight-tag">四川省千人</span>
           <span class="highlight-tag"><a href="https://cis.ieee.org/publications/t-emerging-topics-in-ci/tetci-editors-and-associate-editors" target="_blank" rel="noopener noreferrer">IEEE TETCI 副主编</a></span>
-          <span class="highlight-tag"><a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank" rel="noopener noreferrer">J. Imaging 客座主编</a></span>，<span class="highlight-tag"><a href="#eat-more-group">Eat More Group</a></span>负责人，主要研究方向为<span class="research-keyword">伪造图像检测</span>（<span class="research-keyword">Fake Image Detection</span>）及<span class="research-keyword">生成与取证统一</span>（<span class="research-keyword">Unified Generation and Forensics</span>）。我主导开发了
+          <span class="highlight-tag"><a href="https://www.mdpi.com/journal/jimaging/special_issues/9V8MZF356Y" target="_blank" rel="noopener noreferrer">J. Imaging 客座主编</a></span>，<span class="highlight-tag"><a href="#eat-more-group">Eat More Group</a></span>负责人，主要研究方向为<a class="research-keyword" href="/blog/unified-fid.html" title="阅读博文：分久必合：统一的伪造图像检测（Unified FID）">统一伪造图像检测</a>（<span class="research-keyword">Unified Fake Image Detection</span>）及<span class="research-keyword">生成与取证统一</span>（<span class="research-keyword">Unified Generation and Forensics</span>）。我主导开发了
           <a class="project-tag" href="https://github.com/SunnyHaze/IML-ViT" target="_blank" rel="noopener noreferrer">IML-ViT</a>
           <a class="project-tag" href="https://github.com/scu-zjz/SparseViT" target="_blank" rel="noopener noreferrer">SparseViT</a>
           <a class="project-tag" href="https://github.com/scu-zjz/IMDLBenCo" target="_blank" rel="noopener noreferrer">IMDL-BenCo</a>
