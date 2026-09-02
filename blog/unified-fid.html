@@ -131,6 +131,7 @@ sup.cite a:hover{color:var(--accent-deep);text-decoration:underline}
 .r2{color:#3a6d9e}
 .r3{color:#47825a}
 strong.hl{color:var(--accent)}
+strong.emph{font-weight:700}
 strong.tailnote{color:var(--accent-deep);font-weight:700;letter-spacing:.01em}
 .jz{color:#46688c}  /* 吉喆现象 */
 
@@ -493,7 +494,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>其次，从模型性能上（P: Polymath）：</p>
 
-<p><abbr class="ufid">Unified FID</abbr> 要求<strong class="hl">一个通才模型同时超越多个专才模型</strong>，也就是一个统一的模型要在各个子领域上，比如典型的我们前面说的四个子领域：Deepfake、AIGC，篡改和文档篡改，同时超越各自子领域的 SOTA 模型。这样一个模型才是真正在实际中有应用价值的模型。<strong class="tailnote">尤其是在我国超大规模内容平台的治理、反诈风控与舆情巡检这些特有场景下，在审核拦截、欺诈识别与舆情取证等环节，模型面对的是亿量级、来源与伪造手法都完全不可预设的图像，也只有超越专才模型的精度，才能让 <abbr class="ufid">Unified FID</abbr> 在这类场景中格外有效。</strong></p>
+<p><abbr class="ufid">Unified FID</abbr> 要求<strong class="hl">一个通才模型同时超越多个专才模型</strong>，也就是一个统一的模型要在各个子领域上，比如典型的我们前面说的四个子领域：Deepfake、AIGC，篡改和文档篡改，同时超越各自子领域的 SOTA 模型。这样一个模型才是真正在实际中有应用价值的模型。<strong class="emph">尤其是在我国超大规模内容平台的治理、反诈风控与舆情巡检这些特有场景下，在审核拦截、欺诈识别与舆情取证等环节，模型面对的是亿量级、来源与伪造手法都完全不可预设的图像，也只有超越专才模型的精度，才能让 <abbr class="ufid">Unified FID</abbr> 在这类场景中格外有效。</strong></p>
 
 <p>在有了定义之后，<abbr class="ufid">Unified FID</abbr> 任务貌似有很多简单直接的实现方式，比如直接选一个基础模型在拉通的数据集上进行 fine tuning / post training 好像就行了。</p>
 
@@ -589,7 +590,9 @@ blockquote p:last-child{margin-bottom:0}
 
 <h2><span class="num">五</span>写在最后</h2>
 
-<p>综上我们大概梳理了 <abbr class="ufid">Unified FID</abbr> 这个任务的背景、定义、三条技术路线、各个路线对应的科学问题以及潜在的解决方案。这相当于为我们组过去 1-2 年的关键研究工作做了一个快速总结和对 <abbr class="ufid">Unified FID</abbr> 问题的阐述做了一个简单的开场。关于 <abbr class="ufid">Unified FID</abbr> 一些具体技术路线的可行性分析和潜力研判我会放到后一篇博文继续深入分析。<strong class="tailnote">还需要在最后特别说明的是：我不认为 <abbr class="ufid">Unified FID</abbr> 与现有的各个专有模型之间是替代关系，而应该是上下游关系，由 <abbr class="ufid">Unified FID</abbr> 准确快筛、再由专用模型做取证解释，这应该是未来理想的工作流。</strong></p>
+<p>综上我们大概梳理了 <abbr class="ufid">Unified FID</abbr> 这个任务的背景、定义、三条技术路线、各个路线对应的科学问题以及潜在的解决方案。这相当于为我们组过去 1-2 年的关键研究工作做了一个快速总结和对 <abbr class="ufid">Unified FID</abbr> 问题的阐述做了一个简单的开场。关于 <abbr class="ufid">Unified FID</abbr> 一些具体技术路线的可行性分析和潜力研判我会放到后一篇博文继续深入分析。</p>
+
+<p><strong class="tailnote">还需要在最后特别说明的是：我不认为 <abbr class="ufid">Unified FID</abbr> 与现有的各个专有模型之间是替代关系，而应该是上下游关系，由 <abbr class="ufid">Unified FID</abbr> 准确快筛、再由专用模型做取证解释；这应该是未来理想的工作流。</strong></p>
 
 <p>因为最近收到了很多邮件询问相关问题，所以我的第一篇博客比较长，对目前 30 多封邮件中的几乎所有问题都做了解答，可能有所遗漏和谬误，也欢迎大家联系我进行指正和修改。</p>
 
