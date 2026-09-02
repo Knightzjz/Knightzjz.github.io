@@ -493,7 +493,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>其次，从模型性能上（P: Polymath）：</p>
 
-<p><abbr class="ufid">Unified FID</abbr> 要求<strong class="hl">一个通才模型同时超越多个专才模型</strong>，也就是一个统一的模型要在各个子领域上，比如典型的我们前面说的四个子领域：Deepfake、AIGC，篡改和文档篡改，同时超越各自子领域的 SOTA 模型。这样一个模型才是真正在实际中有应用价值的模型。尤其是在我国超大规模内容平台的治理、反诈风控与舆情巡检这些特有场景下，在审核拦截、欺诈识别与舆情取证等环节，模型面对的是亿量级、来源与伪造手法都完全不可预设的图像，也只有超越专才模型的精度，才能让 <abbr class="ufid">Unified FID</abbr> 在这类场景中格外有效。</p>
+<p><abbr class="ufid">Unified FID</abbr> 要求<strong class="hl">一个通才模型同时超越多个专才模型</strong>，也就是一个统一的模型要在各个子领域上，比如典型的我们前面说的四个子领域：Deepfake、AIGC，篡改和文档篡改，同时超越各自子领域的 SOTA 模型。这样一个模型才是真正在实际中有应用价值的模型。<strong class="tailnote">尤其是在我国超大规模内容平台的治理、反诈风控与舆情巡检这些特有场景下，在审核拦截、欺诈识别与舆情取证等环节，模型面对的是亿量级、来源与伪造手法都完全不可预设的图像，也只有超越专才模型的精度，才能让 <abbr class="ufid">Unified FID</abbr> 在这类场景中格外有效。</strong></p>
 
 <p>在有了定义之后，<abbr class="ufid">Unified FID</abbr> 任务貌似有很多简单直接的实现方式，比如直接选一个基础模型在拉通的数据集上进行 fine tuning / post training 好像就行了。</p>
 
