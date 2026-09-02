@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://giscus.app; connect-src 'self' https://countapi.mileshilliard.com; frame-src https://giscus.app; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/images/avatar-180w.webp" type="image/webp" sizes="180x180">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="preload" as="image" imagesrcset="img/fig1-480.webp 480w, img/fig1-658.webp 658w" imagesizes="(max-width:640px) 480px, 658px" fetchpriority="high">
+<noscript><style>.figwrap img,.endpic img{opacity:1}</style></noscript>
+<title>Long Divided, Must Unite: Unified Fake Image Detection (Unified FID) | Ji-Zhe Zhou</title>
+<meta name="description" content="Unified FID: how four forgery-detection tracks converge, the B (binary) + P (polymath) task definition, three technical routes, and key scientific problems.">
+<meta name="keywords" content="unified fake image detection, Unified FID, fake image detection, forgery detection, AIGC detection, image manipulation detection, document tampering detection, Deepfake detection, passive image forensics, image forensics, Ji-Zhe phenomenon, feature collapse, model collapse, Preset Paradox, SICA, ForensicHub">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Ji-Zhe Zhou's Blog">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta property="og:title" content="Long Divided, Must Unite: Unified Fake Image Detection (Unified FID)">
+<meta property="og:description" content="Unified FID: four forgery-detection tracks converge, the BP task definition, and three technical routes.">
+<meta property="og:url" content="https://knightzjz.github.io/blog/unified-fid-en.html">
+<meta property="og:image" content="https://knightzjz.github.io/blog/img/og-unified-fid.jpg">
+<meta property="og:image:alt" content="Long Divided, Must Unite: Unified Fake Image Detection (Unified FID)">
+<link rel="canonical" href="https://knightzjz.github.io/blog/unified-fid-en.html">
+<link rel="alternate" hreflang="en" href="https://knightzjz.github.io/blog/unified-fid-en.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://knightzjz.github.io/blog/unified-fid.html">
+<link rel="alternate" hreflang="x-default" href="https://knightzjz.github.io/blog/unified-fid.html">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Ji-Zhe Zhou (周吉喆)">
+<meta property="article:published_time" content="2026-08-28T23:17:00+08:00">
+<meta property="article:author" content="Ji-Zhe Zhou (周吉喆)">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Long Divided, Must Unite: Unified Fake Image Detection (Unified FID)">
+<meta name="twitter:description" content="Unified FID: four forgery-detection tracks converge, the BP task definition, and three technical routes.">
+<meta name="twitter:image" content="https://knightzjz.github.io/blog/img/og-unified-fid.jpg">
+<script type="application/ld+json" id="post-ld">
+{"@context":"https://schema.org","@type":"BlogPosting",
+"mainEntityOfPage":{"@type":"WebPage","@id":"https://knightzjz.github.io/blog/unified-fid-en.html"},
+"headline":"Long Divided, Must Unite: Unified Fake Image Detection (Unified FID)",
+"description":"Unified FID: how four forgery-detection tracks converge, the B (binary) + P (polymath) task definition, three technical routes, and key scientific problems.",
+"image":"https://knightzjz.github.io/blog/img/og-unified-fid.jpg",
+"datePublished":"2026-08-28T23:17:00+08:00",
+"dateModified":"2026-09-02T00:00:00+08:00",
+"author":{"@type":"Person","name":"Ji-Zhe Zhou (周吉喆)","url":"https://knightzjz.github.io/","affiliation":{"@type":"CollegeOrUniversity","name":"Sichuan University"}},
+"publisher":{"@type":"Person","name":"Ji-Zhe Zhou (周吉喆)","url":"https://knightzjz.github.io/"},
+"inLanguage":"en",
+"isAccessibleForFree":true,
+"keywords":"unified fake image detection, Unified FID, fake image detection, AIGC detection, image manipulation detection, document tampering detection, Deepfake detection, image forensics, Ji-Zhe phenomenon, feature collapse, model collapse, Preset Paradox, SICA, ForensicHub"}
+</script>
+<script>
+(function(){try{var ld=document.getElementById('post-ld');var o=JSON.parse(ld.textContent);o.dateModified=new Date(document.lastModified).toISOString();ld.textContent=JSON.stringify(o);}catch(e){}})();
+</script>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#ffffff;
+  --ink:#262218; --ink-2:#5b5445; --ink-3:#7a7263;
+  --line:#e7e1d4; --line-2:#d9d2c2;
+  --accent:#a35b22; --accent-deep:#7f4517; --accent-soft:#f6efe3;
+  --sci-bg:#eef4fa; --sci-line:#5d84ab;
+  --concl-bg:#faf3e3; --concl-line:#c08e3e;
+  --sum-bg:#fdf7e1; --sum-line:#dcab41;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:Georgia,"Times New Roman","Source Han Serif SC","Noto Serif CJK SC",serif;
+  font-size:17px;line-height:2.0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:#f1e2c6;color:var(--ink)}
+.wrap{max-width:780px;margin:0 auto;padding:0 24px 110px;position:relative;z-index:1}
+
+header.post-head{padding:26px 0 38px;border-bottom:1px solid var(--line);margin-bottom:44px;
+  text-align:center}
+header.post-head::before{content:"";display:block;width:36px;height:3px;border-radius:2px;
+  background:var(--accent);margin:0 auto 32px}
+h1{font-size:clamp(27px,5.2vw,34px);line-height:1.45;margin:0;font-weight:700;
+  letter-spacing:.01em;text-wrap:balance}
+h1 small{display:block;margin-top:18px;font-family:Georgia,"Times New Roman",serif;
+  font-size:12.5px;font-weight:400;color:var(--ink-3);letter-spacing:.3em;
+  text-transform:uppercase;font-style:normal}
+.byline{display:flex;align-items:center;justify-content:center;gap:18px;
+  margin-top:28px;font-size:13.5px;color:var(--ink-3);letter-spacing:.1em}
+.byline::before,.byline::after{content:"";display:block;width:52px;height:1px;background:var(--line-2)}
+.viewcount{margin-top:12px;text-align:center;font-size:12px;color:var(--ink-3);letter-spacing:.14em}
+
+/* Listen to this article — top entry + floating side control bar */
+.listen-top{display:flex;justify-content:center;margin-top:12px}
+.listen-top .listen-btn{width:auto;height:auto;padding:5px 16px;gap:6px;
+  font-size:12.5px;letter-spacing:.06em}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.listen{position:fixed;right:24px;top:0;transform:translateY(var(--ly,42vh));
+  display:flex;flex-direction:column;align-items:center;gap:10px;z-index:90;
+  transition:transform .6s ease}
+.listen-btn{display:flex;align-items:center;justify-content:center;
+  width:42px;height:42px;border-radius:999px;
+  border:1px solid var(--line-2);background:var(--panel);color:var(--ink-2);
+  cursor:pointer;font-family:inherit;font-size:11.5px;letter-spacing:.02em;
+  box-shadow:0 4px 14px rgba(70,60,35,.12);
+  transition:border-color .2s,color .2s,background .2s,transform .15s}
+.listen-btn:hover{border-color:var(--accent);color:var(--accent)}
+.listen-btn:active{transform:scale(.94)}
+.listen-btn[hidden]{display:none}
+#listen-toggle{width:48px;height:48px;color:var(--accent)}
+#listen-toggle .ic{display:none}
+#listen-toggle.idle .ic-speaker{display:block}
+#listen-toggle.playing .ic-pause{display:block}
+#listen-toggle.paused .ic-play{display:block}
+@media (max-width:980px){
+  .listen{top:auto;right:auto;bottom:20px;left:50%;transform:translateX(-50%);
+    flex-direction:row;padding:6px;gap:8px;background:var(--panel);
+    border:1px solid var(--line-2);border-radius:999px;
+    box-shadow:0 10px 28px rgba(70,60,35,.18)}
+}
+.reading{background:var(--accent-soft);box-shadow:0 0 0 8px var(--accent-soft);border-radius:4px}
+
+h2{font-size:22px;margin:58px 0 20px;padding-bottom:12px;border-bottom:1px solid var(--line-2);
+  font-weight:700;letter-spacing:.01em}
+h2 .num{font-family:Georgia,serif;color:var(--accent);margin-right:14px;font-size:1.32em;font-weight:700;vertical-align:-2px}
+h3{font-size:17.5px;margin:36px 0 14px;font-weight:700;color:var(--ink)}
+h3 .num{font-family:Georgia,serif;color:var(--accent);margin-right:9px;font-size:1.18em;font-weight:700;vertical-align:-1px}
+p{margin:0 0 20px;text-align:justify}
+strong{font-weight:700;color:#1c1811}
+code.term{background:#f4eee1;border:1px solid #eaddc4;border-radius:5px;padding:1px 7px;
+  font-size:14.5px;font-family:ui-monospace,"SF Mono",Consolas,monospace;color:#7a4a1c}
+
+sup.cite{font-size:11.5px;line-height:0;vertical-align:super}
+sup.cite a{color:var(--accent);text-decoration:none;padding:0 1px;font-weight:600}
+sup.cite a:hover{color:var(--accent-deep);text-decoration:underline}
+
+/* Technical routes: r1 single compact model · r2 large model · r3 collaboration */
+.r1{color:#a35b22}
+.r2{color:#3a6d9e}
+.r3{color:#47825a}
+strong.hl{color:var(--accent)}
+strong.tailnote{color:var(--accent-deep);font-weight:700;letter-spacing:.01em}
+.jz{color:#46688c}  /* Ji-Zhe phenomenon */
+
+a{color:var(--accent)}
+a:hover{color:var(--accent-deep)}
+
+figure{margin:30px 0}
+
+/* Lead figure (chat screenshot): WebP + blurred placeholder + fixed aspect ratio */
+.figwrap{position:relative;width:min(658px,100%);aspect-ratio:658/1231;margin:30px auto;
+  border:1px solid var(--line);border-radius:8px;overflow:hidden;
+  box-shadow:0 4px 18px rgba(70,60,35,.07)}
+.figwrap .placeholder{position:absolute;inset:0;background-size:cover;background-position:center;
+  filter:blur(10px);transform:scale(1.06)}
+.figwrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+  opacity:0;transition:opacity .4s ease}
+.figwrap img.loaded{opacity:1}
+
+.quiz{background:var(--panel);border:1px solid var(--line-2);border-radius:12px;
+  padding:20px 26px;margin:20px 0 30px;box-shadow:0 2px 10px rgba(70,60,35,.04)}
+.quiz .q-title{font-weight:700;margin-bottom:12px;font-size:16px}
+.quiz ol{padding-left:0;list-style:none;counter-reset:opt;margin:0}
+.quiz li{counter-increment:opt;position:relative;padding:7px 0 7px 34px;
+  border-bottom:1px dashed var(--line);color:var(--ink-2)}
+.quiz li:last-child{border-bottom:none}
+.quiz li::before{content:counter(opt,upper-alpha) ".";position:absolute;left:0;top:7px;
+  font-family:Georgia,serif;font-weight:700;color:var(--accent)}
+
+abbr.ufid{font-family:ui-monospace,"SF Mono",Consolas,monospace;font-size:.86em;letter-spacing:.02em;
+  background:#f5eddc;color:#7a4a1c;padding:1px 7px;border-radius:5px;margin:0 .18em;
+  text-decoration:none;font-style:normal;border-bottom:1px solid #e3d3b4;white-space:nowrap}
+
+/* ── callout cards: unified left-rule style ── */
+.concl{background:var(--concl-bg);border-left:3px solid var(--concl-line);
+  border-radius:0 10px 10px 0;padding:16px 22px;margin:28px 0;font-size:16.5px;line-height:1.95}
+.concl p{margin:0 0 12px}
+.concl p:last-child{margin-bottom:0}
+
+.sci{background:var(--sci-bg);border-left:3px solid var(--sci-line);
+  border-radius:0 10px 10px 0;padding:18px 22px;margin:28px 0;font-size:16px;line-height:1.95}
+.sci p{margin:0 0 12px}
+.sci p:last-child{margin-bottom:0}
+.sci::before{content:"SCIENTIFIC QUESTION";display:inline-block;background:var(--sci-line);color:#fff;
+  font-size:10.5px;padding:2px 10px;border-radius:4px;margin-right:10px;vertical-align:2px;
+  font-weight:600;letter-spacing:1.2px}
+
+.keysent{font-size:19px;font-weight:700;color:var(--ink);text-align:center;
+  margin:40px 0;padding:26px 20px;line-height:1.85;letter-spacing:.02em;
+  border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+
+.mysum{background:var(--sum-bg);border-left:3px solid var(--sum-line);
+  border-radius:0 10px 10px 0;padding:16px 22px;margin:16px 0 28px;font-size:16.5px;line-height:1.95}
+.mysum p{margin:0}
+
+.jphen{background:#f0f4f8;border:1px solid #c6d5e3;border-radius:10px;
+  padding:18px 24px;margin:26px 0;font-size:16.5px;line-height:1.95}
+.jphen .jp-t{font-weight:700;color:#46688c;display:block;margin-bottom:8px;font-size:14px;letter-spacing:1.5px}
+.jphen p{margin:0}
+
+.note-para{background:#f6f8f4;border-left:3px solid #a8bf9a;border-radius:0 10px 10px 0;
+  padding:15px 22px;margin:24px 0;font-size:16px;line-height:1.95}
+.note-para p{margin:0}
+
+/* Acknowledgements — warm sand background + inset double bronze frame */
+.ackcard{margin:8px 0 30px;padding:16px 22px 18px;text-align:center;
+  background:linear-gradient(135deg,#f8ecd9,#f0dcbc);
+  border:1px solid #d9b98c;border-radius:12px;
+  box-shadow:inset 0 0 0 1px #fff, inset 0 0 0 4px #f8ecd9, inset 0 0 0 5px #e3cb9f;
+  font-size:16.5px;line-height:1.9;color:var(--ink)}
+.ackcard p{margin:0;text-align:center}
+.ackcard a{text-decoration:none;border-bottom:1px solid rgba(163,91,34,.35)}
+.lead-in{margin:10px 0 0;text-align:center;
+  font-family:Georgia,"Times New Roman",serif;font-style:italic;
+  font-size:15.5px;letter-spacing:.1em;color:var(--accent)}
+
+blockquote{margin:28px 0;padding:6px 0 6px 24px;border-left:3px solid var(--accent);
+  color:var(--ink-2);font-size:16.5px}
+blockquote p:last-child{margin-bottom:0}
+
+/* Special Thanks hearts */
+.heart{position:fixed;z-index:9999;pointer-events:none;user-select:none;
+  font-size:17px;color:#f78fb3;text-shadow:0 1px 3px rgba(217,116,154,.35);
+  animation:heart-float 1.15s cubic-bezier(.25,.6,.4,1) forwards}
+@keyframes heart-float{
+  0%  {opacity:0;transform:translate(-50%,-50%) scale(.4) rotate(0deg)}
+  18% {opacity:1;transform:translate(-50%,-50%) scale(1.2) rotate(var(--rot))}
+  45% {opacity:1;transform:translate(calc(-50% + var(--dx)*.5), calc(-50% - 48px)) scale(1) rotate(var(--rot))}
+  100%{opacity:0;transform:translate(calc(-50% + var(--dx)), calc(-50% - 105px)) scale(.75) rotate(var(--rot))}
+}
+@media (prefers-reduced-motion:reduce){
+  .heart{animation-duration:.01s}
+}
+
+/* Acknowledgement card easter egg: balloons on click */
+.balloon{position:fixed;z-index:9999;pointer-events:none;user-select:none;
+  font-size:22px;line-height:1;filter:drop-shadow(0 2px 3px rgba(163,91,34,.18));
+  animation:balloon-float 2.8s cubic-bezier(.25,.55,.35,1) forwards}
+@keyframes balloon-float{
+  0%  {opacity:0;transform:translate(-50%,-50%) scale(.45) rotate(0deg)}
+  12% {opacity:1;transform:translate(calc(-50% + var(--bx)*.1), calc(-50% - 12px)) scale(1) rotate(calc(var(--br)*.2))}
+  55% {opacity:1;transform:translate(calc(-50% + var(--bx)*.6), calc(-50% - 130px)) scale(1) rotate(var(--br))}
+  100%{opacity:0;transform:translate(calc(-50% + var(--bx)), calc(-50% - 260px)) scale(.92) rotate(calc(var(--br)*1.7))}
+}
+@media (prefers-reduced-motion:reduce){
+  .balloon{animation-duration:.01s}
+}
+
+/* Hidden answer: white on white, revealed only by selecting / Ctrl+A */
+.hidden-ans{color:#fff !important;background:transparent;user-select:text}
+
+.signoff{margin-top:52px;padding-top:28px;border-top:1px solid var(--line);color:var(--ink-2);font-size:16px}
+.signoff p.postscript{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line-2);
+  font-family:Georgia,"Times New Roman",serif;font-style:italic;
+  font-size:15.5px;line-height:1.95;color:var(--ink-3);text-align:justify}
+.signoff p.postscript .sig-meta{font-size:13px;letter-spacing:.06em;color:#9a9284}
+
+/* Language switch (en <-> zh) */
+.topnav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:30px}
+.lang-switch{flex:none;font-size:13px;color:var(--ink-3);text-decoration:none;
+  border:1px solid var(--line-2);border-radius:999px;padding:5px 15px;letter-spacing:.06em;
+  transition:border-color .25s,color .25s,background .25s}
+.lang-switch:hover{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+
+/* Back to blog index */
+.back-top{display:inline-flex;align-items:center;gap:7px;margin-top:30px;
+  font-size:13.5px;color:var(--ink-3);text-decoration:none;letter-spacing:.06em;
+  transition:color .2s}
+.back-top:hover{color:var(--accent)}
+.back-top .arr{font-family:Georgia,serif;font-size:15px;transition:transform .2s;display:inline-block}
+.back-top:hover .arr{transform:translateX(-3px)}
+.back-blog-end{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin:60px 0 0}
+.back-blog-end a{display:inline-flex;align-items:center;gap:8px;padding:11px 36px;
+  border:1px solid var(--line-2);border-radius:999px;font-size:14px;color:var(--ink-2);
+  text-decoration:none;letter-spacing:.12em;
+  transition:border-color .25s,color .25s,background .25s}
+.back-blog-end a:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.back-blog-end .arr{font-family:Georgia,serif;display:inline-block;transition:transform .2s}
+.back-blog-end a:hover .arr{transform:translateX(-3px)}
+
+/* Comments — Giscus (GitHub Discussions, rendered in an iframe, themed by giscus-theme.css) */
+.comments{display:none}  /* hidden for now: keep the code, remove this rule and re-enable the giscus script to restore */
+.comments-head{margin:0 0 8px;font-size:20px;font-weight:700;letter-spacing:.02em;
+  display:flex;align-items:center;gap:12px}
+.comments-head::before{content:"";flex:none;width:26px;height:2px;border-radius:2px;
+  background:var(--accent)}
+.comments-tip{margin:0 0 22px;font-size:13.5px;line-height:1.9;color:var(--ink-3)}
+.comments .giscus-frame{width:100%;border:none}
+.thanks{text-align:center;font-size:16px;letter-spacing:2.5px;
+  font-style:italic;margin:34px 0 10px;padding:24px 12px 10px;
+  border-top:1px solid #f0d9e2;
+  color:#e79ab4;
+  cursor:pointer;user-select:none;
+  transition:color .25s, transform .15s, text-shadow .25s}
+.thanks:hover{color:#d9749a;text-shadow:0 0 12px rgba(233,150,180,.45);transform:scale(1.03)}
+.thanks:active{transform:scale(.97)}
+.thanks-sub{text-align:center;font-size:13.5px;color:var(--ink-3);margin:0 0 4px}
+
+.endpic{margin:42px 0 0}
+.endpic .pic-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--line-2)}
+.endpic .placeholder{position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(8px);transform:scale(1.06)}
+.endpic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .45s ease}
+.endpic img.loaded{opacity:1}
+
+.refs{margin-top:64px;padding-top:30px;border-top:1px solid var(--line-2)}
+.refs h2{border:none;margin:0 0 20px;padding:0}
+.refs ol{list-style:none;padding-left:0;font-size:14px;line-height:1.8}
+.refs li{margin-bottom:12px;color:var(--ink-2)}
+.refs .rmark{color:var(--accent);font-weight:600}
+.refs a{word-break:break-all}
+
+/* ── background floaters (fainter than the homepage) ── */
+.page-beans{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.page-bean{position:absolute;bottom:-5vh;opacity:0;animation:bean-float linear infinite}
+@keyframes bean-float{
+  0%{transform:translateY(0) rotate(0deg);opacity:0}
+  8%{opacity:.07}
+  92%{opacity:.07}
+  100%{transform:translateY(-110vh) rotate(360deg);opacity:0}
+}
+@media (prefers-reduced-motion:reduce){.page-bean{animation:none;opacity:0}}
+
+/* ── reading progress bar ── */
+.readbar{position:fixed;top:0;left:0;height:4px;width:0;
+  background:linear-gradient(90deg,var(--accent-deep),var(--accent) 55%,#c98a4b);
+  box-shadow:0 1px 5px rgba(163,91,34,.4);z-index:100}
+
+@media print{body{background:#fff;font-size:11pt}.wrap{max-width:100%}
+  .heart,.page-beans,.readbar,.viewcount,.listen,.comments{display:none}}
+@media (max-width:640px){
+  body{font-size:16.5px}
+  p{text-align:left}
+  h1{font-size:24px}h2{font-size:19.5px}
+  .wrap{padding:0 18px 64px}
+  header.post-head{padding:20px 0 28px}
+  header.post-head::before{margin-bottom:24px}
+  .byline::before,.byline::after{width:32px}
+  .back-top{margin-top:22px}
+  .back-blog-end{margin:48px 0 0}
+  .comments{margin:52px 0 0;padding:28px 0 0}
+  .comments-head{font-size:18px}
+  .quiz{padding:16px 18px}
+  .sci,.concl,.jphen,.note-para,.mysum,.ackcard{padding:14px 16px}
+  .ackcard{font-size:15.5px;padding:14px 18px}
+  .lead-in{font-size:14.5px}
+}
+</style>
+</head>
+<body>
+
+<div class="page-beans" id="page-beans" aria-hidden="true"></div>
+<div class="readbar" id="readbar" aria-hidden="true"></div>
+
+<div class="listen" id="listen">
+  <button class="listen-btn idle" id="listen-toggle" type="button" aria-label="Listen to this article" title="Listen to this article">
+    <svg class="ic ic-speaker" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+    <svg class="ic ic-pause" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+    <svg class="ic ic-play" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+  </button>
+  <button class="listen-btn" id="listen-speed" type="button" aria-label="Adjust reading speed" title="Adjust reading speed" hidden>1.0×</button>
+  <button class="listen-btn" id="listen-stop" type="button" aria-label="Stop reading" title="Stop reading" hidden>
+    <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="5" width="14" height="14" rx="2"/></svg>
+  </button>
+  <span class="sr-only" id="listen-status" aria-live="polite"></span>
+</div>
+
+<div class="wrap">
+
+<div class="topnav">
+  <a class="back-top" href="/blog/"><span class="arr">←</span>Back to blog index</a>
+  <a class="lang-switch" href="/blog/unified-fid.html" hreflang="zh-Hans" lang="zh" title="阅读中文版">中文版</a>
+</div>
+
+<article>
+
+<header class="post-head">
+  <h1>Long Divided, Must Unite: Unified Fake Image Detection
+    <small>Unified FID</small>
+  </h1>
+  <div class="byline">Ji-Zhe Zhou&nbsp;·&nbsp;August 28, 2026</div>
+  <div class="viewcount" id="read-count" hidden></div>
+  <div class="listen-top">
+    <button class="listen-btn" id="listen-top-btn" type="button" aria-label="Listen to this article" title="Listen to this article">
+      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+      <span id="listen-lab">Listen</span>
+    </button>
+  </div>
+</header>
+
+<p>Take a guess — which forgery technique was used to produce the chat screenshot below?</p>
+
+<figure class="figwrap">
+  <div class="placeholder" style="background-image:url('img/fig1-tiny.jpg');"></div>
+  <picture>
+    <source media="(max-width:640px)" srcset="img/fig1-480.webp">
+    <img src="img/fig1-658.webp" alt="Screenshot of a parents' group chat" width="658" height="1231"
+         fetchpriority="high" decoding="async">
+  </picture>
+</figure>
+
+<div class="quiz">
+  <div class="q-title">Options:</div>
+  <ol>
+    <li>Two genuine chat screenshots were spliced together (messages from class group A were grafted onto class group B)</li>
+    <li>Part of the parents' chat content was Photoshopped (document tampering)</li>
+    <li>The teacher's profile picture was swapped (Deepfake)</li>
+    <li>The whole image was generated directly by an AI model (AIGC)<span class="hidden-ans">【Correct answer】</span></li>
+    <li>A+D / B+D / C+D … that is, a model generated an image first, and then various manual or semi-automatic Photoshop edits were applied to fix its content</li>
+  </ol>
+</div>
+
+<p>Not exactly an easy call, is it? ;)</p>
+
+<p><strong>One thing should be said up front: your answer determines which forgery detection model you would have to call</strong>, because the existing research on passive image forensics has essentially been split into several independent tracks, mainly <strong>including but not limited to</strong> AIGC detection (whole-image generation), (natural) image (partial) manipulation detection, (pure) document (image) tampering detection, and Deepfake (face forgery) detection<sup class="cite"><a href="#r1">[1]</a></sup>. Moreover, models across these tracks are not interchangeable: an image manipulation detection model cannot handle tampered document images, a Deepfake detector does not work on AIGC-generated faces, and so on<sup class="cite"><a href="#r1">[1]</a></sup>. Of course you can force a Deepfake detector onto an AIGC image, but the result is close to random guessing and carries no reference value.</p>
+
+<h2><span class="num">1</span>The Emergence of a Paradox</h2>
+
+<p>In practice, then, verifying the authenticity of this chat screenshot runs into a "<strong>Preset Paradox</strong>":</p>
+
+<blockquote>
+<p>A user has to decide which forgery method was used in order to call the correct forensic model and obtain a result; but if the user can already predict the forgery method, why would they need a forensic model at all?</p>
+</blockquote>
+
+<p>The solution to this paradox is also extremely straightforward:</p>
+
+<p>Build a <strong>Unified Fake Image Detection (hereafter <abbr class="ufid">Unified FID</abbr>)</strong> model, that is, one which makes no assumption about the forgery method and can detect images forged by any means. In practice, a user then only needs to feed the image in question into a single <abbr class="ufid">Unified FID</abbr> detector to obtain the result.</p>
+
+<div class="note-para">
+<p>Actually, I believe the term "forged image" (伪造图像) already carries the sense of unification — it means placing no limitation on the type of forgery, and no one in academia had defined "forged image" before. Still, after discussing this with <strong>Prof. Jiancheng Lv</strong>, I decided to single out "unified" and emphasize it separately as the core idea of this task.</p>
+</div>
+
+<h2><span class="num">2</span>Division and Reunion in Passive Image Forensics</h2>
+
+<p>Before we go deeper into <abbr class="ufid">Unified FID</abbr>, there is one question that must be answered: why did the field of passive image forensics — or content security — develop into (at least) four completely independent tracks? Did researchers simply never consider how these methods are used in practice?</p>
+
+<p>Well — as the old saying goes, the world under heaven, long divided, must unite; long united, must divide.</p>
+
+<p>Just as real-world deployment inevitably pushes every detection solution toward unification, developing fully independent solutions for different forgery methods was also a necessity of technological evolution.</p>
+
+<p>The trajectory of content security / passive forensics / image forgery detection is driven by the shift of forgery-method boundaries from clear to blurred. In short, it is a simulacrum effect brought about by the rapid advance of large models: forgery methods are becoming black-boxed and unified, all delegated to large models.</p>
+
+<h3><span class="num">2.1</span>Division: When the Boundaries of Forgery Methods Were Clear</h3>
+
+<p>Rewind the clock just a year or two and you will see that different kinds of forged content basically required different forgery methods. For face forgery, for instance, anything other than Deepfake — Photoshop-based editing, say — was usually fake at a glance and needed no detector at all; the human eye could tell. For document images, one had to Photoshop character by character, keeping fonts, sizes and colors consistent; simply using a generative model would fail to produce even correct glyph shapes.</p>
+
+<p>The requirement at the time was therefore clear: for a given type of image, the forgery method was relatively fixed, and building a dedicated model for each family of methods was not only effective (highly specialized) but also cheap. Gradually, research developed four independent tracks around different forgery methods. There is some overlap (for instance, inpainting in image manipulation already involves direct generation by AI models), but they are largely independent of each other — independent training data, independent model designs, independent benchmark data and protocols — and, crucially, <strong>this caused no trouble whatsoever in real-world use.</strong></p>
+
+<h3><span class="num">2.2</span>Reunion: Large Models Have Flattened the Boundaries Between Forgery Methods</h3>
+
+<p>Yet with the arrival of unified generation-and-understanding models represented by GPT-Image-2, together with a flood of harness tools, the ability of large models to carry out image forgery directly from user instructions has changed qualitatively. Take data from Hong Kong's insurance industry: today, most high-quality (visually indistinguishable) forged images used for insurance fraud are produced directly by large models — forged medical certificates, forged claim amounts, forged policy records, and so on. This used to be manual Photoshop work, which is expensive to learn and slow to execute and does not fit every scenario; now large models do all of it, and do it remarkably well. As a result, forged images today exhibit the typical profile of <strong>"low barrier, large volume, high customization, high deceptiveness"</strong> (低大高强).</p>
+
+<div class="mysum">
+<p><strong>Overall characteristics of forged images in the large-model era · "低大高强"</strong>: low barrier, large volume, high customization, high deceptiveness.</p>
+</div>
+
+<p>The capabilities of large models have largely covered — or blurred — the boundaries that once separated image forgery methods: for images of any content, a large model can simply do the job.</p>
+
+<div class="keysent">When forgery methods converge, forgery detection must converge as well.</div>
+
+<h2><span class="num">3</span>The BP Definition of Unified Fake Image Detection</h2>
+
+<h3><span class="num">3.1</span>Is Unified FID Just AIGC Detection?</h3>
+
+<p>If everything is now forged by large models, then is <abbr class="ufid">Unified FID</abbr> simply an AIGC detection model?</p>
+
+<p>The answer is no:</p>
+
+<p>The forgery capability of large models comes mainly from harness tooling rather than plain diffusion generation. Leveraging their understanding ability, large models continuously monitor during generation whether the image content perfectly matches the user's request, and through the harness layer they autonomously call all kinds of tools to fix the image content — matting, repainting, Deepfake face swapping, and so on. Most large models call dozens of tools to refine a single image; Codex, for example, often spends several minutes on one image, precisely because it keeps invoking tools to constrain the generation process. AIGC images, by contrast, are usually defined as whole images generated by a large model in a single pass. That definition carries two conditions: first, whole-image, excluding any secondary or local manipulation that a large model performs on a real image; second, one-shot, ignoring the step-by-step refinements that come from tool calls in a generation–understanding loop.</p>
+
+<div class="concl">
+<p>Therefore, images forged by today's large models are not simply equivalent to AIGC images; they strictly contain AIGC images.</p>
+</div>
+
+<p>Second, for a long time to come, what we face on the internet remains a mixed environment: many images are forged by large models, and many are still forged by hand or by small dedicated models. One reason is that a large stock of forgeries from the pre-large-model era already exists. The other is that, despite their growing capability, large models still cannot fully replace manual editing or dedicated tampering tools. For example, in <strong>scientific</strong> (especially bioinformatics, materials science and related fields) <strong>paper image forgery</strong>, even faint fluorescence or electrophoresis results at specific image locations carry strong and explicit meaning; large models will struggle for a long while to understand such content precisely and constrain its generation, so in practice people still rely on manual copy-move, splicing and similar tricks (that is, the manual copy-paste and splicing techniques studied under image <strong>manipulation</strong> detection). We certainly hope a <abbr class="ufid">Unified FID</abbr> model will work on scientific figure forgery — after all, forged samples from scientific papers are <strong>scarce</strong>, <strong>hard to annotate</strong>, and extremely <strong>harmful</strong>. So a model that can only handle large-model forgeries neither satisfies nor realizes <abbr class="ufid">Unified FID</abbr>.</p>
+
+<p>So what exactly is the <abbr class="ufid">Unified FID</abbr> task <strong class="hl">(the BP definition)</strong>:</p>
+
+<h3><span class="num">3.2</span>B: Binary Classification</h3>
+
+<p>First, in terms of the task paradigm (B: Binary Classification):</p>
+
+<p><abbr class="ufid">Unified FID</abbr> is an image binary classification task: input an image, output the 0/1 class label for that image.</p>
+
+<p>That is, the paradigm <code class="term">f(x) = y, x = image, y = 0/1</code>.</p>
+
+<p>Within this paradigm:</p>
+
+<p>A standard training set consists of (image, label) / (x, y) pairs, meaning:</p>
+
+<p>1. The model takes in only the image and directly predicts the corresponding 0/1 (real/fake) label.</p>
+
+<p>2. No additional annotations — such as the forgery method — may appear in the training data.</p>
+
+<p>3. Self-supervised / semi-supervised / unsupervised methods that obtain extra information such as the forgery method in order to improve classification accuracy are entirely reasonable and feasible.</p>
+
+<p>4. Using pretrained large models to obtain other relevant information is also reasonable and feasible, as long as the input to both the training set and the test set is the image alone. Using prompt engineering, post-training, or similar techniques to extract extra image information from a foundation model does not affect the task paradigm at all — it is simply a way of strengthening the <code class="term">f(·)</code> function so that it can extract more information from <code class="term">x</code>.</p>
+
+<h3><span class="num">3.3</span>P: Polymath</h3>
+
+<p>Second, in terms of model performance (P: Polymath):</p>
+
+<p><abbr class="ufid">Unified FID</abbr> requires <strong class="hl">a single generalist model to outperform multiple specialist models simultaneously</strong>: one unified model must beat the respective SOTA models on every sub-domain — typically the four we mentioned earlier: Deepfake, AIGC, image manipulation, and document tampering. Only such a model has real application value in practice. Especially in the scenarios particular to China’s very large-scale content platforms — platform governance, fraud-risk control, and public-opinion monitoring — at stages such as interception during moderation, fraud identification, and evidence collection for public-opinion cases, the model faces hundreds of millions of images whose origin and forgery method are entirely unpredictable. Only by surpassing the accuracy of the specialist models can <abbr class="ufid">Unified FID</abbr> be particularly effective in scenarios of this kind.</p>
+
+<p>With the definition in place, <abbr class="ufid">Unified FID</abbr> seems to admit many simple and direct implementations — for instance, picking a base model and running fine-tuning / post-training on a merged dataset appears to suffice.</p>
+
+<div class="keysent">Yet to date, specialists beating generalists is the norm; building a generalist that surpasses multiple specialists is hard, and rare.</div>
+
+<h2><span class="num">4</span>A Research Blueprint for Unified Fake Image Detection</h2>
+
+<p>So where exactly does <abbr class="ufid">Unified FID</abbr> get difficult? Below we lay out the research blueprint and analyze it point by point:</p>
+
+<p>The technical routes can be divided fairly cleanly into three:</p>
+
+<blockquote>
+<p><strong><span class="r1">the single compact model route</span>, <span class="r2">the large model route</span>, and <span class="r3">the compact–large model collaboration route</span></strong></p>
+</blockquote>
+
+<h3><span class="num">4.1</span><span class="r1">The single compact model route</span></h3>
+
+<p>This is the route we have studied most deeply, because it rests on a strong domain intuition: <strong>all sub-fields of passive image forensics are learning the same thing — artifacts, the traces that forgery methods leave on an image</strong>. If what everyone learns is fundamentally shared, and each sub-field already has so many compact specialist models that work well, could we align and merge the datasets and training recipes, pick the strongest compact model, and then train it on a <abbr class="ufid">Unified FID</abbr> dataset to solve the problem?</p>
+
+<p>This idea is highly intuitive, and it is also valuable: the process of selecting the strongest single compact model distills a great many insights, which will be very helpful for building a foundation model dedicated to <abbr class="ufid">Unified FID</abbr> in the future.</p>
+
+<p>But in our tests on ForensicHub, essentially no sub-domain SOTA model meets our P requirement. Even after merging all sub-domain data and training settings, no single sub-domain model is strong enough to dominate the others. Simply put, even after training a sub-domain A model on sub-domain B data, that A model still cannot beat B's original model. Moreover, across extensive experiments, once we fed data from all four sub-domains (A, B, C, D) into one (A) sub-domain model, its performance dropped noticeably — and the drop on its own (A) sub-domain was especially severe. We observed this phenomenon on ForensicHub, and later named it <strong>negative domain transfer</strong> in SICA: as soon as training data from other domains is mixed in, model performance necessarily degrades. The existence of negative domain transfer shows that any solution relying on merging existing models and data for joint training is doomed to fail at <abbr class="ufid">Unified FID</abbr><sup class="cite"><a href="#r2">[2]</a></sup>.</p>
+
+<p>But wait — this line of reasoning felt intuitively right, at least at the start. So, was the intuition wrong?</p>
+
+<p>To find out, we ran a large set of experiments in SICA:</p>
+
+<p>First, we linear-probed the feature space of sub-domain models trained on the merged dataset, and found that the feature matrices of all such models show a fairly clear rank problem: after SVD, the top 20 feature dimensions exhibit strong collinearity (too much feature redundancy, insufficient representational capacity), indicating that the models had not learned many useful artifact features.</p>
+
+<p>Second, we inspected the gradients of those models during merged-data training and found clear gradient conflict: data from different sub-domains push the model's gradient updates in exactly opposite directions, so the gradient descends slowly along a compromise direction — meaning the training dynamics are chaotic and never truly converge or reach an optimum.</p>
+
+<p>Finally, we examined the hand-crafted features that are highly effective and widely used in each sub-domain, and found they are not merely different but mutually non-transferable — for example, the rPPG physiological features used for Deepfake simply cannot transfer to natural images or to document tampering — which indicates that across sub-domains, artifacts are indeed specific in nature.</p>
+
+<p>From these three findings we conclude:</p>
+
+<div class="concl">
+<p>Yes — our intuition was indeed wrong —</p>
+<p>All sub-fields of passive image forensics are learning the same thing, artifacts — but although they share the same name across sub-domains, their feature representations are entirely different, <strong>that is, artifacts are highly heterogeneous across sub-domains</strong>.</p>
+</div>
+
+<div class="jphen">
+<span class="jp-t">Ji-Zhe Phenomenon（吉喆现象）</span>
+<p>In ICML26<sup class="cite"><a href="#r2">[2]</a></sup> we were the first to pin down the heterogeneity problem of artifacts, and we named this phenomenon of artifacts being heterogeneous across sub-domains the <strong class="jz">Ji-Zhe Phenomenon（吉喆现象）</strong>.</p>
+</div>
+
+<p>The <span class="jz">Ji-Zhe Phenomenon</span> inevitably leads to one consequence in a single compact model — <strong>feature collapse</strong>: the model ends up learning only the feature representations shared across sub-domains and gives up on the unique (specific) artifact representations of each sub-domain. The artifact features it finally learns are an averaged, degraded representation, so artifact features collapse (to a trivial solution) and are no longer effective across manipulation methods (they lose discriminative power). Simply put, the model can only try to build a common or shared representation for heterogeneous artifacts, and the result is that it works somewhat on every artifact but works really well on none.</p>
+
+<div class="sci">
+<p>Therefore, the core difficulty of the <span class="r1">single compact model</span> route is not data alignment or unifying training recipes, but how to build a model that can effectively represent these completely heterogeneous artifact features within a single unified feature space (that is, a unified representation that still preserves difference / heterogeneity). This is a typical <strong>feature collapse scientific problem</strong>, with many possible solutions along three directions — avoiding collapse, detecting collapse, and recovering from collapse (for example, gradient surgery, feature affinity, collapse recovery). In SICA we proposed a hypothesis for avoiding collapse, implemented it, and validated it<sup class="cite"><a href="#r2">[2]</a></sup>. Interested readers can turn to the paper for details; I will not repeat them here. Personally, I feel this is the key problem where future <abbr class="ufid">Unified FID</abbr> research will concentrate.</p>
+</div>
+
+<h3><span class="num">4.2</span><span class="r2">The large model route</span></h3>
+
+<p>This is where we invest the most right now, because:</p>
+
+<p>First, the strong out-of-distribution (OOD) generalization of large models is the key to the long-standing generalization difficulty in passive forensics.</p>
+
+<p>Second, large models have an enormous feature space, which can effectively resolve the <span class="jz">Ji-Zhe Phenomenon</span>: features can be partitioned into orthogonal or fully disjoint sub-spaces, so the model no longer faces a dilemma between uniformity and specificity, effectively bypassing the feature-space collapse problem.</p>
+
+<p>Besides, large models natively support dialogue, user-intent understanding, and agent invocation, so they hold great potential for iterating on, explaining and auditing detection results and for collaborating with external tools. For example, after making a detection, a large model can automatically produce an explanation of the result, call external physical agents or tools to audit whether that explanation is correct, and then revise the detection result accordingly — forming an agent-based model harness loop, which works beautifully.</p>
+
+<p>Our currently deployed DeFakerOne model follows exactly this idea<sup class="cite"><a href="#r3">[3]</a></sup>.</p>
+
+<p>However, training cost aside, the main scientific questions worth pursuing further (see our tech report) lie in two aspects:</p>
+
+<div class="sci">
+<p><strong>Model collapse (capability degradation):</strong> Large models suffer from capability degradation on <abbr class="ufid">Unified FID</abbr>, which we call model collapse. Starting from an MLLM foundation model, after we post-train or SFT it on large amounts of data, because <abbr class="ufid">Unified FID</abbr> is a pure B (image binary classification) task, the foundation model gradually loses a series of core capabilities including next-token prediction, prompt understanding, and in-context learning, degrading into a model that can only do binary classification — in other words, degenerating into a small model with an enormous parameter space.</p>
+</div>
+
+<p>Such capability degradation, or model collapse, has extremely serious consequences: the model's generalization to OOD data, its ability to automatically explain detection results, its ability to revise results according to user context, and its ability to dispatch agents to audit results are all essentially lost. More simply put, the model can no longer speak and can no longer follow user instructions — it can only mechanically perform binary classification on images, completely defeating the original purpose of using a large model.</p>
+
+<p>We are still investigating the underlying mechanism of this model collapse during post-training. This problem should not be unique to forensics; many vertical domains will likely see similar issues emerge as training data accumulates. It is a very valuable and fairly difficult research direction, and discussion is very welcome.</p>
+
+<div class="sci">
+<p><strong>Inference efficiency:</strong> The processing efficiency of large models remains hard to improve. In real deployments, forgery detection workloads fluctuate sharply, with clear peaks and troughs. For example, when a lifestyle-services platform runs a promotion on a particular date (say, a discount for teachers around Teachers' Day), a massive (million-scale) detection demand floods in within a short window (1–2 days), because users must upload teacher certificates for eligibility verification — and forging such certificates is something almost any large model can help with. Large-model image detection responds on the order of seconds; at 5 seconds per image, 1 million images take 5 million seconds, which is roughly 58 days.</p>
+</div>
+
+<p>Therefore, how to accelerate inference for <abbr class="ufid">Unified FID</abbr> models under the <span class="r2">large model route</span> is also a core problem. Pruning, parallelism, and hardware acceleration — Chinese hardware in particular — are all high-potential research directions under this problem.</p>
+
+<h3><span class="num">4.3</span><span class="r3">The compact–large model collaboration route</span></h3>
+
+<p>This is the most direct, least roundabout route — since every sub-domain already has its SOTA, just let a large model route and dispatch once, aggregate the compact models' outputs and feed them back to the large model for the final decision (the MoE idea). Beyond our group, many strong teams have taken this route for <abbr class="ufid">Unified FID</abbr>, including (but not limited to) Prof. Jian Zhang at Peking University Shenzhen<sup class="cite"><a href="#r4">[4]</a></sup>, Prof. Baoyuan Wu at CUHK-Shenzhen<sup class="cite"><a href="#r5">[5]</a></sup>, Prof. Hongtao Xie at USTC<sup class="cite"><a href="#r6">[6]</a></sup>, Prof. Jiwei Zhang at BUPT, and others — do follow their work.</p>
+
+<p>This route is currently the fastest-moving and the quickest to yield results. Two scientific questions need further study:</p>
+
+<div class="sci">
+<p><strong>The weakest-link problem:</strong> The ceiling of <span class="r3">compact–large model collaboration</span> is inherently bounded by the ceiling of individual domain-specific compact models and by the large model's routing ability. As a result, existing solutions struggle to satisfy the P requirement of <abbr class="ufid">Unified FID</abbr>. Hence the core scientific question becomes how the large model can dispatch compact models and aggregate their results in a better way, so as to exceed the performance ceiling of any single SOTA model. Follow-up work will likely concentrate on multi-round and priority-aware dispatch of compact models by the large model, as well as the large model's autoregressive, redundancy and reliability judgments over the returned results.</p>
+</div>
+
+<div class="sci">
+<p><strong>Collaboration framework growth / compatibility:</strong> Every area of passive forensics is advancing rapidly, and compact models iterate quickly. How to let a compact–large collaboration framework keep growing and stay compatible with newly emerged or updated SOTA compact models and with new agents is an urgent core scientific question. Put more plainly: how should the large model keep learning about the capability range of new compact models or agents, so that its routing policy and aggregated judgment remain optimal? This is a highly meaningful research direction; the question also applies to the booming field of agents, with enormous research potential and application prospects.</p>
+</div>
+
+<h2><span class="num">5</span>Closing Words</h2>
+
+<p>To summarize, we have outlined the background, definition, three technical routes, the scientific questions behind each route, and potential solutions for the <abbr class="ufid">Unified FID</abbr> task. This serves both as a quick summary of our group's key research over the past one to two years and as a modest opening statement on the <abbr class="ufid">Unified FID</abbr> problem. A feasibility analysis and potential assessment of the specific technical routes for <abbr class="ufid">Unified FID</abbr> will continue in a follow-up post. <strong class="tailnote">One final point deserves special emphasis: I do not see <abbr class="ufid">Unified FID</abbr> as a replacement for the existing specialist models; rather, the two stand in an upstream–downstream relationship, with <abbr class="ufid">Unified FID</abbr> performing an accurate and rapid first-pass screening and the specialist models then carrying out forensic interpretation — this, I believe, should be the ideal workflow going forward.</strong></p>
+
+<p>Because I have received many emails asking about this topic, my first blog post turned out quite long: it answers almost every question raised in the 30-plus emails I have received so far. There may be omissions and mistakes — please feel free to contact me with corrections.</p>
+
+<p>I will write an English version when I have time; quite a few researchers overseas are also interested in <abbr class="ufid">Unified FID</abbr>. Though I probably won't get to it any time soon — so I hope they will make do and just run it through a large model for translation. :)</p>
+
+<p class="lead-in">Last but not least,</p>
+
+<div class="ackcard">
+<p>Thanks to <a href="https://sebastouristtrophyf.github.io/" target="_blank" rel="noopener noreferrer">Wentao Feng</a>, <a href="https://sites.google.com/site/baoyuanwu2015/" target="_blank" rel="noopener noreferrer">Baoyuan Wu</a>, <a href="https://cs.xmut.edu.cn/info/1085/4510.htm" target="_blank" rel="noopener noreferrer">Xia Du</a> and <a href="https://cmpun.github.io/" target="_blank" rel="noopener noreferrer">Chi-Man Pun</a> for their suggestions and help with this post.</p>
+<p>Thanks to Bo Du, Zhe Yang and Xuekang Zhu for proofreading and additions.</p>
+</div>
+
+<div class="signoff">
+  <p>Thank you for your patience — comments and corrections are welcome.</p>
+  <p class="postscript">Helen went to bed with a headache :D &nbsp;so tonight I could finally finish the blog post I had been putting off for a month~<br>
+  <span class="sig-meta">August 28, 2026, 23:17, at home</span></p>
+  <p class="thanks">Special Thanks to Helen Wang</p>
+  <p class="thanks-sub">Reposting is welcome — just credit the source</p>
+</div>
+
+<figure class="endpic">
+  <div class="pic-wrap">
+    <div class="placeholder" style="background-image:url('img/endview-tiny.jpg');"></div>
+    <picture>
+      <source media="(max-width:640px)" srcset="img/endview-800.webp">
+      <img src="img/endview-1400.webp" alt="City skyline after rain: dense high-rises under a low cloud ceiling" width="1400" height="788" loading="lazy" decoding="async">
+    </picture>
+  </div>
+</figure>
+
+<section class="refs">
+<h2>References</h2>
+<ol>
+  <li id="r1"><span class="rmark">[1]</span> Bo Du, Xuekang Zhu, Xiaochen Ma, Chenfan Qu, Kaiwen Feng, Zhe Yang, Chi-Man Pun, Jian Liu, Jizhe Zhou. <strong>ForensicHub: A Unified Benchmark &amp; Codebase for All-Domain Fake Image Detection and Localization.</strong> NeurIPS 2025, Datasets and Benchmarks Track. <a href="https://arxiv.org/abs/2505.11003" target="_blank" rel="noopener noreferrer">arXiv:2505.11003</a>. <a href="https://github.com/scu-zjz/ForensicHub" target="_blank" rel="noopener noreferrer">github.com/scu-zjz/ForensicHub</a>.</li>
+  <li id="r2"><span class="rmark">[2]</span> Bo Du, Xiaochen Ma, Xuekang Zhu, Zhe Yang, Chaoqun Niu, Jian Liu, Ji-Zhe Zhou. <strong>Can We Build a Monolithic Model for Fake Image Detection? SICA: Semantic-Induced Constrained Adaptation for Unified-Yet-Discriminative Artifact Feature Space Reconstruction.</strong> ICML 2026. <a href="https://arxiv.org/abs/2602.06676" target="_blank" rel="noopener noreferrer">arXiv:2602.06676</a>. <a href="https://github.com/venus-guangjian/SICA_OpenMMSec" target="_blank" rel="noopener noreferrer">github.com/venus-guangjian/SICA_OpenMMSec</a>.</li>
+  <li id="r3"><span class="rmark">[3]</span> <strong>Venus-DeFakerOne: Unified Fake Image Detection &amp; Localization.</strong> <a href="https://arxiv.org/abs/2605.14091" target="_blank" rel="noopener noreferrer">arXiv:2605.14091</a>, 2026. <a href="https://github.com/venus-guangjian/Venus-DeFakerOne" target="_blank" rel="noopener noreferrer">github.com/venus-guangjian/Venus-DeFakerOne</a>.</li>
+  <li id="r4"><span class="rmark">[4]</span> Qing Huang, Zhipei Xu, Xuanyu Zhang, Xiangyu Yu, Jian Zhang. <strong>UniShield: An Adaptive Multi-Agent Framework for Unified Forgery Image Detection and Localization.</strong> CVPR 2026 Findings, pp. 8121-8132. <a href="https://arxiv.org/abs/2510.03161" target="_blank" rel="noopener noreferrer">arXiv:2510.03161</a>.</li>
+  <li id="r5"><span class="rmark">[5]</span> Tianxiao Li, Zhenglin Huang, Haiquan Wen, Yiwei He, Xinze Li, Bingyu Zhu, Wuhui Duan, Congang Chen, Zeyu Fu, Yi Dong, Baoyuan Wu, Jason Li, Guangliang Cheng. <strong>Omni-Fake: Benchmarking Unified Multimodal Social Media Deepfake Detection.</strong> CVPR 2026. <a href="https://arxiv.org/abs/2605.01638" target="_blank" rel="noopener noreferrer">arXiv:2605.01638</a>. <a href="https://github.com/tianxiao1201/Omni-Fake" target="_blank" rel="noopener noreferrer">github.com/tianxiao1201/Omni-Fake</a>.</li>
+  <li id="r6"><span class="rmark">[6]</span> Mingqi Fang, Ziguang Li, Lingyun Yu, Quanwei Yang, Hongtao Xie, Yongdong Zhang. <strong>Forensic-MoE: Exploring Comprehensive Synthetic Image Detection Traces with Mixture of Experts.</strong> ICCV 2025, pp. 17772-17782. <a href="https://doi.org/10.1109/ICCV51701.2025.01651" target="_blank" rel="noopener noreferrer">doi:10.1109/ICCV51701.2025.01651</a>. <a href="https://github.com/fangmq77/Forensic-MoE" target="_blank" rel="noopener noreferrer">github.com/fangmq77/Forensic-MoE</a>.</li>
+</ol>
+</section>
+
+<section class="comments">
+<h2 class="comments-head">Comments</h2>
+<p class="comments-tip">Comments are hosted in GitHub Discussions of this site's repository and require a GitHub account. Discussion, corrections and additions are all welcome.</p>
+
+<!-- Comments temporarily disabled: the giscus script is turned off. To restore, remove this comment wrapper
+<script src="https://giscus.app/client.js"
+        data-repo="Knightzjz/Knightzjz.github.io"
+        data-repo-id="R_kgDOKeh7_w"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOKeh7_84DEjHh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="https://knightzjz.github.io/blog/giscus-theme.css"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+<noscript><p class="comments-tip">The comment section requires JavaScript and depends on GitHub Discussions.</p></noscript>
+-->
+</section>
+
+<div class="back-blog-end">
+  <a href="/blog/"><span class="arr">←</span>Back to blog index</a>
+  <a class="lang-switch" href="/blog/unified-fid.html" hreflang="zh-Hans" lang="zh" title="阅读中文版">中文版</a>
+</div>
+
+</article>
+</div>
+
+<script>
+/* Special Thanks to Helen — hearts on click */
+(function(){
+  var el = document.querySelector('.thanks');
+  if(!el) return;
+  var CH = ['❤','❤','❤','💗','💖','💕','💓','✨'];
+  el.title = 'Try clicking ❤';
+  el.addEventListener('click', function(e){
+    var r  = el.getBoundingClientRect();
+    var ox = (e.clientX !== undefined && e.clientX !== 0) ? e.clientX : r.left + r.width  / 2;
+    var oy = (e.clientY !== undefined && e.clientY !== 0) ? e.clientY : r.top  + r.height / 2;
+    var n  = 7 + Math.floor(Math.random() * 5);
+    for (var i = 0; i < n; i++){
+      var h = document.createElement('span');
+      h.className = 'heart';
+      h.setAttribute('aria-hidden','true');
+      h.textContent = CH[Math.floor(Math.random() * CH.length)];
+      h.style.left = (ox + (Math.random() - .5) * 78) + 'px';
+      h.style.top  = (oy + (Math.random() - .5) * 20) + 'px';
+      h.style.setProperty('--dx',  ((Math.random() - .5) * 120).toFixed(0) + 'px');
+      h.style.setProperty('--rot', ((Math.random() - .5) * 70).toFixed(0) + 'deg');
+      h.style.fontSize = (13 + Math.random() * 9).toFixed(0) + 'px';
+      h.style.animationDelay = (Math.random() * .2).toFixed(2) + 's';
+      document.body.appendChild(h);
+      (function(node){ setTimeout(function(){ node.remove(); }, 1500); })(h);
+    }
+  });
+})();
+
+/* Acknowledgement card — balloons on click */
+(function(){
+  var el = document.querySelector('.ackcard');
+  if(!el) return;
+  var CB = ['🎈','🎈','🎈','🎈','🎈','🎈','🎊','✨'];
+  el.title = 'Try clicking 🎈';
+  el.style.cursor = 'pointer';
+  el.addEventListener('click', function(e){
+    if(e.target.closest && e.target.closest('a')) return; /* links still work normally */
+    var r  = el.getBoundingClientRect();
+    var ox = (e.clientX !== undefined && e.clientX !== 0) ? e.clientX : r.left + r.width  / 2;
+    var oy = (e.clientY !== undefined && e.clientY !== 0) ? e.clientY : r.top  + r.height / 2;
+    var n  = 9 + Math.floor(Math.random() * 5);
+    for (var i = 0; i < n; i++){
+      var b = document.createElement('span');
+      b.className = 'balloon';
+      b.setAttribute('aria-hidden','true');
+      b.textContent = CB[Math.floor(Math.random() * CB.length)];
+      b.style.left = (ox + (Math.random() - .5) * Math.min(r.width * .7, 200)) + 'px';
+      b.style.top  = (oy + (Math.random() - .5) * 22) + 'px';
+      b.style.setProperty('--bx', ((Math.random() - .5) * 130).toFixed(0) + 'px');
+      b.style.setProperty('--br', ((Math.random() - .5) * 60).toFixed(0) + 'deg');
+      b.style.fontSize = (16 + Math.random() * 14).toFixed(0) + 'px';
+      b.style.animationDelay = (Math.random() * .35).toFixed(2) + 's';
+      document.body.appendChild(b);
+      (function(node){ setTimeout(function(){ node.remove(); }, 3400); })(b);
+    }
+  });
+})();
+
+/* Image fade-in (lead figure + closing figure) */
+(function(){
+  document.querySelectorAll('.figwrap img, .endpic img').forEach(function(img){
+    if(img.complete){ img.classList.add('loaded'); }
+    else { img.addEventListener('load', function(){ this.classList.add('loaded'); }); }
+  });
+})();
+
+/* Background floaters (fainter than the homepage: fewer, lighter, slower) */
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var c = document.getElementById('page-beans');
+  if(!c) return;
+  var emojis = ['🌊','🐚','☀️','✨','📝','🍃'];
+  var count = Math.min(12, Math.max(5, Math.round(window.innerWidth / 130)));
+  for(var i = 0; i < count; i++){
+    var s = document.createElement('span');
+    s.className = 'page-bean';
+    s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    s.style.left = (Math.random() * 100) + '%';
+    s.style.animationDuration = (18 + Math.random() * 18) + 's';
+    s.style.animationDelay = -(Math.random() * 24) + 's';
+    s.style.fontSize = (1 + Math.random() * 0.8) + 'rem';
+    c.appendChild(s);
+  }
+})();
+
+/* Reading progress bar */
+(function(){
+  var bar = document.getElementById('readbar');
+  if(!bar) return;
+  var upd = function(){
+    var d = document.documentElement;
+    var max = d.scrollHeight - d.clientHeight;
+    bar.style.width = (max > 0 ? d.scrollTop / max * 100 : 0) + '%';
+  };
+  window.addEventListener('scroll', upd, {passive: true});
+  window.addEventListener('resize', upd);
+  upd();
+})();
+
+/* Listen to this article — browser speech synthesis (Web Speech API) */
+(function(){
+  if(!('speechSynthesis' in window)){
+    var l = document.getElementById('listen');
+    if(l) l.style.display = 'none';
+    return;
+  }
+  var art = document.querySelector('article');
+  if(!art) return;
+
+  /* Collect the reading content: section headings + paragraphs + cards + quiz options;
+     skip references, the back link, images, citation marks and the hidden answer (no spoilers) */
+  var blocks = [];
+  art.querySelectorAll('h2,h3,p,.keysent,.jp-t,.quiz li').forEach(function(el){
+    if(el.closest('.refs,.back-blog-end,.endpic,.figwrap,.listen,.comments')) return;
+    if(el.classList.contains('hidden-ans')) return;
+    var clone = el.cloneNode(true);
+    clone.querySelectorAll('sup.cite,.hidden-ans').forEach(function(x){ x.remove(); });
+    var t = clone.textContent.replace(/-{2,}/g, ',').replace(/\s+/g, ' ').trim();
+    /* The quiz A/B/C/D labels come from a CSS ::before counter and are absent from the DOM text — add them when reading */
+    if(el.matches('.quiz li')){
+      var n = Array.prototype.indexOf.call(el.parentNode.children, el);
+      if(n >= 0) t = String.fromCharCode(65 + n) + ', ' + t;
+    }
+    if(t) blocks.push({ el: el, text: t });
+  });
+
+  var enVoice = null;
+  function pickVoice(){
+    var vs = speechSynthesis.getVoices();
+    var en = vs.filter(function(v){ return /^en/i.test(v.lang || ''); });
+    if(!en.length) return;
+    var pref = en.filter(function(v){ return /google|siri|natural|daniel|alex|karen|moira|aria|jenny|guy|ryan|libby|sonia/i.test(v.name); });
+    enVoice = pref[0] || en[0];
+  }
+  pickVoice();
+  if(typeof speechSynthesis.onvoiceschanged !== 'undefined') speechSynthesis.onvoiceschanged = pickVoice;
+
+  var RATES = [0.8, 1.0, 1.25, 1.5];
+  var rate = 1.0, rateIdx = 1;
+  var idx = 0, state = 'idle', gen = 0, prev = null, finished = false;
+
+  var tog = document.getElementById('listen-toggle');
+  var lab = document.getElementById('listen-lab');
+  var listenBox = document.getElementById('listen');
+  var topBtn = document.getElementById('listen-top-btn');
+  var statusEl = document.getElementById('listen-status');
+  var speedBtn = document.getElementById('listen-speed');
+  var stopBtn = document.getElementById('listen-stop');
+
+  /* The side bar follows the paragraph being read (on mobile it is pinned to the bottom).
+     Uses transform rather than top to avoid a reflow on every paragraph change */
+  var mqMobile = window.matchMedia('(max-width:980px)');
+  function trackTo(el){
+    if(mqMobile.matches) return;
+    var r = el.getBoundingClientRect();
+    var target = r.top + r.height / 2 - 24;
+    var max = Math.max(60, window.innerHeight - 190);
+    var y = Math.round(Math.min(Math.max(target, 60), max));
+    listenBox.style.setProperty('--ly', y + 'px');
+  }
+  function resetPos(){ listenBox.style.setProperty('--ly', '42vh'); }
+
+  function highlight(el){
+    if(prev && prev !== el) prev.classList.remove('reading');
+    prev = el; el.classList.add('reading');
+    trackTo(el);
+    var r = el.getBoundingClientRect();
+    if(r.top < 60 || r.bottom > window.innerHeight - 60)
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  function clearHighlight(){ if(prev){ prev.classList.remove('reading'); prev = null; } }
+
+  function speakBlock(i){
+    var b = blocks[i];
+    if(!b){ state = 'idle'; finished = true; clearHighlight(); resetPos(); updateUI(); return; }
+    var g = ++gen;
+    idx = i;
+    highlight(b.el);
+    var u = new SpeechSynthesisUtterance(b.text);
+    u.lang = 'en-US'; u.rate = rate;
+    if(enVoice) u.voice = enVoice;
+    u.onend = function(){ if(g === gen && state === 'playing'){ speakBlock(idx + 1); } };
+    u.onerror = u.onend;
+    speechSynthesis.speak(u);
+  }
+
+  function start(){
+    finished = false; state = 'playing'; gen++;
+    if(speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel();
+    speakBlock(0); /* synchronous call, keeps the iOS gesture context */
+  }
+
+  function updateUI(){
+    tog.classList.remove('idle','playing','paused');
+    tog.classList.add(state === 'playing' ? 'playing' : state === 'paused' ? 'paused' : 'idle');
+    lab.textContent = state === 'playing' ? 'Pause'
+                    : state === 'paused' ? 'Resume'
+                    : (finished ? 'Replay' : 'Listen');
+    var lbl = state === 'playing' ? 'Pause reading'
+            : state === 'paused' ? 'Resume reading'
+            : (finished ? 'Replay' : 'Listen to this article');
+    tog.setAttribute('aria-label', lbl);
+    tog.title = lbl;
+    topBtn.setAttribute('aria-label', lbl);
+    topBtn.title = lbl;
+    speedBtn.hidden = state === 'idle';
+    stopBtn.hidden = state === 'idle';
+    statusEl.textContent = state === 'playing' ? 'Reading'
+                         : state === 'paused' ? 'Reading paused'
+                         : (finished ? 'Reading finished' : 'Reading stopped');
+  }
+
+  /* Pausing uses cancel + remembering the current block; resuming re-reads from the start of that block:
+     this works around speechSynthesis.pause() being unreliable on Chrome/Android.
+     The cost is that resuming repeats a short paragraph — barely noticeable */
+  function togglePlayback(){
+    if(state === 'idle'){ start(); }
+    else if(state === 'playing'){ state = 'paused'; gen++; speechSynthesis.cancel(); }
+    else if(state === 'paused'){ state = 'playing'; speakBlock(idx); }
+    updateUI();
+  }
+
+  tog.addEventListener('click', togglePlayback);
+  topBtn.addEventListener('click', togglePlayback);
+
+  speedBtn.addEventListener('click', function(){
+    rateIdx = (rateIdx + 1) % RATES.length;
+    rate = RATES[rateIdx];
+    speedBtn.textContent = (rate * 100 % 10 ? rate.toFixed(2) : rate.toFixed(1)) + '×';
+    if(state === 'playing'){
+      gen++;
+      speechSynthesis.cancel();
+      setTimeout(function(){ if(state === 'playing') speakBlock(idx); }, 80);
+    }
+  });
+
+  stopBtn.addEventListener('click', function(){
+    gen++; state = 'idle';
+    speechSynthesis.cancel(); clearHighlight(); resetPos(); updateUI();
+  });
+
+  window.addEventListener('pagehide', function(){ speechSynthesis.cancel(); });
+})();
+
+/* Read counter — same technique as the homepage visitor counter: countapi + 1-hour session dedup */
+(function(){
+  var el = document.getElementById('read-count');
+  if(!el) return;
+  var KEY = 'knightzjz-blog-unified-fid-en-views';
+  var SESSION_KEY = 'blog_ufid_en_session_ts';
+  var CACHE_KEY = 'blog_ufid_en_views_cache';
+  var SESSION_MS = 3600000; // 1-hour dedup window
+
+  var now = Date.now();
+  var lastHit = parseInt(localStorage.getItem(SESSION_KEY) || '0', 10);
+  var isNewSession = (now - lastHit) > SESSION_MS;
+
+  var base = isNewSession
+    ? 'https://countapi.mileshilliard.com/api/v1/hit/'
+    : 'https://countapi.mileshilliard.com/api/v1/get/';
+
+  var show = function(v){
+    el.textContent = Number(v).toLocaleString() + ' reads';
+    el.hidden = false;
+  };
+
+  fetch(base + KEY)
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      if(isNewSession){
+        try { localStorage.setItem(SESSION_KEY, String(now)); } catch (_) {}
+      }
+      var v = j && j.value;
+      if(v !== undefined && v !== null && Number.isFinite(Number(v))){
+        show(v);
+        try { localStorage.setItem(CACHE_KEY, String(v)); } catch (_) {}
+      } else {
+        var cached = localStorage.getItem(CACHE_KEY);
+        if(cached && Number.isFinite(Number(cached))) show(cached);
+      }
+    })
+    .catch(function(){
+      var cached = localStorage.getItem(CACHE_KEY);
+      if(cached && Number.isFinite(Number(cached))) show(cached);
+    });
+})();
+</script>
+
+</body>
+</html>

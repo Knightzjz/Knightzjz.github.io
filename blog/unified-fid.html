@@ -21,6 +21,9 @@
 <meta property="og:image" content="https://knightzjz.github.io/blog/img/og-unified-fid.jpg">
 <meta property="og:image:alt" content="分久必合：统一的伪造图像检测（Unified FID）">
 <link rel="canonical" href="https://knightzjz.github.io/blog/unified-fid.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://knightzjz.github.io/blog/unified-fid.html">
+<link rel="alternate" hreflang="en" href="https://knightzjz.github.io/blog/unified-fid-en.html">
+<link rel="alternate" hreflang="x-default" href="https://knightzjz.github.io/blog/unified-fid.html">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="周吉喆 (Ji-Zhe Zhou)">
 <meta property="article:published_time" content="2026-08-28T23:17:00+08:00">
@@ -128,6 +131,7 @@ sup.cite a:hover{color:var(--accent-deep);text-decoration:underline}
 .r2{color:#3a6d9e}
 .r3{color:#47825a}
 strong.hl{color:var(--accent)}
+strong.tailnote{color:var(--accent-deep);font-weight:700;letter-spacing:.01em}
 .jz{color:#46688c}  /* 吉喆现象 */
 
 a{color:var(--accent)}
@@ -245,6 +249,13 @@ blockquote p:last-child{margin-bottom:0}
   font-size:15.5px;line-height:1.95;color:var(--ink-3);text-align:justify}
 .signoff p.postscript .sig-meta{font-size:13px;letter-spacing:.06em;color:#9a9284}
 
+/* 语言切换（中文 ⇄ English） */
+.topnav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:30px}
+.lang-switch{flex:none;font-size:13px;color:var(--ink-3);text-decoration:none;
+  border:1px solid var(--line-2);border-radius:999px;padding:5px 15px;letter-spacing:.06em;
+  transition:border-color .25s,color .25s,background .25s}
+.lang-switch:hover{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+
 /* 返回博客列表 */
 .back-top{display:inline-flex;align-items:center;gap:7px;margin-top:30px;
   font-size:13.5px;color:var(--ink-3);text-decoration:none;letter-spacing:.06em;
@@ -252,7 +263,7 @@ blockquote p:last-child{margin-bottom:0}
 .back-top:hover{color:var(--accent)}
 .back-top .arr{font-family:Georgia,serif;font-size:15px;transition:transform .2s;display:inline-block}
 .back-top:hover .arr{transform:translateX(-3px)}
-.back-blog-end{display:flex;justify-content:center;margin:60px 0 0}
+.back-blog-end{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin:60px 0 0}
 .back-blog-end a{display:inline-flex;align-items:center;gap:8px;padding:11px 36px;
   border:1px solid var(--line-2);border-radius:999px;font-size:14px;color:var(--ink-2);
   text-decoration:none;letter-spacing:.12em;
@@ -349,7 +360,10 @@ blockquote p:last-child{margin-bottom:0}
 
 <div class="wrap">
 
-<a class="back-top" href="/blog/"><span class="arr">←</span>返回博客列表</a>
+<div class="topnav">
+  <a class="back-top" href="/blog/"><span class="arr">←</span>返回博客列表</a>
+  <a class="lang-switch" href="/blog/unified-fid-en.html" hreflang="en" lang="en" title="Read the English version">English version</a>
+</div>
 
 <article>
 
@@ -479,7 +493,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>其次，从模型性能上（P: Polymath）：</p>
 
-<p><abbr class="ufid">Unified FID</abbr> 要求<strong class="hl">一个通才模型同时超越多个专才模型</strong>，也就是一个统一的模型要在各个子领域上，比如典型的我们前面说的四个子领域：Deepfake、AIGC，篡改和文档篡改，同时超越各自子领域的 SOTA 模型。这样一个模型才是真正在实际中有应用价值的模型。</p>
+<p><abbr class="ufid">Unified FID</abbr> 要求<strong class="hl">一个通才模型同时超越多个专才模型</strong>，也就是一个统一的模型要在各个子领域上，比如典型的我们前面说的四个子领域：Deepfake、AIGC，篡改和文档篡改，同时超越各自子领域的 SOTA 模型。这样一个模型才是真正在实际中有应用价值的模型。尤其是在我国超大规模内容平台的治理、反诈风控与舆情巡检这些特有场景下，在审核拦截、欺诈识别与舆情取证等环节，模型面对的是亿量级、来源与伪造手法都完全不可预设的图像，也只有超越专才模型的精度，才能让 <abbr class="ufid">Unified FID</abbr> 在这类场景中格外有效。</p>
 
 <p>在有了定义之后，<abbr class="ufid">Unified FID</abbr> 任务貌似有很多简单直接的实现方式，比如直接选一个基础模型在拉通的数据集上进行 fine tuning / post training 好像就行了。</p>
 
@@ -575,7 +589,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <h2><span class="num">五</span>写在最后</h2>
 
-<p>综上我们大概梳理了 <abbr class="ufid">Unified FID</abbr> 这个任务的背景、定义、三条技术路线、各个路线对应的科学问题以及潜在的解决方案。这相当于为我们组过去 1-2 年的关键研究工作做了一个快速总结和对 <abbr class="ufid">Unified FID</abbr> 问题的阐述做了一个简单的开场。关于 <abbr class="ufid">Unified FID</abbr> 一些具体技术路线的可行性分析和潜力研判我会放到后一篇博文继续深入分析。</p>
+<p>综上我们大概梳理了 <abbr class="ufid">Unified FID</abbr> 这个任务的背景、定义、三条技术路线、各个路线对应的科学问题以及潜在的解决方案。这相当于为我们组过去 1-2 年的关键研究工作做了一个快速总结和对 <abbr class="ufid">Unified FID</abbr> 问题的阐述做了一个简单的开场。关于 <abbr class="ufid">Unified FID</abbr> 一些具体技术路线的可行性分析和潜力研判我会放到后一篇博文继续深入分析。<strong class="tailnote">还需要在最后特别说明的是：我不认为 <abbr class="ufid">Unified FID</abbr> 与现有的各个专有模型之间是替代关系，而应该是上下游关系，由 <abbr class="ufid">Unified FID</abbr> 准确快筛、再由专用模型做取证解释，这应该是未来理想的工作流。</strong></p>
 
 <p>因为最近收到了很多邮件询问相关问题，所以我的第一篇博客比较长，对目前 30 多封邮件中的几乎所有问题都做了解答，可能有所遗漏和谬误，也欢迎大家联系我进行指正和修改。</p>
 
@@ -645,6 +659,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <div class="back-blog-end">
   <a href="/blog/"><span class="arr">←</span>返回博客列表</a>
+  <a class="lang-switch" href="/blog/unified-fid-en.html" hreflang="en" lang="en" title="Read the English version">English version</a>
 </div>
 
 </article>

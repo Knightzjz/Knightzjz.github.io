@@ -242,6 +242,10 @@
       color: #2563eb; font-weight: 600; text-decoration: none;
     }
     .read-more:hover { text-decoration: underline; }
+    /* English version link — sits next to 阅读全文, same row, separated by a dot */
+    .read-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.55rem; }
+    .read-row .sep { color: #cbd5e1; font-weight: 400; }
+    .read-more.lang-link { color: #0f766e; font-weight: 600; }
 
     .photo-caption .loc {
       font-size: 0.85rem;
@@ -339,7 +343,7 @@
           <p>
             <span class="pun-line">统一伪造检测难在哪？难在让一个模型同时打赢四个专才。</span>
           </p>
-          <p><a class="read-more" href="unified-fid.html">阅读全文 →</a></p>
+          <p class="read-row"><a class="read-more" href="unified-fid.html">阅读全文 →</a><span class="sep" aria-hidden="true">·</span><a class="read-more lang-link" href="unified-fid-en.html" hreflang="en" lang="en">English version →</a></p>
         </div>
       </article>
 
