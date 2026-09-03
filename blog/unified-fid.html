@@ -558,7 +558,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>目前我们上线的 DeFakerOne 大模型也就是根据这套思路做的<sup class="cite"><a href="#r3">[3]</a></sup>。</p>
 
-<p>然而大模型除了训练成本问题以外，大家可以看看我们的 tech report，主要可以继续深入的科学问题在于如下两方面：</p>
+<p>然而大模型除了众所周知的训练成本问题以外，大家可以看看我们的 tech report，虽然子空间能有效绕过特征坍塌问题，但<abbr class="ufid">Unified FID</abbr>大模型在训练和推理中分别存在如下两方面问题：</p>
 
 <div class="sci">
 <p><strong>模型坍塌（能力退化）：</strong>大模型在 <abbr class="ufid">Unified FID</abbr> 中存在模型能力退化问题，我们叫他模型坍塌。也就是从一个 MLLM 基座大模型开始，我们使用大量数据进行 post-training 或者 sft 之后，由于 <abbr class="ufid">Unified FID</abbr> 是一个纯粹的 B（图像二分类）任务，这个基座大模型逐步会丧失包括 next token prediction，prompt understanding，in-context learning 在内的一系列的核心能力，退化为一个只会二分类模型，也就是退化了一个参数空间极大的小模型。</p>
