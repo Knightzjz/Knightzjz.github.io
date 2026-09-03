@@ -405,7 +405,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>Not exactly an easy call, is it? ;)</p>
 
-<p><strong>One thing should be said up front: your answer determines which forgery detection model you would have to call</strong>, because the existing research on passive image forensics has essentially been split into several independent tracks, mainly <strong>including but not limited to</strong> AIGC detection (whole-image generation), (natural) image (partial) manipulation detection, (pure) document (image) tampering detection, and Deepfake (face forgery) detection<sup class="cite"><a href="#r1">[1]</a></sup>. Moreover, models across these tracks are not interchangeable: an image manipulation detection model cannot handle tampered document images, a Deepfake detector does not work on AIGC-generated faces, and so on<sup class="cite"><a href="#r1">[1]</a></sup>. Of course you can force a Deepfake detector onto an AIGC image, but the result is close to random guessing and carries no reference value.</p>
+<p><strong>One thing should be said up front: your answer determines which fake-image detection model you would have to call</strong>, because the existing research on passive image forensics has essentially been split into several independent tracks, mainly <strong>including but not limited to</strong> AIGC detection (whole-image generation), (natural) image (partial) manipulation detection, (pure) document (image) tampering detection, and Deepfake (face forgery) detection<sup class="cite"><a href="#r1">[1]</a></sup>. Moreover, models across these tracks are not interchangeable: an image manipulation detection model cannot handle tampered document images, a Deepfake detector does not work on AIGC-generated faces, and so on<sup class="cite"><a href="#r1">[1]</a></sup>. Of course you can force a Deepfake detector onto an AIGC image, but the result is close to random guessing and carries no reference value.</p>
 
 <h2><span class="num">1</span>The Emergence of a Paradox</h2>
 
@@ -420,10 +420,10 @@ blockquote p:last-child{margin-bottom:0}
 <p>Build a <strong>Unified Fake Image Detection (hereafter <abbr class="ufid">Unified FID</abbr>)</strong> model, that is, one which makes no assumption about the forgery method and can detect images forged by any means. In practice, a user then only needs to feed the image in question into a single <abbr class="ufid">Unified FID</abbr> detector to obtain the result.</p>
 
 <div class="note-para">
-<p>Actually, I believe the term "forged image" (伪造图像) already carries the sense of unification — it means placing no limitation on the type of forgery, and no one in academia had defined "forged image" before. Still, after discussing this with <strong>Prof. Jiancheng Lv</strong>, I decided to single out "unified" and emphasize it separately as the core idea of this task.</p>
+<p>Actually, I believe the term "fake image" is itself inherently unifying — it places no restriction on the type of forgery, and no one in academia had defined "fake image" before. Still, after discussing this with <strong>Prof. Jiancheng Lv</strong>, I decided to single out "unified" and emphasize it separately as the core idea of this task.</p>
 </div>
 
-<h2><span class="num">2</span>Division and Reunion in Passive Image Forensics</h2>
+<h2><span class="num">2</span>Division and Unification in Passive Image Forensics</h2>
 
 <p>Before we go deeper into <abbr class="ufid">Unified FID</abbr>, there is one question that must be answered: why did the field of passive image forensics — or content security — develop into (at least) four completely independent tracks? Did researchers simply never consider how these methods are used in practice?</p>
 
@@ -441,7 +441,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <h3><span class="num">2.2</span>Reunion: Large Models Have Flattened the Boundaries Between Forgery Methods</h3>
 
-<p>Yet with the arrival of unified generation-and-understanding models represented by GPT-Image-2, together with a flood of harness tools, the ability of large models to carry out image forgery directly from user instructions has changed qualitatively. Take data from the insurance industry in Hong Kong, China: today, most high-quality (visually indistinguishable) forged images used for insurance fraud are produced directly by large models — forged medical certificates, forged claim amounts, forged policy records, and so on. This used to be manual Photoshop work, which is expensive to learn and slow to execute and does not fit every scenario; now large models do all of it, and do it remarkably well. As a result, forged images today exhibit the typical profile of <strong>"low barrier, large volume, high customization, high deceptiveness"</strong> (低大高强).</p>
+<p>Yet with the arrival of unified generation-and-understanding models represented by GPT-Image-2, together with a flood of harness tools, the ability of large models to carry out image forgery directly from user instructions has changed qualitatively. Take data from the insurance industry in Hong Kong: today, most high-quality (visually indistinguishable) forged images used for insurance fraud are produced directly by large models — forged medical certificates, forged claim amounts, forged policy records, and so on. This used to be manual Photoshop work, which is expensive to learn and slow to execute and does not fit every scenario; now large models do all of it, and do it remarkably well. As a result, forged images today exhibit the typical profile of <strong>"low barrier, large volume, high customization, high deceptiveness"</strong> (低大高强).</p>
 
 <div class="mysum">
 <p><strong>Overall characteristics of forged images in the large-model era · "低大高强"</strong>: low barrier, large volume, high customization, high deceptiveness.</p>
@@ -521,7 +521,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>To find out, we ran a large set of experiments in SICA:</p>
 
-<p>First, we linear-probed the feature space of sub-domain models trained on the merged dataset, and found that the feature matrices of all such models show a fairly clear rank problem: after SVD, the top 20 feature dimensions exhibit strong collinearity (too much feature redundancy, insufficient representational capacity), indicating that the models had not learned many useful artifact features.</p>
+<p>First, we linear-probed the feature space of sub-domain models trained on the merged dataset, and found that the feature matrices of all such models show a fairly clear rank deficiency: after SVD, the top 20 feature dimensions exhibit strong collinearity (too much feature redundancy, insufficient representational capacity), indicating that the models had not learned many useful artifact features.</p>
 
 <p>Second, we inspected the gradients of those models during merged-data training and found clear gradient conflict: data from different sub-domains push the model’s gradient updates in exactly opposite directions, so the gradient descends slowly along a compromise direction — meaning the training dynamics are chaotic and never truly converge or reach an optimum.</p>
 
@@ -575,7 +575,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <h3><span class="num">4.3</span><span class="r3">The compact–large model collaboration route</span></h3>
 
-<p>This is the most direct, least roundabout route — since every sub-domain already has its SOTA, just let a large model route and dispatch once, aggregate the compact models’ outputs and feed them back to the large model for the final decision (the MoE idea). Beyond our group, many strong teams have taken this route for <abbr class="ufid">Unified FID</abbr>, including (but not limited to) Prof. Jian Zhang at Peking University Shenzhen<sup class="cite"><a href="#r4">[4]</a></sup>, Prof. Baoyuan Wu at CUHK-Shenzhen<sup class="cite"><a href="#r5">[5]</a></sup>, Prof. Hongtao Xie at USTC<sup class="cite"><a href="#r6">[6]</a></sup>, Prof. Jiwei Zhang at BUPT, and others — do follow their work.</p>
+<p>This is the most direct, least roundabout route — since every sub-domain already has its SOTA, just let a large model route and dispatch once, aggregate the compact models’ outputs and feed them back to the large model for the final decision (the MoE idea). Beyond our group, many strong teams have taken this route for <abbr class="ufid">Unified FID</abbr>, including (but not limited to) Prof. Jian Zhang at Peking University<sup class="cite"><a href="#r4">[4]</a></sup>, Prof. Baoyuan Wu at CUHK-Shenzhen<sup class="cite"><a href="#r5">[5]</a></sup>, Prof. Hongtao Xie at USTC<sup class="cite"><a href="#r6">[6]</a></sup>, Prof. Bin Li at Shenzhen University<sup class="cite"><a href="#r7">[7]</a></sup>, Prof. Jiwei Zhang at BUPT, and others — do follow their work.</p>
 
 <p>This route is currently the fastest-moving and the quickest to yield results. Two scientific questions need further study:</p>
 
@@ -631,6 +631,7 @@ blockquote p:last-child{margin-bottom:0}
   <li id="r4"><span class="rmark">[4]</span> Qing Huang, Zhipei Xu, Xuanyu Zhang, Xiangyu Yu, Jian Zhang. <strong>UniShield: An Adaptive Multi-Agent Framework for Unified Forgery Image Detection and Localization.</strong> CVPR 2026 Findings, pp. 8121-8132. <a href="https://arxiv.org/abs/2510.03161" target="_blank" rel="noopener noreferrer">arXiv:2510.03161</a>.</li>
   <li id="r5"><span class="rmark">[5]</span> Tianxiao Li, Zhenglin Huang, Haiquan Wen, Yiwei He, Xinze Li, Bingyu Zhu, Wuhui Duan, Congang Chen, Zeyu Fu, Yi Dong, Baoyuan Wu, Jason Li, Guangliang Cheng. <strong>Omni-Fake: Benchmarking Unified Multimodal Social Media Deepfake Detection.</strong> CVPR 2026. <a href="https://arxiv.org/abs/2605.01638" target="_blank" rel="noopener noreferrer">arXiv:2605.01638</a>. <a href="https://github.com/tianxiao1201/Omni-Fake" target="_blank" rel="noopener noreferrer">github.com/tianxiao1201/Omni-Fake</a>.</li>
   <li id="r6"><span class="rmark">[6]</span> Mingqi Fang, Ziguang Li, Lingyun Yu, Quanwei Yang, Hongtao Xie, Yongdong Zhang. <strong>Forensic-MoE: Exploring Comprehensive Synthetic Image Detection Traces with Mixture of Experts.</strong> ICCV 2025, pp. 17772-17782. <a href="https://doi.org/10.1109/ICCV51701.2025.01651" target="_blank" rel="noopener noreferrer">doi:10.1109/ICCV51701.2025.01651</a>. <a href="https://github.com/fangmq77/Forensic-MoE" target="_blank" rel="noopener noreferrer">github.com/fangmq77/Forensic-MoE</a>.</li>
+  <li id="r7"><span class="rmark">[7]</span> Youqi Wang, Shen Chen, Haowei Wang, Rongxuan Peng, Taiping Yao, Shunquan Tan, Changsheng Chen, Bin Li, Shouhong Ding. <strong>ForgeryVCR: Visual-Centric Reasoning via Efficient Forensic Tools in MLLMs for Image Forgery Detection and Localization.</strong> ACM MM 2026. <a href="https://arxiv.org/abs/2602.14098" target="_blank" rel="noopener noreferrer">arXiv:2602.14098</a>. <a href="https://doi.org/10.1145/3767308.3836185" target="_blank" rel="noopener noreferrer">doi:10.1145/3767308.3836185</a>. <a href="https://github.com/youqiwong/ForgeryVCR" target="_blank" rel="noopener noreferrer">github.com/youqiwong/ForgeryVCR</a>.</li>
 </ol>
 </section>
 
