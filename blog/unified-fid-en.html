@@ -913,13 +913,13 @@ blockquote p:last-child{margin-bottom:0}
   window.addEventListener('pagehide', function(){ speechSynthesis.cancel(); });
 })();
 
-/* Read counter — same technique as the homepage visitor counter: countapi + 1-hour session dedup */
+/* Read counter — SHARED with the Chinese page (merged views into one counter): countapi + 1-hour session dedup */
 (function(){
   var el = document.getElementById('read-count');
   if(!el) return;
-  var KEY = 'knightzjz-blog-unified-fid-en-views';
-  var SESSION_KEY = 'blog_ufid_en_session_ts';
-  var CACHE_KEY = 'blog_ufid_en_views_cache';
+  var KEY = 'knightzjz-blog-unified-fid-views'; // shared counter with the Chinese page (merged views)
+  var SESSION_KEY = 'blog_ufid_session_ts';
+  var CACHE_KEY = 'blog_ufid_views_cache';
   var SESSION_MS = 3600000; // 1-hour dedup window
 
   var now = Date.now();
