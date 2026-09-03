@@ -896,18 +896,6 @@ a.research-keyword:focus-visible {
   font-weight: 600; color: var(--primary);
   min-width: 2em; display: inline-block; text-align: center;
 }
-.blog-read-counter {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  margin-top: 0.6rem; padding: 0.3rem 0.9rem;
-  background: var(--bg-alt); border: 1px solid var(--border);
-  border-radius: 20px; font-size: 0.82rem; color: var(--text-light);
-}
-.blog-read-counter svg { width: 14px; height: 14px; color: var(--accent, var(--primary)); }
-#blog-read-num {
-  font-weight: 600; color: var(--accent, var(--primary));
-  min-width: 2em; display: inline-block; text-align: center;
-}
-
 /* ============================================================
    Responsive
    ============================================================ */
@@ -1976,14 +1964,6 @@ a.research-keyword:focus-visible {
         </svg>
         访客总数：<span id="visitor-num" hidden>…</span>
       </div>
-      <div class="blog-read-counter">
-        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 4h11a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4z"></path>
-          <path d="M9 4v14"></path>
-          <path d="M19 4h1a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-1"></path>
-        </svg>
-        博客阅读：<span id="blog-read-num" hidden>…</span>
-      </div>
     </div>
     <div class="footer-waves" aria-hidden="true">
       <svg viewBox="0 0 1200 50" preserveAspectRatio="none">
@@ -2071,41 +2051,6 @@ a.research-keyword:focus-visible {
         })
         .catch(function () {
           // API unreachable — show cached value if available, otherwise stay hidden
-          var cached = localStorage.getItem(CACHE_KEY);
-          if (cached && Number.isFinite(Number(cached))) {
-            el.textContent = Number(cached).toLocaleString();
-            el.hidden = false;
-          }
-        });
-    })();
-
-    /* ── 3b. Blog Read Counter — READ-ONLY mirror of the unified-fid shared counter.
-            Uses get (NEVER hit) so homepage visits do NOT increment the blog counter,
-            and it stays fully separate from the homepage visitor counter (knightzjz-pageviews). ── */
-    (function () {
-      var el = document.getElementById('blog-read-num');
-      if (!el) return;
-      var KEY = 'knightzjz-blog-unified-fid-views';
-      var CACHE_KEY = 'blog_read_cache';
-
-      // Read-only on purpose: homepage traffic must never add to the blog counter.
-      fetch('https://countapi.mileshilliard.com/api/v1/get/' + KEY)
-        .then(function (r) { return r.json(); })
-        .then(function (j) {
-          var v = j && j.value;
-          if (v !== undefined && v !== null && Number.isFinite(Number(v))) {
-            el.textContent = Number(v).toLocaleString();
-            el.hidden = false;
-            try { localStorage.setItem(CACHE_KEY, String(v)); } catch (_) {}
-          } else {
-            var cached = localStorage.getItem(CACHE_KEY);
-            if (cached && Number.isFinite(Number(cached))) {
-              el.textContent = Number(cached).toLocaleString();
-              el.hidden = false;
-            }
-          }
-        })
-        .catch(function () {
           var cached = localStorage.getItem(CACHE_KEY);
           if (cached && Number.isFinite(Number(cached))) {
             el.textContent = Number(cached).toLocaleString();

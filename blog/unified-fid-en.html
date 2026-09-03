@@ -955,6 +955,32 @@ blockquote p:last-child{margin-bottom:0}
       if(cached && Number.isFinite(Number(cached))) show(cached);
     });
 })();
+
+/* Site visitor counter (one-way link) — reading the blog also counts as a visit
+   to knightzjz.github.io, so we report to the homepage counter knightzjz-pageviews.
+   Shares the single visitor_session_ts dedup window with index.html, so within one
+   hour "homepage + blog" together count as ONE visitor.
+   The reverse does not hold — browsing the homepage never adds to the blog read
+   count (that direction is guarded by the read counter itself). */
+(function(){
+  var SITE_KEY = 'knightzjz-pageviews';
+  var SITE_SESSION_KEY = 'visitor_session_ts'; // shared dedup window with index.html
+  var SESSION_MS = 3600000;
+
+  var now = Date.now();
+  var lastHit = 0;
+  try { lastHit = parseInt(localStorage.getItem(SITE_SESSION_KEY) || '0', 10) || 0; } catch (_) {}
+  if((now - lastHit) <= SESSION_MS) return; // already counted inside the window
+
+  fetch('https://countapi.mileshilliard.com/api/v1/hit/' + SITE_KEY)
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      if(j && j.value !== undefined && j.value !== null){
+        try { localStorage.setItem(SITE_SESSION_KEY, String(now)); } catch (_) {}
+      }
+    })
+    .catch(function(){}); // silent: never affect the read counter or the page
+})();
 </script>
 
 </body>

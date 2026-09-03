@@ -956,6 +956,31 @@ blockquote p:last-child{margin-bottom:0}
       if(cached && Number.isFinite(Number(cached))) show(cached);
     });
 })();
+
+/* 站点访客计数（单向连通）——读博客同样算访问了 knightzjz.github.io，
+   因此在这里上报主页的访客计数器 knightzjz-pageviews。
+   与主页共用 visitor_session_ts 这一个去重窗口：同一人 1 小时内
+   「逛主页 + 读博客」合计只计 1 个访客。
+   反向不成立——只逛主页不会增加博客阅读数（该方向由博客阅读计数器自己把关）。 */
+(function(){
+  var SITE_KEY = 'knightzjz-pageviews';
+  var SITE_SESSION_KEY = 'visitor_session_ts'; // 与 index.html 共享去重窗口
+  var SESSION_MS = 3600000;
+
+  var now = Date.now();
+  var lastHit = 0;
+  try { lastHit = parseInt(localStorage.getItem(SITE_SESSION_KEY) || '0', 10) || 0; } catch (_) {}
+  if((now - lastHit) <= SESSION_MS) return; // 窗口内已计过，跳过
+
+  fetch('https://countapi.mileshilliard.com/api/v1/hit/' + SITE_KEY)
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      if(j && j.value !== undefined && j.value !== null){
+        try { localStorage.setItem(SITE_SESSION_KEY, String(now)); } catch (_) {}
+      }
+    })
+    .catch(function(){}); // 静默失败：绝不拖累阅读计数与页面功能
+})();
 </script>
 
 </body>
