@@ -52,7 +52,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          git add index.html blog/unified-fid.html blog/unified-fid-en.html sitemap.xml
+          # blog/index.html is listed because it now carries a JSON-LD
+          # dateModified of its own (the Blog entity). Leaving it out would
+          # leave unstaged changes behind and git pull --rebase would abort
+          # with exit 128 — that is exactly what run #7 died of.
+          git add index.html blog/index.html blog/unified-fid.html blog/unified-fid-en.html sitemap.xml
           if git diff --cached --quiet; then
             echo "No change, skipping commit."
           else
