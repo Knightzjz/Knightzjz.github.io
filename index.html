@@ -54,7 +54,7 @@
     "@type": "ProfilePage",
     "@id": "https://knightzjz.github.io/#profile",
     "url": "https://knightzjz.github.io/",
-    "dateModified": "2026-07-20",
+    "dateModified": "2026-09-04T20:29:32+08:00",
     "mainEntity": {
       "@type": "Person",
       "@id": "https://knightzjz.github.io/#person",
@@ -2227,11 +2227,27 @@ a.research-keyword:focus-visible {
       var ld = document.querySelector('script[type="application/ld+json"]');
       if (!ld) return;
       try {
-        var d = new Date(document.lastModified);
-        if (isNaN(d.getTime())) return;
-        var iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
         var data = JSON.parse(ld.textContent);
-        data.dateModified = iso;
+        var d = new Date(document.lastModified);
+        var t = d.getTime();
+        var pub = data.datePublished ? new Date(data.datePublished).getTime() : NaN;
+        /* Guards — dateModified must stay a valid ISO 8601 datetime that is
+           neither earlier than datePublished nor in the future, otherwise
+           search engines reject the field outright. document.lastModified can
+           degrade to the epoch (or to an unparseable string) whenever the
+           Last-Modified header is missing, e.g. when a crawler renders from
+           cache; in that case we keep the static fallback value. */
+        if (!isFinite(t)) return;
+        if (t < Date.UTC(2020, 0, 1)) return;
+        if (t > Date.now() + 86400000) return;
+        if (isFinite(pub) && t < pub) return;
+        var z = function (n) { return String(n).padStart(2, '0'); };
+        var off = -d.getTimezoneOffset();
+        var a = Math.abs(off);
+        data.dateModified =
+          d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' + z(d.getDate()) +
+          'T' + z(d.getHours()) + ':' + z(d.getMinutes()) + ':' + z(d.getSeconds()) +
+          (off >= 0 ? '+' : '-') + z(Math.floor(a / 60)) + ':' + z(a % 60);
         ld.textContent = JSON.stringify(data, null, 2);
       } catch (_) { /* keep the static fallback date */ }
     })();
