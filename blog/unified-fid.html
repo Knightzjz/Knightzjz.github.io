@@ -462,7 +462,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>答案是否定的：</p>
 
-<p>大模型伪造能力主要得益于 harness 工具而非简单的 diffusion 生成。大模型借助理解能力，会在生成的过程中不断监测图像内容是否完美符合用户需求，并且通过 harness 层不断自主调用各类工具修正图像内容，包括抠图，重绘，deepfake 换脸等工具。大部分大模型会为此调用数十项工具对图像内容进行精修，比如 codex 的单图生成往往花费数分钟之久，就是各类工具不断调用对生成过程进行约束的结果。而 AIGC 图像往往被限定为大模型一次性生成的整张图像。这里包含两个要素：一是整图，不包含大模型在真实图像上的二次或者局部伪造；二是一次性，不考虑大模型调用工具基于生成—理解循环对图像的各类逐步修正。</p>
+<p>大模型伪造能力主要得益于 harness 工具而非简单的 diffusion 生成。大模型借助理解能力，会在生成的过程中不断监测图像内容是否完美符合用户需求，并且通过 harness 层不断自主调用各类工具修正图像内容，包括抠图，重绘，deepfake 换脸等工具。大部分大模型会为此调用数十项工具对图像内容进行精修，比如 codex 的单图生成往往花费数分钟之久，就是各类工具不断调用对生成过程进行约束的结果。而 AIGC 图像往往被限定为大模型一次性生成的整张图像。这里包含两个要素：一是整图，不包含大模型在真实图像上的二次或者局部伪造（最新的工作已经发现其实现有的AIGC检测模型对具备伪造的鉴别能力均非常欠缺<sup class="cite"><a href="#r8">[8]</a></sup>）。二是一次性，不考虑实际中往往会利用人工、专业软件或用其他（B）大模型对（A）大模型生成的图像进行再次修改或二创；以及（A）大模型不断调用工具基于生成—理解循环对图像的各类逐步修正。</p>
 
 <div class="concl">
 <p>因此，现有的大模型伪造图像并不简单 = AIGC 图像，而是完全包含了 AIGC 图像。</p>
@@ -635,6 +635,7 @@ blockquote p:last-child{margin-bottom:0}
   <li id="r5"><span class="rmark">[5]</span> Tianxiao Li, Zhenglin Huang, Haiquan Wen, Yiwei He, Xinze Li, Bingyu Zhu, Wuhui Duan, Congang Chen, Zeyu Fu, Yi Dong, Baoyuan Wu, Jason Li, Guangliang Cheng. <strong>Omni-Fake: Benchmarking Unified Multimodal Social Media Deepfake Detection.</strong> CVPR 2026. <a href="https://arxiv.org/abs/2605.01638" target="_blank" rel="noopener noreferrer">arXiv:2605.01638</a>. <a href="https://github.com/tianxiao1201/Omni-Fake" target="_blank" rel="noopener noreferrer">github.com/tianxiao1201/Omni-Fake</a>.</li>
   <li id="r6"><span class="rmark">[6]</span> Mingqi Fang, Ziguang Li, Lingyun Yu, Quanwei Yang, Hongtao Xie, Yongdong Zhang. <strong>Forensic-MoE: Exploring Comprehensive Synthetic Image Detection Traces with Mixture of Experts.</strong> ICCV 2025, pp. 17772-17782. <a href="https://doi.org/10.1109/ICCV51701.2025.01651" target="_blank" rel="noopener noreferrer">doi:10.1109/ICCV51701.2025.01651</a>. <a href="https://github.com/fangmq77/Forensic-MoE" target="_blank" rel="noopener noreferrer">github.com/fangmq77/Forensic-MoE</a>.</li>
   <li id="r7"><span class="rmark">[7]</span> Youqi Wang, Shen Chen, Haowei Wang, Rongxuan Peng, Taiping Yao, Shunquan Tan, Changsheng Chen, Bin Li, Shouhong Ding. <strong>ForgeryVCR: Visual-Centric Reasoning via Efficient Forensic Tools in MLLMs for Image Forgery Detection and Localization.</strong> ACM MM 2026. <a href="https://arxiv.org/abs/2602.14098" target="_blank" rel="noopener noreferrer">arXiv:2602.14098</a>. <a href="https://doi.org/10.1145/3767308.3836185" target="_blank" rel="noopener noreferrer">doi:10.1145/3767308.3836185</a>. <a href="https://github.com/youqiwong/ForgeryVCR" target="_blank" rel="noopener noreferrer">github.com/youqiwong/ForgeryVCR</a>.</li>
+<li id="r8"><span class="rmark">[8]</span> Xin Jiang, Hao Tang, Junyao Gao, Meiqi Cao, Fei Shen, Dongming Zhang, Yongdong Zhang. <strong>DailyBench: A Unified Benchmark for AI-Generated and Manipulated Images from Modern Generative Models.</strong> arXiv:2607.24016, 2026. <a href="https://arxiv.org/abs/2607.24016" target="_blank" rel="noopener noreferrer">arXiv:2607.24016</a>. <a href="https://dailybench.github.io/" target="_blank" rel="noopener noreferrer">dailybench.github.io</a>.</li>
 </ol>
 </section>
 
