@@ -496,7 +496,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>其次，从模型性能上（P: Polymath）：</p>
 
-<p><abbr class="ufid">Unified FID</abbr> 要求<strong class="hl">一个通才模型同时超越多个专才模型</strong>，也就是一个统一的模型要在各个子领域上，比如典型的我们前面说的四个子领域：Deepfake、AIGC，篡改和文档篡改，同时超越各自子领域的 SOTA 模型。这样一个模型才是真正在实际中有应用价值的模型。<strong class="emph">尤其在我国超大规模内容平台的治理、反诈风控与舆情巡检这些特有场景下，在审核拦截、欺诈识别与舆情取证等环节，模型面对的是亿量级、来源与伪造手法都完全不可预设的图像，只有超越专才模型的精度，才能让<abbr class="ufid">Unified FID</abbr>模型在这类场景中格外有效。</strong></p>
+<p><abbr class="ufid">Unified FID</abbr> 要求<strong class="hl">一个通才模型同时超越多个专才模型</strong>，也就是一个统一的模型要在各个子领域上，比如典型的我们前面说的四个子领域：Deepfake、AIGC，篡改和文档篡改，同时超越各自子领域（尽可能多）的 SOTA 模型。这样一个模型才是真正在实际中有应用价值的模型。<strong class="emph">尤其在我国超大规模内容平台的治理、反诈风控与舆情巡检这些特有场景下，在审核拦截、欺诈识别与舆情取证等环节，模型面对的是亿量级、来源与伪造手法都完全不可预设的图像，只有超越专才模型的精度，才能让<abbr class="ufid">Unified FID</abbr>模型在这类场景中格外有效。</strong></p>
 
 <p>在有了定义之后，<abbr class="ufid">Unified FID</abbr> 任务貌似有很多简单直接的实现方式，比如直接选一个基础模型在拉通的数据集上进行 fine tuning / post training 好像就行了。</p>
 
@@ -542,7 +542,7 @@ blockquote p:last-child{margin-bottom:0}
 <p>我们在 ICML26<sup class="cite"><a href="#r2">[2]</a></sup> 中首次明确了 artifacts 的异构问题，并管这种 artifacts 在各子领域异构的这个现象叫<strong class="jz">吉喆现象（Ji-Zhe Phenomenon）</strong>。</p>
 </div>
 
-<p><span class="jz">吉喆现象</span>在单体小模型中必然会导致一个结果——<strong>特征坍塌</strong>，也就是模型基本只会学习各个子领域共同的特征表达，放弃学习每个子领域独特的 artifacts 表征（特异性），最终学到的 artifacts 特征是一个平均/退化后的表达，导致 artifacts 特征坍塌（到平凡解 trivial solution），不再对各种篡改手法均有效（没有区分度）。简单说就是模型只能尝试为异构的 artifacts 建立一个公共/共享表征，那么结果就是对所有 artifacts 都有点效果，但是也都没有特别好的效果。</p>
+<p><span class="jz">吉喆现象</span>一定会带来异构特征的兼容性问题，也就是如何为这么多异构的特征构建统一的特征空间问题。尤其在单体小模型路线中，用极其有限的统一特征空间去兼容庞杂的异构artifacts表征，极其容易引发<strong>特征空间坍塌</strong>；也就是模型受到有限特征空间和统一表征的约束，基本只会学习各个子领域共同的特征表达，放弃学习每个子领域独特的 artifacts 表征（特异性），最终学到的 artifacts 特征是一个平均/退化后的表达，导致 artifacts 特征坍塌（到平凡解 trivial solution），不再对各种篡改手法均有效（没有区分度）。简单说就是模型只能尝试为异构的 artifacts 建立一个尽可能共享/统一的表征，那么结果就是这个表征出来的artifacts对各种伪造都有点效果，但是也都没有什么特别好的效果（有点用，但不多）。</p>
 
 <div class="sci">
 <p>所以，<span class="r1">单体小模型</span>的核心难点不在于数据对齐和训练模式拉通，而在于如何构建一个模型能在一个单体 / 统一的特征空间中，有效表征这些完全异构的 artifacts 特征（即统一表征又不丢失差异/异构性）。这是一个典型的<strong>特征坍塌科学问题</strong>，从避免坍塌、检测坍塌和解除坍塌三方面都有很多可能的解决方案（比如梯度手术、特征亲和、坍塌恢复等）可以研究，我们在 SICA 中对此提出了一个避免坍塌的假设并进行了实现和验证<sup class="cite"><a href="#r2">[2]</a></sup>。大家有兴趣可以移步论文详细阅读，我就不再赘述。我个人感觉这是未来 <abbr class="ufid">Unified FID</abbr> 研究会集中涌现的关键问题点。</p>
@@ -594,7 +594,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>综上我们大概梳理了 <abbr class="ufid">Unified FID</abbr> 这个任务的背景、定义、三条技术路线、各个路线对应的科学问题以及潜在的解决方案。这相当于为我们组过去 1-2 年的关键研究工作做了一个快速总结和对 <abbr class="ufid">Unified FID</abbr> 问题的阐述做了一个简单的开场。关于 <abbr class="ufid">Unified FID</abbr> 一些具体技术路线的可行性分析和潜力研判我会放到后一篇博文继续深入分析。</p>
 
-<p><strong class="tailnote">还需要在最后特别说明的是：我不认为 <abbr class="ufid">Unified FID</abbr> 与现有的各个专有模型之间是替代关系，而应该是上下游关系，由 <abbr class="ufid">Unified FID</abbr> 准确快筛、再由专用模型做取证解释；这应该是未来理想的工作流。</strong></p>
+<p><strong class="tailnote">还需要在最后特别说明的是：我不认为 <abbr class="ufid">Unified FID</abbr> 与现有的各个专有模型之间是替代关系，而应该是上下游关系。尤其在司法取证，传媒鉴证等强合规场景下，由 <abbr class="ufid">Unified FID</abbr> 准确快筛、再由专用模型做取证解释将会是未来理想的工作流。</strong></p>
 
 <p>因为最近收到了很多邮件询问相关问题，所以我的第一篇博客比较长，对目前 30 多封邮件中的几乎所有问题都做了解答，可能有所遗漏和谬误，也欢迎大家联系我进行指正和修改。</p>
 
