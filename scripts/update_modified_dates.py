@@ -1,22 +1,24 @@
 #!/usr/bin/env python3
 """Keep each blog post's "last updated" metadata honest and in sync.
 
-Blog posts (``POSTS``) get four places written from ONE source of truth —
+Blog posts (``POSTS``) get three places written from ONE source of truth —
 the commit date of the last *real* (non-bot) commit that touched the file:
 
   1. the JSON-LD ``dateModified`` field,
-  2. the visible ``<span class="sig-updated">`` line in the sign-off block
-     (date only — it sits right under the publication date, which is the
-     pairing Google looks for),
-  3. the visible ``<p class="lastmod-note">`` line after the references
-     (date *and* time — for readers who want to know how fresh the page is),
-  4. the ``<lastmod>`` entry in sitemap.xml.
+  2. the visible ``<p class="lastmod-note">`` line after the references — the
+     only updated date a reader sees, and therefore the only one that can
+     corroborate the structured data,
+  3. the ``<lastmod>`` entry in sitemap.xml.
 
-Google will only show an updated date in search results when the structured
-data agrees with a date a human can actually see on the page, so 1 and 2 must
-never drift apart. That is also why the old JavaScript updater was deleted:
-it overwrote ``dateModified`` at render time with the deploy timestamp, which
-silently broke that agreement.
+There used to be a second visible date in the sign-off block, right under the
+publication date. It was removed on purpose: two visible "last updated" lines
+read like a rendering glitch, and the publication date already carries the
+time. One date, in one place, matching the JSON-LD exactly.
+
+Google only shows an updated date when the structured data agrees with a date
+a human can actually see, so 1 and 2 must never drift apart. That is also why
+the old JavaScript updater was deleted: it overwrote ``dateModified`` at
+render time with the deploy timestamp, which silently broke that agreement.
 
 Landing pages (``PAGES`` — the home page and the blog index) get machine
 readable metadata only: their JSON-LD ``dateModified`` and their sitemap
@@ -72,19 +74,20 @@ MONTHS_EN = [
     "July", "August", "September", "October", "November", "December",
 ]
 
-# Both visible lines read "<label><date>". The labels are pinned down here
+# The closing note reads "<label><date>". The label is pinned down here
 # rather than matched as "anything ending in a colon".
 #
-# An earlier version did the latter, matched the whole span body, and shipped
-# the posts with the label stripped — a bare date that read like a sentence
-# fragment. Pinning the labels also kills the mirror image of that bug: the
-# closing note carries a time (…22:08), so a colon-chasing pattern happily
-# treats the colon *inside the clock* as the label separator, splices the new
-# date into the middle of the timestamp, and then passes its own sanity check
-# because the re-match finds the rewritten value sitting after that colon.
+# An earlier version did the latter, matched the whole element body, and
+# shipped the posts with the label stripped — a bare date that read like a
+# sentence fragment. Pinning the label also kills the mirror image of that
+# bug: when the note still carried a time (…22:08), a colon-chasing pattern
+# happily treated the colon *inside the clock* as the label separator, spliced
+# the new date into the middle of the timestamp, and then passed its own
+# sanity check because the re-match found the rewritten value sitting after
+# that colon. The time is gone now, but the whitelist stays.
 LABELS = {
-    "zh": {"sig": "最后更新：", "note": "最后更新时间："},
-    "en": {"sig": "Last updated: ", "note": "Last updated: "},
+    "zh": "最后更新：",
+    "en": "Last updated: ",
 }
 
 
@@ -131,12 +134,6 @@ def fmt_visible(when: datetime, lang: str) -> str:
     return f"{MONTHS_EN[when.month - 1]} {when.day}, {when.year}"
 
 
-def fmt_visible_long(when: datetime, lang: str) -> str:
-    """Date plus time, for the closing note after the references."""
-    clock = f"{when.hour:02d}:{when.minute:02d}"
-    if lang == "zh":
-        return f"{when.year} 年 {when.month} 月 {when.day} 日 {clock}"
-    return f"{MONTHS_EN[when.month - 1]} {when.day}, {when.year}, {clock}"
 
 
 def fmt_iso(when: datetime) -> str:
@@ -150,10 +147,8 @@ def rewrite_post(path: str, lang: str, when: datetime, dry: bool) -> bool:
 
     iso = fmt_iso(when)
     visible = fmt_visible(when, lang)
-    visible_long = fmt_visible_long(when, lang)
 
-    sig_re = labelled('<span class="sig-updated">', LABELS[lang]["sig"], "</span>")
-    note_re = labelled('<p class="lastmod-note">', LABELS[lang]["note"], "</p>")
+    note_re = labelled('<p class="lastmod-note">', LABELS[lang], "</p>")
 
     # 1. JSON-LD dateModified — the field is written without spaces after the
     #    colon in these files, but match both spellings to stay robust.
@@ -163,14 +158,8 @@ def rewrite_post(path: str, lang: str, when: datetime, dry: bool) -> bool:
         src,
         count=1,
     )
-    # 2. Visible "last updated" line — replace the date only, keep the label.
-    m_vis = sig_re.search(new_src)
-    n_vis = 0
-    if m_vis is not None:
-        new_src = new_src[: m_vis.start(2)] + visible + new_src[m_vis.end(2) :]
-        n_vis = 1
 
-    # 3. article:modified_time meta tag.
+    # 2. article:modified_time meta tag.
     new_src, n_meta = re.subn(
         r'(<meta property="article:modified_time" content=")[^"]*(")',
         lambda m: m.group(1) + iso + m.group(2),
@@ -178,12 +167,13 @@ def rewrite_post(path: str, lang: str, when: datetime, dry: bool) -> bool:
         count=1,
     )
 
-    # 4. Closing note after the references — date and time, label kept intact.
+    # 3. Closing note after the references — the only visible updated date on
+    #    the page. Replace the date only, keep the label.
     m_note = note_re.search(new_src)
     n_note = 0
     if m_note is not None:
         new_src = (
-            new_src[: m_note.start(2)] + visible_long + new_src[m_note.end(2) :]
+            new_src[: m_note.start(2)] + visible + new_src[m_note.end(2) :]
         )
         n_note = 1
 
@@ -192,7 +182,6 @@ def rewrite_post(path: str, lang: str, when: datetime, dry: bool) -> bool:
         for name, count in
         (
             ("dateModified", n_ld),
-            ("sig-updated", n_vis),
             ("modified_time", n_meta),
             ("lastmod-note", n_note),
         )
@@ -204,13 +193,8 @@ def rewrite_post(path: str, lang: str, when: datetime, dry: bool) -> bool:
 
     # Belt and braces: refuse to write if the label somehow got eaten, or if
     # the visible date no longer matches the ISO value we are shipping.
-    check = sig_re.search(new_src)
+    check = note_re.search(new_src)
     if check is None or check.group(2) != visible:
-        print(f"  !! {path}: visible line would read wrong — left untouched")
-        return False
-
-    check_long = note_re.search(new_src)
-    if check_long is None or check_long.group(2) != visible_long:
         print(f"  !! {path}: closing note would read wrong — left untouched")
         return False
 
@@ -218,7 +202,7 @@ def rewrite_post(path: str, lang: str, when: datetime, dry: bool) -> bool:
         print(f"  == {path}: already up to date ({iso})")
         return False
 
-    print(f"  -> {path}: {iso} | {visible} | {visible_long}")
+    print(f"  -> {path}: {iso} | {visible}")
     if not dry:
         with open(full, "w", encoding="utf-8") as fh:
             fh.write(new_src)

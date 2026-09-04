@@ -2,8 +2,8 @@ name: Update Modified Dates
 
 # Keeps every page's freshness metadata pinned to the commit date of the last
 # real (non-bot) change to that file:
-#   * blog posts  — JSON-LD dateModified + the two visible "last updated"
-#                   lines + sitemap lastmod;
+#   * blog posts  — JSON-LD dateModified + the single visible "last updated"
+#                   line after the references + sitemap lastmod;
 #   * index.html and blog/index.html — JSON-LD dateModified (home page only)
 #                   and sitemap lastmod. No visible date: Google never shows
 #                   one for a non-article page.
