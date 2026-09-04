@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Keep each blog post's "last updated" metadata honest and in sync.
 
-For every post we write four places from ONE source of truth — the commit
-date of the last *real* (non-bot) commit that touched the file:
+Blog posts (``POSTS``) get four places written from ONE source of truth —
+the commit date of the last *real* (non-bot) commit that touched the file:
 
   1. the JSON-LD ``dateModified`` field,
   2. the visible ``<span class="sig-updated">`` line in the sign-off block
@@ -17,6 +17,13 @@ data agrees with a date a human can actually see on the page, so 1 and 2 must
 never drift apart. That is also why the old JavaScript updater was deleted:
 it overwrote ``dateModified`` at render time with the deploy timestamp, which
 silently broke that agreement.
+
+Landing pages (``PAGES`` — the home page and the blog index) get machine
+readable metadata only: their JSON-LD ``dateModified`` and their sitemap
+``<lastmod>``. They deliberately carry NO visible updated date. Google never
+renders a date for a non-article page, so a visible line would have nothing
+to corroborate and would only clutter the layout; sitemap ``<lastmod>`` is a
+crawl-scheduling hint and does not require a human-visible counterpart.
 
 Idempotent by construction: bot commits carry ``[skip ci]`` and are skipped
 when looking for the last real commit, so re-running produces the same date
@@ -47,6 +54,14 @@ SKIP_MARKER = "[skip ci]"
 POSTS = [
     ("blog/unified-fid.html", "zh"),
     ("blog/unified-fid-en.html", "en"),
+]
+
+# (path, URL path as it appears in sitemap.xml) for pages that only carry
+# machine-readable freshness. The URL is spelled out because it is not always
+# the file path: the home page lives in index.html but is listed as "/".
+PAGES = [
+    ("index.html", ""),
+    ("blog/index.html", "blog/"),
 ]
 
 SITEMAP = "sitemap.xml"
@@ -210,7 +225,42 @@ def rewrite_post(path: str, lang: str, when: datetime, dry: bool) -> bool:
     return True
 
 
-def rewrite_sitemap(dates: dict[str, datetime], dry: bool) -> bool:
+def rewrite_page(path: str, when: datetime, dry: bool) -> bool:
+    """Refresh the machine-readable date on a non-article page.
+
+    No visible line is written — see the module docstring for why.
+    """
+    full = os.path.join(REPO, path)
+    with open(full, encoding="utf-8") as fh:
+        src = fh.read()
+
+    iso = fmt_iso(when)
+    new_src, n_ld = re.subn(
+        r'("dateModified"\s*:\s*")[^"]*(")',
+        lambda m: m.group(1) + iso + m.group(2),
+        src,
+        count=1,
+    )
+    if n_ld == 0:
+        # Not every landing page ships structured data. The sitemap entry is
+        # the part that matters, so this is a note rather than a failure.
+        print(f"  -- {path}: no JSON-LD dateModified (sitemap lastmod only)")
+        return False
+
+    if new_src == src:
+        print(f"  == {path}: already up to date ({iso})")
+        return False
+
+    print(f"  -> {path}: {iso}")
+    if not dry:
+        with open(full, "w", encoding="utf-8") as fh:
+            fh.write(new_src)
+    return True
+
+
+def rewrite_sitemap(
+    dates: dict[str, datetime], dry: bool, problems: list[str]
+) -> bool:
     full = os.path.join(REPO, SITEMAP)
     with open(full, encoding="utf-8") as fh:
         src = fh.read()
@@ -218,12 +268,16 @@ def rewrite_sitemap(dates: dict[str, datetime], dry: bool) -> bool:
     new_src = src
     for path, when in dates.items():
         url = SITE + path
-        new_src = re.sub(
+        new_src, n = re.subn(
             r"(<loc>" + re.escape(url) + r"</loc>\s*<lastmod>)[^<]*(</lastmod>)",
             lambda m: m.group(1) + fmt_iso(when) + m.group(2),
             new_src,
             count=1,
         )
+        if n == 0:
+            # A stale URL here would otherwise rot silently: the entry just
+            # stops being maintained while still looking maintained.
+            problems.append(f"{SITEMAP}: no <lastmod> found for {url}")
 
     if new_src == src:
         print(f"  == {SITEMAP}: already up to date")
@@ -242,20 +296,36 @@ def main() -> int:
         print("DRY RUN — no files will be written\n")
 
     changed = False
+    problems: list[str] = []
     dates: dict[str, datetime] = {}
 
     for path, lang in POSTS:
         when = last_real_commit(path)
         if when is None:
-            print(f"  ?? {path}: no git history, skipped")
+            problems.append(f"{path}: no git history")
             continue
         dates[path] = when
         if rewrite_post(path, lang, when, dry):
             changed = True
 
-    changed = rewrite_sitemap(dates, dry) or changed
+    for path, url_path in PAGES:
+        when = last_real_commit(path)
+        if when is None:
+            problems.append(f"{path}: no git history")
+            continue
+        dates[url_path] = when
+        if rewrite_page(path, when, dry):
+            changed = True
+
+    if rewrite_sitemap(dates, dry, problems):
+        changed = True
 
     print("\n" + ("Changes pending." if changed else "Nothing to update."))
+    if problems:
+        print("Problems:")
+        for item in problems:
+            print(f"  - {item}")
+        return 1
     return 0
 
 

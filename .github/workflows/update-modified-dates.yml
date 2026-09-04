@@ -1,8 +1,13 @@
 name: Update Modified Dates
 
-# Keeps each blog post's JSON-LD dateModified, its visible "last updated"
-# line, and the sitemap lastmod pinned to the commit date of the last real
-# (non-bot) change to that file.
+# Keeps every page's freshness metadata pinned to the commit date of the last
+# real (non-bot) change to that file:
+#   * blog posts  — JSON-LD dateModified + the two visible "last updated"
+#                   lines + sitemap lastmod;
+#   * index.html and blog/index.html — JSON-LD dateModified (home page only)
+#                   and sitemap lastmod. No visible date: Google never shows
+#                   one for a non-article page.
+# Every sitemap entry is now generated, so none of them needs hand-editing.
 #
 # Two details keep this from looping:
 #   * the commit below carries "[skip ci]", so the bot's own push does not
@@ -43,11 +48,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add blog/unified-fid.html blog/unified-fid-en.html sitemap.xml
+          git add index.html blog/unified-fid.html blog/unified-fid-en.html sitemap.xml
           if git diff --cached --quiet; then
             echo "No change, skipping commit."
           else
-            git commit -m "meta: refresh blog modified dates [skip ci]"
+            git commit -m "meta: refresh modified dates [skip ci]"
             git pull --rebase origin main
             git push
           fi
