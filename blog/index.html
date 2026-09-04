@@ -19,6 +19,60 @@
   <meta property="og:url" content="https://knightzjz.github.io/blog/">
   <meta property="og:image" content="https://knightzjz.github.io/images/og-banner.png">
   <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Structured data for the blog index.
+       The dateModified below is rewritten by scripts/update_modified_dates.py,
+       which only touches the first one it finds — so the Blog entity's own
+       field has to stay ahead of anything inside the blogPost array. Post
+       entries carry datePublished only: their freshness lives on the post
+       pages, and duplicating it here would just give us a second copy to keep
+       in sync. (No quotes around dateModified in this comment on purpose:
+       a bare-word search for it should land on the JSON-LD, not here.) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": "https://knightzjz.github.io/blog/#blog",
+    "url": "https://knightzjz.github.io/blog/",
+    "name": "Eat More Digest",
+    "description": "周吉喆（Ji-Zhe Zhou）的博客 Eat More Digest：伪造图像检测、统一伪造图像检测（Unified FID）、生成与取证统一的深度长文与研究随笔。",
+    "inLanguage": "zh-CN",
+    "dateModified": "2026-09-02T18:37:49+08:00",
+    "author": {
+      "@type": "Person",
+      "name": "周吉喆 (Ji-Zhe Zhou)",
+      "url": "https://knightzjz.github.io/",
+      "affiliation": {
+        "@type": "CollegeOrUniversity",
+        "name": "Sichuan University"
+      }
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "周吉喆 (Ji-Zhe Zhou)",
+      "url": "https://knightzjz.github.io/"
+    },
+    "blogPost": [
+      {
+        "@type": "BlogPosting",
+        "url": "https://knightzjz.github.io/blog/unified-fid.html",
+        "headline": "分久必合：统一的伪造图像检测（Unified FID）",
+        "image": "https://knightzjz.github.io/blog/img/og-unified-fid.jpg",
+        "datePublished": "2026-08-28T23:17:00+08:00",
+        "inLanguage": "zh-CN"
+      },
+      {
+        "@type": "BlogPosting",
+        "url": "https://knightzjz.github.io/blog/unified-fid-en.html",
+        "headline": "Long Divided, Shall Unite: Unified Fake Image Detection (Unified FID)",
+        "image": "https://knightzjz.github.io/blog/img/og-unified-fid-en.jpg",
+        "datePublished": "2026-08-28T23:17:00+08:00",
+        "inLanguage": "en"
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/images/avatar-180w.webp" type="image/webp" sizes="180x180">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">

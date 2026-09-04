@@ -36,6 +36,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - uses: actions/setup-python@v5
         with:
@@ -45,9 +46,12 @@ jobs:
         run: python scripts/update_modified_dates.py
 
       - name: Commit if changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git add index.html blog/unified-fid.html blog/unified-fid-en.html sitemap.xml
           if git diff --cached --quiet; then
             echo "No change, skipping commit."

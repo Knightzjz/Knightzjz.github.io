@@ -18,7 +18,10 @@ jobs:
       group: site-data
       cancel-in-progress: false
     steps:
+      # See update-citations.yml — the token is re-attached only for the push.
       - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-python@v5
         with:
@@ -30,9 +33,12 @@ jobs:
         run: python scripts/fetch_stars.py
 
       - name: Commit if changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git add stars.json
           if git diff --cached --quiet; then
             echo "No change, skipping commit."

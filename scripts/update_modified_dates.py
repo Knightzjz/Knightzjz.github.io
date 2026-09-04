@@ -27,6 +27,11 @@ renders a date for a non-article page, so a visible line would have nothing
 to corroborate and would only clutter the layout; sitemap ``<lastmod>`` is a
 crawl-scheduling hint and does not require a human-visible counterpart.
 
+The rewrite uses ``count=1``, so on the blog index the ``dateModified``
+belonging to the Blog entity must stay the FIRST one in the file — ahead of
+anything inside the ``blogPost`` array. That is why those entries carry
+``datePublished`` only.
+
 Idempotent by construction: bot commits carry ``[skip ci]`` and are skipped
 when looking for the last real commit, so re-running produces the same date
 and therefore no diff. No diff means no commit, which is what stops the

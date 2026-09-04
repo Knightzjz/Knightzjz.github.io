@@ -8,7 +8,7 @@
   <meta name="format-detection" content="telephone=no">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://countapi.mileshilliard.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
   <title>周吉喆 - 四川大学计算机学院</title>
-  <meta name="description" content="周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。">
+  <meta name="description" content="周吉喆（Ji-Zhe Zhou），四川大学计算机学院副教授，Eat More Group（EMG）负责人。研究统一伪造图像检测、生成与取证统一，主导 IML-ViT、IMDL-BenCo 等开源项目。">
   <meta name="author" content="Jizhe Zhou">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://knightzjz.github.io/">
@@ -17,7 +17,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://knightzjz.github.io/">
   <meta property="og:title" content="周吉喆 - 四川大学计算机学院">
-  <meta property="og:description" content="周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。">
+  <meta property="og:description" content="周吉喆（Ji-Zhe Zhou），四川大学计算机学院副教授，Eat More Group（EMG）负责人。研究统一伪造图像检测、生成与取证统一，主导 IML-ViT、IMDL-BenCo 等开源项目。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:site_name" content="Ji-Zhe Zhou Academic Homepage">
   <meta property="og:image" content="https://knightzjz.github.io/images/og-banner.png">
@@ -32,7 +32,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://knightzjz.github.io/">
   <meta name="twitter:title" content="周吉喆 - 四川大学计算机学院">
-  <meta name="twitter:description" content="周吉喆, Ji-Zhe Zhou，四川大学计算机学院副教授。研究方向：伪造图像检测、生成与取证统一、人工智能安全。">
+  <meta name="twitter:description" content="周吉喆（Ji-Zhe Zhou），四川大学计算机学院副教授，Eat More Group（EMG）负责人。研究统一伪造图像检测、生成与取证统一，主导 IML-ViT、IMDL-BenCo 等开源项目。">
   <meta name="twitter:image" content="https://knightzjz.github.io/images/og-banner.webp">
   <meta name="twitter:image:alt" content="周吉喆 Ji-Zhe Zhou — 四川大学计算机学院副教授">
 
@@ -98,7 +98,7 @@
         "https://www.semanticscholar.org/author/Jizhe-Zhou/2238645",
         "https://github.com/Knightzjz"
       ],
-      "description": "四川大学计算机学院副教授，研究方向为伪造图像检测及生成与取证统一",
+      "description": "四川大学计算机学院副教授，Eat More Group（EMG）负责人，研究方向为统一伪造图像检测及生成与取证统一",
       "image": "https://knightzjz.github.io/images/avatar.jpeg",
       "knowsAbout": ["Fake Image Detection", "Image Manipulation Localization", "Deepfake Detection", "AI-Generated Image Detection", "Visual Forensics", "Multimodal Large Language Models", "Artificial Intelligence Security"]
     }
@@ -1170,6 +1170,7 @@ a.research-keyword:focus-visible {
           <a class="project-tag" href="https://github.com/scu-zjz/IMDLBenCo" target="_blank" rel="noopener noreferrer">IMDL-BenCo</a>
           <a class="project-tag" href="https://github.com/scu-zjz/ForensicHub" target="_blank" rel="noopener noreferrer">ForensicHub</a>
           等多个开源基准项目，更多详情请见 GitHub 与 Google Scholar 主页。
+        </p>
       </div>
       <hr class="bio-divider">
       <div class="bio-en">
@@ -2173,9 +2174,16 @@ a.research-keyword:focus-visible {
         if (!info) return;
         var html = '';
         var prefix = 'images/pub-thumbs/' + info.base;
-        html += '<img src="' + prefix + '.webp" alt="Page 1" height="150" loading="lazy">';
+        /* width/height carry the thumbs' INTRINSIC pixel size (124x160), not
+           the size they are displayed at — the stylesheet scales them to
+           height:150px with width:auto. Getting this ratio right is the whole
+           point: it lets the browser reserve the slot before the image loads
+           (no layout shift as the strip fills in) and it matches the real
+           aspect ratio, so the thumbs are never stretched. Do not "fix" these
+           numbers to 150 to match the CSS height. */
+        html += '<img src="' + prefix + '.webp" alt="Page 1" width="124" height="160" loading="lazy">';
         for (var i = 2; i <= info.pages; i++) {
-          html += '<img src="' + prefix + '_p' + i + '.webp" alt="Page ' + i + '" height="150" loading="lazy">';
+          html += '<img src="' + prefix + '_p' + i + '.webp" alt="Page ' + i + '" width="124" height="160" loading="lazy">';
         }
         strip.innerHTML = html;
         var hint = document.createElement('span');

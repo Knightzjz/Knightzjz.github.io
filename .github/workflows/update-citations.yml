@@ -21,7 +21,12 @@ jobs:
       group: site-data
       cancel-in-progress: false
     steps:
+      # Do not leave the GITHUB_TOKEN sitting in .git/config for the rest of
+      # the job. Nothing after checkout needs it until the push step, which
+      # re-attaches the token to the remote itself.
       - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-python@v5
         with:
@@ -33,9 +38,12 @@ jobs:
         run: python scripts/fetch_citations.py
 
       - name: Commit if changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git add citations.json
           if git diff --cached --quiet; then
             echo "No change, skipping commit."
