@@ -1,0 +1,53 @@
+name: Update Modified Dates
+
+# Keeps each blog post's JSON-LD dateModified, its visible "last updated"
+# line, and the sitemap lastmod pinned to the commit date of the last real
+# (non-bot) change to that file.
+#
+# Two details keep this from looping:
+#   * the commit below carries "[skip ci]", so the bot's own push does not
+#     re-trigger this workflow;
+#   * the script ignores "[skip ci]" commits when looking for the last real
+#     change, so re-running yields the same date, hence no diff, hence no
+#     commit. Bot commits can never bump the date on their own.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: site-data
+      cancel-in-progress: false
+    steps:
+      # fetch-depth 0 is required: the script walks back through commit
+      # history to find the last non-bot change, and a shallow clone would
+      # only ever see one commit.
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Refresh modified dates
+        run: python scripts/update_modified_dates.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add blog/unified-fid.html blog/unified-fid-en.html sitemap.xml
+          if git diff --cached --quiet; then
+            echo "No change, skipping commit."
+          else
+            git commit -m "meta: refresh blog modified dates [skip ci]"
+            git pull --rebase origin main
+            git push
+          fi

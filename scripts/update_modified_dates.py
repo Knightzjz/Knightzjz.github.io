@@ -1,0 +1,194 @@
+#!/usr/bin/env python3
+"""Keep each blog post's "last updated" metadata honest and in sync.
+
+For every post we write three places from ONE source of truth — the commit
+date of the last *real* (non-bot) commit that touched the file:
+
+  1. the JSON-LD ``dateModified`` field,
+  2. the visible ``<span class="sig-updated">`` line in the sign-off block,
+  3. the ``<lastmod>`` entry in sitemap.xml.
+
+Google will only show an updated date in search results when the structured
+data agrees with a date a human can actually see on the page, so 1 and 2 must
+never drift apart. That is also why the old JavaScript updater was deleted:
+it overwrote ``dateModified`` at render time with the deploy timestamp, which
+silently broke that agreement.
+
+Idempotent by construction: bot commits carry ``[skip ci]`` and are skipped
+when looking for the last real commit, so re-running produces the same date
+and therefore no diff. No diff means no commit, which is what stops the
+GitHub Action from re-triggering itself forever.
+
+Usage:
+    python scripts/update_modified_dates.py            # rewrite files
+    DRY_RUN=1 python scripts/update_modified_dates.py  # report only
+"""
+
+from __future__ import annotations
+
+import os
+import re
+import subprocess
+import sys
+from datetime import datetime, timedelta, timezone
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BEIJING = timezone(timedelta(hours=8))
+
+# Commit subjects containing this marker are bot commits and are ignored when
+# looking for the last real content change.
+SKIP_MARKER = "[skip ci]"
+
+# (path, language of the visible date line)
+POSTS = [
+    ("blog/unified-fid.html", "zh"),
+    ("blog/unified-fid-en.html", "en"),
+]
+
+SITEMAP = "sitemap.xml"
+SITE = "https://knightzjz.github.io/"
+
+MONTHS_EN = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
+]
+
+
+def git(*args: str) -> str:
+    out = subprocess.run(
+        ["git", "-C", REPO, *args],
+        capture_output=True, text=True, check=True,
+    )
+    return out.stdout
+
+
+def last_real_commit(path: str) -> datetime | None:
+    """Commit date of the newest commit touching `path`, skipping bot commits."""
+    log = git("log", "--format=%cI%x1f%s", "--", path).strip()
+    if not log:
+        return None
+    fallback = None
+    for entry in log.split("\n"):
+        iso, _, subject = entry.partition("\x1f")
+        when = datetime.fromisoformat(iso.strip()).astimezone(BEIJING)
+        if fallback is None:
+            fallback = when
+        if SKIP_MARKER not in subject:
+            return when
+    # Every commit we know about is a bot commit — better than nothing.
+    return fallback
+
+
+def fmt_visible(when: datetime, lang: str) -> str:
+    if lang == "zh":
+        return f"{when.year} 年 {when.month} 月 {when.day} 日"
+    return f"{MONTHS_EN[when.month - 1]} {when.day}, {when.year}"
+
+
+def fmt_iso(when: datetime) -> str:
+    return when.strftime("%Y-%m-%dT%H:%M:%S") + "+08:00"
+
+
+def rewrite_post(path: str, lang: str, when: datetime, dry: bool) -> bool:
+    full = os.path.join(REPO, path)
+    with open(full, encoding="utf-8") as fh:
+        src = fh.read()
+
+    iso = fmt_iso(when)
+    visible = fmt_visible(when, lang)
+
+    # 1. JSON-LD dateModified — the field is written without spaces after the
+    #    colon in these files, but match both spellings to stay robust.
+    new_src, n_ld = re.subn(
+        r'("dateModified"\s*:\s*")[^"]*(")',
+        lambda m: m.group(1) + iso + m.group(2),
+        src,
+        count=1,
+    )
+    # 2. Visible "last updated" line.
+    new_src, n_vis = re.subn(
+        r'(<span class="sig-updated">)(.*?)(</span>)',
+        lambda m: m.group(1) + visible + m.group(3),
+        new_src,
+        count=1,
+    )
+    # 3. article:modified_time meta tag.
+    new_src, n_meta = re.subn(
+        r'(<meta property="article:modified_time" content=")[^"]*(")',
+        lambda m: m.group(1) + iso + m.group(2),
+        new_src,
+        count=1,
+    )
+
+    missing = [
+        name
+        for name, count in
+        (("dateModified", n_ld), ("sig-updated", n_vis), ("modified_time", n_meta))
+        if count == 0
+    ]
+    if missing:
+        print(f"  !! {path}: could not find {', '.join(missing)} — left untouched")
+        return False
+
+    if new_src == src:
+        print(f"  == {path}: already up to date ({iso})")
+        return False
+
+    print(f"  -> {path}: {iso} | {visible}")
+    if not dry:
+        with open(full, "w", encoding="utf-8") as fh:
+            fh.write(new_src)
+    return True
+
+
+def rewrite_sitemap(dates: dict[str, datetime], dry: bool) -> bool:
+    full = os.path.join(REPO, SITEMAP)
+    with open(full, encoding="utf-8") as fh:
+        src = fh.read()
+
+    new_src = src
+    for path, when in dates.items():
+        url = SITE + path
+        new_src = re.sub(
+            r"(<loc>" + re.escape(url) + r"</loc>\s*<lastmod>)[^<]*(</lastmod>)",
+            lambda m: m.group(1) + fmt_iso(when) + m.group(2),
+            new_src,
+            count=1,
+        )
+
+    if new_src == src:
+        print(f"  == {SITEMAP}: already up to date")
+        return False
+
+    print(f"  -> {SITEMAP}: refreshed lastmod")
+    if not dry:
+        with open(full, "w", encoding="utf-8") as fh:
+            fh.write(new_src)
+    return True
+
+
+def main() -> int:
+    dry = os.environ.get("DRY_RUN") == "1"
+    if dry:
+        print("DRY RUN — no files will be written\n")
+
+    changed = False
+    dates: dict[str, datetime] = {}
+
+    for path, lang in POSTS:
+        when = last_real_commit(path)
+        if when is None:
+            print(f"  ?? {path}: no git history, skipped")
+            continue
+        dates[path] = when
+        if rewrite_post(path, lang, when, dry):
+            changed = True
+
+    changed = rewrite_sitemap(dates, dry) or changed
+
+    print("\n" + ("Changes pending." if changed else "Nothing to update."))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
