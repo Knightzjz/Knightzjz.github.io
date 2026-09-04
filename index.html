@@ -2244,10 +2244,17 @@ a.research-keyword:focus-visible {
         var z = function (n) { return String(n).padStart(2, '0'); };
         var off = -d.getTimezoneOffset();
         var a = Math.abs(off);
-        data.dateModified =
+        var iso =
           d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' + z(d.getDate()) +
           'T' + z(d.getHours()) + ':' + z(d.getMinutes()) + ':' + z(d.getSeconds()) +
           (off >= 0 ? '+' : '-') + z(Math.floor(a / 60)) + ':' + z(a % 60);
+        /* Final self-check — Google rejects anything that is not a full
+           ISO 8601 datetime WITH a time component and a UTC offset. A
+           date-only string ("2026-08-31") is exactly what triggered the
+           Search Console error, so verify the shape before writing. */
+        if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})$/.test(iso)) return;
+        if (!isFinite(new Date(iso).getTime())) return;
+        data.dateModified = iso;
         ld.textContent = JSON.stringify(data, null, 2);
       } catch (_) { /* keep the static fallback date */ }
     })();
