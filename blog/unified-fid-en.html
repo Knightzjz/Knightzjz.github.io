@@ -506,7 +506,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>So where exactly does <abbr class="ufid">Unified FID</abbr> get difficult? Below we lay out the research blueprint and analyze it point by point:</p>
 
-<p>The technical routes can be divided fairly cleanly into three:</p>
+<p>Overall, the technical routes of <abbr class="ufid">Unified FID</abbr> can be divided fairly cleanly into three:</p>
 
 <blockquote>
 <p><strong><span class="r1">the single compact model route</span>, <span class="r2">the large model route</span>, and <span class="r3">the hybrid compact–large model route</span></strong></p>
@@ -554,13 +554,13 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>First, the strong out-of-distribution (OOD) generalization of large models is the key to the long-standing generalization difficulty in passive forensics.</p>
 
-<p>Second, large models have an enormous feature space, which can effectively resolve the <span class="jz">Ji-Zhe Phenomenon</span>: features can be partitioned into orthogonal or fully disjoint sub-spaces, so the model no longer faces a dilemma between uniformity and specificity, effectively bypassing the feature-space collapse problem.</p>
+<p>Second, large models have a larger feature space and — provided the manifold of that feature space is properly constrained — have the capacity to partition artifact features into orthogonal or fully disjoint sub-spaces. This defuses the tension between the uniformity and the specificity of features, resolves the <span class="jz">Ji-Zhe Phenomenon</span>, and avoids the collapse of the feature space.</p>
 
 <p>Besides, large models natively support dialogue, user-intent understanding, and agent invocation, so they hold great potential for iterating on, explaining and auditing detection results and for collaborating with external tools. For example, after making a detection, a large model can automatically produce an explanation of the result, call external physical agents or tools to audit whether that explanation is correct, and then revise the detection result accordingly — forming an agent-based model harness loop, which works beautifully.</p>
 
 <p>Our currently deployed DeFakerOne model follows exactly this idea<sup class="cite"><a href="#r4">[4]</a></sup>.</p>
 
-<p>However, training cost aside, the main scientific questions worth pursuing further (see our tech report) lie in two aspects:</p>
+<p>However, training cost aside, you can take a look at our tech report — I will not repeat the reasoning here: although the enormous parameter space of large models can effectively bypass the feature collapse problem, <abbr class="ufid">Unified FID</abbr> large models still face the following two problems in training and in inference respectively:</p>
 
 <div class="sci">
 <p><strong>Model collapse (capability degradation):</strong> Large models suffer from capability degradation on <abbr class="ufid">Unified FID</abbr>, which we call model collapse. Starting from an MLLM foundation model, after we post-train or SFT it on large amounts of data, because <abbr class="ufid">Unified FID</abbr> is a pure B (image binary classification) task, the foundation model gradually loses a series of core capabilities including next-token prediction, prompt understanding, and in-context learning, degrading into a model that can only do binary classification — in other words, degenerating into a small model with an enormous parameter space.</p>
@@ -571,16 +571,16 @@ blockquote p:last-child{margin-bottom:0}
 <p>We are still investigating the underlying mechanism of this model collapse during post-training. This problem should not be unique to forensics; many vertical domains will likely see similar issues emerge as training data accumulates. It is a very valuable and fairly difficult research direction, and discussion is very welcome.</p>
 
 <div class="sci">
-<p><strong>Inference efficiency:</strong> The processing efficiency of large models remains hard to improve. In real deployments, forgery detection workloads fluctuate sharply, with clear peaks and troughs. For example, when a lifestyle-services platform runs a promotion on a particular date (say, a discount for teachers around Teachers’ Day), a massive (million-scale) detection demand floods in within a short window (1–2 days), because users must upload teacher certificates for eligibility verification — and forging such certificates is something almost any large model can help with. Large-model image detection responds on the order of seconds; at 5 seconds per image, 1 million images take 5 million seconds, which is roughly 58 days.</p>
+<p><strong>Inference efficiency:</strong> The processing efficiency of large models remains hard to improve. In real deployments, forgery detection workloads fluctuate sharply, with clear peaks and troughs. For example, when a lifestyle-services platform runs a promotion on a particular date (say, a discount for teachers around Teachers’ Day), a massive (million-scale) detection demand floods in within a short window (1–2 days), because users must upload teacher certificates for eligibility verification — and forging such certificates is something almost any large model can help with. Large-model image detection responds on the order of seconds; at 5 seconds per image, 1 million images take 5 million seconds, which is roughly 58 days. But simply throwing more inference cards at the problem is a bad bargain: during the troughs of the forgery-detection workload, even a single inference card may sit idle much of the time. Provisioning a large pool of idle resources just to cover peak demand is extremely wasteful.</p>
 </div>
 
-<p>Therefore, how to accelerate inference for <abbr class="ufid">Unified FID</abbr> models under the <span class="r2">large model route</span> is also a core problem. Pruning, parallelism, and hardware acceleration — Chinese hardware in particular — are all high-potential research directions under this problem.</p>
+<p>Therefore, how to accelerate inference for <abbr class="ufid">Unified FID</abbr> models under the <span class="r2">large model route</span> is the core problem. Pruning, parallelism, and hardware acceleration — Chinese hardware in particular — are all high-potential research directions under this problem.</p>
 
 <h3><span class="num">4.3</span><span class="r3">The hybrid compact–large model route</span></h3>
 
-<p>This is the most direct, least roundabout route — since every sub-domain already has its SOTA, just let a large model route and dispatch once, aggregate the compact models’ outputs and feed them back to the large model for the final decision (the MoE idea). Beyond our group, many strong teams have taken this route for <abbr class="ufid">Unified FID</abbr>, including (but not limited to) Prof. Jian Zhang at Peking University<sup class="cite"><a href="#r5">[5]</a></sup>, Prof. Baoyuan Wu at CUHK-Shenzhen<sup class="cite"><a href="#r6">[6]</a></sup>, Prof. Hongtao Xie at USTC<sup class="cite"><a href="#r7">[7]</a></sup>, Prof. Bin Li at Shenzhen University<sup class="cite"><a href="#r8">[8]</a></sup>, Prof. Jiwei Zhang at BUPT, and others — do follow their work.</p>
+<p>This is the most direct, least roundabout route — since every sub-domain already has its SOTA, just let a large model route and dispatch once, aggregate the compact models’ outputs and feed them back to the large model for the final decision (the MoE idea). Beyond our group, many strong teams have taken this route for <abbr class="ufid">Unified FID</abbr>, including (but not limited to) Prof. Jian Zhang at Peking University<sup class="cite"><a href="#r5">[5]</a></sup>, Prof. Baoyuan Wu at CUHK-Shenzhen<sup class="cite"><a href="#r6">[6]</a></sup>, Prof. Hongtao Xie at USTC<sup class="cite"><a href="#r7">[7]</a></sup>, Prof. Bin Li at Shenzhen University<sup class="cite"><a href="#r8">[8]</a></sup>, Prof. Jiwei Zhang at BUPT, and others — do follow their work; I will not repeat how the scientific problem is derived and distilled here.</p>
 
-<p>This route is currently the fastest-moving and the quickest to yield results. Two scientific questions need further study:</p>
+<p>Overall, this route is currently the fastest-moving and the quickest to yield results. Two scientific questions need further study:</p>
 
 <div class="sci">
 <p><strong>The weakest-link problem:</strong> The ceiling of <span class="r3">hybrid collaboration</span> is inherently bounded by the ceiling of individual domain-specific compact models and by the large model’s routing ability. As a result, existing solutions struggle to satisfy the P requirement of <abbr class="ufid">Unified FID</abbr>. Hence the core scientific question becomes how the large model can dispatch compact models and aggregate their results in a better way, so as to exceed the performance ceiling of any single SOTA model. Follow-up work will likely concentrate on multi-round and priority-aware dispatch of compact models by the large model, as well as the large model’s autoregressive, redundancy and reliability judgments over the returned results.</p>
