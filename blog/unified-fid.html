@@ -542,7 +542,7 @@ blockquote p:last-child{margin-bottom:0}
 <p>我们在 ICML26<sup class="cite"><a href="#r2">[2]</a></sup> 中首次明确了 artifacts 的异构问题，并管这种 artifacts 在各子领域异构的这个现象叫<strong class="jz">吉喆现象（Ji-Zhe Phenomenon）</strong>。</p>
 </div>
 
-<p><span class="jz">吉喆现象</span>一定会带来异构特征的兼容性问题，也就是如何为这么多异构的特征构建统一的特征空间问题。尤其在单体小模型路线中，用极其有限的统一特征空间去兼容庞杂的异构artifacts表征，极其容易引发<strong>特征空间坍塌</strong>；也就是模型受到有限特征空间和统一表征的约束，基本只会学习各个子领域共同的特征表达，放弃学习每个子领域独特的 artifacts 表征（特异性），最终学到的 artifacts 特征是一个平均/退化后的表达，导致 artifacts 特征坍塌（到平凡解 trivial solution），不再对各种篡改手法均有效（没有区分度）。简单说就是模型只能尝试为异构的 artifacts 建立一个尽可能共享/统一的表征，那么结果就是这个表征出来的artifacts对各种伪造都有点效果，但是也都没有什么特别好的效果（有点用，但不多）。</p>
+<p><span class="jz">吉喆现象</span>会带来异构特征的兼容性问题，尤其在单体小模型路线中，用极其有限的特征空间去兼容庞杂的异构artifacts表征，将非常容易引发<strong>特征空间坍塌</strong>。也就是，模型基本只会学习各个子领域共同的特征表达，放弃学习每个子领域独特的 artifacts 表征（特异性），最终学到的 artifacts 特征是一个平均/退化后的表达，导致 artifacts 特征坍塌（到平凡解 trivial solution），不再对各种篡改手法均有效（没有区分度）。简单说就是，模型在有限（不充裕）的特征空间下尝试为异构的 artifacts 建立一个尽可能共享/统一的表征，结果就是这个表征会在artifacts之间相互妥协，导致对各种artifacts都有点效果，但是也都没什么特别好的效果（有点用，但不多）。</p>
 
 <div class="sci">
 <p>所以，<span class="r1">单体小模型</span>的核心难点不在于数据对齐和训练模式拉通，而在于如何构建一个模型能在一个单体 / 统一的特征空间中，有效表征这些完全异构的 artifacts 特征（即统一表征又不丢失差异/异构性）。这是一个典型的<strong>特征坍塌科学问题</strong>，从避免坍塌、检测坍塌和解除坍塌三方面都有很多可能的解决方案（比如梯度手术、特征亲和、坍塌恢复等）可以研究，我们在 SICA 中对此提出了一个避免坍塌的假设并进行了实现和验证<sup class="cite"><a href="#r2">[2]</a></sup>。大家有兴趣可以移步论文详细阅读，我就不再赘述。我个人感觉这是未来 <abbr class="ufid">Unified FID</abbr> 研究会集中涌现的关键问题点。</p>
