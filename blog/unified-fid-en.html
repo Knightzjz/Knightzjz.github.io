@@ -127,7 +127,7 @@ sup.cite{font-size:11.5px;line-height:0;vertical-align:super}
 sup.cite a{color:var(--accent);text-decoration:none;padding:0 1px;font-weight:600}
 sup.cite a:hover{color:var(--accent-deep);text-decoration:underline}
 
-/* Technical routes: r1 single compact model · r2 large model · r3 collaboration */
+/* Technical routes: r1 single compact model · r2 large model · r3 hybrid compact–large */
 .r1{color:#a35b22}
 .r2{color:#3a6d9e}
 .r3{color:#47825a}
@@ -508,7 +508,7 @@ blockquote p:last-child{margin-bottom:0}
 <p>The technical routes can be divided fairly cleanly into three:</p>
 
 <blockquote>
-<p><strong><span class="r1">the single compact model route</span>, <span class="r2">the large model route</span>, and <span class="r3">the compact–large model collaboration route</span></strong></p>
+<p><strong><span class="r1">the single compact model route</span>, <span class="r2">the large model route</span>, and <span class="r3">the hybrid compact–large model route</span></strong></p>
 </blockquote>
 
 <h3><span class="num">4.1</span><span class="r1">The single compact model route</span></h3>
@@ -575,18 +575,18 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>Therefore, how to accelerate inference for <abbr class="ufid">Unified FID</abbr> models under the <span class="r2">large model route</span> is also a core problem. Pruning, parallelism, and hardware acceleration — Chinese hardware in particular — are all high-potential research directions under this problem.</p>
 
-<h3><span class="num">4.3</span><span class="r3">The compact–large model collaboration route</span></h3>
+<h3><span class="num">4.3</span><span class="r3">The hybrid compact–large model route</span></h3>
 
 <p>This is the most direct, least roundabout route — since every sub-domain already has its SOTA, just let a large model route and dispatch once, aggregate the compact models’ outputs and feed them back to the large model for the final decision (the MoE idea). Beyond our group, many strong teams have taken this route for <abbr class="ufid">Unified FID</abbr>, including (but not limited to) Prof. Jian Zhang at Peking University<sup class="cite"><a href="#r5">[5]</a></sup>, Prof. Baoyuan Wu at CUHK-Shenzhen<sup class="cite"><a href="#r6">[6]</a></sup>, Prof. Hongtao Xie at USTC<sup class="cite"><a href="#r7">[7]</a></sup>, Prof. Bin Li at Shenzhen University<sup class="cite"><a href="#r8">[8]</a></sup>, Prof. Jiwei Zhang at BUPT, and others — do follow their work.</p>
 
 <p>This route is currently the fastest-moving and the quickest to yield results. Two scientific questions need further study:</p>
 
 <div class="sci">
-<p><strong>The weakest-link problem:</strong> The ceiling of <span class="r3">compact–large model collaboration</span> is inherently bounded by the ceiling of individual domain-specific compact models and by the large model’s routing ability. As a result, existing solutions struggle to satisfy the P requirement of <abbr class="ufid">Unified FID</abbr>. Hence the core scientific question becomes how the large model can dispatch compact models and aggregate their results in a better way, so as to exceed the performance ceiling of any single SOTA model. Follow-up work will likely concentrate on multi-round and priority-aware dispatch of compact models by the large model, as well as the large model’s autoregressive, redundancy and reliability judgments over the returned results.</p>
+<p><strong>The weakest-link problem:</strong> The ceiling of <span class="r3">hybrid collaboration</span> is inherently bounded by the ceiling of individual domain-specific compact models and by the large model’s routing ability. As a result, existing solutions struggle to satisfy the P requirement of <abbr class="ufid">Unified FID</abbr>. Hence the core scientific question becomes how the large model can dispatch compact models and aggregate their results in a better way, so as to exceed the performance ceiling of any single SOTA model. Follow-up work will likely concentrate on multi-round and priority-aware dispatch of compact models by the large model, as well as the large model’s autoregressive, redundancy and reliability judgments over the returned results.</p>
 </div>
 
 <div class="sci">
-<p><strong>Collaboration framework growth / compatibility:</strong> Every area of passive forensics is advancing rapidly, and compact models iterate quickly. How to let a compact–large collaboration framework keep growing and stay compatible with newly emerged or updated SOTA compact models and with new agents is an urgent core scientific question. Put more plainly: how should the large model keep learning about the capability range of new compact models or agents, so that its routing policy and aggregated judgment remain optimal? This is a highly meaningful research direction; the question also applies to the booming field of agents, with enormous research potential and application prospects.</p>
+<p><strong>Hybrid framework growth / compatibility:</strong> Every area of passive forensics is advancing rapidly, and compact models iterate quickly. How to let a hybrid collaboration framework keep growing and stay compatible with newly emerged or updated SOTA compact models and with new agents is an urgent core scientific question. Put more plainly: how should the large model keep learning about the capability range of new compact models or agents, so that its routing policy and aggregated judgment remain optimal? This is a highly meaningful research direction; the question also applies to the booming field of agents, with enormous research potential and application prospects.</p>
 </div>
 
 <h2><span class="num">5</span>Closing Words</h2>
