@@ -53,6 +53,15 @@ MONTHS_EN = [
     "July", "August", "September", "October", "November", "December",
 ]
 
+# The visible line is "<label><date>" inside one span, e.g.
+#   <span class="sig-updated">最后更新：2026 年 9 月 4 日</span>
+#   <span class="sig-updated">Last updated: September 4, 2026</span>
+# Group 2 is the label (everything up to and including the colon, ASCII or
+# full-width). It must survive the rewrite: an earlier version of this script
+# matched the whole span body and shipped the posts with the label stripped,
+# leaving a bare date that read like a fragment.
+VIS_RE = re.compile(r'(<span class="sig-updated">)([^<]*?[:：]\s*)([^<]*)(</span>)')
+
 
 def git(*args: str) -> str:
     out = subprocess.run(
@@ -105,13 +114,13 @@ def rewrite_post(path: str, lang: str, when: datetime, dry: bool) -> bool:
         src,
         count=1,
     )
-    # 2. Visible "last updated" line.
-    new_src, n_vis = re.subn(
-        r'(<span class="sig-updated">)(.*?)(</span>)',
-        lambda m: m.group(1) + visible + m.group(3),
-        new_src,
-        count=1,
-    )
+    # 2. Visible "last updated" line — replace the date only, keep the label.
+    m_vis = VIS_RE.search(new_src)
+    n_vis = 0
+    if m_vis is not None:
+        new_src = new_src[: m_vis.start(3)] + visible + new_src[m_vis.end(3) :]
+        n_vis = 1
+
     # 3. article:modified_time meta tag.
     new_src, n_meta = re.subn(
         r'(<meta property="article:modified_time" content=")[^"]*(")',
@@ -128,6 +137,14 @@ def rewrite_post(path: str, lang: str, when: datetime, dry: bool) -> bool:
     ]
     if missing:
         print(f"  !! {path}: could not find {', '.join(missing)} — left untouched")
+        return False
+
+    # Belt and braces: refuse to write if the label somehow got eaten, or if
+    # the visible date no longer matches the ISO value we are shipping.
+    check = VIS_RE.search(new_src)
+    if check is None or check.group(3) != visible:
+        print(f"  !! {path}: visible line would read wrong — left untouched")
+        return False
         return False
 
     if new_src == src:
