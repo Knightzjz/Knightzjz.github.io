@@ -54,7 +54,7 @@
   --ink:#262218; --ink-2:#5b5445; --ink-3:#7a7263;
   --line:#e7e1d4; --line-2:#d9d2c2;
   --accent:#a35b22; --accent-deep:#7f4517; --accent-soft:#f6efe3;
-  --sci-bg:#eef4fa; --sci-line:#5d84ab;
+  --sci-bg:#eef4fa; --sci-line:#4a6d91; /* 徽标白字需 ≥4.5:1，原 #5d84ab 仅 3.92:1 */
   --concl-bg:#faf3e3; --concl-line:#c08e3e;
   --sum-bg:#fdf7e1; --sum-line:#dcab41;
 }
@@ -128,7 +128,7 @@ sup.cite a:hover{color:var(--accent-deep);text-decoration:underline}
 /* 技术路线配色：r1 单体小模型 · r2 大模型 · r3 大小模型协同 */
 .r1{color:#a35b22}
 .r2{color:#3a6d9e}
-.r3{color:#47825a}
+.r3{color:#3d7150}
 strong.hl{color:var(--accent)}
 strong.emph{font-weight:700}
 strong.tailnote{color:var(--accent-deep);font-weight:700;letter-spacing:.01em}
@@ -201,9 +201,11 @@ abbr.ufid{font-family:ui-monospace,"SF Mono",Consolas,monospace;font-size:.86em;
   box-shadow:inset 0 0 0 1px #fff, inset 0 0 0 4px #f8ecd9, inset 0 0 0 5px #e3cb9f;
   font-size:16.5px;line-height:1.9;color:var(--ink)}
 .ackcard p{margin:0;text-align:center}
-.ackcard a{text-decoration:none;border-bottom:1px solid rgba(163,91,34,.35)}
+/* 沙底渐变压低了对比度，链接与人名统一用深铜色（--accent-deep），
+   原 --accent 在此底色上仅 3.84–4.41:1 */
+.ackcard a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid rgba(163,91,34,.35)}
 /* 致谢人名（无链接者）：与链接人名同样的铜色，保持视觉一致 */
-.ackcard .ack-name{color:var(--accent)}
+.ackcard .ack-name{color:var(--accent-deep)}
 /* 致谢卡前的引语行（在正文末尾，衔接下方卡片） */
 .lead-in{margin:10px 0 0;text-align:center;
   font-family:Georgia,"Times New Roman",serif;font-style:italic;
@@ -249,7 +251,7 @@ blockquote p:last-child{margin-bottom:0}
 .signoff p.postscript{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line-2);
   font-family:"Kaiti SC","STKaiti","KaiTi","楷体",Georgia,serif;
   font-size:15.5px;line-height:1.95;color:var(--ink-3);text-align:justify}
-.signoff p.postscript .sig-meta{font-size:13px;letter-spacing:.06em;color:#9a9284}
+.signoff p.postscript .sig-meta{font-size:13px;letter-spacing:.06em;color:#6f6858} /* 原 #9a9284 仅 2.95:1 */
 
 /* 语言切换（中文 ⇄ English） */
 .topnav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:30px}
@@ -285,12 +287,14 @@ blockquote p:last-child{margin-bottom:0}
 .thanks{text-align:center;font-size:16px;letter-spacing:2.5px;
   font-style:italic;margin:34px 0 10px;padding:24px 12px 10px;
   border-top:1px solid #f0d9e2;
-  color:#e79ab4;
+  color:#b04d78; /* 原 #e79ab4 仅 2.08:1，几近不可读 */
   cursor:pointer;user-select:none;
   transition:color .25s, transform .15s, text-shadow .25s}
-.thanks:hover{color:#d9749a;text-shadow:0 0 12px rgba(233,150,180,.45);transform:scale(1.03)}
+.thanks:hover{color:#9c3a68;text-shadow:0 0 12px rgba(233,150,180,.45);transform:scale(1.03)}
 .thanks:active{transform:scale(.97)}
 .thanks-sub{text-align:center;font-size:13.5px;color:var(--ink-3);margin:0 0 4px}
+/* 两个彩蛋控件可聚焦后必须有可见焦点环，否则键盘用户看不出焦点在哪 */
+.thanks:focus-visible,.ackcard:focus-visible{outline:2px solid var(--accent-deep);outline-offset:3px}
 
 .endpic{margin:42px 0 0}
 .endpic .pic-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--line-2)}
@@ -305,7 +309,7 @@ blockquote p:last-child{margin-bottom:0}
 .refs .rmark{color:var(--accent);font-weight:600}
 .refs a{word-break:break-all}
 .lastmod-note{margin:32px 0 0;padding-top:18px;border-top:1px solid var(--line);
-  font-size:13px;letter-spacing:.06em;color:#9a9284}
+  font-size:13px;letter-spacing:.06em;color:#6f6858} /* 原 #9a9284 仅 2.95:1 */
 
 /* ── 背景漂浮物（比主页更浅，不影响阅读） ── */
 .page-beans{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
@@ -603,7 +607,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p class="lead-in">Last but not least,</p>
 
-<div class="ackcard">
+<div class="ackcard" tabindex="0" aria-label="致谢卡：按 Enter 或空格冒小气球">
 <p>感谢<a href="https://sebastouristtrophyf.github.io/" target="_blank" rel="noopener noreferrer">冯文韬</a>、<a href="https://sites.google.com/site/baoyuanwu2015/" target="_blank" rel="noopener noreferrer">吴保元</a>、<a href="https://cs.xmut.edu.cn/info/1085/4510.htm" target="_blank" rel="noopener noreferrer">杜侠</a>、<a href="https://cmpun.github.io/" target="_blank" rel="noopener noreferrer">潘治文</a>老师对博文的建议和帮助。</p>
 <p>感谢<span class="ack-name">杜博</span>、<span class="ack-name">杨哲</span>、<span class="ack-name">朱学康</span>对博文的校对和补充。</p>
 </div>
@@ -612,7 +616,7 @@ blockquote p:last-child{margin-bottom:0}
   <p>感谢大家的耐心阅读，欢迎批评指正。</p>
   <p class="postscript">Helen姐头疼去睡觉了 :D   所以今晚我能安心把拖了一个月的博客写完~<br>
   <span class="sig-meta">2026 年 8 月 28 日，23:17，家中</span></p>
-  <p class="thanks">Special Thanks to Helen Wang</p>
+  <p class="thanks" role="button" tabindex="0">Special Thanks to Helen Wang</p>
   <p class="thanks-sub">欢迎转载，只需标明出处</p>
 </div>
 
@@ -682,7 +686,7 @@ blockquote p:last-child{margin-bottom:0}
   if(!el) return;
   var CH = ['❤','❤','❤','💗','💖','💕','💓','✨'];
   el.title = '点一下试试 ❤';
-  el.addEventListener('click', function(e){
+  function burst(e){
     var r  = el.getBoundingClientRect();
     var ox = (e.clientX !== undefined && e.clientX !== 0) ? e.clientX : r.left + r.width  / 2;
     var oy = (e.clientY !== undefined && e.clientY !== 0) ? e.clientY : r.top  + r.height / 2;
@@ -701,6 +705,13 @@ blockquote p:last-child{margin-bottom:0}
       document.body.appendChild(h);
       (function(node){ setTimeout(function(){ node.remove(); }, 1500); })(h);
     }
+  }
+  el.addEventListener('click', burst);
+  /* 键盘可达：role="button" 必须响应 Enter / 空格，否则纯键盘用户无法触发 */
+  el.addEventListener('keydown', function(e){
+    if(e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+    e.preventDefault(); /* 空格默认会滚动页面 */
+    burst(e);
   });
 })();
 
@@ -711,7 +722,7 @@ blockquote p:last-child{margin-bottom:0}
   var CB = ['🎈','🎈','🎈','🎈','🎈','🎈','🎊','✨'];
   el.title = '点一下试试 🎈';
   el.style.cursor = 'pointer';
-  el.addEventListener('click', function(e){
+  function burst(e){
     if(e.target.closest && e.target.closest('a')) return; /* 点人名照常打开链接 */
     var r  = el.getBoundingClientRect();
     var ox = (e.clientX !== undefined && e.clientX !== 0) ? e.clientX : r.left + r.width  / 2;
@@ -731,6 +742,14 @@ blockquote p:last-child{margin-bottom:0}
       document.body.appendChild(b);
       (function(node){ setTimeout(function(){ node.remove(); }, 3400); })(b);
     }
+  }
+  el.addEventListener('click', burst);
+  /* 键盘可达：否则纯键盘与读屏用户完全无法触发这个彩蛋 */
+  el.addEventListener('keydown', function(e){
+    if(e.target !== el) return; /* 焦点在人名链接上时，交还给链接自己处理 */
+    if(e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+    e.preventDefault(); /* 空格默认会滚动页面 */
+    burst(e);
   });
 })();
 
@@ -780,6 +799,10 @@ blockquote p:last-child{margin-bottom:0}
   if(!('speechSynthesis' in window)){
     var l = document.getElementById('listen');
     if(l) l.style.display = 'none';
+    /* 顶部「听本文」与浮动条共用一套逻辑，此处提前返回，
+       若只隐藏浮动条，顶部按钮会变成点了没反应的死按钮 */
+    var t0 = document.getElementById('listen-top-btn');
+    if(t0) t0.style.display = 'none';
     return;
   }
   var art = document.querySelector('article');
@@ -816,6 +839,7 @@ blockquote p:last-child{margin-bottom:0}
   var RATES = [0.8, 1.0, 1.25, 1.5];
   var rate = 1.0, rateIdx = 1;
   var idx = 0, state = 'idle', gen = 0, prev = null, finished = false;
+  var rateTimer = null; /* 调速续读的定时器句柄，连点时需清掉上一次 */
 
   var tog = document.getElementById('listen-toggle');
   var lab = document.getElementById('listen-lab');
@@ -858,7 +882,18 @@ blockquote p:last-child{margin-bottom:0}
     u.lang = 'zh-CN'; u.rate = rate;
     if(zhVoice) u.voice = zhVoice;
     u.onend = function(){ if(g === gen && state === 'playing'){ speakBlock(idx + 1); } };
-    u.onerror = u.onend;
+    /* 错误不能复用 onend：否则无可用语音时每段立即报错并推进，
+       约 90 段会在瞬间"读完"，UI 卡在朗读中。
+       主动 cancel/被打断不算失败，交给对应的调用方处理；
+       真实合成失败则停止整篇朗读并提示，而不是继续往下推 */
+    u.onerror = function(ev){
+      if(g !== gen || state !== 'playing') return;
+      var err = ev && ev.error;
+      if(err === 'canceled' || err === 'interrupted') return;
+      state = 'idle';
+      clearHighlight(); resetPos(); updateUI();
+      statusEl.textContent = '语音合成失败，朗读已停止';
+    };
     speechSynthesis.speak(u);
   }
 
@@ -906,9 +941,15 @@ blockquote p:last-child{margin-bottom:0}
     rate = RATES[rateIdx];
     speedBtn.textContent = (rate * 100 % 10 ? rate.toFixed(2) : rate.toFixed(1)) + '×';
     if(state === 'playing'){
-      gen++;
+      /* g0 是本次调速的代数：连点时旧定时器因 gen 已变而作废，
+         避免两条 utterance 同时入队导致同段念两遍、高亮错乱 */
+      var g0 = ++gen;
       speechSynthesis.cancel();
-      setTimeout(function(){ if(state === 'playing') speakBlock(idx); }, 80);
+      if(rateTimer) clearTimeout(rateTimer);
+      rateTimer = setTimeout(function(){
+        rateTimer = null;
+        if(g0 === gen && state === 'playing') speakBlock(idx);
+      }, 80);
     }
   });
 
