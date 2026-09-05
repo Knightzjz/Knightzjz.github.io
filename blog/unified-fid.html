@@ -27,7 +27,7 @@
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="author" content="周吉喆 (Ji-Zhe Zhou)">
 <meta property="article:published_time" content="2026-08-28T23:17:00+08:00">
-<meta property="article:modified_time" content="2026-09-05T01:51:51+08:00">
+<meta property="article:modified_time" content="2026-09-05T20:29:22+08:00">
 <meta property="article:author" content="周吉喆 (Ji-Zhe Zhou)">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="分久必合：统一的伪造图像检测（Unified FID）">
@@ -40,7 +40,7 @@
 "description":"本文系统梳理统一伪造图像检测（Unified FID）：回顾 AIGC 检测、图像篡改检测、文档篡改检测与 Deepfake 检测四条赛道由分到合的历史，指出大模型已抹平伪造手段的边界；给出 B（二分类）+ P（通才）的任务定义，提出单体小模型、大模型与大小模型协同三条技术路线，并讨论吉喆现象、特征坍塌与 Preset Paradox 等科学问题。",
 "image":"https://knightzjz.github.io/blog/img/og-unified-fid.jpg",
 "datePublished":"2026-08-28T23:17:00+08:00",
-"dateModified":"2026-09-05T01:51:51+08:00",
+"dateModified":"2026-09-05T20:29:22+08:00",
 "author":{"@type":"Person","name":"周吉喆 (Ji-Zhe Zhou)","url":"https://knightzjz.github.io/","affiliation":{"@type":"CollegeOrUniversity","name":"Sichuan University"}},
 "publisher":{"@type":"Person","name":"周吉喆 (Ji-Zhe Zhou)","url":"https://knightzjz.github.io/"},
 "inLanguage":"zh-CN",
@@ -473,7 +473,7 @@ blockquote p:last-child{margin-bottom:0}
 <p>因此，现有的大模型伪造图像并不简单 = AIGC 图像，而是完全包含了 AIGC 图像。</p>
 </div>
 
-<p>其次，在很长时间范围内，我们在互联网上面对的都是一个混合环境，也就是有很多大模型伪造的图像，也有很多是手工、小模型伪造的图像。这一方面归因于，历史上已经积攒了大量非大模型时代的伪造图像。另一方面则是，虽然大模型能力不断强化，但至今仍不能完全取代手工、特定模型等的篡改方案。比如，在<strong>科学</strong>（尤其生信、材料等方向）<strong>论文的图像伪造</strong>中，图像具体位置上哪怕微弱的荧光、电泳等反应结果都带有强烈且明确的指示意涵，大模型在未来较长一段时间内都难以精确理解并准确约束这类图像的生成结果，实操中仍需依赖手工copy-move、splicing等方式伪造图像（也就是图像<strong>篡改</strong>检测中的手工复制粘贴、拼接等手法）。我们当然希望一个<abbr class="ufid">Unified FID</abbr>模型能对科学论文图像伪造有效（毕竟科学论文的伪造图像样本<strong>稀缺</strong>、<strong>标注困难</strong>且<strong>危害</strong>性极<strong>大</strong>）。所以，只能检测AIGC图像的模型，甚至只能处理大模型伪造图像的模型都是不能实现 <abbr class="ufid">Unified FID</abbr>的。</p>
+<p>此外，在很长时间范围内，我们在互联网上面对的都是一个混合环境，也就是有很多大模型伪造的图像，也有很多是手工、小模型伪造的图像。这一方面归因于，历史上已经积攒了大量非大模型时代的伪造图像。另一方面则是，虽然大模型能力不断强化，但至今仍不能完全取代手工、特定模型等的篡改方案。比如，在<strong>科学</strong>（尤其生信、材料等方向）<strong>论文的图像伪造</strong>中，图像具体位置上哪怕微弱的荧光、电泳等反应结果都带有强烈且明确的指示意涵，大模型在未来较长一段时间内都难以精确理解并准确约束这类图像的生成结果，实操中仍需依赖手工copy-move、splicing等方式伪造图像（也就是图像<strong>篡改</strong>检测中的手工复制粘贴、拼接等手法）。我们当然希望一个<abbr class="ufid">Unified FID</abbr>模型能对科学论文图像伪造有效（毕竟科学论文的伪造图像样本<strong>稀缺</strong>、<strong>标注困难</strong>且<strong>危害</strong>性极<strong>大</strong>）。所以，只能检测AIGC图像的模型，甚至只能处理大模型伪造图像的模型都是不能实现 <abbr class="ufid">Unified FID</abbr>的。</p>
 
 <p>那么 <abbr class="ufid">Unified FID</abbr> 任务到底是什么呢<strong class="hl">（BP 定义）</strong>：</p>
 
