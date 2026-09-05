@@ -467,7 +467,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>答案是否定的：</p>
 
-<p>大模型伪造能力主要得益于 harness 工具而非简单的 diffusion 生成。大模型借助理解能力，会在生成的过程中不断监测图像内容是否完美符合用户需求，并且通过 harness 层不断自主调用各类工具修正图像内容，包括抠图，重绘，deepfake 换脸等工具。很多大模型会为此调用大量工具对图像内容进行精修，比如 codex 的单图生成往往花费数分钟之久，就是各类工具不断调用对生成过程进行约束的结果。现有大量 AIGC detection benchmark 主要关注大模型一次性生成的整张图像。这里包含两个要素：一是整图，即不包含大模型在真实图像上的二次或者局部伪造（DailyBench 的最新评测刚好也验证了现有AIGC检测模型对局部伪造的鉴别能力其实非常欠缺<sup class="cite"><a href="#r2">[2]</a></sup>）。二是一次性，即不考虑人工或用其他（B）大模型对（A）大模型生成的图像进行的再次修改或二创；以及（A）大模型通过 harness 工具对图像的自我修正。</p>
+<p>大模型伪造能力主要得益于 harness 工具而非简单的 diffusion 生成。大模型借助理解能力，会在生成的过程中不断监测图像内容是否完美符合用户需求，并且通过 harness 层不断自主调用各类工具修正图像内容，包括抠图，重绘，deepfake 换脸等工具。很多大模型会为此调用大量工具对图像内容进行精修，比如 codex 的单图生成往往花费数分钟之久，就是各类工具不断调用对生成过程进行约束的结果。现有大量 AIGC detection benchmark 主要关注大模型一次性生成的整张图像。这里包含两个要素：一是整图，即不包含大模型在真实图像上的二次或者局部伪造（最新的工作刚好也验证了现有AIGC检测模型对局部伪造的鉴别能力其实非常欠缺<sup class="cite"><a href="#r2">[2]</a></sup>）。二是一次性，即不考虑人工或用其他（B）大模型对（A）大模型生成的图像进行的再次修改或二创；以及（A）大模型通过 harness 工具对图像的自我修正。</p>
 
 <div class="concl">
 <p>因此，现有的大模型伪造图像并不简单 = AIGC 图像，而是完全包含了 AIGC 图像。</p>
@@ -544,7 +544,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <div class="jphen">
 <span class="jp-t">吉喆现象（Ji-Zhe Phenomenon）</span>
-<p>我们在 ICML 2026<sup class="cite"><a href="#r3">[3]</a></sup> 中首次明确了 artifacts 的异构问题，并管这种 artifacts 在各子领域异构的这个现象叫<strong class="jz">吉喆现象（Ji-Zhe Phenomenon）</strong>。</p>
+<p>我们在 ICML26<sup class="cite"><a href="#r3">[3]</a></sup> 中首次明确了 artifacts 的异构问题，并管这种 artifacts 在各子领域异构的这个现象叫<strong class="jz">吉喆现象（Ji-Zhe Phenomenon）</strong>。</p>
 </div>
 
 <p><span class="jz">吉喆现象</span>会带来异构特征的兼容性问题，尤其在单体小模型路线中，用极其有限的特征空间去兼容庞杂的异构artifacts表征，将非常容易引发<strong>特征空间坍塌</strong>。也就是，模型基本只会学习各个子领域共同的特征表达，放弃学习每个子领域独特的 artifacts 表征（特异性），最终学到的 artifacts 特征是一个平均/退化后的表达，导致 artifacts 特征坍塌（到平凡解 trivial solution），不再对各种篡改手法均有效（没有区分度）。简单说就是，模型在有限（不充裕）的特征空间下尝试为异构的 artifacts 建立一个尽可能共享/统一的表征，结果就是这个表征会在artifacts之间相互妥协，导致对各种artifacts都有点效果，但是也都没什么特别好的效果（有点用，但不多）。</p>
