@@ -287,10 +287,10 @@ blockquote p:last-child{margin-bottom:0}
 .thanks{text-align:center;font-size:16px;letter-spacing:2.5px;
   font-style:italic;margin:34px 0 10px;padding:24px 12px 10px;
   border-top:1px solid #f0d9e2;
-  color:#b04d78; /* 原 #e79ab4 仅 2.08:1，几近不可读 */
+  color:#e79ab4; /* 作者指定保留的粉白色，勿改 */
   cursor:pointer;user-select:none;
   transition:color .25s, transform .15s, text-shadow .25s}
-.thanks:hover{color:#9c3a68;text-shadow:0 0 12px rgba(233,150,180,.45);transform:scale(1.03)}
+.thanks:hover{color:#d9749a;text-shadow:0 0 12px rgba(233,150,180,.45);transform:scale(1.03)}
 .thanks:active{transform:scale(.97)}
 .thanks-sub{text-align:center;font-size:13.5px;color:var(--ink-3);margin:0 0 4px}
 /* 两个彩蛋控件可聚焦后必须有可见焦点环，否则键盘用户看不出焦点在哪 */
@@ -523,7 +523,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>这个思路非常有直觉，而且也很有意义，因为筛选最强单体小模型的过程能帮助我们提炼大量 insights，这对未来如何构建 <abbr class="ufid">Unified FID</abbr> 专用的基座大模型是非常有帮助的。</p>
 
-<p>但是通过我们从 ForensicHub 的测试来看，基本上没有任何一个子领域 SOTA 模型能实现我们 P 的要求。哪怕将所有子领域数据和训练设定打通，也没有任何一个子领域模型能强到通吃其他子领域的模型。简而言之，就是即便用 B 子领域数据训练 A 子领域的模型之后，A 子领域的模型也打不过 B 子领域的原有模型。甚至经过我们大量实验，把 ABCD 所有子领域数据都喂给某一（A）子领域模型后，他们性能却发生了明显下降，尤其在该（A）子领域本身下降极其明显。我们在 ForensicHub 上就发现了这一现象，然后在 SICA 中管这一发现叫做<strong>领域负迁移</strong>，也就是只要混入了其他域的训练数据，模型性能必然会下降。领域负迁移现象的存在说明，依靠现有模型和数据拉通训练的方案是注定无法实现 <abbr class="ufid">Unified FID</abbr> 的<sup class="cite"><a href="#r3">[3]</a></sup>。</p>
+<p>但是通过我们从 ForensicHub 的测试来看，基本上没有任何一个子领域 SOTA 模型能实现我们 P 的要求。哪怕将所有子领域数据和训练设定打通，也没有任何一个子领域模型能强到通吃其他子领域的模型。简而言之，就是即便用 B 子领域数据训练 A 子领域的模型之后，A 子领域的模型也打不过 B 子领域的原有模型。甚至经过我们大量实验，把 ABCD 所有子领域数据都喂给某一（A）子领域模型后，他们性能却发生了明显下降，尤其在该（A）子领域本身下降极其明显。我们在 ForensicHub 上就发现了这一现象，然后在 SICA 中管这一发现叫做<strong>领域负迁移</strong>，也就是只要混入了其他域的训练数据，模型性能基本会明显下降。领域负迁移现象的存在说明，依靠现有模型和数据拉通训练的方案是难以实现 <abbr class="ufid">Unified FID</abbr> 的<sup class="cite"><a href="#r3">[3]</a></sup>。</p>
 
 <p>但是等等，这个思路至少在一开始我们直觉上是非常正确的啊~所以，应该是直觉错了么？</p>
 
@@ -576,7 +576,7 @@ blockquote p:last-child{margin-bottom:0}
 <p>在 post-training 阶段这个模型坍塌问题的本质机理我们目前还在探索中，这个问题应该不仅会存在在取证方向上，很多垂直领域随着训练数据量的积攒应该都会有类似问题慢慢出现。这是一个非常有价值也比较难的研究方向，欢迎大家一起讨论。</p>
 
 <div class="sci">
-<p><strong>推理效率：</strong>大模型的处理效率至今难以提升。在实际场景中，对伪造图像的检测业务会存在明显的波动，有明显波峰波谷。比如，一些生活服务平台在特定日期的优惠活动（比如教师节老师吃饭打折），这就会在短时间（1-2 天）内涌入海量（百万量级）的检测需求（因为需要上传教师证核验资格，而教师证的伪造基本各类大模型都能帮你做）。大模型检测图像基本在秒级响应，在给定 latency、throughput 和 peak load 下，所需推理资源和成本不可接受。但是通过在工程上简单增加推理卡的数目来解决推理时延是完全不合算的。在伪造图像的检测业务的波谷时段，单张推理卡可能都存在大量闲置，为了应对波峰需求而配置大量闲置资源是极其奢侈的。</p>
+<p><strong>推理效率：</strong>大模型的处理效率至今难以提升。在实际场景中，对伪造图像的检测业务会存在明显的波动，有明显波峰波谷。比如，一些生活服务平台在特定日期的优惠活动（比如教师节老师吃饭打折），这就会在短时间（1-2 天）内涌入海量（百万量级）的检测需求（因为需要上传教师证核验资格，而教师证的伪造基本各类大模型都能帮你做）。大模型检测图像基本在秒级响应，在给定 latency、throughput 和 peak load 下，以 5 秒检测一幅图像计算，100 万张图像就需要 500 万秒也就是大概 58 天时间，推理所需的时间成本不可接受。但是通过在工程上简单增加推理卡的数目来解决推理时延是完全不合算的。在伪造图像的检测业务的波谷时段，单张推理卡可能都存在大量闲置，为了应对波峰需求而配置大量闲置资源是极其奢侈的。</p>
 </div>
 
 <p>因此，如何对<span class="r2">大模型路线</span>下的 <abbr class="ufid">Unified FID</abbr> 模型做推理加速也是一个核心问题。剪枝、量化、硬件尤其国产硬件加速等都是这个问题下的高潜力研究方向。</p>
@@ -599,7 +599,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>综上我们大概梳理了 <abbr class="ufid">Unified FID</abbr> 这个任务的背景、定义、三条技术路线、各个路线对应的科学问题以及潜在的解决方案。这相当于为我们组过去 1-2 年的关键研究工作做了一个快速总结和对 <abbr class="ufid">Unified FID</abbr> 问题的阐述做了一个简单的开场。关于 <abbr class="ufid">Unified FID</abbr> 一些具体技术路线的可行性分析和潜力研判我会放到后一篇博文继续深入分析。</p>
 
-<p><strong class="tailnote">还需要在最后特别说明的是：我不认为 <abbr class="ufid">Unified FID</abbr> 与现有的各个专有模型之间是替代关系，而应该是上下游关系。尤其在司法取证，传媒鉴证等强合规场景下，由 <abbr class="ufid">Unified FID</abbr> 准确快筛、再由专用模型做证据审计（Evidence Auditing）的可解释取证（Explainable Forensics）模式将会是未来理想的工作流。</strong></p>
+<p><strong class="tailnote">还需要在最后特别说明的是：我不认为 <abbr class="ufid">Unified FID</abbr> 与现有的各个专有模型之间是替代关系，而应该是上下游关系。尤其在司法取证，传媒鉴证等强合规场景下，考虑到专用模型往往都结合了良好的领域先验知识，由 <abbr class="ufid">Unified FID</abbr> 准确快筛、再由专用模型做证据审计（Evidence Auditing）的可解释取证（Explainable Forensics）模式将会是未来理想的工作流。</strong></p>
 
 <p>因为最近收到了很多邮件询问相关问题，所以我的第一篇博客比较长，对目前 30 多封邮件中的几乎所有问题都做了解答，可能有所遗漏和谬误，也欢迎大家联系我进行指正和修改。</p>
 

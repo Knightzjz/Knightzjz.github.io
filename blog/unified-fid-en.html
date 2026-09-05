@@ -286,10 +286,10 @@ blockquote p:last-child{margin-bottom:0}
 .thanks{text-align:center;font-size:16px;letter-spacing:2.5px;
   font-style:italic;margin:34px 0 10px;padding:24px 12px 10px;
   border-top:1px solid #f0d9e2;
-  color:#b04d78; /* was #e79ab4, only 2.08:1 — nearly unreadable */
+  color:#e79ab4; /* author-specified pink — do not change */
   cursor:pointer;user-select:none;
   transition:color .25s, transform .15s, text-shadow .25s}
-.thanks:hover{color:#9c3a68;text-shadow:0 0 12px rgba(233,150,180,.45);transform:scale(1.03)}
+.thanks:hover{color:#d9749a;text-shadow:0 0 12px rgba(233,150,180,.45);transform:scale(1.03)}
 .thanks:active{transform:scale(.97)}
 .thanks-sub{text-align:center;font-size:13.5px;color:var(--ink-3);margin:0 0 4px}
 /* Now that both easter eggs are focusable, they need a visible focus ring */
@@ -472,7 +472,7 @@ blockquote p:last-child{margin-bottom:0}
 <p>Therefore, images forged by today’s large models are not simply equivalent to AIGC images; they strictly contain AIGC images.</p>
 </div>
 
-<p>Second, for a long time to come, what we face on the internet remains a mixed environment: many images are forged by large models, and many are still forged by hand or by small dedicated models. One reason is that a large stock of forgeries from the pre-large-model era already exists. The other is that, despite their growing capability, large models still cannot fully replace manual editing or dedicated tampering tools. For example, in <strong>scientific</strong> (especially bioinformatics, materials science and related fields) <strong>paper image forgery</strong>, even faint fluorescence or electrophoresis results at specific image locations carry strong and explicit meaning; large models will struggle for a long while to understand such content precisely and constrain its generation, so in practice people still rely on manual copy-move, splicing and similar tricks (that is, the manual copy-paste and splicing techniques studied under image <strong>manipulation</strong> detection). We certainly hope a <abbr class="ufid">Unified FID</abbr> model will work on scientific figure forgery — after all, forged samples from scientific papers are <strong>scarce</strong>, <strong>hard to annotate</strong>, and extremely <strong>harmful</strong>. So a model that only detects AIGC images — even one that only handles large-model forgeries — cannot realize <abbr class="ufid">Unified FID</abbr>.</p>
+<p>Besides, for a long time to come, what we face on the internet remains a mixed environment: many images are forged by large models, and many are still forged by hand or by small dedicated models. One reason is that a large stock of forgeries from the pre-large-model era already exists. The other is that, despite their growing capability, large models still cannot fully replace manual editing or dedicated tampering tools. For example, in <strong>scientific</strong> (especially bioinformatics, materials science and related fields) <strong>paper image forgery</strong>, even faint fluorescence or electrophoresis results at specific image locations carry strong and explicit meaning; large models will struggle for a long while to understand such content precisely and constrain its generation, so in practice people still rely on manual copy-move, splicing and similar tricks (that is, the manual copy-paste and splicing techniques studied under image <strong>manipulation</strong> detection). We certainly hope a <abbr class="ufid">Unified FID</abbr> model will work on scientific figure forgery — after all, forged samples from scientific papers are <strong>scarce</strong>, <strong>hard to annotate</strong>, and extremely <strong>harmful</strong>. So a model that only detects AIGC images — even one that only handles large-model forgeries — cannot realize <abbr class="ufid">Unified FID</abbr>.</p>
 
 <p>So what exactly is the <abbr class="ufid">Unified FID</abbr> task <strong class="hl">(the BP definition)</strong>:</p>
 
