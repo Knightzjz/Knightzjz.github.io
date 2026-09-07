@@ -7,7 +7,7 @@
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/images/avatar-180w.webp" type="image/webp" sizes="180x180">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-<link rel="preload" as="image" imagesrcset="img/fig1-480.webp 480w, img/fig1-658.webp 658w" imagesizes="(max-width:640px) 480px, 658px" fetchpriority="high">
+<link rel="preload" as="image" imagesrcset="img/fig1-en-480.webp 480w, img/fig1-en-658.webp 658w" imagesizes="(max-width:640px) 480px, 658px" fetchpriority="high">
 <noscript><style>.figwrap img,.endpic img{opacity:1}</style></noscript>
 <title>Long Divided, Shall Unite: Unified Fake Image Detection (Unified FID) | Ji-Zhe Zhou</title>
 <meta name="description" content="Unified FID: how four forgery-detection tracks converge, the B (binary) + P (polymath) task definition, three technical routes, and key scientific problems.">
@@ -390,11 +390,11 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>Take a guess — which forgery technique was used to produce the chat screenshot below?</p>
 
-<figure class="figwrap">
-  <div class="placeholder" style="background-image:url('img/fig1-tiny.jpg');"></div>
+<figure class="figwrap" style="aspect-ratio:658/1169;">
+  <div class="placeholder" style="background-image:url('img/fig1-en-tiny.jpg');"></div>
   <picture>
-    <source media="(max-width:640px)" srcset="img/fig1-480.webp">
-    <img src="img/fig1-658.webp" alt="Screenshot of a parents' group chat" width="658" height="1231"
+    <source media="(max-width:640px)" srcset="img/fig1-en-480.webp">
+    <img src="img/fig1-en-658.webp" alt="Screenshot of a back-to-school parents' group chat" width="658" height="1169"
          fetchpriority="high" decoding="async">
   </picture>
 </figure>
@@ -403,10 +403,10 @@ blockquote p:last-child{margin-bottom:0}
   <div class="q-title">Options:</div>
   <ol>
     <li>Two genuine chat screenshots were spliced together (messages from class group A were grafted onto class group B)</li>
-    <li>Part of the parents’ chat content was Photoshopped (document tampering)</li>
-    <li>The teacher’s profile picture was swapped (Deepfake)</li>
+    <li>Part of the parents' chat content was Photoshopped (document tampering)</li>
+    <li>The teacher's profile picture was swapped (Deepfake)</li>
     <li>The whole image was generated directly by an AI model (AIGC)<span class="hidden-ans">【Correct answer】</span></li>
-    <li>A+D / B+D / C+D … that is, a model generated an image first, and then various manual or semi-automatic Photoshop edits were applied to fix its content</li>
+    <li>A+D / B+D / C+D ... that is, a model generated an image first, and then various manual or semi-automatic Photoshop edits were applied to fix its content</li>
   </ol>
 </div>
 
