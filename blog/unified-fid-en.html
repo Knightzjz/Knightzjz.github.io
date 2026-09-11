@@ -532,7 +532,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>To find out, we explored the problem through extensive experiments in SICA:</p>
 
-<p>First, we performed linear probing on the feature spaces of subfield models trained on the pooled datasets. All these models showed clear problems with feature-matrix rank: after singular value decomposition (SVD), the top 20 feature dimensions were highly collinear, with excessive redundancy and insufficient representational capacity. This indicated that the models had learned few useful artifact features.</p>
+<p>First, we performed linear probing on the feature spaces of subfield models trained on the pooled datasets. All these models showed clear problems with feature-matrix rank: measured by singular value decomposition (SVD), the feature matrices exhibited low effective rank, meaning that the learned representations were highly redundant and lacked sufficient representational capacity. This indicated that the models had learned few useful artifact features.</p>
 
 <p>Second, we examined their gradients during training on the pooled data and found clear gradient conflict. Data from different subfields exhibit significant negative gradient alignment (i.e., gradient updates in opposing directions), so that joint optimization frequently produces mutually canceling updates. This raises the difficulty of optimization (training does not truly converge) and pushes the model toward a compromise solution.</p>
 
