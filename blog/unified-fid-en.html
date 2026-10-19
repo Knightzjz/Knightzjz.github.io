@@ -9,18 +9,18 @@
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 <link rel="preload" as="image" imagesrcset="img/fig1-en-480.webp 480w, img/fig1-en-658.webp 658w" imagesizes="(max-width:640px) 480px, 658px" fetchpriority="high">
 <noscript><style>.figwrap img,.endpic img{opacity:1}</style></noscript>
-<title>What Has Long Been Divided Shall Unite: Unified Fake Image Detection | Ji-Zhe Zhou</title>
+<title>What Has Long Been Split Shall Unite: Unified Fake Image Detection | Ji-Zhe Zhou</title>
 <meta name="description" content="Unified FID: how four forgery-detection tracks converge, the B (binary) + P (polymath) task definition, three technical routes, and key scientific problems.">
 <meta name="keywords" content="unified fake image detection, Unified FID, fake image detection, forgery detection, image forgery detection, AIGC detection, image manipulation detection, document tampering detection, Deepfake detection, passive image forensics, image forensics, Ji-Zhe phenomenon, feature collapse, model collapse, Preset Paradox, SICA, ForensicHub, 伪造检测, 伪造图像检测, 统一伪造图像检测">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Ji-Zhe Zhou's Blog">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="zh_CN">
-<meta property="og:title" content="What Has Long Been Divided Shall Unite: Unified Fake Image Detection">
+<meta property="og:title" content="What Has Long Been Split Shall Unite: Unified Fake Image Detection">
 <meta property="og:description" content="Unified FID: four forgery-detection tracks converge, the BP task definition, and three technical routes.">
 <meta property="og:url" content="https://knightzjz.github.io/blog/unified-fid-en.html">
 <meta property="og:image" content="https://knightzjz.github.io/blog/img/og-unified-fid-en.jpg">
-<meta property="og:image:alt" content="What Has Long Been Divided Shall Unite: Unified Fake Image Detection">
+<meta property="og:image:alt" content="What Has Long Been Split Shall Unite: Unified Fake Image Detection">
 <link rel="canonical" href="https://knightzjz.github.io/blog/unified-fid-en.html">
 <link rel="alternate" hreflang="en" href="https://knightzjz.github.io/blog/unified-fid-en.html">
 <link rel="alternate" hreflang="zh-Hans" href="https://knightzjz.github.io/blog/unified-fid.html">
@@ -31,13 +31,13 @@
 <meta property="article:modified_time" content="2026-10-16T23:56:04+08:00">
 <meta property="article:author" content="Ji-Zhe Zhou (周吉喆)">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="What Has Long Been Divided Shall Unite: Unified Fake Image Detection">
+<meta name="twitter:title" content="What Has Long Been Split Shall Unite: Unified Fake Image Detection">
 <meta name="twitter:description" content="Unified FID: four forgery-detection tracks converge, the BP task definition, and three technical routes.">
 <meta name="twitter:image" content="https://knightzjz.github.io/blog/img/og-unified-fid-en.jpg">
 <script type="application/ld+json" id="post-ld">
 {"@context":"https://schema.org","@type":"BlogPosting",
 "mainEntityOfPage":{"@type":"WebPage","@id":"https://knightzjz.github.io/blog/unified-fid-en.html"},
-"headline":"What Has Long Been Divided Shall Unite: Unified Fake Image Detection",
+"headline":"What Has Long Been Split Shall Unite: Unified Fake Image Detection",
 "description":"Unified FID: how four forgery-detection tracks converge, the B (binary) + P (polymath) task definition, three technical routes, and key scientific problems.",
 "image":"https://knightzjz.github.io/blog/img/og-unified-fid-en.jpg",
 "datePublished":"2026-08-28T23:17:00+08:00",
@@ -375,7 +375,7 @@ blockquote p:last-child{margin-bottom:0}
 <article>
 
 <header class="post-head">
-  <h1>What Has Long Been Divided Shall Unite: Unified Fake Image Detection
+  <h1>What Has Long Been Split Shall Unite: Unified Fake Image Detection
     <small>Unified FID</small>
   </h1>
   <div class="byline">Ji-Zhe Zhou&nbsp;·&nbsp;August 28, 2026</div>
@@ -422,7 +422,7 @@ blockquote p:last-child{margin-bottom:0}
 <p>A user must first identify the image's forgery method to choose the right forensic model and obtain a result. But if the user can already tell how the image was forged, why would they need a forensic model at all?</p>
 </blockquote>
 
-<p>The solution to this paradox is equally straightforward:</p>
+<p>The solution to this paradox is straightforward:</p>
 
 <p>Build a Unified Fake Image Detection model, or <abbr class="ufid">Unified FID</abbr> for short: a model that can detect images forged by any method without presupposing how they were forged. In practice, the user would then need only to submit an image to a single <abbr class="ufid">Unified FID</abbr> detector to obtain the result.</p>
 
@@ -430,7 +430,7 @@ blockquote p:last-child{margin-bottom:0}
 <p>In fact, I think the term "fake image" is inherently unifying: it places no restriction on the type of forgery, and no one had previously defined the term in academic research. Still, after discussing this with Professor Jiancheng Lv, I decided to emphasize "Unified" separately as the task's central idea.</p>
 </div>
 
-<h2><span class="num">2</span>Division and Unification in Passive Image Forensics</h2>
+<h2><span class="num">2</span>Split and Unification in Passive Image Forensics</h2>
 
 <p>Before we go further into <abbr class="ufid">Unified FID</abbr>, there is a question we need to address: why did passive image forensics, or content safety, develop into at least four completely independent tracks? Did researchers never consider how these methods would be used in practice?</p>
 
@@ -440,7 +440,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>The evolution of content safety, passive forensics, and fake-image detection follows a shift in the boundaries between forgery methods: once clear, they are now blurred. Put more simply, this is a convergence effect brought about by rapidly advancing large models. Forgery methods are becoming black boxes and converging on the same pattern: having a large model do the work.</p>
 
-<h3><span class="num">2.1</span>Division: When the Boundaries of Forgery Methods Were Clear</h3>
+<h3><span class="num">2.1</span>Split: When the Boundaries of Forgery Methods Were Clear</h3>
 
 <p>Turn the clock back just a year or two, and different kinds of forged content generally called for different forgery methods. For face forgery, for example, anything other than Deepfake, including manual Photoshop editing, usually looked fake at a glance. There was no need for a detector; the human eye could tell. Document images, by contrast, had to be edited character by character in Photoshop, with the font, size, color, and other details kept consistent. Simply using a generative model would fail to produce even the basic character shapes correctly.</p>
 
@@ -448,10 +448,10 @@ blockquote p:last-child{margin-bottom:0}
 
 <h3><span class="num">2.2</span>Unification: Large Models Have Erased the Boundaries Between Forgery Methods</h3>
 
-<p>With the arrival of models that unify generation and understanding, such as GPT-Image-2, alongside a growing array of harness tools, large models have made a qualitative leap in their ability to forge images directly to user specifications. Take our observations of Hong Kong's insurance industry: most high-quality fake images used for insurance fraud today, those difficult to distinguish with the naked eye, are produced directly by large models. Examples include forged medical certificates, falsified claim amounts, and fake insurance records. This used to be manual Photoshop work, which was costly to learn, time-consuming to perform, and unsuitable for some scenarios. Now large models do it directly, and do it remarkably well. As a result, fake images exhibit four characteristic traits: low barriers to entry, high volume, high customizability, and strong deceptive power.</p>
+<p>With the arrival of models that unify generation and understanding, such as GPT-Image-2, alongside a growing array of harness tools, large models have made a qualitative leap in their ability to forge images directly to user specifications. Take our observations of Hong Kong's insurance industry: most high-quality fake images used for insurance fraud today, those difficult to distinguish with the naked eye, are produced directly by large models. Examples include forged medical certificates, falsified claim amounts, and fake insurance records. This used to be manual Photoshop work, which was costly to learn, time-consuming to perform, and unsuitable for some scenarios. Now large models do it directly, and do it remarkably well. As a result, fake images exhibit four characteristic traits: Low barriers to entry, Massive volume, High customizability, and Strong deceptive power (LMHS).</p>
 
 <div class="mysum">
-<p><strong>Overall characteristics of forged images in the large-model era</strong>: low barriers to entry, high volume, high customizability, and strong deceptive power.</p>
+<p><strong>Overall characteristics of forged images in the large-model era (LMHS)</strong>: Low barriers to entry, Massive volume, High customizability, and Strong deceptive power.</p>
 </div>
 
 <p>Large-model capabilities now largely span, or blur, the boundaries that once separated forgery methods. Whatever an image contains, you can simply have a large model do the work.</p>
@@ -474,7 +474,7 @@ blockquote p:last-child{margin-bottom:0}
 <p>Images forged by today's large models therefore form a broader category than AIGC images, one that includes AIGC images in full.</p>
 </div>
 
-<p>For a long time to come, the internet will also remain a mixed environment: many images will be forged by large models, while many others will be forged manually or by small models. One reason is the large stock of fake images accumulated before the large-model era. Another is that, despite their growing capabilities, large models still cannot fully replace manual tampering or methods based on specialized models. For example, in images in scientific papers, especially in medicine and materials science, even faint fluorescence, electrophoresis, or other reaction results at specific image locations carry strong and unambiguous scientific meaning. For a long time to come, large models will struggle to understand these images precisely and accurately constrain their generated outputs. In practice, forging them will still require manual copy-move, splicing, and similar methods: the manual copying and pasting, splicing, and other techniques studied in image tampering detection. Of course, we want <abbr class="ufid">Unified FID</abbr> to work on forged scientific images. After all, such samples are scarce and difficult to annotate, while the forgeries themselves cause extremely serious harm. A model that detects only AIGC images, or even one that handles only images forged by large models, therefore cannot realize <abbr class="ufid">Unified FID</abbr>. (Recent tests show that GPT-Astra's computer-use capability lets it accurately operate Photoshop to edit images. In the future, the traces in images produced by large models may thus resemble those of manual Photoshop edits more closely than those of purely AIGC images.)</p>
+<p>For a long time to come, the internet will also remain a mixed environment: many images will be forged by large models, while many others will be forged manually or by small models. One reason is the large stock of fake images accumulated before the large-model era. Another is that, despite their growing capabilities, large models still cannot fully replace manual tampering or methods based on specialized models. For example, in images in scientific papers, especially in medicine and materials science, even faint fluorescence, electrophoresis, or other reaction results at specific image locations carry strong and unambiguous scientific meaning. For a long time to come, large models will struggle to understand these images precisely and accurately constrain their generated outputs. In practice, forging them will still require manual copy-move, splicing, and similar methods: the manual copying and pasting, splicing, and other techniques studied in image tampering detection. Of course, we want <abbr class="ufid">Unified FID</abbr> to work on forged scientific images. After all, such samples are scarce and difficult to annotate, while the forgeries themselves cause extremely serious harm. A model that detects only AIGC images, or even one that handles only images forged by large models, therefore cannot realize <abbr class="ufid">Unified FID</abbr>. (Recent tests show that GPT-Astra's computer-use capability lets it accurately operate Photoshop to edit images. In the future, the traces in images produced by large models may thus resemble those of manual Photoshop edits more closely than those of purely AIGC images. This further illustrates that <abbr class="ufid">Unified FID</abbr> encompasses AIGC detection rather than being equivalent to it.)</p>
 
 <p>So what exactly is the <abbr class="ufid">Unified FID</abbr> task? Here is its B/P definition:</p>
 
@@ -506,9 +506,9 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>During moderation and blocking, fraud detection, and evidence collection relating to public opinion, the model encounters hundreds of millions of images whose origins and forgery methods cannot be assumed in advance. Only by exceeding the specialists' accuracy can <abbr class="ufid">Unified FID</abbr> be especially effective in these settings.</p>
 
-<p>With this definition in place, <abbr class="ufid">Unified FID</abbr> seems to admit many simple, direct solutions. Perhaps we could just choose a base model and fine-tune or post-train it on pooled datasets.</p>
+<p>With this definition in place, <abbr class="ufid">Unified FID</abbr> seems to be simple. Perhaps we could just choose a base model and fine-tune or post-train it on pooled datasets.</p>
 
-<div class="keysent">Yet specialists beating generalists remains the norm. A generalist that outperforms multiple specialists is difficult to build, and rare.</div>
+<div class="keysent">Yet specialists beating polymaths remains the norm. A polymath that outperforms multiple specialists is difficult to build, and rare.</div>
 
 <h2><span class="num">4</span>A Research Blueprint for Unified Fake Image Detection</h2>
 
@@ -526,13 +526,13 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>The idea is both intuitive and worthwhile. Selecting the strongest monolithic small model can yield many insights that will help us build a large base model specifically for <abbr class="ufid">Unified FID</abbr> in the future.</p>
 
-<p>Our ForensicHub tests, however, show that essentially no subfield's SOTA model meets the P requirement. Even after pooling all subfields' data and harmonizing their training setups, no single subfield model is strong enough to beat all the others. Put simply, even when a model from subfield A is trained on data from subfield B, it still cannot beat B's original model. Across extensive experiments, feeding data from all four subfields, A, B, C, and D, into a model from A actually caused a marked performance drop, especially on A itself. We first observed this in ForensicHub and later called it domain negative transfer in SICA: mixing in training data from other domains generally leads to a noticeable decline in performance.</p>
+<p>Our ForensicHub tests, however, show that essentially no subfield's SOTA model meets the P requirement. Even after pooling all subfields' data and harmonizing their training setups, no single subfield model is strong enough to beat all the others. Put simply, even when a model from subfield A is trained on data from subfield B, it still cannot beat B's original model. Across extensive experiments, feeding data from all four subfields, A, B, C, and D, into a model from A actually caused a marked performance drop, especially on A itself. We first observed this in ForensicHub and later called it domain negative transfer in SICA: mixing in training data from other domains generally leads to a noticeable decline in performance. The existence of domain negative transfer therefore suggests that simply pooling existing models and data for joint training is unlikely to achieve <abbr class="ufid">Unified FID</abbr><sup class="cite"><a href="#r3">[3]</a></sup>.</p>
 
 <p>But wait. The idea felt right to begin with, didn't it? Was our intuition wrong?</p>
 
 <p>To find out, we explored the problem through extensive experiments in SICA:</p>
 
-<p>First, we performed linear probing on the feature spaces of subfield models trained on the pooled datasets. All these models showed clear problems with feature-matrix rank: measured by singular value decomposition (SVD), the feature matrices exhibited low effective rank, meaning that the learned representations were highly redundant and lacked sufficient representational capacity. This indicated that the models had learned few useful artifact features.</p>
+<p>First, we performed linear probing on the feature spaces of subfield models trained on the pooled datasets. All these models showed clear problems with feature-matrix rank: measured by singular value decomposition (SVD), the feature matrices exhibited low effective rank, and an SVD-based analysis further suggested substantial collinearity among the first 20 feature dimensions, indicating feature redundancy and insufficient representational capacity. In other words, the models had learned few useful artifact features.</p>
 
 <p>Second, we examined their gradients during training on the pooled data and found clear gradient conflict. Data from different subfields exhibit significant negative gradient alignment (i.e., gradient updates in opposing directions), so that joint optimization frequently produces mutually canceling updates. This raises the difficulty of optimization (training does not truly converge) and pushes the model toward a compromise solution.</p>
 
@@ -573,7 +573,7 @@ blockquote p:last-child{margin-bottom:0}
 <p>Yet although the enormous parameter space, obtained at considerable training cost, can effectively resolve feature collapse, <abbr class="ufid">Unified FID</abbr> large models still face two scientific problems: one during training and the other during inference. Our technical report discusses the reasoning behind them, so I will not repeat that process here.</p>
 
 <div class="sci">
-<p><strong>Model collapse (capability degradation):</strong> Large models suffer from capability degradation in <abbr class="ufid">Unified FID</abbr>, which we call model collapse. We start with an MLLM base model and perform post-training or SFT on large amounts of data. Because <abbr class="ufid">Unified FID</abbr> is purely a B task, binary image classification, the base model gradually loses core capabilities such as next-token prediction, prompt understanding, and in-context learning. It degenerates into a model capable only of binary classification: in effect, a small model with an enormous parameter space.</p>
+<p><strong>Model collapse (capability degradation):</strong> Large models suffer from capability degradation in <abbr class="ufid">Unified FID</abbr>, which we call model collapse. We start with an MLLM base model and perform post-training or SFT on large amounts of data. Because <abbr class="ufid">Unified FID</abbr> is purely a B task, binary image classification, the base model gradually loses core capabilities such as next-token prediction, prompt understanding, and tool calling. It degenerates into a model capable only of binary classification: in effect, a small model with an enormous parameter space.</p>
 </div>
 
 <p>This capability degradation, or model collapse, has extremely serious consequences. The model essentially loses its ability to generalize to OOD data, explain detection results automatically, revise them in light of user context, and dispatch agents to audit them. Put more simply, it can no longer talk or understand user instructions. It can only classify images mechanically as real or fake, completely defeating our original purpose in using a large model.</p>
@@ -608,7 +608,11 @@ blockquote p:last-child{margin-bottom:0}
 
 <p>We have now outlined the background and definition of <abbr class="ufid">Unified FID</abbr>, its three technical routes, the scientific questions each raises, and some possible solutions. This is both a brief summary of our group's key research over the past 1-2 years and an opening account of the <abbr class="ufid">Unified FID</abbr> problem. In a follow-up post, I will look more closely at the feasibility and promise of specific technical approaches.</p>
 
-<p>One final point needs emphasis. I do not see <abbr class="ufid">Unified FID</abbr> as a replacement for existing specialist models; I see them as successive stages of a workflow. This matters especially in fields with stringent compliance requirements, such as judicial forensics and media authentication. Specialist models usually incorporate strong domain-specific prior knowledge. The ideal future workflow will use <abbr class="ufid">Unified FID</abbr> for fast, accurate initial screening, followed by specialist models for evidence auditing: a form of explainable forensics.</p>
+<p>Two final points deserve emphasis:</p>
+
+<p><strong class="tailnote">1. <abbr class="ufid">Unified FID</abbr> is currently defined over the four tasks described at the outset, mainly because these four tracks are the most mature: they provide abundant public benchmark datasets, methods, and standard evaluation protocols for scientific experimentation, and together they cover more than 95% of forgery scenarios. It should be noted, however, that a few smaller tasks in this field have not yet been brought into the scope of this post and of mainstream research (image watermark detection, for example), largely because they lack public benchmark datasets and standard training and testing protocols; new tasks beyond these four tracks will certainly appear in the future as well. The research paradigm of <abbr class="ufid">Unified FID</abbr> must therefore reserve Laplacian-regularization space for these foreseeable "unseen quantities." For instance, ForensicHub<sup class="cite"><a href="#r1">[1]</a></sup> has already reserved an interface for extension to new domains, and the paradigms of SICA<sup class="cite"><a href="#r3">[3]</a></sup> and Forensic-MoE<sup class="cite"><a href="#r7">[7]</a></sup> are equally compatible with new tasks. Beyond that, the research blueprint put forward in this post (its scientific questions and solutions) also deliberately preserves extensibility and compatibility with potential new tasks: even after new tasks are integrated, these conclusions will still hold.</strong></p>
+
+<p><strong class="tailnote">2. I do not see <abbr class="ufid">Unified FID</abbr> as a replacement for existing specialist models; I see them as successive stages of a workflow. This matters especially in fields with stringent compliance requirements, such as judicial forensics and media authentication. Specialist models usually incorporate strong domain-specific prior knowledge. The ideal future workflow will use <abbr class="ufid">Unified FID</abbr> for fast, accurate initial screening, followed by specialist models for evidence auditing: a form of explainable forensics.</strong></p>
 
 <p>Recent emails about this topic are why my first blog post has grown so long. It answers almost every question in the more than 30 emails I have received so far. There may still be omissions and mistakes, so please feel free to contact me with corrections.</p>
 
@@ -617,7 +621,6 @@ blockquote p:last-child{margin-bottom:0}
 <p class="lead-in">Last but not least,</p>
 
 <div class="ackcard" tabindex="0" aria-label="Acknowledgement card: press Enter or Space to release balloons">
-<p>Thanks to Bo Du, Zhe Yang, and Xuekang Zhu for proofreading the post and contributing additions.</p>
 <p>Thanks to <a href="https://sebastouristtrophyf.github.io/" target="_blank" rel="noopener noreferrer">Wentao Feng</a>, <a href="https://sites.google.com/site/baoyuanwu2015/" target="_blank" rel="noopener noreferrer">Baoyuan Wu</a>, <a href="https://cs.xmut.edu.cn/info/1085/4510.htm" target="_blank" rel="noopener noreferrer">Xia Du</a> and <a href="https://cmpun.github.io/" target="_blank" rel="noopener noreferrer">Chi-Man Pun</a> for their suggestions and help with this post.</p>
 <p>Thanks to <span class="ack-name">MD MOBASHIR HOSSIAN SIFAT</span> for translating this blog post into English.</p>
 </div>
