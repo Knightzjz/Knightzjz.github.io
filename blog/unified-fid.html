@@ -608,7 +608,7 @@ blockquote p:last-child{margin-bottom:0}
 
 <p><strong class="tailnote">还需要在最后特别说明的是：</strong></p>
 
-<p><strong class="tailnote">1. <abbr class="ufid">Unified FID</abbr> 目前主要定义在开篇所说的这四个任务上，这主要是因为这四个赛道最为成熟：它们提供了大量可供科学实验的公开基准数据集、方法与标准评测协议，且总体上覆盖了 95% 以上的伪造场景。但仍需说明的是，<abbr class="ufid">Unified FID</abbr> 这个领域目前还有一些细小的任务尚未被纳入这篇博文与主流研究工作的讨论范围（比如图像水印检测），这主要是由其缺乏公开基准数据集与训练、测试标准协议所导致的；而未来也一定会出现这四个赛道之外的新任务。因此，<abbr class="ufid">Unified FID</abbr> 的研究范式必须为这些可预见的「未见量」预留拉普拉斯正则化的空间。比如，ForensicHub<sup class="cite"><a href="#r1">[1]</a></sup> 已经为未来新 domain 的扩展预留了接口，SICA<sup class="cite"><a href="#r3">[3]</a></sup>、Forensic-MoE<sup class="cite"><a href="#r7">[7]</a></sup> 等工作的范式同样可以兼容新任务。此外，这篇博文提出的研究蓝图（科学问题与解决方案）也都刻意预留了对潜在任务的扩展性和兼容性——即便后续集成了新任务，这些结论也依然能保持正确。</strong></p>
+<p><strong class="tailnote">1. <abbr class="ufid">Unified FID</abbr> 目前主要定义在开篇所说的这四个任务上，这主要是因为这四个赛道最为成熟：它们提供了大量可供科学实验的公开基准数据集、方法与标准评测协议，且总体上覆盖了 95% 以上的伪造场景。但仍需说明的是，<abbr class="ufid">Unified FID</abbr> 这个领域目前还有一些细小的任务尚未被纳入这篇博文与主流研究工作的讨论范围（比如图像水印检测），这主要是由其缺乏公开基准数据集与训练、测试标准协议所导致的；而未来也一定会出现这四个赛道之外的新任务。因此，现有的 <abbr class="ufid">Unified FID</abbr> 研究基本都为这些「未见量」预留了空间，新任务可以无缝集成进来。比如 ForensicHub<sup class="cite"><a href="#r1">[1]</a></sup> 已经为未来新 domain 的扩展预留了接口，SICA<sup class="cite"><a href="#r3">[3]</a></sup>、Forensic-MoE<sup class="cite"><a href="#r7">[7]</a></sup> 等工作的范式同样可以兼容新任务。而本篇博文提出的研究蓝图（科学问题与解决方案），也都刻意保留了对潜在任务的扩展性和兼容性——即便后续集成了新任务，这些结论也依然成立。</strong></p>
 
 <p><strong class="tailnote">2. 我不认为 <abbr class="ufid">Unified FID</abbr> 与现有的各个专有模型之间是直接替代关系，而应该是上下游关系。尤其在司法取证，传媒鉴证等强合规场景下，考虑到专用模型往往都结合了良好的领域先验知识，由 <abbr class="ufid">Unified FID</abbr> 准确快筛、再由专用模型做证据审计（Evidence Auditing）的可解释取证（Explainable Forensics）模式将会是未来理想的工作流。</strong></p>
 
